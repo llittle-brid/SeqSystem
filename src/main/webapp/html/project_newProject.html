@@ -15,39 +15,132 @@
     <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../css/xzw.css" rel="stylesheet">
 </head>
-<body>
-<div class="ibox">
-    <div class=" form-group">
-        <h3>首页>>创建项目</h3>
+<body class="gray-bg">
+
+    <div id="page-wrapper" class="white-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header"><a  href="#"><img src="../img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <a class="dropdown J_tabClose" data-toggle="dropdown">王二狗<span class="caret"></span>
+
+                </a>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>修改个人信息</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a>系统管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a href="../example/login.html">安全退出</a>
+                    </li>
+                </ul>
+
+                <li class="dropdown hidden-xs">
+                    <a class="right-sidebar-toggle" aria-expanded="false" href="../example/login.html">
+                        <img src="../img/退出.png">
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <hr class="ibox-title" style="color: black"/>
-
-    <div id="content-main">
-        <div class="col-md-12 col-md-offset-4">
-            <span>项目名称：<input type="text" placeholder="输入项目名称"></span>
-        </div>
-        <br/><br/><br/><br/>
-
-        <div class="col-md-12 col-md-offset-4">
-            <span>文档名称：<input type="text" placeholder="输入文档名称"></span>
-        </div>
-        <br/><br/><br/><br/>
-
-        <div class="col-md-12 col-md-offset-4">
-            <span>所属机构：<input type="search" placeholder="输入机构名称"></span>
-        </div>
-        <br/><br/><br/><br/>
-
-        <div class="col-md-6 col-md-offset-4">
-            <span>项目简介：<textarea cols="1" rows="5" class="ibox-content">输入项目的基本介绍</textarea></span>
-        </div>
-
+        <div class=" row J_mainContent white-bg" id="content-main">
+        <ol class="breadcrumb" style="margin-left: 50px">
+            <li style="font-size: 15px">
+                <strong>
+                    <a href="head.html">首页</a> >><a href="project_newProject.html">创建项目</a>
+                </strong>
+            </li>
+        </ol>
+    </div>
     </div>
 
-    <div class="col-md-2 col-md-offset-4">
-        <button class="btn-danger btn-w-m">确认创建</button>
-        <button class="btn-default btn-w-m">取消</button>
+    <div class="col-xs-12">
+        <br/>
+        <br/>
     </div>
-</div>
+
+    <form id="w0" class="form-horizontal col-xs-offset-1">
+        <div class="form-group">
+
+            <label class="control-label col-sm-3"><button class="btn-circle btn-default"><i class="fa fa-pencil"></i></button>项目名称：</label>
+            <div class="col-sm-6">
+                <input type="text"  class="form-control my_input1" placeholder="请输入项目名称">
+                <div class="help-block help-block-error "></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br/>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3"><button class="btn-circle btn-default"><i class="fa fa-file"></i></button>文档名称：</label>
+            <div class="col-sm-6">
+                <input type="text"  class="form-control my_input1" placeholder="请输入文档名称">
+                <div class="help-block help-block-error "></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br/>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3"><button class="btn-circle btn-default"><i class="fa fa-group"></i></button>机构名称：</label>
+            <div class="col-sm-6" style="display: table">
+                <input type="text" class="form-control my_input1" autocomplete="off" placeholder="请输入机构名称">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-toggle="">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="padding-top: 0px; max-height: 375px; max-width: 800px; overflow: auto; width: auto; transition: 0.5s; min-width: 400px; left: -367px; right: auto;">
+                    </ul>
+                </div>
+                <!-- /btn-group -->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br/>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3"><button class="btn-circle btn-default"><i class="fa fa-bookmark"></i></button>项目简介：</label>
+            <div class="col-sm-6">
+                <textarea type="text"  class="form-control" placeholder="输入项目的基本介绍" rows="4"></textarea>
+                <div class="help-block help-block-error "></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br/>
+        </div>
+
+    </form>
+
+    <div class="col-xs-6 col-xs-offset-5">
+        <label id="mylabel">请确认项目的相关信息 组员后续可以继续添加 若信息无误请按确认创建</label>
+    </div>
+
+
+    <div class="col-md-12">
+        <br/><br/><br/>
+    </div>
+
+    <div class="col-md-4 col-md-offset-5">
+        <span class="col-md-2">
+            <button class="btn-danger btn">确认创建</button>
+        </span>
+        <span class="col-md-2 col-xs-offset-3">
+            <button class="btn-default btn">取消创建</button>
+        </span>
+    </div>
+
 </body>
 </html>

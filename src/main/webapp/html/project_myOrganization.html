@@ -16,104 +16,149 @@
     <link href="../css/animate.min.css" rel="stylesheet">
     <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../css/xzw.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
+<!--右侧部分开始-->
+<div id="page-wrapper" class="white-bg dashbard-1">
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header"><a  href="#"><img src="../img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
+            </div>
 
-    <div class=" row wrapper border-bottom white-bg page-heading">
+            <ul class="nav navbar-top-links navbar-right">
+                <a class="dropdown J_tabClose" data-toggle="dropdown">王二狗<span class="caret"></span>
+
+                </a>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>修改个人信息</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a>系统管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a href="../example/login.html">安全退出</a>
+                    </li>
+                </ul>
+
+                <li class="dropdown hidden-xs">
+                    <a class="right-sidebar-toggle" aria-expanded="false" href="../example/login.html">
+                        <img src="../img/退出.png">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class=" row wrapper white-bg" id="content-main">
         <ol class="breadcrumb" style="margin-left: 40px">
-            <li>
+            <li style="font-size: 15px">
                 <strong>
-                    <a href="head.html">首页</a> >><a href="project_myProfile.html">个人中心</a> >><a href="project_myOrganization.html">我的机构</a>
+                    <a href="head.html">首页</a> >><a href="project_myProfile.html">个人中心</a> >><a href="#" class="disabled">我的机构</a>
                 </strong>
             </li>
         </ol>
     </div>
 
-    <div style="margin-left: 40px">
-    <div class="form-group col-md-1">
-        <table class="container">
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><button class="btn-primary btn-w-m btn-rounded">我的资料</button></td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><button class="btn-warning btn-w-m btn-rounded">我的机构</button></td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td>&nbsp;</td></tr>
-            <tr><td><button class="btn-primary btn-w-m btn-rounded">我的消息</button></td></tr>
-        </table>
-    </div>
 
-    <div class="col-md-10 col-md-offset-2"></div>
-    <div class="col-md-3 col-md-offset-8">
-        <input type="search" placeholder="输入关键字进行搜索" id="search">
-    </div>
-    <em class="col-md-1 col-md-pull-2">
-        <a href="">
-            <i class="fa fa-search"></i>
-        </a>
-    </em>
+        <div class="form-group col-md-1">
+            <ul class="nav navbar">
+                <li>
+                    <a href="project_myProfile.html"><button class="btn-primary btn">我的资料</button></a>
+                </li>
+                <li>
+                    <a href="project_myOrganization.html"><button class="btn-warning btn">我的机构</button></a>
+                </li>
+                <li>
+                    <a href="project_myInformation.html"><button class="btn-primary btn">消息中心</button></a>
+                </li>
+            </ul>
+        </div>
 
-    <div class="col-md-8 col-md-offset-1">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>机构名</th>
-                <th>机构管理员</th>
-                <th>机构编码</th>
-                <th>机构人数</th>
-                <th>机构项目数</th>
-                <th>操作</th>
-            </tr>
-            </thead>
+        <div class="col-md-8">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+        <form class="col-md-2 col-md-offset-8">
+            <div class="input-group">
+                <input type="search" name="q" value="" class="form-control" placeholder="搜索成员">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn-rounded btn-lg btn-warning"><span class="fa fa-search"></span></button>
+                </span>
+            </div>
+        </form>
 
-            <tbody>
-            <tr>
-                <td>需求编辑组一</td>
-                <td>赖菜一号</td>
-                <td>001</td>
-                <td>23</td>
-                <td>4</td>
-                <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">操作</a></td>
-            </tr>
-            <tr>
-                <td>需求编辑组二</td>
-                <td>赖菜二号</td>
-                <td>002</td>
-                <td>27</td>
-                <td>3</td>
-                <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">操作</a></td>
-            </tr>
-            <tr>
-                <td>需求编辑组三</td>
-                <td>赖菜三号</td>
-                <td>003</td>
-                <td>65</td>
-                <td>2</td>
-                <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">操作</a></td>
-            </tr>
-            <tr>
-                <td>需求编辑组四</td>
-                <td>赖菜四号</td>
-                <td>004</td>
-                <td>65</td>
-                <td>1</td>
-                <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">操作</a></td>
-            </tr>
-            <tr>
-                <td>需求编辑组五</td>
-                <td>赖菜五号</td>
-                <td>005</td>
-                <td>65</td>
-                <td>2</td>
-                <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">操作</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="col-md-2 col-md-offset-7">
+            <br/>
+        </div>
+        <div class="col-md-9 col-md-offset-1 mytable">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>机构名</th>
+                    <th>机构管理员</th>
+                    <th>机构编码</th>
+                    <th>机构人数</th>
+                    <th>机构项目数</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
 
-    </div>
+                <tbody>
+                <tr>
+                    <td>需求编辑组一</td>
+                    <td>赖菜一号</td>
+                    <td>001</td>
+                    <td>23</td>
+                    <td>4</td>
+                    <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
+                </tr>
+                <tr>
+                    <td>需求编辑组二</td>
+                    <td>赖菜二号</td>
+                    <td>002</td>
+                    <td>27</td>
+                    <td>3</td>
+                    <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
+                </tr>
+                <tr>
+                    <td>需求编辑组三</td>
+                    <td>赖菜三号</td>
+                    <td>003</td>
+                    <td>65</td>
+                    <td>2</td>
+                    <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
+                </tr>
+                <tr>
+                    <td>需求编辑组四</td>
+                    <td>赖菜四号</td>
+                    <td>004</td>
+                    <td>65</td>
+                    <td>1</td>
+                    <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
+                </tr>
+                <tr>
+                    <td>需求编辑组五</td>
+                    <td>赖菜五号</td>
+                    <td>005</td>
+                    <td>65</td>
+                    <td>2</td>
+                    <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
+                </tr>
+                </tbody>
+            </table>
 
-    </div>
+        </div>
+
+</div>
 
 </body>
 </html>
