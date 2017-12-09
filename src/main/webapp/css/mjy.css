@@ -1,0 +1,24 @@
+.li_head{
+    height: 30px;
+    text-align: center;
+    color: #ffffff;
+}
+.li_fun{
+    text-align: right;
+    color: #ffffff;
+}
+.li_fa{
+}
+.li_fa:hover{
+    color: #ffd22e;
+}
+.main{
+    text-align: center;
+}
+/*模板左侧导航栏*/
+.black{
+    color: #5E5E5E;
+}
+.nav-label{
+    color: #5E5E5E;
+}

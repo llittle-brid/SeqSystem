@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <constant name="struts.action.extension" value="action,do,"></constant>
+
+    <package name="default" namespace="/" extends="struts-default,json-default">
+        <!-- 404 -->
+        <action name="404">
+            <result>/404.jsp</result>
+        </action>
+        <!--<action name="account-*" class="accountAction" method="{1}">-->
+            <!--<result name="login" type="stream">-->
+                <!--<param name="contentType">text/html</param>-->
+                <!--<param name="inputName">inputStream</param>-->
+            <!--</result>-->
+            <!--<result name="error">/index.jsp</result>-->
+            <!--<result name="home">/WEB-INF/pages/homepage.jsp</result>-->
+            <!--<result name="changeStore" type="json">-->
+                <!--<param name="root">vStoreEntity</param>-->
+            <!--</result>-->
+            <!--<result name="changePassLogout">/index.jsp</result>-->
+            <!--<result name="changePass" type="json">-->
+                <!--<param name="root">loginFlag</param>-->
+            <!--</result>-->
+            <!--<allowed-methods>login,logout,home,changeStore,changePassLogout,changePass</allowed-methods>-->
+        <!--</action>-->
+
+        <action name="user-*" class="action.UserAction" method="{1}">
+            <result name="RES" type="json">
+                <param name="root">dataMap</param></result>
+        <result name="asd">/WEB-INF/pages/project_homepage.jsp</result>
+        <allowed-methods>login,home</allowed-methods>
+        </action>
+    </package>
+</struts>
