@@ -9,19 +9,25 @@
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
     <meta httpequiv="refresh" content="0;ie.html" />
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/bootstrap.min14ed.css" rel="stylesheet">
-    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="/css/xzw.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/xzw.css" rel="stylesheet">
+
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 </head>
 <body class="gray-bg">
 
 <div id="page-wrapper" class="white-bg dashbard-1">
     <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header"><a  href="user-jmpHomepage"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
+            <div class="navbar-header"><a  href="../../html/project_homepage.html"><img src="../../img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -35,16 +41,16 @@
                     <li class="J_tabShowActive"><a>系统管理</a>
                     </li>
                     <li class="divider"></li>
-                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
+                    <li class="J_tabShowActive"><a href="../../html/project_myOrganization.html">机构管理</a>
                     </li>
                     <li class="divider"></li>
-                    <li class="J_tabCloseAll"><a href="user-jmpLogin">安全退出</a>
+                    <li class="J_tabCloseAll"><a href="../../html/project_homepage.html">安全退出</a>
                     </li>
                 </ul>
 
                 <li class="dropdown hidden-xs">
-                    <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin">
-                        <img src="/img/退出.png">
+                    <a class="right-sidebar-toggle" aria-expanded="false" href="jmpLogin">
+                        <img src="../../img/退出.png">
                     </a>
                 </li>
             </ul>
@@ -54,7 +60,7 @@
         <ol class="breadcrumb" style="margin-left: 50px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpNewproject">创建项目</a>
+                    <a href="../../html/project_homepage.html">首页</a> >><a href="project_newproject.jsp">创建项目</a>
                 </strong>
             </li>
         </ol>
@@ -69,9 +75,9 @@
 <div class="form-horizontal col-md-offset-3 ">
     <div class="form-group">
 
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="/img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  class="form-control my_input1 " placeholder="请输入项目名称">
+            <input type="text"  id="proName" class="form-control my_input1 " placeholder="请输入项目名称">
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -81,9 +87,9 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="/img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
-            <input type="text"  class="form-control my_input1" placeholder="请输入文档名称">
+            <input type="text"  id="docName" class="form-control my_input1" placeholder="请输入文档名称">
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -93,9 +99,9 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="/img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
         <div class="col-sm-4" style="display: table">
-            <input type="text" class="form-control my_input1" autocomplete="off" placeholder="请输入机构名称">
+            <input type="text" id="orgName" class="form-control my_input1" autocomplete="off" placeholder="请输入机构名称">
             <div class="input-group-btn">
                 <button type="button" class="btn btn-white dropdown-toggle" data-toggle="">
                     <span class="caret"></span>
@@ -112,9 +118,9 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="/img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
         <div class="col-sm-4">
-            <textarea type="text"  class="form-control" placeholder="输入项目的基本介绍" rows="6"></textarea>
+            <textarea type="text"  id="intro" class="form-control" placeholder="输入项目的基本介绍" rows="6"></textarea>
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -134,23 +140,22 @@
 
     <div class="col-md-5 col-xs-offset-2">
         <span class="col-md-2 col-xs-offset-2">
-            <button class="btn-danger btn">确认创建</button>
+            <button id="create_button" class="btn-danger btn">确认创建</button>
         </span>
         <span class="col-md-2 col-xs-offset-2">
             <button class="btn-default btn">取消创建</button>
         </span>
     </div>
-<div>
+</div>
 
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
 </body>
 
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/content.min.js?v=1.0.0"></script>
+<script src="../../js/plugins/toastr/toastr.min.js"></script>
+<script src="../../js/mjy.js"></script>
 <script>
-
     function showtoast(type, title, msg) {
         var $showDuration = "3000";
         var $hideDuration = "1000";
@@ -198,22 +203,22 @@
     }
 
 
-    $("button#login_button").click(function () {
+    $("button#create_button").click(function () {
         $.ajax({
-            url: "user-login",
-            data: {name: $("input#name").val(),password: $("input#password").val(),},
+            url: "project-create",
+            data: {ProName: $("input#proName").val(), DocName: $("input#docName").val(), OrgName: $("input#orgName").val(), Intro: $("textarea#intro").val()},
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast("success", "登录成功", "操作成功")
-                    location.href = "user-jmpHomepage";
+                    showtoast("success", "创建成功", "操作成功")
+                    location.href = "project-create"
                 }
-                else  showtoast("error", "登录失败", "登录失败")
+                else  showtoast("error", "创建失败", "操作失败")
             },
             error: function (result) {
-                showtoast("error", "登录失败", "登录失败")
+                showtoast("error", "创建失败", "操作失败")
             }
         })
     })
