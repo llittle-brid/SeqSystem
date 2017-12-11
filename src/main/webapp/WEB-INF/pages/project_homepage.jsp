@@ -1,6 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: DELL
+  Date: 2017/12/3
+  Time: 20:15
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE html>
 <html>
 
@@ -32,9 +38,8 @@
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <a class="dropdown J_tabClose" data-toggle="dropdown">
-                        ${name}
-                        <span class="caret"></span>
+                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.username}<span class="caret"></span>
+
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                         <li class="J_tabShowActive">
@@ -103,6 +108,9 @@
         </table>
         <span class="col-md-6 col-md-offset-4">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
         <a href="user-jmpNewproject"><img class="col-md-offset-1" src="/img/u7.png"></a>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
+        </div>
     </div>
 </div>
 <script src="js/jquery.min.js?v=2.1.4"></script>

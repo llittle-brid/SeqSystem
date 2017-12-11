@@ -430,7 +430,7 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper, body.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 0 0 70px
+    margin: 0 0 0 0px
 }
 
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
@@ -2887,7 +2887,7 @@ body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, h
 }
 
 #page-wrapper {
-    min-height: auto
+    min-height: 1000px;
 }
 
 body.boxed-layout {
@@ -3039,7 +3039,7 @@ video {
 #page-wrapper {
     padding: 0 15px;
     position: inherit;
-    margin: 0 0 0 0px
+    margin: 0 0 0 0px;
 }
 
 .title-action {
@@ -6147,7 +6147,7 @@ body.rtls.mini-navbar.fixed-sidebar #page-wrapper {
 }
 
 body.rtls.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 220px 0 0
+    margin: 0 0px 0 0
 }
 
 body.rtls.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
