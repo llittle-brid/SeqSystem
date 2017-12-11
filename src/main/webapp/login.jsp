@@ -10,6 +10,8 @@
 
 <!DOCTYPE html>
 <html>
+
+
 <!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 <head>
 
@@ -36,8 +38,8 @@
 
 <body class="gray-bg loginBackground" >
 <div class="middle-box text-center loginscreen  animated fadeInDown ">
-    <div class="loginForm">
-        <div class="text-center loginLogo" >
+    <div class="loginForm" >
+        <div class="text-center loginLogo m-t" >
         </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
                 <input name="name" id="name" type="username" class="form-control loginLine" style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" required="">
@@ -50,7 +52,7 @@
 
             </div>
             <div class="form-group" >
-                <p class="text-muted text-center" > <a href="pages/project_forgetpassword.html"><small>找回密码</small></a> | <a href="pages/project_registration.html"><small>注册账号</small></a>
+                <p class="text-muted text-center" > <a href="user-jmpReplacepassword"><small>找回密码</small></a> | <a href="user-jmpRegistration"><small>注册账号</small></a>
                 </p></div>
 
     </div>

@@ -24,7 +24,11 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private UserEntity user;
     private Map<String,Object> request;
     private Map<String,Object> session;
+    private String tempPassword;
+    private String newPassword;
     private Map<String, Object> dataMap;
+
+
 
     public String login() {
         dataMap = new HashMap<String, Object>();
@@ -39,8 +43,46 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
-    public String home() {
-        return "asd";
+    public String registration() {
+        dataMap = new HashMap<String, Object>();
+        userDao = new UserDaoImp();
+        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword);
+        boolean res = userDao.registration(user.getName(), user.getPassword(),tempPassword);
+        dataMap.put("res", res);
+        return "RES";
+    }
+
+    public String replacepassword() {
+        dataMap = new HashMap<String, Object>();
+        userDao = new UserDaoImp();
+        System.out.println(user.getName() + " " + user.getPassword()+" "+newPassword);
+        boolean res = userDao.replacepassword(user.getName(), user.getPassword(),tempPassword,newPassword);
+        dataMap.put("res", res);
+        return "RES";
+    }
+
+    public String jmpLogin(){
+        return "loginPage";
+    }
+
+    public String jmpRegistration() {
+        return "registrationPage";
+    }
+
+    public String jmpReplacepassword(){
+        return "replacepasswordPage";
+    }
+
+    public String jmpHomepage() {
+        return "homePage";
+    }
+
+    public String jmpNewproject(){
+        return "newprojectPage";
+    }
+
+    public String jmpMyprofile(){
+        return "myprofilePage";
     }
 
     @Override
@@ -72,4 +114,11 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
 
 
+
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
+    }
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 }
