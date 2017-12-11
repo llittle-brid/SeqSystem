@@ -60,7 +60,7 @@
         <ol class="breadcrumb" style="margin-left: 50px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="../../html/project_homepage.html">首页</a> >><a href="project_newProject.jsp">创建项目</a>
+                    <a href="../../html/project_homepage.html">首页</a> >><a href="project_newproject.jsp">创建项目</a>
                 </strong>
             </li>
         </ol>
