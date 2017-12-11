@@ -28,7 +28,6 @@
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
-
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
     <div id="page-wrapper" class="white-bg dashbard-1">
@@ -38,7 +37,7 @@
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <a class="dropdown J_tabClose" data-toggle="dropdown">王二狗<span class="caret"></span>
+                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.username}<span class="caret"></span>
 
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
@@ -63,59 +62,8 @@
                 </ul>
             </nav>
         </div>
-        <div class="col-md-9">
-            <table>
-                <tr><td>&nbsp</td></tr>
-                <tr><td>&nbsp</td></tr>
-                <tr><td>&nbsp</td></tr>
-            </table>
-            <div class="col-md-2 col-md-offset-4">
-                <img src="http://127.0.0.1:32767/22.07.29/images/page2__/u9.png" height="160px">
-            </div>
-            <div class="col-md-2">
-                <img src="http://127.0.0.1:32767/22.07.29/images/page2__/u4.jpg" height="160px">
-            </div>
-            <div class="col-md-2 ">
-                <img src="http://127.0.0.1:32767/22.07.29/images/page2__/u3.jpg" height="160px">
-            </div>
-            <div class="col-md-2 ">
-                <img src="http://127.0.0.1:32767/22.07.29/images/page2__/u2.jpg" height="160px">
-            </div>
-        </div>
-        <div class="col-md-9 form-group">
-            <div class="col-md-2 col-md-offset-4">
-                <span style="color:#365063 ">当前项目</span><br/>
-                <span style="color:black">目前有</span>
-                <span style="color: #ff0000">6</span>
-                <span style="color:black">个项目</span>
-            </div>
-            <div class="col-md-2">
-                <span style="color:#365063 ">历史项目</span><br/>
-                <span style="color:black">完成了</span>
-                <span style="color: #ff0000">2</span>
-                <span style="color:black">个项目</span>
-            </div>
-            <div class="col-md-2">
-                <span style="color:#365063 ">共享知识</span><br/>
-                <span style="color:black">收到了</span>
-                <span style="color: #ff0000">0</span>
-                <span style="color:black">条邀请</span>
-            </div>
-            <div class="col-md-2">
-                <span style="color:#365063 ">个人中心</span><br/>
-                <span style="color:black">收到了</span>
-                <span style="color: #ff0000">0</span>
-                <span style="color:black">条邀请</span>
-            </div>
-        </div>
-        <div class="col-md-9 form-group">
-            <table>
-                <tr><td>&nbsp</td></tr>
-                <tr><td>&nbsp</td></tr>
-                <tr><td>&nbsp</td></tr>
-            </table>
-            <span class="col-md-6 col-md-offset-4">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
-            <img class="col-md-offset-1" src="http://127.0.0.1:32767/22.07.29/images/page2__/u7.png">
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
         </div>
     </div>
 </div>

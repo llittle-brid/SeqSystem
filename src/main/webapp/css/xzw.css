@@ -1,12 +1,4 @@
-/*.zw_user {*/
-    /*position: relative;*/
-    /*color: rgb(51, 51, 51);*/
-    /*font-size: 18px;*/
-    /*font-style: normal;*/
-    /*font-weight: bold;*/
-    /*transform-origin: 42.5px 12px;*/
-    /*word-wrap: break-word;*/
-/*}*/
+
 textarea {
     background-color: transparent;
     text-align: center;
@@ -21,9 +13,55 @@ textarea {
 
 #search {
     text-align: center;
+    height: 30px;
 }
-
+.mytable tbody {
+    text-align: center;
+}
+.mytable th {
+    text-align: center;
+}
 .maininfo {
     margin-left: 40px;
 }
+.iconfont{
+    font-family:"iconfont";
+    font-size:16px;
+    font-style:normal;
+}
+.zw_form-control {
+    background-color: #FFF;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: gray;
 
+    padding: 6px 12px;
+    -webkit-transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+    transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+    width: 94.2%;
+    font-family: inherit;
+    font-size: 14px;
+    box-shadow: none;
+    -webkit-appearance: textfield;
+    -webkit-rtl-ordering: logical;
+    text-rendering: auto;
+}
+#w0 {
+    font-size: 15px;
+    color: #1b6d85;
+}
+#mylabel {
+    font-size: 12px;
+    color: grey;
+}
+.my_input {
+    text-align: center;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: medium;
+    color: grey;
+}
+
+.my_input1 {
+    text-align: center;
+}

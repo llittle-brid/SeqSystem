@@ -22,7 +22,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 
     private UserDao userDao;
     private UserEntity user;
-
+    private Map<String,Object> request;
+    private Map<String,Object> session;
     private Map<String, Object> dataMap;
 
     public String login() {
@@ -31,6 +32,11 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         System.out.println(user.getName() + " " + user.getPassword());
         boolean res = userDao.login(user.getName(), user.getPassword());
         dataMap.put("res", res);
+        if(res==true)
+        {
+            session.put("username",user.getName());
+        }
+
         return "RES";
     }
 
@@ -49,11 +55,13 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
 
     @Override
-    public void setRequest(Map<String, Object> map) {
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     @Override
-    public void setSession(Map<String, Object> map) {
+    public void setRequest(Map<String, Object> request) {
+        this.request = request;
     }
 
     public Map<String, Object> getDataMap() {
@@ -63,4 +71,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
     }
+
+
 }
