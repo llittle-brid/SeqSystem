@@ -212,13 +212,13 @@
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast("success", "创建成功", "成功")
+                    showtoast("success", "创建成功", "操作成功")
                     location.href = "project-create"
                 }
-                else  showtoast("error", "创建失败", "失败")
+                else  showtoast("error", "创建失败", "操作失败")
             },
             error: function (result) {
-                showtoast("error", "创建失败", "失败")
+                showtoast("error", "创建失败", "操作失败")
             }
         })
     })
