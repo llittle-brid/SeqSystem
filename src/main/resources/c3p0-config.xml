@@ -5,7 +5,7 @@
   <!-- This app is massive! -->
   <named-config name="mvcapp"> 
   	 <property name="user">root</property>
- 	<property name="password">py19980321</property>
+ 	<property name="password">123456</property>
 	 <property name="driverClass">com.mysql.jdbc.Driver</property>
 	 <property name="jdbcUrl">jdbc:mysql://localhost:3306/seq?useUnicode=true&amp;characterEncoding=UTF-8</property>
     <property name="acquireIncrement">5</property>

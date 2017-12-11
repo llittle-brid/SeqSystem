@@ -11,7 +11,7 @@ function showtoast(type, title, msg) {
         closeButton: true,
         debug: false,
         progressBar: true,
-        positionClass: "toast-top-full-width",
+        positionClass: "toast-top-right",
         onclick: null
     };
     if ($showDuration) {
