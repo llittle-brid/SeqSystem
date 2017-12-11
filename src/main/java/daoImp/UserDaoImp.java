@@ -21,6 +21,26 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         else return false;
     }
 
+    public boolean registration(String name,String password1,String password2)
+    {
+        if(password1.length()>=6&&password1.equals(password2))
+        {String sql="insert into user (NAME,PASSWORD) values (?,?)";
+            update(sql,name,password1);
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean replacepassword(String name,String password1,String password2,String password3)
+    {
+        if(password2.equals(password3))
+        {String sql="update user set password=? where name=?";
+            update(sql,password2,name);
+            return true;
+        }
+        else return false;
+    }
+
     public UserEntity getOne(String name)
     {
         String sql="select * from user where name=?";

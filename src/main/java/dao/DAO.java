@@ -42,12 +42,7 @@ public class DAO<T> {
 	}
      
 	
-	/**
-	 * 单独的一个值
-	 * @param sql
-	 * @param args
-	 * @return
-	 */
+
 	@SuppressWarnings("unchecked")
 	public <E> E getForValue(String sql,Object ... args){
 		Connection connection=null;
@@ -63,13 +58,8 @@ public class DAO<T> {
 		return null;
 	}
 	
-	
-	/**
-	 * 拿多行值
-	 * @param sql
-	 * @param args
-	 * @return
-	 */
+
+
 	public List<T> getForList(String sql,Object ... args){
 		Connection connection=null;
 		try{
@@ -86,12 +76,7 @@ public class DAO<T> {
 	
 
 
-	/**
-	 * 拿一行
-	 * @param sql
-	 * @param args
-	 * @return
-	 */
+
 	public T get(String sql,Object ... args){
 		Connection connection=null;
 		try{
@@ -110,13 +95,9 @@ public class DAO<T> {
 	
 
 
-	/**
-	 * 增删改
-	 * @param sql
-	 * @param args
-	 */
+
 	public void update(String sql,Object ... args){
-		System.out.println("修改了！！");
+		System.out.println("Replace Success");
 		Connection connection=null;
 		try{
 			connection=JdbcUtils.getConnection();
@@ -127,7 +108,8 @@ public class DAO<T> {
 			JdbcUtils.releaseConnection(connection);
 		}
 	}
-	public void save(String sql,Object ... args){
+	public void save(String sql,Object ... args)
+	{
 		
 	}
 }
