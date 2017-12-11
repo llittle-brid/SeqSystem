@@ -31,6 +31,10 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return SUCCESS;
     }
 
+    public String jmpProjectManage() {
+        return "myProject";
+    }
+
     @Override
     public void prepare() throws Exception {
         project = new ProjectEntity();

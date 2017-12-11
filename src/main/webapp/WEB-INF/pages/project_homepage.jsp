@@ -23,10 +23,10 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -72,21 +72,21 @@
             <tr><td>&nbsp</td></tr>
         </table>
         <div class="col-md-2 col-md-offset-4">
-            <a onclick="javascript:window.location.href='jmp3.tttt'"><img src="/img/Home1.png" height="160px"></a><br/>
+            <a onclick="javascript:window.location.href='project-jmpProjectManage'"><img src="/img/Home1.png" height="160px"></a><br/>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
             <span style="color: #ff0000"> <%=session.getAttribute("countnow") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
-            <img src="/img/Home2.jpg" height="160px"><br/>
+            <img src="../../img/Home2.jpg" height="160px"><br/>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
             <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
-            <img src="/img/Home3.jpg" height="160px"><br/>
+            <img src="../../img/Home3.jpg" height="160px"><br/>
             <span style="color:#365063 ">共享知识</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>

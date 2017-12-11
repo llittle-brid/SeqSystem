@@ -47,7 +47,8 @@
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>create</allowed-methods>
+            <result name="myProject">/WEB-INF/pages/project_projectManage.jsp</result>
+            <allowed-methods>create,jmpProjectManage</allowed-methods>
         </action>
     </package>
 </struts>
