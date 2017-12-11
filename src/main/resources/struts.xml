@@ -39,8 +39,8 @@
             <result name="homePage">/WEB-INF/pages/project_homepage.jsp</result>
             <result name="newprojectPage">/WEB-INF/pages/project_newproject.jsp</result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
-
-        <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
+            <result name="temp">/WEB-INF/pages/temp.jsp</result>
+        <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">

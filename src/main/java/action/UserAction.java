@@ -76,7 +76,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpHomepage() {
         return "homePage";
     }
-
+    public String jmpTemp() {
+        return "temp";
+    }
     public String jmpNewproject(){
         return "newprojectPage";
     }
@@ -84,6 +86,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpMyprofile(){
         return "myprofilePage";
     }
+
 
     @Override
     public UserEntity getModel() {

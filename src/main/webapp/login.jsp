@@ -133,7 +133,7 @@
             success: function (result) {
                 if (result.res === true) {
                     showtoast("success", "登录成功", "操作成功")
-                    location.href = "user-jmpHomepage";
+                    location.href = "user-jmpTemp";
                 }
                 else showtoast("error", "登录失败", "登录失败")
             },

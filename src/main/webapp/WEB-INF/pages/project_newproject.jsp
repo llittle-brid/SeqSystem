@@ -4,68 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF8">
     <title>创建项目</title>
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
     <meta httpequiv="refresh" content="0;ie.html" />
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/xzw.css" rel="stylesheet">
-
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <link href="/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="/css/fontawesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/xzw.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 
-<div id="page-wrapper" class="white-bg dashbard-1">
-    <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header"><a  href="../../html/project_homepage.html"><img src="../../img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
-            </div>
-
-            <ul class="nav navbar-top-links navbar-right">
-                <a class="dropdown J_tabClose" data-toggle="dropdown">王二狗<span class="caret"></span>
-
-                </a>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="J_tabShowActive"><a>修改个人信息</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a>系统管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a href="../../html/project_myOrganization.html">机构管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabCloseAll"><a href="../../html/project_homepage.html">安全退出</a>
-                    </li>
-                </ul>
-
-                <li class="dropdown hidden-xs">
-                    <a class="right-sidebar-toggle" aria-expanded="false" href="jmpLogin">
-                        <img src="../../img/退出.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class=" row J_mainContent white-bg" id="content-main">
-        <ol class="breadcrumb" style="margin-left: 50px">
-            <li style="font-size: 15px">
-                <strong>
-                    <a href="../../html/project_homepage.html">首页</a> >><a href="project_newproject.jsp">创建项目</a>
-                </strong>
-            </li>
-        </ol>
-    </div>
-</div>
 
 <div class="col-xs-12">
     <br/>
@@ -213,7 +164,7 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "创建成功", "操作成功")
-                    location.href = "user-jmpHomepage"
+                    location.href = "project-jmpProjectManage"
                 }
                 else  showtoast("error", "创建失败", "操作失败")
             }

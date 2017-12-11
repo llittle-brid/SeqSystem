@@ -31,40 +31,7 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="animated fadeInDown">
-    <div id="page-wrapper" class="white-bg dashbard-1">
-        <div class="white-bg row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header"><a  href="user-jmpHomepage"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
-                </div>
 
-                <ul class="nav navbar-top-links navbar-right">
-                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.username}<span class="caret"></span>
-
-                    </a>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive">
-                            <a href="user-jmpMyprofile">修改个人信息</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>系统管理</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>机构管理</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a href="user-jmpLogin">安全退出</a>
-                        </li>
-                    </ul>
-
-                    <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin" >
-                            <img src="/img/exit.png">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
     <div class="col-md-9 form-group">
         <table>
             <tr><td>&nbsp</td></tr>
