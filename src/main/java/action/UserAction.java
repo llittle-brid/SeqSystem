@@ -29,7 +29,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String login() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        System.out.println(user.getName() + " " + user.getPassword());
         boolean res = userDao.login(user.getName(), user.getPassword());
         dataMap.put("res", res);
         if(res==true)
