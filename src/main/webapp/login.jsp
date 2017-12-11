@@ -65,7 +65,6 @@
 <script src="js/mjy.js"></script>
 </body>
 <script>
-
     function showtoast(type, title, msg) {
         var $showDuration = "3000";
         var $hideDuration = "1000";

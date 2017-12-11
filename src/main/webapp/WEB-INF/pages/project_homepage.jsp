@@ -23,10 +23,10 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="example/favicon.ico">
-    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -34,7 +34,7 @@
     <div id="page-wrapper" class="white-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header"><a  href="#"><img src="img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
+                <div class="navbar-header"><a  href="#"><img src="../../img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
@@ -57,7 +57,7 @@
 
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false" href="example/login.html">
-                            <img src="img/退出.png">
+                            <img src="../../img/退出.png">
                         </a>
                     </li>
                 </ul>
@@ -119,14 +119,14 @@
         </div>
     </div>
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="js/contabs.min.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../js/plugins/layer/layer.min.js"></script>
+<script src="../../js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="../../js/contabs.min.js"></script>
+<script src="../../js/plugins/pace/pace.min.js"></script>
 </body>
 
 
