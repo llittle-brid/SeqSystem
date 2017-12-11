@@ -123,9 +123,6 @@
         }
         var $toast = toastr[type](msg, title);
     }
-</script>
-
-<script>
     $("button#login_button").click(function () {
         $.ajax({
             url: "user-login",
@@ -136,7 +133,7 @@
             success: function (result) {
                 if (result.res === true) {
                     showtoast("success", "登录成功", "操作成功")
-                    location.href = "user-home";
+                    location.href = "user-jmpHomepage";
                 }
                 else showtoast("error", "登录失败", "登录失败")
             },

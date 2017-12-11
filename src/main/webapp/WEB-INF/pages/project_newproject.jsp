@@ -143,7 +143,7 @@
             <button id="create_button" class="btn-danger btn">确认创建</button>
         </span>
         <span class="col-md-2 col-xs-offset-2">
-            <button class="btn-default btn">取消创建</button>
+            <button href="user-jmpHomepage" class="btn-default btn">取消创建</button>
         </span>
     </div>
 </div>
@@ -213,13 +213,13 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "创建成功", "操作成功")
-                    location.href = "project-create"
+                    location.href = "user-jmpHomepage"
                 }
                 else  showtoast("error", "创建失败", "操作失败")
-            },
-            error: function (result) {
-                showtoast("error", "创建失败", "操作失败")
             }
+//            error: function (result) {
+//                showtoast("error", "创建失败", "操作失败")
+//            }
         })
     })
 </script>
