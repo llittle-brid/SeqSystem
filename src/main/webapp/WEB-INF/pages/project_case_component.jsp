@@ -11,25 +11,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>系统用例构件库</title>
+    <title>主页</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
     <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <style>
+        a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
         a:visited {color:gray;} /*已访问颜色*/
-        a:hover {color:black;} /*悬浮（鼠标经过）时颜色*/
-        a:active {color:yellow;} /*点击时的颜色*/
+        a:hover {color:grey;} /*悬浮（鼠标经过）时颜色*/
+        a:active {color:beige;} /*点击时的颜色*/
     </style>
+    <script>
+        var timer1=null;
+        function toshow() {
+            clearTimeout(timer1);
+            component_menu.style.display='block';
+        };
+        function tomiss() {
+            timer1=setTimeout(function () {
+                component_menu.style.display='none';
+            },500);
+            component_menu.onmouseover=function() {
+                clearTimeout(timer1);
+            }
+            component_menu.onmouseout=function () {
+                timer1=setTimeout(function () {
+                    div1.style.display='none';
+                },500);
+
+            }
+        };
+    </script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInRight gray-bg">
+    <div class=" row wrapper white-bg">
+        <ol class="breadcrumb" style="margin-left: 40px">
+            <li style="font-size: 15px">
+                <strong>
+                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpComponent">构件库</a>>><a href="user-jmpCasecomponent">用例构件库</a>
+                </strong>
+            </li>
+        </ol>
+    </div>
         <div id="background" style="width: 100%;margin: 0 auto" class="gray-bg">
             <div id="main" style="height: 2000px;width:100%;margin: 0px ">
                 <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
@@ -55,7 +86,7 @@
                     </div>
                 </div>
                 <div id="mid" style="clear: both;height:750px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
-                    <div id="div1" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4">
+                    <div id="div1" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                         <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">登陆</span>
                         </div>
@@ -78,7 +109,7 @@
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
                         </div>
                     </div>
-                    <div id="div2" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4">
+                    <div id="div2" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                         <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">登陆</span>
                         </div>
@@ -101,7 +132,7 @@
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
                         </div>
                     </div>
-                    <div id="div3" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4">
+                    <div id="div3" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                         <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">登陆</span>
                         </div>
@@ -124,7 +155,7 @@
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
                         </div>
                     </div>
-                    <div id="div4" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4">
+                    <div id="div4" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                         <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">登陆</span>
                         </div>
@@ -147,10 +178,17 @@
                             <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
                         </div>
                     </div>
-                    <div id="pages" style="clear: both;height: 50px;width: 150px;margin: auto">
-                        <div style="display: inline;float: left;margin: 5px"><img src="../img/toword_left.png" height="30" width="30"/></div>
-                        <div style="height: 40px;width: 70px;float: left;font-size: 30px"><a>1</a></div>
-                        <div style="display: inline;float: right;margin: 5px"><img src="../img/toword_right.png" height="30" width="30"/></div>
+                </div>
+                <div id="footer" style="clear: both;text-align: center; margin-top:-30px">
+                    <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-white  active">1</button>
+                        <button class="btn btn-white">2</button>
+                        <button class="btn btn-white">3</button>
+                        <button class="btn btn-white">4</button>
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
                 <div style="width:1200px;margin: 0 auto">
@@ -166,13 +204,13 @@
                         </p>
                     </div>
                     <div style="margin: 0px 0px 0px 100px">
-                        <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true">
+                        <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true" class="white-bg">
                         </div>
                         <div style="height: 120px;float: left;margin: 98px 0px 0px 20px">
-                            <img src="../img/camera.png" height="22" width="26"/>
+                            <img src="../img/camera.png" height="24" width="26"/>
                         </div>
-                        <div style="height: 120px;float: left;margin: 95px 0px 0px 20px">
-                            <button style="height:25px;width:50px;text-align: center" class="btn btn-primary btn-info">发表</button>
+                        <div style="height: 120px;float: left;margin: 88px 20px 0px 20px">
+                            <button type="button" class="btn btn-primary">　发表　</button>
                         </div>
                     </div>
                 </div>
@@ -180,14 +218,18 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.min.js?v=2.1.4"></script>
-<script src="../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../js/plugins/layer/layer.min.js"></script>
-<script src="../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../js/contabs.min.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="/js/contabs.min.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+<script src="/js/content.min.js?v=1.0.0"></script>
+<script>
+    $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
+</script>
 </body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->

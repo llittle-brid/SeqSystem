@@ -52,7 +52,7 @@
 <div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
 
     <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">
-        <div class=" row wrapper white-bg" id="content-main">
+        <div class=" row wrapper white-bg" >
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
@@ -81,7 +81,7 @@
                                         <a style="font-size: 18px">用户</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="jmpCasecomponent" style="font-size: 18px">用例</a>
+                                        <a href="user-jmpCasecomponent" style="font-size: 18px ">用例</a>
                                     </li>
                                     </li>
                                 </ul>
@@ -248,7 +248,8 @@
                 <button class="btn btn-white">4</button>
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
                 </button>
-            </div></div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/js/jquery.min.js?v=2.1.4"></script>

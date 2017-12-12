@@ -16,6 +16,15 @@
     <link href="/css/xzw.css" rel="stylesheet">
 </head>
 <body class="gray-bg animated fadeInDown">
+<div class=" row wrapper white-bg">
+    <ol class="breadcrumb" style="margin-left: 40px">
+        <li style="font-size: 15px">
+            <strong>
+                <a href="user-jmpHomepage">首页</a> >><a href="user-jmpNewproject">新建项目</a>
+            </strong>
+        </li>
+    </ol>
+</div>
 
 <div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
     <div class="form-group">
