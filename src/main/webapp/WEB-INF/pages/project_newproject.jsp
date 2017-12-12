@@ -15,15 +15,9 @@
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/xzw.css" rel="stylesheet">
 </head>
-<body class="gray-bg">
+<body class="gray-bg animated fadeInDown">
 
-
-<div class="col-xs-12">
-    <br/>
-    <br/>
-</div>
-
-<div class="form-horizontal col-md-offset-3 ">
+<div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
     <div class="form-group">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
