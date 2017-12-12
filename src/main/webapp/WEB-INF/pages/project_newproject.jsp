@@ -21,7 +21,7 @@
     <ol class="breadcrumb" style="margin-left: 40px">
         <li style="font-size: 15px">
             <strong>
-                <a href="user-jmpHomepage">首页</a> >><a href="user-jmpNewproject">新建项目</a>
+                <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpNewproject"><span class="lzf_b">新建项目</span></a>
             </strong>
         </li>
     </ol>
