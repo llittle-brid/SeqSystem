@@ -21,6 +21,7 @@
     <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -57,7 +58,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpComponent">构件库</a>>><a href="user-jmpUsercomponent">用户构件库</a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpComponent"><span class="lzf_b">构件库</span></a>>><a href="user-jmpUsercomponent"><span class="lzf_b">用户构件库</span></a>
                 </strong>
             </li>
         </ol>

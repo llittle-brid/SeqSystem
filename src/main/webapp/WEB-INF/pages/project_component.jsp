@@ -57,7 +57,7 @@
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
-                        <a href="user-jmpHomepage">首页</a> >><a href="user-jmpComponent">构件库</a>
+                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpComponent"><span class="lzf_b">构件库</span></a>
                     </strong>
                 </li>
             </ol>
@@ -73,16 +73,16 @@
                             <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 120px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a style="font-size: 18px">全部</a>
+                                        <a href=""><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a style="font-size: 18px" >通用</a>
+                                        <a href="" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
                                     </li>
-                                    <li style="margin: 5px" class="J_tabShowActive lzf_a">
-                                        <a href="user-jmpUsercomponent" style="font-size: 18px"  class="lzf_a">用户</a>
+                                    <li style="margin: 5px" class="J_tabShowActive">
+                                        <a href="user-jmpUsercomponent"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
                                     </li>
-                                    <li style="margin: 5px" class="J_tabShowActive lzf_a">
-                                        <a href="user-jmpCasecomponent" style="font-size: 18px " class="lzf_a">用例</a>
+                                    <li style="margin: 5px" class="J_tabShowActive">
+                                        <a href="user-jmpCasecomponent" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
                                     </li>
                                     </li>
                                 </ul>
