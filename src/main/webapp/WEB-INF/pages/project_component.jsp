@@ -19,6 +19,7 @@
     <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -77,11 +78,11 @@
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a style="font-size: 18px" >通用</a>
                                     </li>
-                                    <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpUsercomponent" style="font-size: 18px;" class="lzf">用户</a>
+                                    <li style="margin: 5px" class="J_tabShowActive lzf_a">
+                                        <a href="user-jmpUsercomponent" style="font-size: 18px"  class="lzf_a">用户</a>
                                     </li>
-                                    <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCasecomponent" style="font-size: 18px " class="lzf">用例</a>
+                                    <li style="margin: 5px" class="J_tabShowActive lzf_a">
+                                        <a href="user-jmpCasecomponent" style="font-size: 18px " class="lzf_a">用例</a>
                                     </li>
                                     </li>
                                 </ul>

@@ -73,9 +73,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpHomepage() {
         return "homePage";
     }
-    public String jmpTemp() {
-        return "tempPage";
-    }
+    public String jmpTemp() { return "tempPage";}
     public String jmpNewproject(){
         return "newprojectPage";
     }
@@ -84,6 +82,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
     public String jmpComponent(){ return "componentPage"; }
     public String jmpCasecomponent(){return "casecomponentPage";}
+    public String jmpUsercomponent(){return "usercomponentPage";}
 
 
 
