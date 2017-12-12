@@ -65,18 +65,6 @@
 <script src="js/mjy.js"></script>
 </body>
 
-<script>function verification() {
-    $.ajax({
-        url: "user-login",
-        data: {name: $("input#name").val(),password: $("input#password").val()},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            if(result.res===true)  {
-//                    showtoast("success", "登录成功", "操作成功")
-                location.href = "user-home";
-</script>
 <script>
     function showtoast(type, title, msg) {
         var $showDuration = "3000";
