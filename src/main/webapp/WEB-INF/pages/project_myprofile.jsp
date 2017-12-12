@@ -14,6 +14,7 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/xzw.css" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
 
 </head>
 
@@ -25,7 +26,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpMyprofile">我的资料</a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpMyprofile"><span class="lzf_b">我的资料</span></a>
                 </strong>
             </li>
         </ol>
