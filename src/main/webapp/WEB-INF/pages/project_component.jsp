@@ -78,10 +78,10 @@
                                         <a style="font-size: 18px" >通用</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a style="font-size: 18px">用户</a>
+                                        <a href="user-jmpUsercomponent" style="font-size: 18px;" class="lzf">用户</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCasecomponent" style="font-size: 18px ">用例</a>
+                                        <a href="user-jmpCasecomponent" style="font-size: 18px " class="lzf">用例</a>
                                     </li>
                                     </li>
                                 </ul>
