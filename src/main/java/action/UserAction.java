@@ -64,15 +64,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpLogin(){
         return "loginPage";
     }
-
     public String jmpRegistration() {
         return "registrationPage";
     }
-
     public String jmpReplacepassword(){
         return "replacepasswordPage";
     }
-
     public String jmpHomepage() {
         return "homePage";
     }
@@ -82,12 +79,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpNewproject(){
         return "newprojectPage";
     }
-
     public String jmpMyprofile(){
         return "myprofilePage";
     }
-
     public String jmpComponent(){ return "componentPage"; }
+    public String jmpCasecomponent(){return "casecomponentPage";}
+
 
 
     @Override

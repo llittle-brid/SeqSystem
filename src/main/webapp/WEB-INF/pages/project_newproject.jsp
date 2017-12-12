@@ -75,7 +75,7 @@
     </div>
 
     <div class="col-xs-10 col-xs-offset-1">
-        <label id="mylabel" style="font-size: 13px;margin-left: 50px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
+        <label id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
     </div>
 
 

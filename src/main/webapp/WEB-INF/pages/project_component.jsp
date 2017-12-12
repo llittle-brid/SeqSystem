@@ -75,13 +75,13 @@
                                         <a style="font-size: 18px">全部</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a style="font-size: 18px">通用</a>
+                                        <a style="font-size: 18px" >通用</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a style="font-size: 18px">用户</a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a style="font-size: 18px">用例</a>
+                                        <a href="jmpCasecomponent" style="font-size: 18px">用例</a>
                                     </li>
                                     </li>
                                 </ul>
