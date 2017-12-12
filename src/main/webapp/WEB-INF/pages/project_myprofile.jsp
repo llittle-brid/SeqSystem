@@ -17,41 +17,9 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg animated fadeInDown">
 
-<div id="page-wrapper" class="white-bg dashbard-1">
-
-    <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header"><a  href="jmpHomepage"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
-            </div>
-
-            <ul class="nav navbar-top-links navbar-right">
-                <a class="dropdown J_tabClose" data-toggle="dropdown"><%=session.getAttribute("name") %><span class="caret"></span>
-
-                </a>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="J_tabShowActive"><a href="user-jmpMyprofile">修改个人信息</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a>系统管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabCloseAll"><a href="user-jmpLogin">安全退出</a>
-                    </li>
-                </ul>
-
-                <li class="dropdown hidden-xs">
-                    <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin">
-                        <img src="/img/exit.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<div id="page-wrapper" class="gray-bg dashbard-1">
 
     <div class=" row wrapper white-bg" id="content-main">
         <ol class="breadcrumb" style="margin-left: 40px">
@@ -88,7 +56,7 @@
             <div class="container-fluid">
                 <form class="form-inline">
                     <br/><br/><br/><br/>
-                    <label for="name" style="font-size: medium">用户名: </label>
+                    <label style="font-size: medium">用户名: </label>
                     <span rows="1" class="form-control my_input"> <%=session.getAttribute("name") %></span>
                     <img src="/img/u413.png">
                     <br/><br/>
@@ -182,7 +150,7 @@
 </div>
 
 
-<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
