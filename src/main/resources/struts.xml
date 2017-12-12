@@ -43,7 +43,8 @@
             <result name="componentPage">/WEB-INF/pages/project_component.jsp</result>
             <result name="casecomponentPage">/WEB-INF/pages/project_case_component.jsp</result>
             <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
-        <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent</allowed-methods>
+            <result name="picturecomponentPage">/WEB-INF/pages/project_picture_component.jsp</result>
+        <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent,jmpPicturecomponent</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">

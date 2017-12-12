@@ -70,10 +70,10 @@
                             <div style="font-size: 18px;color: black" onmouseover="toshow()" onmouseout="tomiss()">官方构件库</div>
                         </div>
                         <div id="component_choose" style="border-top: red solid 1.7px;  position: absolute;width: 90px;height: 200px;z-index: 999;overflow: hidden;margin-top: 6px">
-                            <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 120px;margin-top:-5px;display:none">
+                            <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 150px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href=""><span class="lzf_a" style="font-size: 18px ">全部</span></a>
+                                        <a href="user-jmpComponent"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a href="" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
@@ -84,6 +84,8 @@
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a href="user-jmpCasecomponent" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
                                     </li>
+                                    <li style="margin: 5px" class="J_tabShowActive">
+                                        <a href="user-jmpPicturecomponent" ><span class="lzf_a" style="font-size: 18px ">图片</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -238,7 +240,8 @@
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div>
+        </div>
         <div id="footer" style="clear: both;text-align: center; margin-top:45px">
             <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>

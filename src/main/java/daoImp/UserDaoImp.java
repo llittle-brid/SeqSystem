@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     public boolean login(String name,String password)
     {
-        String sql="select count(*) from USER where name=? and password=?";
+        String sql="SELECT COUNT(*) from USER WHERE NAME=? and PASSWORD=?";
         int count=Integer.valueOf(getForValue(sql,name,password).toString());
         if(count==1)return true;
         else return false;

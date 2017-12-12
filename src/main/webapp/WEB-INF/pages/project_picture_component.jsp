@@ -51,7 +51,7 @@
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInRight gray-bg">
+<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
     <div class=" row wrapper white-bg">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">

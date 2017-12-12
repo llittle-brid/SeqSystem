@@ -100,8 +100,8 @@
                         <div style="float: left">
                                 <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
                                 <ul>
-                                    <li><span;font-weight:400;">登陆</span></li>
-                            <li><span;font-weight:400;">系统管理</span></li>
+                                    <li><span>登陆</span></li>
+                            <li><span>系统管理</span></li>
                             </ul>
                             </span>
                         </div>
@@ -119,8 +119,8 @@
                         <div style="float: left">
                                 <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
                                 <ul>
-                                    <li><span;font-weight:400;">登陆</span></li>
-                            <li><span;font-weight:400;">系统管理</span></li>
+                                    <li><span>登陆</span></li>
+                            <li><span>系统管理</span></li>
                             </ul>
                             </span>
                         </div>
@@ -138,8 +138,8 @@
                         <div style="float: left">
                                 <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
                                 <ul>
-                                    <li><span;font-weight:400;">登陆</span></li>
-                            <li><span;font-weight:400;">系统管理</span></li>
+                                    <li><span>登陆</span></li>
+                            <li><span>系统管理</span></li>
                             </ul>
                             </span>
                         </div>
@@ -157,8 +157,8 @@
                         <div style="float: left">
                                 <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
                                 <ul>
-                                    <li><span;font-weight:400;">登陆</span></li>
-                            <li><span;font-weight:400;">系统管理</span></li>
+                                    <li><span>登陆</span></li>
+                            <li><span>系统管理</span></li>
                             </ul>
                             </span>
                         </div>
@@ -202,7 +202,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <script src="/js/jquery.min.js?v=2.1.4"></script>
