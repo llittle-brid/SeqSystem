@@ -51,7 +51,7 @@
     </script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInRight gray-bg">
+<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
     <div class=" row wrapper white-bg">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
@@ -80,9 +80,9 @@
                         </div>
                     </div>
                     <div style="float: right;height: 60px;width: 450px" >
-                        <div style="margin:30px 0px 0px 253px;float: left"><img src="../img/magnifier.png" height="35px" width="35px"/></div>
-                        <div style="margin:30px 0px 0px 10px;float: left"><img src="../img/star.png" height="35" width="35"/></div>
-                        <div style="margin:30px 0px 0px 10px;float: left"><img src="../img/back.png" height="35" width="35"/></div>
+                        <div style="margin:30px 0px 0px 253px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
+                        <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/star.png" height="35" width="35"/></div>
+                        <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                     </div>
                 </div>
                 <div id="mid" style="clear: both;height:750px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
@@ -207,7 +207,7 @@
                         <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true" class="white-bg">
                         </div>
                         <div style="height: 120px;float: left;margin: 98px 0px 0px 20px">
-                            <img src="../img/camera.png" height="24" width="26"/>
+                            <img src="/img/camera.png" height="24" width="26"/>
                         </div>
                         <div style="height: 120px;float: left;margin: 88px 20px 0px 20px">
                             <button type="button" class="btn btn-primary">　发表　</button>
