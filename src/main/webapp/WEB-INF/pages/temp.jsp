@@ -31,7 +31,6 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
-
     <!--右侧部分开始-->
     <div id="page-wrapper" class="white-bg dashbard-1">
         <div class="row border-bottom">
@@ -40,7 +39,7 @@
                 </div>
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.username}<span class="caret"></span>
+                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
 
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
