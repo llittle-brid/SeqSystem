@@ -53,11 +53,11 @@
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
-            <a href="user-jmpComponent"><img src="/img/Home3.jpg" height="160px"></a><br/>
+            <a href="user-jmpLibrary"><img src="/img/Home3.jpg" height="160px"></a><br/>
             <span style="color:#365063 ">共享知识</span><br/>
-            <span style="color:black">收到了</span>
+            <span style="color:black">收藏了</span>
             <span style="color: #ff0000">0</span>
-            <span style="color:black">条邀请</span>
+            <span style="color:black">个构件库</span>
         </div>
         <div class="col-md-2 ">
             <a href="user-jmpMyprofile"><img src="/img/Home4.jpg" height="160px"><br/></a>

@@ -57,7 +57,7 @@
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
-                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpComponent"><span class="lzf_b">构件库</span></a>
+                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>
                     </strong>
                 </li>
             </ol>
@@ -73,19 +73,19 @@
                             <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 150px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpComponent"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
+                                        <a href="user-jmpLibrary"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
+                                        <a href="user-jmpCommonlibrary" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpUsercomponent"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
+                                        <a href="user-jmpUserlibrary"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCasecomponent" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
+                                        <a href="user-jmpCaselibrary" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpPicturecomponent" ><span class="lzf_a" style="font-size: 18px ">图片</span></a>
+                                        <a href="user-jmpPicturelibrary" ><span class="lzf_a" style="font-size: 18px ">图片</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -104,60 +104,14 @@
 
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px">
                 <div class="row">
-                    <div id="div1" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div2" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left">
-                                    <img src="/img/div2_1.png" height="80px" width="80px"/>
-                                </div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统用例构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="div3" class="col-sm-4">
+                    <a  href="user-jmpCasecomponent"><div id="div1" class="col-sm-4">
                         <div class="contact-box">
                             <div>
                                 <div style="margin: 10px 10px 10px 15px;float: left">
                                     <img src="/img/div3_1.png" height="80px" width="80px"/></div>
                                 <div style="margin: 10px;float: left">
-                                    <h3>OA系统功能构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
+                                    <h3>OA系统用例构件库</h3>
+                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
                                 </div>
                                 <div style="clear: both;margin: 0px 10px 0px 10px">
                                     <p>
@@ -172,14 +126,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="div4" class="col-sm-4">
+                    </div></a>
+                    <a  href="user-jmpCasecomponent"><div id="div2" class="col-sm-4">
                         <div class="contact-box">
                             <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
+                                <div style="margin: 10px 10px 10px 15px;float: left">
+                                    <img src="/img/div3_1.png" height="80px" width="80px"/></div>
                                 <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
+                                    <h3>OA系统用例构件库</h3>
+                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
                                 </div>
                                 <div style="clear: both;margin: 0px 10px 0px 10px">
                                     <p>
@@ -194,14 +149,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="div5" class="col-sm-4">
+                    </div></a>
+                    <a  href="user-jmpCasecomponent"><div id="div3" class="col-sm-4">
                         <div class="contact-box">
                             <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
+                                <div style="margin: 10px 10px 10px 15px;float: left">
+                                    <img src="/img/div3_1.png" height="80px" width="80px"/></div>
                                 <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
+                                    <h3>OA系统用例构件库</h3>
+                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
                                 </div>
                                 <div style="clear: both;margin: 0px 10px 0px 10px">
                                     <p>
@@ -216,14 +172,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="div6" class="col-sm-4">
+                    </div></a>
+                    <a  href="user-jmpCasecomponent"><div id="div4" class="col-sm-4">
                         <div class="contact-box">
                             <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
+                                <div style="margin: 10px 10px 10px 15px;float: left">
+                                    <img src="/img/div3_1.png" height="80px" width="80px"/></div>
                                 <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件</h3>
-                                    <p>贡献人：官房<br>发布时间：date</p>
+                                    <h3>OA系统用例构件库</h3>
+                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
                                 </div>
                                 <div style="clear: both;margin: 0px 10px 0px 10px">
                                     <p>
@@ -238,7 +195,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></a>
+                    <a  href="user-jmpCasecomponent"><div id="div5" class="col-sm-4">
+                        <div class="contact-box">
+                            <div>
+                                <div style="margin: 10px 10px 10px 15px;float: left">
+                                    <img src="/img/div3_1.png" height="80px" width="80px"/></div>
+                                <div style="margin: 10px;float: left">
+                                    <h3>OA系统用例构件库</h3>
+                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
+                                </div>
+                                <div style="clear: both;margin: 0px 10px 0px 10px">
+                                    <p>
+                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
+                                    </p>
+                                </div>
+                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                    <ul>
+                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
+                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div></a>
                 </div>
             </div>
         </div>

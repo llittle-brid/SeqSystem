@@ -77,12 +77,15 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpNewproject(){
         return "newprojectPage";
     }
-    public String jmpMyprofile(){
-        return "myprofilePage";
-    }
-    public String jmpComponent(){ return "componentPage"; }
+    public String jmpMyprofile(){ return "myprofilePage"; }
+    public String jmpLibrary(){ return "libraryPage"; }
+    public String jmpUserlibrary(){return "userlibraryPage";}
+    public String jmpCaselibrary(){return "caselibraryPage";}
+    public String jmpCommonlibrary(){return "commonlibraryPage";}
+    public String jmpPicturelibrary(){return "picturelibraryPage";}
     public String jmpCasecomponent(){return "casecomponentPage";}
     public String jmpUsercomponent(){return "usercomponentPage";}
+    public String jmpCommoncomponent(){return "commoncomponentPage";}
     public String jmpPicturecomponent(){return "picturecomponentPage";}
 
 

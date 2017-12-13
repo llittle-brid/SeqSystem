@@ -58,7 +58,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpComponent"><span class="lzf_b">构件库</span></a>>><a href="user-jmpUsercomponent"><span class="lzf_b">用户构件库</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>>><a href="user-jmpUsercomponent"><span class="lzf_b">用户构件</span></a>
                 </strong>
             </li>
         </ol>
