@@ -3,6 +3,8 @@ package dao;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -96,20 +98,22 @@ public class DAO<T> {
 
 
 
-	public void update(String sql,Object ... args){
+	public void update(String sql,Object ... args) {
 		System.out.println("Replace Success");
-		Connection connection=null;
-		try{
-			connection=JdbcUtils.getConnection();
+		Connection connection = null;
+		try {
+			connection = JdbcUtils.getConnection();
 			qr.update(connection, sql, args);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			JdbcUtils.releaseConnection(connection);
 		}
 	}
+
 	public void save(String sql,Object ... args)
 	{
-		
+
 	}
+
 }
