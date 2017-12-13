@@ -36,8 +36,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         boolean res = userDao.login(user.getName(), user.getPassword());
         dataMap.put("res", res);
         if(res==true)
-        {
-            session.put("username",user.getName());
+        {   user=userDao.getOne(user.getName());
+            session.put("user",user);
         }
 
         return "RES";

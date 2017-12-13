@@ -42,7 +42,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
 
     public UserEntity getOne(String name)
     {
-        String sql="select * from user where name=?";
+        String sql="select * from USER where name=?";
         UserEntity user1=get(sql,name);
         return user1;
     }
