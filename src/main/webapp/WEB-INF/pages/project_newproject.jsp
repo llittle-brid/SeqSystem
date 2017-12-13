@@ -14,16 +14,20 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/xzw.css" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
 </head>
-<body class="gray-bg">
-
-
-<div class="col-xs-12">
-    <br/>
-    <br/>
+<body class="gray-bg animated fadeInDown">
+<div class=" row wrapper white-bg">
+    <ol class="breadcrumb" style="margin-left: 40px">
+        <li style="font-size: 15px">
+            <strong>
+                <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpNewproject"><span class="lzf_b">新建项目</span></a>
+            </strong>
+        </li>
+    </ol>
 </div>
 
-<div class="form-horizontal col-md-offset-3 ">
+<div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
     <div class="form-group">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
@@ -81,7 +85,7 @@
     </div>
 
     <div class="col-xs-10 col-xs-offset-1">
-        <label id="mylabel" style="font-size: 13px;margin-left: 50px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
+        <label id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
     </div>
 
 

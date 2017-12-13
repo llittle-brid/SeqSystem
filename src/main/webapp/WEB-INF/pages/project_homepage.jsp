@@ -46,14 +46,14 @@
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
-            <img src="../../img/Home2.jpg" height="160px"><br/>
+            <img src="/img/Home2.jpg" height="160px"><br/>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
             <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
-            <img src="../../img/Home3.jpg" height="160px"><br/>
+            <a href="user-jmpComponent"><img src="/img/Home3.jpg" height="160px"></a><br/>
             <span style="color:#365063 ">共享知识</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>
@@ -67,17 +67,9 @@
             <span style="color:black">条邀请</span>
         </div>
     </div>
-    <div class="col-md-9 form-group">
-        <table>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-        </table>
-        <span class="col-md-6 col-md-offset-4">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
+    <div class="col-md-9 form-group" style="margin-top:80px">
+        <span class="col-md-6 col-md-offset-4" style="font-size:15px">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
         <a href="user-jmpNewproject"><img class="col-md-offset-1" src="/img/u7.png"></a>
-        <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
-        </div>
     </div>
 </div>
 <script src="js/jquery.min.js?v=2.1.4"></script>

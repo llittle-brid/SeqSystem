@@ -14,18 +14,19 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/xzw.css" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg animated fadeInDown">
 
-<div id="page-wrapper" class="white-bg dashbard-1">
+<div id="page-wrapper" class="gray-bg dashbard-1">
 
     <div class=" row wrapper white-bg" id="content-main">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpMyprofile">我的资料</a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpMyprofile"><span class="lzf_b">我的资料</span></a>
                 </strong>
             </li>
         </ol>
@@ -56,7 +57,7 @@
             <div class="container-fluid">
                 <form class="form-inline">
                     <br/><br/><br/><br/>
-                    <label for="name" style="font-size: medium">用户名: </label>
+                    <label style="font-size: medium">用户名: </label>
                     <span rows="1" class="form-control my_input"> <%=session.getAttribute("name") %></span>
                     <img src="/img/u413.png">
                     <br/><br/>
