@@ -28,7 +28,7 @@
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control my_input1 " placeholder="请输入项目名称">
+            <input type="text"  id="proName" class="form-control my_input1" placeholder="请输入项目名称" required="required">
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -40,7 +40,7 @@
     <div class="form-group">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control my_input1" placeholder="请输入文档名称">
+            <input type="text"  id="docName" class="form-control my_input1" placeholder="请输入文档名称" required="required">
             <div class="help-block help-block-error "></div>
         </div>
     </div>

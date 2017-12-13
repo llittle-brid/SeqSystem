@@ -20,6 +20,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     public boolean save(ProjectEntity p) {
         String sql = "insert into project(proName,docName,orgName,intro) values(?,?,?,?)";
         try {
+//            if (p.getProName()==null||p.getOrgName()==null||p.getDocName())
             update(sql,p.getProName(),p.getDocName(),p.getOrgName(),p.getIntro());
             return true;
         } catch (Exception e){
