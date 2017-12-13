@@ -73,7 +73,7 @@
                             <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 150px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpLibrary"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
+                                        <a href="user-jmpLibrary"><span class="lzf_a" style="font-size: 18px "><u>全部</u></span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a href="user-jmpCommonlibrary" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
@@ -93,7 +93,11 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;width: 100px;text-align: left;color: #999999">用户构件库</div>
+                        <div style="float: left;font-size:18px;text-align: left;color: #999999">用户构件库</div>
+                    </div>
+                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
+                    <div style="float: left">
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="user-jmpMycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
@@ -117,10 +121,9 @@
                                         描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                <div style="float: right;margin: 0px -5px 0px 0px">
                                     <ul>
                                         <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -141,10 +144,9 @@
                                         描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                <div style="float: right;margin: 0px -5px 0px 0px">
                                     <ul>
                                         <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -164,10 +166,9 @@
                                         描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                <div style="float: right;margin: 0px -5px 0px 0px">
                                     <ul>
                                         <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -186,10 +187,9 @@
                                         描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                <div style="float: right;margin: 0px -5px 0px 0px">
                                     <ul>
                                         <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
                                     </ul>
                                 </div>
                             </div>
@@ -208,10 +208,9 @@
                                         描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
+                                <div style="float: right;margin: 0px -5px 0px 0px">
                                     <ul>
                                         <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
                                     </ul>
                                 </div>
                             </div>

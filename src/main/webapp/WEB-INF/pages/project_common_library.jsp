@@ -76,7 +76,7 @@
                                         <a href="user-jmpLibrary"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCommonlibrary" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
+                                        <a href="user-jmpCommonlibrary" ><span class="lzf_a" style="font-size: 18px "><u>通用</u></span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a href="user-jmpUserlibrary"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
@@ -93,7 +93,11 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;width: 100px;text-align: left;color: #999999">用户构件库</div>
+                        <div style="float: left;font-size:18px;text-align: left;color: #999999">用户构件库</div>
+                    </div>
+                    <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
+                    <div style="float: left">
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="user-jmpMycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
