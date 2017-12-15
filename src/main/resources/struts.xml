@@ -60,5 +60,11 @@
             <result name="myProject">/WEB-INF/pages/project_projectManage.jsp</result>
             <allowed-methods>create,jmpProjectManage</allowed-methods>
         </action>
+
+        <action name="library-*" class="action.LibraryAction" method="{1}">
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <result name="getall">/WEB-INF/pages/project_library.jsp</result>
+            <allowed-methods>get</allowed-methods>
+        </action>
     </package>
 </struts>

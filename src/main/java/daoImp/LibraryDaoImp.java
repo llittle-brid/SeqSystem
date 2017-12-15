@@ -13,11 +13,10 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         LibraryEntity library1=get(sql,name);
         return library1;
     }
-
-    public List<LibraryEntity> getAll()
+    public List<LibraryEntity> getAll(int num1,int num2)
     {
-        String sql="select * from user ";
-        List<LibraryEntity> user1=getForList(sql);
-        return user1;
+        String sql="select * from LIBRARY limit ?,? ";
+        List<LibraryEntity> library1=getForList(sql,num1,num2);
+        return library1;
     }
 }
