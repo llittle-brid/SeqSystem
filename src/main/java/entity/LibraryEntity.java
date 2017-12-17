@@ -9,6 +9,24 @@ public class LibraryEntity {
     private int id_template;
     private int id_user;
     private int collect_num;
+    private String mention;
+    private Date time;
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public String getMention() {
+        return mention;
+    }
+
+    public void setMention(String mention) {
+        this.mention = mention;
+    }
 
     public int getId_library() {
         return id_library;
