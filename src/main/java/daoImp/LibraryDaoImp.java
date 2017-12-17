@@ -19,4 +19,32 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
+
+    public List<LibraryEntity> getCommon(int num1,int num2)
+    {
+        String sql="select * from LIBRARY where ID_TEMPLATE=1 limit ?,? ";
+        List<LibraryEntity> library1=getForList(sql,num1,num2);
+        return library1;
+    }
+
+    public List<LibraryEntity> getUser(int num1,int num2)
+    {
+        String sql="select * from LIBRARY where ID_TEMPLATE=2 limit ?,? ";
+        List<LibraryEntity> library1=getForList(sql,num1,num2);
+        return library1;
+    }
+
+    public List<LibraryEntity> getCase(int num1,int num2)
+    {
+        String sql="select * from LIBRARY where ID_TEMPLATE=3 limit ?,? ";
+        List<LibraryEntity> library1=getForList(sql,num1,num2);
+        return library1;
+    }
+
+    public List<LibraryEntity> getPicture(int num1,int num2)
+    {
+        String sql="select * from LIBRARY where ID_TEMPLATE=4 limit ?,? ";
+        List<LibraryEntity> library1=getForList(sql,num1,num2);
+        return library1;
+    }
 }
