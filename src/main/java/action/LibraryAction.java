@@ -30,9 +30,48 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryAll;
         int page=1;
         libraryAll=libraryDao.getAll((page-1)*6,(page-1)*6+6);
-        session.put("libraryAll",libraryAll);
         ActionContext.getContext().getValueStack().set("list",libraryAll);
         return "getall";
+    }
+
+    public String getcommon() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryCommon;
+        int page=1;
+        libraryCommon=libraryDao.getCommon((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcommon",libraryCommon);
+        return "getcommon";
+    }
+
+    public String getuser() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryUser;
+        int page=1;
+        libraryUser=libraryDao.getUser((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listuser",libraryUser);
+        return "getuser";
+    }
+
+    public String getcase() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryCase;
+        int page=1;
+        libraryCase=libraryDao.getCase((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcase",libraryCase);
+        return "getcase";
+    }
+
+    public String getpicture() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryPicture;
+        int page=1;
+        libraryPicture=libraryDao.getPicture((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listpicture",libraryPicture);
+        return "getpicture";
     }
 
     @Override

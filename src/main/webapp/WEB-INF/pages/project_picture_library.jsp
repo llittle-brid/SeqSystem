@@ -73,19 +73,19 @@
                             <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 150px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpLibrary"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
+                                        <a href="library-get"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCommonlibrary" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
+                                        <a href="library-getcommon" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpUserlibrary"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
+                                        <a href="library-getuser"><span class="lzf_a" style="font-size: 18px ">用户</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpCaselibrary" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
+                                        <a href="library-getcase" ><span class="lzf_a" style="font-size: 18px ">用例</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="user-jmpPicturelibrary" ><span class="lzf_a" style="font-size: 18px "><u>图片</u></span></a>
+                                        <a href="library-getpicture" ><span class="lzf_a" style="font-size: 18px "><u>图片</u></span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -108,116 +108,33 @@
 
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px">
                 <div class="row">
-                    <a  href="user-jmpPicturecomponent"><div id="div1" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件库</h3>
-                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div></a>
-                    <a  href="user-jmpPicturecomponent"><div id="div2" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件库</h3>
-                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
+                    <s:iterator value="listpicture">
+                        <div class="col-sm-4">
+                            <div class="contact-box">
+                                <div  href="user-jmpUsercomponent">
+                                    <div style="margin: 10px 10px 10px 15px;float: left">
+                                        <img src="/img/div4.png" height="80px" width="80px"/>
+                                    </div>
+                                    <div style="margin: 10px;float: left">
+                                        <h3><s:property value="name"/></h3>
+                                        <p>贡献人：官方<br>发布时间：<s:property value="time"/></p>
+                                    </div>
+                                    <div style="height:60px;clear: both;margin: 0px 10px 0px 10px;overflow: hidden">
+                                        <p>
+                                            <s:property value="mention"/>
+                                        </p>
+                                    </div>
+                                    <div style="float: right;margin: 0px 3px 0px 0px">
+                                        <ul>
+                                            <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
+                                            <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div></a>
-                    <a  href="user-jmpPicturecomponent"><div id="div3" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件库</h3>
-                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div></a>
-                    <a  href="user-jmpPicturecomponent"><div id="div4" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件库</h3>
-                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div></a>
-                    <a  href="user-jmpPicturecomponent"><div id="div5" class="col-sm-4">
-                        <div class="contact-box">
-                            <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><img src="/img/div1.png" height="80" width="80"/></div>
-                                <div style="margin: 10px;float: left">
-                                    <h3>OA系统图片构件库</h3>
-                                    <p>贡献人：官方<br>发布时间：2017-12-28</p>
-                                </div>
-                                <div style="clear: both;margin: 0px 10px 0px 10px">
-                                    <p>
-                                        描述：包含OA系统大部分的用例图，结构图，流程图；包含组织机构管理的逻辑思维导图，编写不易，请给我点个赞哟。
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div></a>
+                    </s:iterator>
+
                 </div>
             </div>
         </div>

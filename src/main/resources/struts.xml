@@ -65,7 +65,11 @@
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="getall">/WEB-INF/pages/project_library.jsp</result>
             <result name="getcommon">/WEB-INF/pages/project_common_library.jsp</result>
-            <allowed-methods>get,getcommon</allowed-methods>
+            <result name="getuser">/WEB-INF/pages/project_user_library.jsp</result>
+            <result name="getcase">/WEB-INF/pages/project_case_library.jsp</result>
+            <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
+
+            <allowed-methods>get,getcommon,getuser,getcase,getpicture</allowed-methods>
         </action>
     </package>
 </struts>

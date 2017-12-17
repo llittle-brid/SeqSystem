@@ -88,7 +88,7 @@
             <div id="mid" style="clear: both;height:700px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
                 <div id="div1" style="background-color: white;margin-left:90px" class="col-sm-5 contact-box">
                     <div style="margin: 10px 10px 10px 15px;float: left">
-                        <div style="float: left"><img src="/img/div1.png" height="200" width="200"/> </div>
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
                         <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
                     <div style="margin: 20px 0px 0px 10px;float: left">
@@ -99,7 +99,7 @@
                 <div id="div2" style="background-color: white;margin-left: 50px" class="col-sm-5 contact-box">
 
                     <div style="margin: 10px 10px 10px 15px;float: left">
-                        <div style="float: left"><img src="/img/div1.png" height="200" width="200"/> </div>
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
                         <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
                     <div style="margin: 20px 0px 0px 10px;float: left">
@@ -110,7 +110,7 @@
 
                 <div id="div3" style="background-color: white;margin-left:90px" class="col-sm-5 contact-box">
                     <div style="margin: 10px 10px 10px 15px;float: left">
-                        <div style="float: left"><img src="/img/div1.png" height="200" width="200"/> </div>
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
                         <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
                     <div style="margin: 20px 0px 0px 10px;float: left">
@@ -120,7 +120,7 @@
                 </div>
                 <div id="div4" style="background-color: white;margin-left: 50px" class="col-sm-5 contact-box">
                     <div style="margin: 10px 10px 10px 15px;float: left">
-                        <div style="float: left"><img src="/img/div1.png" height="200" width="200"/> </div>
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
                         <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
                     <div style="margin: 20px 0px 0px 10px;float: left">
