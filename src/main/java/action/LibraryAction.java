@@ -30,7 +30,10 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryAll;
         int page=1;
         libraryAll=libraryDao.getAll((page-1)*6,(page-1)*6+6);
+        int count=libraryDao.getAllcount();
+        int num=count/6;
         ActionContext.getContext().getValueStack().set("list",libraryAll);
+        ActionContext.getContext().getValueStack().set("list",num);
         return "getall";
     }
 

@@ -142,12 +142,14 @@
             <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
                 </button>
+                <s:iterator value="list">
                 <button class="btn btn-white  active">1</button>
                 <button class="btn btn-white">2</button>
                 <button class="btn btn-white">3</button>
                 <button class="btn btn-white">4</button>
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
                 </button>
+                </s:iterator>
             </div>
         </div>
     </div>

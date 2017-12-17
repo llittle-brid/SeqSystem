@@ -47,4 +47,11 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
+
+    public int getAllcount()
+    {
+        String sql="select count(*) from LIBRARY";
+        int count=Integer.valueOf(getForValue(sql).toString());
+        return count;
+    }
 }
