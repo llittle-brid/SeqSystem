@@ -64,7 +64,8 @@
         <action name="library-*" class="action.LibraryAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="getall">/WEB-INF/pages/project_library.jsp</result>
-            <allowed-methods>get</allowed-methods>
+            <result name="getcommon">/WEB-INF/pages/project_common_library.jsp</result>
+            <allowed-methods>get,getcommon</allowed-methods>
         </action>
     </package>
 </struts>
