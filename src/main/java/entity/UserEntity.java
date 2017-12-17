@@ -11,7 +11,7 @@ public class UserEntity {
     private int id_user;
     private String password;
     private String name;
-    private byte gender;
+    private String gender;
     private String address;
     private String introduce;
     private java.sql.Date dob;
@@ -44,11 +44,11 @@ public class UserEntity {
         this.name = name;
     }
 
-    public byte getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(byte gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -108,7 +108,7 @@ public class UserEntity {
         this.photo = photo;
     }
 
-    public UserEntity(int id_user, String password, String name, byte gender, String address, String introduce, java.sql.Date dob, String mail, String qq, String tel, String photo) {
+    public UserEntity(int id_user, String password, String name, String gender, String address, String introduce, java.sql.Date dob, String mail, String qq, String tel, String photo) {
         this.id_user = id_user;
         this.password = password;
         this.name = name;

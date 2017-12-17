@@ -23,7 +23,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     public boolean registration(String name,String password1,String password2)
     {
         if(password1.length()>=6&&password1.equals(password2))
-        {String sql="insert into user (NAME,PASSWORD) values (?,?)";
+        {String sql="insert into USER (NAME,PASSWORD) values (?,?)";
             update(sql,name,password1);
             return true;
         }
@@ -33,23 +33,32 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     public boolean replacepassword(String name,String password1,String password2,String password3)
     {
         if(password2.equals(password3))
-        {String sql="update user set password=? where name=?";
+        {String sql="update USER set password=? where name=?";
             update(sql,password2,name);
             return true;
         }
         else return false;
     }
+    public boolean edit(String username,String qq,String address,String mail,String tel,String introduce,String gender)
+    {
+        String sql="update USER set qq=?,address=?,mail=?,tel=?,introduce=?,gender=? where name=?";
+        System.out.println(username+qq+address+mail+tel+introduce+gender);
+        update(sql,qq,address,mail,tel,introduce,gender,username);
+        return true;
+    }
 
     public UserEntity getOne(String name)
     {
-        String sql="select * from user where name=?";
+        String sql="select * from USER where name=?";
         UserEntity user1=get(sql,name);
         return user1;
     }
 
+
+
     public List<UserEntity> getAll()
     {
-        String sql="select * from user ";
+        String sql="select * from USER ";
         List<UserEntity> user1=getForList(sql);
         return user1;
     }

@@ -1,32 +1,67 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF8">
+    <<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人中心</title>
-    <meta name="viewport" content="width=devicewidth, initialscale=1.0">
-    <meta name="renderer" content="webkit">
-    <meta httpequiv="refresh" content="0;ie.html" />
-    <link href="/css/bootstrap.min14ed.css" rel="stylesheet">
-    <link href="/css/fontawesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="/css/xzw.css" rel="stylesheet">
-    <link href="/css/lzf.css" rel="stylesheet">
+    <link rel="shortcut icon" href="example/favicon.ico"> <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
+
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 
 </head>
 
-<body class="gray-bg animated fadeInDown">
+<body class="gray-bg">
 
-<div id="page-wrapper" class="gray-bg dashbard-1">
+<div id="page-wrapper" class="white-bg dashbard-1">
+
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header"><a  href="user-jmpHomepage"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
+
+                </a>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a href="user-jmpMyprofile">修改个人信息</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a>系统管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a href="user-jmpLogin">安全退出</a>
+                    </li>
+                </ul>
+
+                <li class="dropdown hidden-xs">
+                    <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin">
+                        <img src="/img/exit.png">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
     <div class=" row wrapper white-bg" id="content-main">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpMyprofile"><span class="lzf_b">我的资料</span></a>
+                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpMyprofile">我的资料</a>
                 </strong>
             </li>
         </ol>
@@ -39,15 +74,14 @@
 
             </li>
             <li>
-                <a href="project_myOrganization.html"><button class="btn btn-w-m  btn-primary">我的机构</button></a>
+                <a href="ogz-jmporganization"><button class="btn btn-w-m  btn-primary">我的机构</button></a>
             </li>
             <li>
                 <a href="project_myInformation.html"><button class="btn btn-w-m  btn-primary">消息中心</button></a>
             </li>
         </ul>
     </div>
-
-    <div class="zw_user col-xs-8 col-xs-push-1">
+        <div class="zw_user col-xs-8 col-xs-push-1">
 
         <div class="col-xs-2" style="margin-top:20px">
             <img src="/img/u410.png" height="158" width="150">
@@ -58,42 +92,37 @@
                 <form class="form-inline">
                     <br/><br/><br/><br/>
                     <label style="font-size: medium">用户名: </label>
-                    <span rows="1" class="form-control my_input"> <%=session.getAttribute("name") %></span>
+                    <span rows="1">${sessionScope.user.name}</span>
                     <img src="/img/u413.png">
-                    <br/><br/>
                 </form>
             </div>
         </div>
     </div>
-
     <!--填充空白-->
-    <div class="col-md-6 col-md-offset-6">
-        <br/><br/><br/>
+        <div class="col-md-6 col-md-offset-6">
+        <br/>
     </div>
-
-
     <!--具体内容-->
-    <div>
-        <form action="reprofile1.tttt" method="post">
+            <div>
             <div>
                 <div class="col-xs-8 col-xs-push-2">
 
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <table class="table table-bordered" style="text-align: center">
                             <thead>
                             <tr>
-                                <th style="text-align: center;background-color: lightgray">性别</th>
+                                <th style="text-align: center;background-color: lightgray">邮箱</th>
                             </tr></thead>
-                            <tr><td><span rows="1"><%=session.getAttribute("sex") %></span></td></tr>
+                            <tr><td><span rows="1">${sessionScope.user.mail}</span></td></tr>
                         </table>
                     </div>
 
-                    <div class="col-xs-4 col-xs-offset-1">
+                    <div class="col-xs-3 col-xs-offset-1">
                         <table class="table table-bordered" style="text-align: center;">
                             <thead><tr>
                                 <th style="text-align: center;background-color: lightgrey">所在地</th>
                             </tr></thead>
-                            <tr><td><span rows="1"><%=session.getAttribute("address") %></span></td></tr>
+                            <tr><td><span rows="1">${sessionScope.user.address}</span></td></tr>
                         </table>
                     </div>
 
@@ -104,60 +133,105 @@
                         <br/><br/>
                     </div>
 
-                    <div class="col-xs-2">
+                    <div class="col-xs-3">
                         <table class="table table-bordered" style="text-align: center">
                             <thead><tr><th style="text-align: center;background-color: lightgrey">QQ</th>
                             </tr></thead>
-                            <tr><td><span rows="1"><%=session.getAttribute("qq") %></span></td></tr>
+                            <tr><td><span rows="1">${sessionScope.user.qq}</span></td></tr>
                         </table>
                     </div>
 
-                    <div class="col-xs-4 col-xs-offset-1">
+                    <div class="col-xs-3 col-xs-offset-1">
                         <table class="table table-bordered" style="text-align: center">
                             <thead><tr><th style="text-align: center;background-color: lightgrey">联系电话</th>
                             </tr></thead>
-                            <tr><td><span rows="1">111</span></td></tr>
+                            <tr><td><span rows="1">${sessionScope.user.tel}</span></td></tr>
                         </table>
                     </div>
-
-
                 </div>
-
                 <div class="col-xs-3 col-xs-pull-1">
                     <table class="table table-bordered" style="text-align: center">
                         <thead><tr><th style="text-align: center;background-color: lightgrey">个人简介</th>
                         </tr></thead>
                         <tr>
-                            <td>
-                                <textarea rows="9"></textarea>
+                            <td style="height: 184px">
+                               ${sessionScope.user.introduce}
                             </td>
                         </tr>
 
                     </table>
                 </div>
-
                 <!--填充空白-->
                 <div class="col-md-12 col-md-offset-1">
-                    <br/><br/><br/><br/>
+                    <br/>
                 </div>
 
             </div>
             <div class="col-md-4 col-md-offset-5">
-                <button type="submit" class="btn btn-w-m btn-danger btn-primary ">资料修改</button>
+                <button type="button" class="btn btn-w-m btn-success" data-toggle="modal" data-target="#myModal">修改资料</button>
             </div>
-        </form>
     </div>
-
+        <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title">修改资料</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control"></div>
+                    <div class="form-group"><label>QQ</label> <input id="qq" type="email" placeholder="请输入QQ" class="form-control"></div>
+                    <div class="form-group"><label>所在地</label> <input id="address" type="email" placeholder="请输入所在地" class="form-control"></div>
+                    <div class="form-group"><label>联系电话</label> <input id="tel" type="email" placeholder="请输入联系电话" class="form-control"></div>
+                    <div class="form-group"><label>个人简介</label> <input id="introduce" type="email" placeholder="请输入个人简介" class="form-control"></div>
+                    <div class="form-group">
+                        <label>性别</label>
+                        <div class="form-group">
+                            <select class="form-control" name="gender">
+                                <option>男</option>
+                                <option>女</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="edit-button" type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
-<script src="../js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/content.min.js?v=1.0.0"></script>
+<script src="../../js/plugins/toastr/toastr.min.js"></script>
+<script src="../../js/mjy.js"></script>
 
 </body>
-
+<script>
+    $("button#edit-button").click(function (){
+        $.ajax({
+            url: "user-editProfile",
+            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),sex:$("select#gender").val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "修改成功", "操作成功")
+                    location.href = "user-jmpMyprofile";
+                }
+                else  showtoast("error", "修改失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "修改失败", "修改失败")
+            }
+        })
+    })
+</script>
 
 </html>

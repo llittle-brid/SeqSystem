@@ -1,8 +1,10 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.util.ValueStack;
 import dao.UserDao;
 import daoImp.UserDaoImp;
 import entity.UserEntity;
@@ -10,6 +12,8 @@ import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,18 +32,16 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private String newPassword;
     private Map<String, Object> dataMap;
 
-
-
     public String login() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         boolean res = userDao.login(user.getName(), user.getPassword());
         dataMap.put("res", res);
-        if(res==true)
-        {
-            session.put("username",user.getName());
+        if(res==true) {
+            user = userDao.getOne(user.getName());
+            session.put("user",user);
+            System.out.println(user);
         }
-
         return "RES";
     }
 
@@ -59,6 +61,20 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         boolean res = userDao.replacepassword(user.getName(), user.getPassword(),tempPassword,newPassword);
         dataMap.put("res", res);
         return "RES";
+    }
+
+    public String editProfile() {
+        System.out.println("111");
+        dataMap = new HashMap<String, Object>();
+        userDao = new UserDaoImp();
+        UserEntity seesionUser=(UserEntity)session.get("user");
+        boolean res=userDao.edit(seesionUser.getName(),user.getQq(),user.getAddress(),user.getMail(),user.getTel(),user.getIntroduce(),user.getGender());
+        dataMap.put("res", res);
+        if(res==true) {
+            user = userDao.getOne(seesionUser.getName());
+            session.put("user",user);
+        }
+        return "success";
     }
 
     public String jmpLogin(){
@@ -113,8 +129,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
     }
-
-
 
     public void setTempPassword(String tempPassword) {
         this.tempPassword = tempPassword;

@@ -49,6 +49,16 @@
             <div class="form-group ">
                 <button  id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
             </div>
+            <div class="form-group col-md-offset-3">
+                <table>
+                    <tr>
+                        <td>
+                            <button id="registration_button" class="btn btn-w-m btn-Bblack btn-sm">注 册</button>
+                            <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
     </div>
 
 </div>
@@ -110,7 +120,7 @@
 
     $("button#replacepassword_button").click(function () {
         $.ajax({
-            url: "user-replacepassword",
+            url: "login-replacepassword",
             data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val(),newPassword:$("input#password3").val()},
             dataType: "json",
             type: "Post",
@@ -118,14 +128,14 @@
             success: function (result) {
                 if(result.res===true)  {
 //                    showtoast("success", "修改成功", "操作成功")
-                    location.href = "user-jmpLogin";
+                    location.href = "login-jmpLogin";
                 }
                 else  showtoast("error", "修改失败", "注册失败")
                 location.href = "user-jmpLogin";
             },
             error: function (result) {
                 showtoast("error", "修改失败", "注册失败")
-                location.href = "user-jmpLogin";
+                location.href = "login-jmpLogin";
             }
         })
     })

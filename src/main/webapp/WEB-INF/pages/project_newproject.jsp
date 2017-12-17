@@ -6,9 +6,6 @@
 <head>
     <meta charset="UTF8">
     <title>创建项目</title>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
     <meta httpequiv="refresh" content="0;ie.html" />
@@ -17,12 +14,7 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/xzw.css" rel="stylesheet">
-<<<<<<< Updated upstream
     <link href="/css/lzf.css" rel="stylesheet">
-=======
-
-
->>>>>>> Stashed changes
 </head>
 <body class="gray-bg animated fadeInDown">
 <div class=" row wrapper white-bg">
@@ -40,7 +32,7 @@
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control my_input1" placeholder="请输入项目名称">
+            <input type="text"  id="proName" class="form-control my_input1 " placeholder="请输入项目名称">
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -64,9 +56,9 @@
     <div class="form-group">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
         <div class="col-sm-4" style="display: table">
-            <input type="text" id="orgName" class="form-control my_input1" autocomplete="true" placeholder="请输入机构名称" onkeyup="inputSuggest()">
+            <input type="text" id="orgName" class="form-control my_input1" autocomplete="off" placeholder="请输入机构名称">
             <div class="input-group-btn">
-                <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn btn-white dropdown-toggle" data-toggle="">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu" style="padding-top: 0px; max-height: 375px; max-width: 800px; overflow: auto; width: auto; transition: 0.5s; min-width: 400px; left: -367px; right: auto;">
@@ -83,7 +75,7 @@
     <div class="form-group">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
         <div class="col-sm-4">
-            <textarea type="text"  id="intro" class="form-control my_input1" placeholder="输入项目的基本介绍" rows="6"></textarea>
+            <textarea type="text"  id="intro" class="form-control" placeholder="输入项目的基本介绍" rows="6"></textarea>
             <div class="help-block help-block-error "></div>
         </div>
     </div>
@@ -117,11 +109,8 @@
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/mjy.js"></script>
-
 <script>
-
     $("button#create_button").click(function () {
         $.ajax({
             url: "project-create",
@@ -135,10 +124,10 @@
                     location.href = "project-jmpProjectManage"
                 }
                 else  showtoast("error", "创建失败", "操作失败")
-            },
-            error: function (result) {
-                showtoast("error", "创建失败", "操作失败")
             }
+//            error: function (result) {
+//                showtoast("error", "创建失败", "操作失败")
+//            }
         })
     })
 </script>
