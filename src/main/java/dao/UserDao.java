@@ -11,6 +11,7 @@ public interface UserDao {
 
 	boolean replacepassword(String name,String password1,String password2,String password3);
 
+	boolean edit(String username,String qq,String address,String mail,String tel,String introduce,String gender);
 	UserEntity getOne(String name);
 
     List<UserEntity> getAll();

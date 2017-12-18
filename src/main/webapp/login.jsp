@@ -17,11 +17,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>用户登录</title>
-
-
     <link rel="shortcut icon" href="example/favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 
@@ -52,7 +48,7 @@
 
             </div>
             <div class="form-group" >
-                <p class="text-muted text-center" > <a href="user-jmpReplacepassword"><small>找回密码</small></a> | <a href="user-jmpRegistration"><small>注册账号</small></a>
+                <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a>
                 </p></div>
 
     </div>
@@ -64,72 +60,25 @@
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
 </body>
-
-<script>
-    function showtoast(type, title, msg) {
-        var $showDuration = "3000";
-        var $hideDuration = "1000";
-        var $timeOut = "5000";
-        var $extendedTimeOut = "1000";
-        var $showEasing = "swing";
-        var $hideEasing = "linear";
-        var $showMethod = "fadeIn";
-        var $hideMethod = "fadeOut";
-        toastr.options = {
-            closeButton: true,
-            debug: false,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            onclick: null
-        };
-        if ($showDuration) {
-            toastr.options.showDuration = $showDuration
-        }
-        if ($hideDuration) {
-            toastr.options.hideDuration = $hideDuration
-        }
-        if ($timeOut) {
-            toastr.options.timeOut = $timeOut
-        }
-        if ($extendedTimeOut) {
-            toastr.options.extendedTimeOut = $extendedTimeOut
-        }
-        if ($showEasing) {
-            toastr.options.showEasing = $showEasing
-        }
-        if ($hideEasing) {
-            toastr.options.hideEasing = $hideEasing
-        }
-        if ($showMethod) {
-            toastr.options.showMethod = $showMethod
-        }
-        if ($hideMethod) {
-            toastr.options.hideMethod = $hideMethod
-        }
-        if (!msg) {
-            msg = getMessage()
-        }
-        var $toast = toastr[type](msg, title);
-    }
-    $("button#login_button").click(function () {
-        $.ajax({
-            url: "user-login",
-            data: {name: $("input#name").val(), password: $("input#password").val()},
-            dataType: "json",
-            type: "Post",
-            async: "false",
-            success: function (result) {
-                if (result.res === true) {
-                    showtoast("success", "登录成功", "操作成功")
-                    location.href = "user-jmpTemp";
-                }
-                else showtoast("error", "登录失败", "登录失败")
-            },
-            error: function (result) {
-                showtoast("error", "登录失败", "登录失败")
+<script>function verification() {
+    $.ajax({
+        url: "login-login",
+        data: {name: $("input#name").val(),password: $("input#password").val()},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            if(result.res===true)  {
+//                    showtoast("success", "登录成功", "操作成功")
+                location.href = "user-jmpTemp";
             }
-        })
+            else  showtoast("error", "登录失败", "登录失败")
+        },
+        error: function (result) {
+            showtoast("error", "登录失败", "登录失败")
+        }
     })
+}
 </script>
 
 

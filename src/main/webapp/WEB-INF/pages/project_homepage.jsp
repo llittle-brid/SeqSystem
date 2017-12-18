@@ -16,7 +16,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" r/>
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
     <title>主页</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
@@ -31,45 +31,47 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="animated fadeInDown">
-
-    <div class="col-md-9 form-group">
-        <table>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-        </table>
+    <div class="col-md-9 form-group" style="margin-top: 20px">
         <div class="col-md-2 col-md-offset-4">
-            <a href="user-jmpCurrentProjectList"><img src="/img/Home1.png" height="160px"></a><br/>
+            <a onclick="javascript:window.location.href='jmp3.tttt'"><img src="../../img/Home1.png" height="160px"></a><br/>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
             <span style="color: #ff0000"> <%=session.getAttribute("countnow") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
-            <a href="user-jmpCompletedProjectList"><img src="/img/Home2.jpg" height="160px"></a><br/>
+            <img src="../../img/Home2.jpg" height="160px"><br/>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
             <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
-            <a href="user-jmpComponent"><img src="/img/Home3.jpg" height="160px"></a><br/>
+            <img src="../../img/Home3.jpg" height="160px"><br/>
             <span style="color:#365063 ">共享知识</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>
             <span style="color:black">条邀请</span>
         </div>
         <div class="col-md-2 ">
-            <a href="user-jmpMyprofile"><img src="/img/Home4.jpg" height="160px"><br/></a>
+            <a href="user-jmpMyprofile"><img src="../../img/Home4.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">个人中心</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>
             <span style="color:black">条邀请</span>
         </div>
     </div>
-    <div class="col-md-9 form-group" style="margin-top:80px">
-        <span class="col-md-6 col-md-offset-4" style="font-size:15px">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
-        <a href="user-jmpNewproject"><img class="col-md-offset-1" src="/img/u7.png"></a>
+    <div class="col-md-9 form-group">
+        <table>
+            <tr><td>&nbsp</td></tr>
+            <tr><td>&nbsp</td></tr>
+            <tr><td>&nbsp</td></tr>
+        </table>
+        <span class="col-md-6 col-md-offset-4">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
+        <a href="user-jmpNewproject"><img class="col-md-offset-1" src="../../img/u7.png"></a>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
+        </div>
     </div>
 </div>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
