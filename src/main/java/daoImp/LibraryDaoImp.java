@@ -54,4 +54,28 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         int count=Integer.valueOf(getForValue(sql).toString());
         return count;
     }
+    public int getCommoncount()
+    {
+        String sql="select count(*) from LIBRARY where ID_TEMPLATE=1";
+        int count=Integer.valueOf(getForValue(sql).toString());
+        return count;
+    }
+    public int getUsercount()
+    {
+        String sql="select count(*) from LIBRARY where ID_TEMPLATE=2";
+        int count=Integer.valueOf(getForValue(sql).toString());
+        return count;
+    }
+    public int getCasecount()
+    {
+        String sql="select count(*) from LIBRARY where ID_TEMPLATE=3";
+        int count=Integer.valueOf(getForValue(sql).toString());
+        return count;
+    }
+    public int getPicturecount()
+    {
+        String sql="select count(*) from LIBRARY where ID_TEMPLATE=4";
+        int count=Integer.valueOf(getForValue(sql).toString());
+        return count;
+    }
 }

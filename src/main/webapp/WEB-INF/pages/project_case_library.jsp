@@ -141,10 +141,9 @@
             <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
                 </button>
-                <button class="btn btn-white  active">1</button>
-                <button class="btn btn-white">2</button>
-                <button class="btn btn-white">3</button>
-                <button class="btn btn-white">4</button>
+                <s:iterator begin="1" end="#request.num" step="1" status="st">
+                    <button class="btn btn-white  active"><s:property value='#st.index+1'/></button>
+                </s:iterator>
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
                 </button>
             </div>

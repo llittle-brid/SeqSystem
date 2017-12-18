@@ -16,4 +16,8 @@ public interface LibraryDao {
     List<LibraryEntity> getPicture(int num1,int num2);
 
     int getAllcount();
+    int getUsercount();
+    int getCasecount();
+    int getPicturecount();
+    int getCommoncount();
 }

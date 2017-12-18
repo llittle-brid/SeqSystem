@@ -142,14 +142,11 @@
             <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
                 </button>
-                <s:iterator value="list">
-                <button class="btn btn-white  active">1</button>
-                <button class="btn btn-white">2</button>
-                <button class="btn btn-white">3</button>
-                <button class="btn btn-white">4</button>
+                <s:iterator begin="1" end="#request.num" step="1" status="st">
+                <button class="btn btn-white  active"><s:property value='#st.index+1'/></button>
+                </s:iterator>
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
                 </button>
-                </s:iterator>
             </div>
         </div>
     </div>
@@ -166,6 +163,7 @@
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
+<script></script>
 </body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->

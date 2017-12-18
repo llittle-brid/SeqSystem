@@ -31,9 +31,9 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         int page=1;
         libraryAll=libraryDao.getAll((page-1)*6,(page-1)*6+6);
         int count=libraryDao.getAllcount();
-        int num=count/6;
+        int num=count/6+1;
         ActionContext.getContext().getValueStack().set("list",libraryAll);
-        ActionContext.getContext().getValueStack().set("list",num);
+        request.put("num",num);
         return "getall";
     }
 
@@ -42,6 +42,9 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryCommon;
         int page=1;
+        int count=libraryDao.getCommoncount();
+        int num=count/6+1;
+        request.put("num",num);
         libraryCommon=libraryDao.getCommon((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listcommon",libraryCommon);
         return "getcommon";
@@ -52,6 +55,9 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryUser;
         int page=1;
+        int count=libraryDao.getUsercount();
+        int num=count/6+1;
+        request.put("num",num);
         libraryUser=libraryDao.getUser((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listuser",libraryUser);
         return "getuser";
@@ -62,6 +68,9 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryCase;
         int page=1;
+        int count=libraryDao.getCasecount();
+        int num=count/6+1;
+        request.put("num",num);
         libraryCase=libraryDao.getCase((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listcase",libraryCase);
         return "getcase";
@@ -72,6 +81,9 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryPicture;
         int page=1;
+        int count=libraryDao.getPicturecount();
+        int num=count/6+1;
+        request.put("num",num);
         libraryPicture=libraryDao.getPicture((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listpicture",libraryPicture);
         return "getpicture";
