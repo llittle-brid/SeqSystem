@@ -11,8 +11,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 <head>
 
     <meta charset="utf-8">
@@ -44,7 +42,7 @@
                 <input name="password" id="password"  type="password" class="form-control loginLine" style="font-size:13px" placeholder="请输入密码" required="">
             </div>
             <div class="form-group">
-                <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm">登 录</button>
+                <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
 
             </div>
             <div class="form-group" >
@@ -81,8 +79,5 @@
 }
 </script>
 
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>
 
