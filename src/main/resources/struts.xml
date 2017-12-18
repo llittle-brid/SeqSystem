@@ -43,15 +43,25 @@
             <result name="componentPage">/WEB-INF/pages/project_component.jsp</result>
             <result name="casecomponentPage">/WEB-INF/pages/project_case_component.jsp</result>
             <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
-        <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent</allowed-methods>
+            <result name="currentProjectList">/WEB-INF/pages/project_currentList.jsp</result>
+            <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
+        <allowed-methods>
+            login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage
+            ,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent
+            ,jmpCurrentProjectList,jmpCompletedProjectList
+        </allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <result name="myProject">/WEB-INF/pages/project_projectManage.jsp</result>
-            <allowed-methods>create,jmpProjectManage</allowed-methods>
+            <result name="select" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
+            <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo</allowed-methods>
         </action>
     </package>
 </struts>

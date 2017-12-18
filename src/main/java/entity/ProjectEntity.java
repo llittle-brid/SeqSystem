@@ -9,6 +9,15 @@ public class ProjectEntity {
     private String orgName;
     private String intro;
     private List<String> members;
+    private  String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getId_project() {
         return id_project;
@@ -61,10 +70,11 @@ public class ProjectEntity {
     public ProjectEntity() {
     }
 
-    public ProjectEntity(String proName, String docName, String orgName, String intro) {
+    public ProjectEntity(String proName, String docName, String orgName, String intro, String username) {
         this.proName = proName;
         this.docName = docName;
         this.orgName = orgName;
         this.intro = intro;
+        this.username = username;
     }
 }

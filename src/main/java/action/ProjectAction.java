@@ -1,18 +1,27 @@
 package action;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.OrganizationDao;
 import dao.ProjectDao;
 
+import daoImp.OrganizationDaoImp;
 import daoImp.ProjectDaoImp;
 
 
+import entity.OrganizationEntity;
 import entity.ProjectEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProjectAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<ProjectEntity>, Preparable {
@@ -25,16 +34,36 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String create() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        System.out.println(project.getProName()+" "+project.getDocName());
+        System.out.println(project.getProName()+" "+project.getDocName()+" "+project.getUsername());
         boolean res= projectDao.save(project);
+        projectDao.setPM(project);
         dataMap.put("res",res);
         return SUCCESS;
     }
 
-    public String jmpProjectManage() {
-        return "myProject";
+    public String chooseOrg() throws Exception {
+        dataMap = new HashMap<String, Object>();
+        OrganizationDao organizationDao = new OrganizationDaoImp();
+        List<OrganizationEntity> list = organizationDao.getMatched(project.getOrgName());
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(list);
+        dataMap.put("res",jsonString);
+        return "select";
     }
 
+    @Override
+    public String execute() throws Exception {
+        dataMap = new HashMap<String, Object>();
+
+        return null;
+    }
+
+    public String jmpProjectMember() {
+        return "projectMember";
+    }
+    public String jmpProjectInfo() {
+        return "projectInformation";
+    }
     @Override
     public void prepare() throws Exception {
         project = new ProjectEntity();
