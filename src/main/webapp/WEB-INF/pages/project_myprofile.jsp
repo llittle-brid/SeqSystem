@@ -3,60 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
     <title>个人中心</title>
-    <link rel="shortcut icon" href="example/favicon.ico"> <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/z_style.css" rel="stylesheet">
-
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 
+    <link rel="shortcut icon" href="/example/favicon.ico">
+    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
-
 <div id="page-wrapper" class="white-bg dashbard-1">
-
-    <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header"><a  href="user-jmpHomepage"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a>
-            </div>
-
-            <ul class="nav navbar-top-links navbar-right">
-                <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
-
-                </a>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="J_tabShowActive"><a href="user-jmpMyprofile">修改个人信息</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a>系统管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabShowActive"><a href="template.html">机构管理</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="J_tabCloseAll"><a href="user-jmpLogin">安全退出</a>
-                    </li>
-                </ul>
-
-                <li class="dropdown hidden-xs">
-                    <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin">
-                        <img src="/img/exit.png">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
     <div class=" row wrapper white-bg" id="content-main">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
@@ -67,11 +31,10 @@
         </ol>
     </div>
 
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-2">
         <ul class="nav navbar">
             <li>
-                <a href="user-jmpMyprofile"><button class="btn btn-w-m  btn-primary"><u>我的资料</u></button></a>
-
+                <a href="user-jmpMyprofile"><button class="btn btn-w-m  btn-warning">我的资料</button></a>
             </li>
             <li>
                 <a href="ogz-jmporganization"><button class="btn btn-w-m  btn-primary">我的机构</button></a>
@@ -81,81 +44,109 @@
             </li>
         </ul>
     </div>
-        <div class="zw_user col-xs-8 col-xs-push-1">
-
-        <div class="col-xs-2" style="margin-top:20px">
-            <img src="/img/u410.png" height="158" width="150">
-        </div>
-
-        <div class=" col-md-8 col-xs-offset-1">
-            <div class="container-fluid">
+    <div class="col-md-9">
+        <div style="margin-left: 13px;margin-bottom: 20px" class="col-xs-8 ">
                 <form class="form-inline">
-                    <br/><br/><br/><br/>
+                    <br>
                     <label style="font-size: medium">用户名: </label>
-                    <span rows="1">${sessionScope.user.name}</span>
-                    <img src="/img/u413.png">
+                    <span style="width: 30px" rows="1">${sessionScope.user.name}</span>
+                    <s:if test='#session.user.gender=="男"'>
+                        <img src="/img/u413.png">
+                    </s:if>
+                    <s:elseif test='#session.user.gender=="女"'>
+                        <img style="height: 30px;width: 30px" src="/img/famale.png">
+                    </s:elseif>
+                    <s:else>
+                        <img style="height: 30px;width: 30px" src="/img/gender.png">
+                    </s:else>
                 </form>
-            </div>
         </div>
-    </div>
-    <!--填充空白-->
-        <div class="col-md-6 col-md-offset-6">
-        <br/>
-    </div>
-    <!--具体内容-->
+        <!--具体内容-->
+        <div>
             <div>
-            <div>
-                <div class="col-xs-8 col-xs-push-2">
-
-                    <div class="col-xs-3">
+                <div class="col-xs-8">
+                    <div>
+                        <div style="float: left;margin: 20px;margin-left: 0px" class="col-md-5" >
                         <table class="table table-bordered" style="text-align: center">
                             <thead>
                             <tr>
                                 <th style="text-align: center;background-color: lightgray">邮箱</th>
                             </tr></thead>
-                            <tr><td><span rows="1">${sessionScope.user.mail}</span></td></tr>
+                            <tr><td style="height: 35px">
+                                <span rows="1">
+                                    <s:if test='#session.user.mail==""'>
+                                        <s:property value="" default="未填写" />
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#session.user.mail"/>
+                                    </s:else>
+                                </span>
+                            </td></tr>
                         </table>
                     </div>
-
-                    <div class="col-xs-3 col-xs-offset-1">
-                        <table class="table table-bordered" style="text-align: center;">
+                        <div style="float: left;margin: 20px;margin-left: 35px" class="col-md-5">
+                            <table class="table table-bordered" style="text-align: center;">
                             <thead><tr>
                                 <th style="text-align: center;background-color: lightgrey">所在地</th>
                             </tr></thead>
-                            <tr><td><span rows="1">${sessionScope.user.address}</span></td></tr>
+                            <tr><td style="height: 35px">
+                                <span rows="1">
+                                    <s:if test='#session.user.address==""'>
+                                        <s:property value="" default="未填写" />
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#session.user.address"/>
+                                    </s:else>
+                                </span>
+                            </td></tr>
                         </table>
-                    </div>
-
-                    <div>
-                        <br/><br/>
-                        <br/><br/>
-                        <br/><br/>
-                        <br/><br/>
-                    </div>
-
-                    <div class="col-xs-3">
+                        </div>
+                        <div style="float: left;margin: 20px;margin-left: 0px" class="col-md-5">
                         <table class="table table-bordered" style="text-align: center">
                             <thead><tr><th style="text-align: center;background-color: lightgrey">QQ</th>
                             </tr></thead>
-                            <tr><td><span rows="1">${sessionScope.user.qq}</span></td></tr>
+                            <tr><td style="height: 35px">
+                                <span rows="1">
+                                    <s:if test='#session.user.qq==""'>
+                                        <s:property value="" default="未填写" />
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#session.user.qq"/>
+                                    </s:else>
+                                </span>
+                            </td></tr>
                         </table>
                     </div>
-
-                    <div class="col-xs-3 col-xs-offset-1">
+                        <div style="float: left;margin: 20px;margin-left: 35px" class="col-md-5">
                         <table class="table table-bordered" style="text-align: center">
                             <thead><tr><th style="text-align: center;background-color: lightgrey">联系电话</th>
                             </tr></thead>
-                            <tr><td><span rows="1">${sessionScope.user.tel}</span></td></tr>
+                            <tr><td style="height: 35px">
+                                <span rows="1">
+                                    <s:if test='#session.user.tel==""'>
+                                        <s:property value="" default="未填写" />
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="#session.user.tel"/>
+                                    </s:else>
+                                </span>
+                            </td></tr>
                         </table>
                     </div>
+                    </div>
                 </div>
-                <div class="col-xs-3 col-xs-pull-1">
+                <div style="margin: 20px;margin-left: 0px" class="col-xs-3">
                     <table class="table table-bordered" style="text-align: center">
                         <thead><tr><th style="text-align: center;background-color: lightgrey">个人简介</th>
                         </tr></thead>
                         <tr>
-                            <td style="height: 184px">
-                               ${sessionScope.user.introduce}
+                            <td style="height: 164px">
+                                <s:if test='#session.user.introduce==""'>
+                                    <s:property value="" default="写点东西介绍自己吧!" />
+                                </s:if>
+                                <s:else>
+                                    <s:property value="#session.user.introduce"/>
+                                </s:else>
                             </td>
                         </tr>
 
@@ -167,11 +158,14 @@
                 </div>
 
             </div>
-            <div class="col-md-4 col-md-offset-5">
+            <div class="col-md-4 col-md-offset-4">
+                <div style="margin-left: 50px">
                 <button type="button" class="btn btn-w-m btn-success" data-toggle="modal" data-target="#myModal">修改资料</button>
+                </div>
             </div>
+        </div>
     </div>
-        <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
@@ -180,17 +174,18 @@
                     <h4 class="modal-title">修改资料</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control"></div>
-                    <div class="form-group"><label>QQ</label> <input id="qq" type="email" placeholder="请输入QQ" class="form-control"></div>
-                    <div class="form-group"><label>所在地</label> <input id="address" type="email" placeholder="请输入所在地" class="form-control"></div>
-                    <div class="form-group"><label>联系电话</label> <input id="tel" type="email" placeholder="请输入联系电话" class="form-control"></div>
-                    <div class="form-group"><label>个人简介</label> <input id="introduce" type="email" placeholder="请输入个人简介" class="form-control"></div>
+                    <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
+                    <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
+                    <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                    <div class="form-group"><label>联系电话</label> <input id="tel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
+                    <div class="form-group"><label>个人简介</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
                     <div class="form-group">
                         <label>性别</label>
                         <div class="form-group">
-                            <select class="form-control" name="gender">
+                            <select id="gender" class="form-control" name="gender">
                                 <option>男</option>
                                 <option>女</option>
+                                <option>保密</option>
                             </select>
                         </div>
                     </div>
@@ -210,13 +205,12 @@
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
-
 </body>
 <script>
     $("button#edit-button").click(function (){
         $.ajax({
             url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),sex:$("select#gender").val()},
+            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
             dataType: "json",
             type: "Post",
             async: "false",

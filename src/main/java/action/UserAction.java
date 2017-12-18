@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.util.ValueStack;
 import dao.UserDao;
 import daoImp.UserDaoImp;
 import entity.UserEntity;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -64,15 +65,17 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
 
     public String editProfile() {
-        System.out.println("111");
+        System.out.println("start editProfile");
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         UserEntity seesionUser=(UserEntity)session.get("user");
         boolean res=userDao.edit(seesionUser.getName(),user.getQq(),user.getAddress(),user.getMail(),user.getTel(),user.getIntroduce(),user.getGender());
+        System.out.println(user.getGender()+"location:UserAction");
         dataMap.put("res", res);
         if(res==true) {
             user = userDao.getOne(seesionUser.getName());
             session.put("user",user);
+            System.out.println("put newuser in session");
         }
         return "success";
     }
