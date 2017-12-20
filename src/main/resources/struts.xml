@@ -45,15 +45,22 @@
             <result name="picturecomponentPage">/WEB-INF/pages/project_picture_component.jsp</result>
             <result name="commoncomponentPage">/WEB-INF/pages/project_common_component.jsp</result>
             <result name="mycollectPage">/WEB-INF/pages/project_mycollect.jsp</result>
-        <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpPicturecomponent,jmpCommoncomponent,jmpMycollect</allowed-methods>
+            <result name="currentProjectList">/WEB-INF/pages/project_currentList.jsp</result>
+            <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
+
+            <allowed-methods>login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpPicturecomponent,jmpCommoncomponent,jmpMycollect,jmpCompletedProjectList,jmpCurrentProjectList</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
+            <result name="projectList" type="json">
+                <param name="root">dataMap</param>
+            </result>
+
             <result name="myProject">/WEB-INF/pages/project_projectManage.jsp</result>
-            <allowed-methods>create,jmpProjectManage</allowed-methods>
+            <allowed-methods>create,showList,jmpProjectManage</allowed-methods>
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">

@@ -89,6 +89,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpPicturecomponent(){return "picturecomponentPage";}
     public String jmpMycollect(){return "mycollectPage";}
 
+    public String jmpCurrentProjectList() {
+        return "currentProjectList";
+    }
+    public String jmpCompletedProjectList() {
+        return "completedProjectList";
+    }
 
 
     @Override
