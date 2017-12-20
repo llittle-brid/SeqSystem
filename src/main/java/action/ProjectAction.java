@@ -1,8 +1,9 @@
 package action;
 
-import com.google.gson.Gson;
+/*import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+*/
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -41,7 +42,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return SUCCESS;
     }
 
-    public String chooseOrg() throws Exception {
+ /*   public String chooseOrg() throws Exception {
         dataMap = new HashMap<String, Object>();
         OrganizationDao organizationDao = new OrganizationDaoImp();
         List<OrganizationEntity> list = organizationDao.getMatched(project.getOrgName());
@@ -49,7 +50,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         String jsonString = gson.toJson(list);
         dataMap.put("res",jsonString);
         return "select";
-    }
+    }*/
 
     @Override
     public String execute() throws Exception {

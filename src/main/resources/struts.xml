@@ -28,7 +28,7 @@
             <result name="loginPage">/login.jsp</result>
             <result name="registrationPage">/WEB-INF/pages/project_registration.jsp</result>
             <result name="replacepasswordPage">/WEB-INF/pages/project_replacepassword.jsp</result>
-            <result name="myprofilePage">/WEB-INF/pages/project_PersonalCenter.jsp</result>
+            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword</allowed-methods>
         </action>
         <action name="user-*" class="action.UserAction" method="{1}">
@@ -44,7 +44,7 @@
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
             <interceptor-ref name="myStack"/>
         <allowed-methods>
-            login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage
+            login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile
             ,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent
             ,jmpCurrentProjectList,jmpCompletedProjectList
         </allowed-methods>
