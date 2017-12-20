@@ -48,6 +48,8 @@
             }
         };
     </script>
+
+
 </head>
 <body class="fixed-sidebar  gray-bg" style="overflow:hidden">
 <div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
@@ -143,7 +145,7 @@
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
                 </button>
                 <s:iterator begin="1" end="#request.num" step="1" status="st">
-                <button class="btn btn-white  active"><s:property value='#st.index+1'/></button>
+                <button type="button" class="btn btn-white active pagenum"><s:property value='#st.index+1'/></button>
                 </s:iterator>
                 <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
                 </button>
@@ -163,7 +165,14 @@
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
-<script></script>
+<script>
+    $(document).ready(function(){
+        $("button.pagenum").click(function(){
+            alert($(this).html());
+            $(this).hide();
+        });
+    });
+</script>
 </body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
