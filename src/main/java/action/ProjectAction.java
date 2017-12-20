@@ -16,13 +16,8 @@ import daoImp.ProjectDaoImp;
 
 import entity.OrganizationEntity;
 import entity.ProjectEntity;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
