@@ -11,8 +11,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 <head>
 
     <meta charset="utf-8">
@@ -81,8 +79,5 @@
 }
 </script>
 
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
 </html>
 

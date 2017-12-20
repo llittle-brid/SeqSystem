@@ -115,8 +115,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpComponent(){ return "componentPage"; }
     public String jmpCasecomponent(){return "casecomponentPage";}
     public String jmpUsercomponent(){return "usercomponentPage";}
-
-
+    public String jmpCurrentProjectList() {
+        return "currentProjectList";
+    }
+    public String jmpCompletedProjectList() {
+        return "completedProjectList";
+    }
 
     @Override
     public UserEntity getModel() {
