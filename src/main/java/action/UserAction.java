@@ -94,6 +94,18 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "homePage";
     }
     public String jmpTemp() { return "tempPage";}
+    public String jmpSysManager1(){
+        return "SysManager1Page";
+    }
+    public String jmpSysManager2(){
+        return "SysManager2Page";
+    }
+    public String jmpOrgManager1(){
+        return "OrgManager1Page";
+    }
+    public String jmpOrgManager2(){
+        return "OrgManager2Page";
+    }
     public String jmpNewproject(){
         return "newprojectPage";
     }

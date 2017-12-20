@@ -38,10 +38,10 @@
                         <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>系统管理</a>
+                        <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>机构管理</a>
+                        <li class="J_tabShowActive"><a href="user-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
                         <li class="J_tabCloseAll"><a href="login-jmpLogin">安全退出</a>

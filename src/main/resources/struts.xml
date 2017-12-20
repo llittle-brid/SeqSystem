@@ -35,9 +35,13 @@
             <result name="success" type="json"><param name="root">dataMap</param></result>
             <result name="homePage">/WEB-INF/pages/project_homepage.jsp</result>
             <result name="newprojectPage">/WEB-INF/pages/project_newproject.jsp</result>
+            <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
+            <result name="SysManager2Page">/WEB-INF/pages/project_sysManager2.jsp</result>
+            <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
+            <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <interceptor-ref name="myStack"/>
-        <allowed-methods>editProfile,jmpTemp,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
+        <allowed-methods>jmpSysManager1,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,editProfile,jmpTemp,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
 
         </action>
     </package>
