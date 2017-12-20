@@ -25,142 +25,276 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpMyprofile">我的资料</a>
+                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpMyprofile">个人中心</a>
                 </strong>
             </li>
         </ol>
     </div>
 
-    <div class="form-group col-md-2">
-        <ul class="nav navbar">
-            <li>
-                <a href="user-jmpMyprofile"><button class="btn btn-w-m  btn-warning">我的资料</button></a>
-            </li>
-            <li>
-                <a href="ogz-jmporganization"><button class="btn btn-w-m  btn-primary">我的机构</button></a>
-            </li>
-            <li>
-                <a href="project_myInformation.html"><button class="btn btn-w-m  btn-primary">消息中心</button></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-md-9">
-        <div style="margin-left: 13px;margin-bottom: 20px" class="col-xs-8 ">
-                <form class="form-inline">
-                    <br>
-                    <label style="font-size: medium">用户名: </label>
-                    <span style="width: 30px" rows="1">${sessionScope.user.name}</span>
-                    <s:if test='#session.user.gender=="男"'>
-                        <img src="/img/u413.png">
-                    </s:if>
-                    <s:elseif test='#session.user.gender=="女"'>
-                        <img style="height: 30px;width: 30px" src="/img/famale.png">
-                    </s:elseif>
-                    <s:else>
-                        <img style="height: 30px;width: 30px" src="/img/gender.png">
-                    </s:else>
-                </form>
-        </div>
-        <!--具体内容-->
-        <div>
-            <div>
-                <div class="col-xs-8">
-                    <div>
-                        <div style="float: left;margin: 20px;margin-left: 0px" class="col-md-5" >
-                        <table class="table table-bordered" style="text-align: center">
-                            <thead>
-                            <tr>
-                                <th style="text-align: center;background-color: lightgray">邮箱</th>
-                            </tr></thead>
-                            <tr><td style="height: 35px">
-                                <span rows="1">
-                                    <s:if test='#session.user.mail==""'>
-                                        <s:property value="" default="未填写" />
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#session.user.mail"/>
-                                    </s:else>
-                                </span>
-                            </td></tr>
-                        </table>
-                    </div>
-                        <div style="float: left;margin: 20px;margin-left: 35px" class="col-md-5">
-                            <table class="table table-bordered" style="text-align: center;">
-                            <thead><tr>
-                                <th style="text-align: center;background-color: lightgrey">所在地</th>
-                            </tr></thead>
-                            <tr><td style="height: 35px">
-                                <span rows="1">
-                                    <s:if test='#session.user.address==""'>
-                                        <s:property value="" default="未填写" />
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#session.user.address"/>
-                                    </s:else>
-                                </span>
-                            </td></tr>
-                        </table>
-                        </div>
-                        <div style="float: left;margin: 20px;margin-left: 0px" class="col-md-5">
-                        <table class="table table-bordered" style="text-align: center">
-                            <thead><tr><th style="text-align: center;background-color: lightgrey">QQ</th>
-                            </tr></thead>
-                            <tr><td style="height: 35px">
-                                <span rows="1">
-                                    <s:if test='#session.user.qq==""'>
-                                        <s:property value="" default="未填写" />
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#session.user.qq"/>
-                                    </s:else>
-                                </span>
-                            </td></tr>
-                        </table>
-                    </div>
-                        <div style="float: left;margin: 20px;margin-left: 35px" class="col-md-5">
-                        <table class="table table-bordered" style="text-align: center">
-                            <thead><tr><th style="text-align: center;background-color: lightgrey">联系电话</th>
-                            </tr></thead>
-                            <tr><td style="height: 35px">
-                                <span rows="1">
-                                    <s:if test='#session.user.tel==""'>
-                                        <s:property value="" default="未填写" />
-                                    </s:if>
-                                    <s:else>
-                                        <s:property value="#session.user.tel"/>
-                                    </s:else>
-                                </span>
-                            </td></tr>
-                        </table>
-                    </div>
-                    </div>
-                </div>
-                <div style="margin: 20px;margin-left: 0px" class="col-xs-3">
-                    <table class="table table-bordered" style="text-align: center">
-                        <thead><tr><th style="text-align: center;background-color: lightgrey">个人简介</th>
-                        </tr></thead>
-                        <tr>
-                            <td style="height: 164px">
-                                <s:if test='#session.user.introduce==""'>
-                                    <s:property value="" default="写点东西介绍自己吧!" />
-                                </s:if>
-                                <s:else>
-                                    <s:property value="#session.user.introduce"/>
-                                </s:else>
-                            </td>
-                        </tr>
+    <div style="padding: 20px" class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div style="float: left;margin-left: 5px"><span><strong>基本资料</strong></span></div>
+                <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">修改资料</button></div>
+            </div>
+            <div style="padding-left: 80px" class="ibox-content">
+                <table class="table" style="width:400px;border-left: none;border-right: none">
+                    <tbody>
+                    <tr >
+                        <th style="width: 150px;text-align: center">用户名:</th>
+                        <th>
+                            ${sessionScope.user.name}
+                            <s:if test='#session.user.gender=="男"'>
+                                <img src="/img/u413.png">
+                            </s:if>
+                            <s:elseif test='#session.user.gender=="女"'>
+                                <img style="height: 30px;width: 30px" src="/img/famale.png">
+                            </s:elseif>
+                            <s:else>
+                                <img style="height: 30px;width: 30px" src="/img/gender.png">
+                            </s:else>
 
-                    </table>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">QQ:</th>
+                        <th>
+                            <s:if test='#session.user.address==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.address"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">邮箱:</th>
+                        <th>
+                            <s:if test='#session.user.mail==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.mail"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">联系电话:</th>
+                        <th>
+                            <s:if test='#session.user.tel==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.tel"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">所在地:</th>
+                        <th>
+                            <s:if test='#session.user.address==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.address"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">个性签名:</th>
+                        <th>
+                            <s:if test='#session.user.introduce==""'>
+                                <s:property value="" default="写点东西介绍自己吧!" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.introduce"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div style="float: left;margin-left: 5px"><span><strong>我的机构</strong></span></div>
+                <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newOrg">申请机构</button></div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>机构名</th>
+                        <th>机构管理员</th>
+                        <th>机构编码</th>
+                        <th>机构人数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="height: 50px;margin-left: 40%" class="btn-group">
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-white">1</button>
+                    <button class="btn btn-white  active">2</button>
+                    <button class="btn btn-white">3</button>
+                    <button class="btn btn-white">4</button>
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                    </button>
                 </div>
-                <!--填充空白-->
-                <div class="col-md-12 col-md-offset-1">
-                    <br/>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 20px 0px 0px 0px" class="col-md-6">
+        <div class="ibox-title">
+            <h5>消息中心</h5>
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-8 m-b-xs">
+                        <select class="input-sm form-control input-s-sm inline">
+                            <option value="0">请选择查找类型</option>
+                            <option value="1">用户筛选</option>
+                            <option value="2">时间筛选</option>
+                            <option value="3">备注筛选</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+
+                            <th>邮件概述</th>
+                            <th>发件时间</th>
+                            <th>主题</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 50px;margin-left: 40%" class="btn-group">
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-white">1</button>
+                        <button class="btn btn-white  active">2</button>
+                        <button class="btn btn-white">3</button>
+                        <button class="btn btn-white">4</button>
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
 
             </div>
-            <div class="col-md-4 col-md-offset-4">
-                <div style="margin-left: 50px">
-                <button type="button" class="btn btn-w-m btn-success" data-toggle="modal" data-target="#myModal">修改资料</button>
+        </div>
+    </div>
+
+    <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title">申请机构</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>机构名</label> <input id="OrgName" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
+                    <div class="form-group"><label>联系方式</label> <input id="mytel" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
+                    <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="newOrg-button" type="button" class="btn btn-primary">申请</button>
                 </div>
             </div>
         </div>
@@ -178,7 +312,7 @@
                     <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
                     <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
                     <div class="form-group"><label>联系电话</label> <input id="tel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
-                    <div class="form-group"><label>个人简介</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
+                    <div class="form-group"><label>个性签名</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
                     <div class="form-group">
                         <label>性别</label>
                         <div class="form-group">
