@@ -60,7 +60,7 @@
 </body>
 <script>function verification() {
     $.ajax({
-        url: "login-login",
+        url: "user-login",
         data: {name: $("input#name").val(),password: $("input#password").val()},
         dataType: "json",
         type: "Post",
