@@ -31,22 +31,16 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="animated fadeInDown">
-
-    <div class="col-md-9 form-group">
-        <table>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-            <tr><td>&nbsp</td></tr>
-        </table>
+    <div class="col-md-9 form-group" style="margin-top: 20px">
         <div class="col-md-2 col-md-offset-4">
-            <a onclick="javascript:window.location.href='project-jmpProjectManage'"><img src="/img/Home1.png" height="160px"></a><br/>
+            <a href="user-jmpCurrentProjectList"><img src="../../img/Home1.png" height="160px"><br/></a>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
             <span style="color: #ff0000"> <%=session.getAttribute("countnow") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
-            <img src="/img/Home2.jpg" height="160px"><br/>
+            <a href="user-jmpCompletedProjectList"><img src="../../img/Home2.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
             <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
@@ -60,7 +54,7 @@
             <span style="color:black">个构件库</span>
         </div>
         <div class="col-md-2 ">
-            <a href="user-jmpMyprofile"><img src="/img/Home4.jpg" height="160px"><br/></a>
+            <a href="user-jmpMyprofile"><img src="../../img/Home4.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">个人中心</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>

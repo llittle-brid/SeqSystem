@@ -47,7 +47,7 @@
                 <tr>
                     <td>
                         <button id="registration_button" class="btn btn-w-m btn-Bblack btn-sm">注 册</button>
-                        <a href="user-jmpLogin"><small>已有账号？点我登录</small></a>
+                        <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
                     </td>
                 </tr>
             </table>
@@ -113,7 +113,7 @@
 
     $("button#registration_button").click(function () {
         $.ajax({
-            url: "user-registration",
+            url: "login-registration",
             data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val()},
             dataType: "json",
             type: "Post",
@@ -121,14 +121,14 @@
             success: function (result) {
                 if(result.res===true)  {
 //                    showtoast("success", "注册成功", "操作成功")
-                    location.href = "user-jmpLogin";
+                    location.href = "login-jmpLogin";
                 }
                 else  showtoast("error", "注册失败", "注册失败")
-                location.href = "user-jmpLogin";
+                location.href = "login-jmpLogin";
             },
             error: function (result) {
                 showtoast("error", "注册失败", "注册失败")
-                location.href = "user-jmpLogin";
+                location.href = "login-jmpLogin";
             }
         })
     })

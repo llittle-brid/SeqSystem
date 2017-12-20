@@ -57,7 +57,7 @@
                     </ul>
 
                     <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin"">
+                        <a class="right-sidebar-toggle" aria-expanded="false" href="user-jmpLogin">
                             <img src="/img/exit.png">
                         </a>
                     </li>
@@ -76,6 +76,7 @@
 <script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+
 </body>
 
 

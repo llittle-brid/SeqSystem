@@ -6,15 +6,19 @@
 <head>
     <meta charset="UTF8">
     <title>创建项目</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
-    <meta httpequiv="refresh" content="0;ie.html" />
-    <link href="/css/bootstrap.min14ed.css" rel="stylesheet">
-    <link href="/css/fontawesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="/css/xzw.css" rel="stylesheet">
-    <link href="/css/lzf.css" rel="stylesheet">
+
+    <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/xzw.css" rel="stylesheet">
+    <link href="../../css/lzf.css" rel="stylesheet">
+
 </head>
 <body class="gray-bg animated fadeInDown">
 <div class=" row wrapper white-bg">
@@ -28,24 +32,25 @@
 </div>
 
 <div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
-    <div class="form-group">
+    <div class="form-group has-feedback">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control my_input1 " placeholder="请输入项目名称">
-            <div class="help-block help-block-error "></div>
+            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称">
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
+
     </div>
 
     <div class="form-group">
         <br/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control my_input1" placeholder="请输入文档名称">
-            <div class="help-block help-block-error "></div>
+            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称">
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
     </div>
 
@@ -55,28 +60,31 @@
 
     <div class="form-group">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
-        <div class="col-sm-4" style="display: table">
-            <input type="text" id="orgName" class="form-control my_input1" autocomplete="off" placeholder="请输入机构名称">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-white dropdown-toggle" data-toggle="">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu" style="padding-top: 0px; max-height: 375px; max-width: 800px; overflow: auto; width: auto; transition: 0.5s; min-width: 400px; left: -367px; right: auto;">
-                </ul>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <input type="text" id="orgName" class="form-control text-center" autocomplete="true" placeholder="请输入机构名称" oninput="inputSuggest()">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" style="padding-top: 0px; max-height: 375px; max-width: 800px; overflow: auto; width: auto; transition: 0.5s; min-width: 400px; left: -367px; right: auto;">
+                    </ul>
+                </div>
             </div>
             <!-- /btn-group -->
         </div>
     </div>
 
+
     <div class="form-group">
         <br/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
         <div class="col-sm-4">
-            <textarea type="text"  id="intro" class="form-control" placeholder="输入项目的基本介绍" rows="6"></textarea>
-            <div class="help-block help-block-error "></div>
+            <textarea type="text"  id="intro" class="form-control text-center" placeholder="输入项目的基本介绍" rows="6"></textarea>
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
     </div>
 
@@ -98,7 +106,7 @@
             <button id="create_button" class="btn-danger btn">确认创建</button>
         </span>
         <span class="col-md-2 col-xs-offset-2">
-            <button href="user-jmpHomepage" class="btn-default btn">取消创建</button>
+            <a href="user-jmpHomepage"><button class="btn-default btn">取消创建</button></a>
         </span>
     </div>
 </div>
@@ -109,72 +117,67 @@
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
+<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/mjy.js"></script>
-<script>
-    function showtoast(type, title, msg) {
-        var $showDuration = "3000";
-        var $hideDuration = "1000";
-        var $timeOut = "5000";
-        var $extendedTimeOut = "1000";
-        var $showEasing = "swing";
-        var $hideEasing = "linear";
-        var $showMethod = "fadeIn";
-        var $hideMethod = "fadeOut";
-        toastr.options = {
-            closeButton: true,
-            debug: false,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            onclick: null
-        };
-        if ($showDuration) {
-            toastr.options.showDuration = $showDuration
-        }
-        if ($hideDuration) {
-            toastr.options.hideDuration = $hideDuration
-        }
-        if ($timeOut) {
-            toastr.options.timeOut = $timeOut
-        }
-        if ($extendedTimeOut) {
-            toastr.options.extendedTimeOut = $extendedTimeOut
-        }
-        if ($showEasing) {
-            toastr.options.showEasing = $showEasing
-        }
-        if ($hideEasing) {
-            toastr.options.hideEasing = $hideEasing
-        }
-        if ($showMethod) {
-            toastr.options.showMethod = $showMethod
-        }
-        if ($hideMethod) {
-            toastr.options.hideMethod = $hideMethod
-        }
-        if (!msg) {
-            msg = getMessage()
-        }
-        var $toast = toastr[type](msg, title);
-    }
 
+<script>
 
     $("button#create_button").click(function () {
+        var username = "${sessionScope.username}";
         $.ajax({
             url: "project-create",
-            data: {ProName: $("input#proName").val(), DocName: $("input#docName").val(), OrgName: $("input#orgName").val(), Intro: $("textarea#intro").val()},
+            data: {
+                ProName: $("input#proName").val(), DocName: $("input#docName").val(),
+                OrgName: $("input#orgName").val(), Intro: $("textarea#intro").val(),
+                Username: username
+            },
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "创建成功", "操作成功")
-                    location.href = "project-jmpProjectManage"
+                    location.href = "project-jmpProjectInfo"
                 }
                 else  showtoast("error", "创建失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "创建失败", "操作失败")
             }
-//            error: function (result) {
-//                showtoast("error", "创建失败", "操作失败")
-//            }
+        })
+    })
+    function inputSuggest() {
+        var orgName=$("input#orgName");
+        $.ajax({
+            url: "project-chooseOrg",
+            data: {OrgName:orgName.val()},
+            dataType: "json",
+            type: "get",
+            async: "false",
+            success: function (result) {
+                var orgList = result.res;
+                var suggest="";
+                suggest = JSON.parse('{"value": ' + orgList + ', "defaults": "10000000000"}');
+
+                $("input#orgName").bsSuggest("destroy");
+                $("#orgName").bsSuggest({
+                    idField:"ID_ORGANIZATION",
+                    keyField:"NAME",
+                    data:suggest
+                }).on('onDataRequestSuccess', function (e, result) {
+                    console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
+        })
+    }
+
+    $(function () {
+
+        $('a').click(function () {
+            $('input')[0].value = "";
         })
     })
 </script>
