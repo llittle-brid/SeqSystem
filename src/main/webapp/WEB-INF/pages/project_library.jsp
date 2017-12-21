@@ -59,7 +59,7 @@
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
-                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>
+                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="library-get"><span class="lzf_b">构件库</span></a>
                     </strong>
                 </li>
             </ol>
@@ -169,7 +169,7 @@
     $(document).ready(function(){
         $("button.pagenum").click(function(){
             alert($(this).html());
-            $(this).hide();
+
         });
     });
 </script>

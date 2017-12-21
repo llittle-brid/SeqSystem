@@ -24,6 +24,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
 
+
     public String get() {
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
@@ -35,6 +36,25 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         ActionContext.getContext().getValueStack().set("list",libraryAll);
         request.put("num",num);
         return "getall";
+    }
+
+    public String getagain() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryAllagain;
+        libraryAllagain=libraryDao.getAll((library.getPage()-1)*6,(library.getPage()-1)*6+6);
+        ActionContext.getContext().getValueStack().set("list",libraryAllagain);
+        boolean res=!(libraryAllagain.isEmpty());
+        dataMap.put("res", res);
+        return "getagain";
+    }
+
+    public String jmpLibrary(){
+        libraryDao = new LibraryDaoImp();
+        int count=libraryDao.getAllcount();
+        int num=count/6+1;
+        request.put("num",num);
+        return "libraryPage";
     }
 
     public String getcommon() {
@@ -88,6 +108,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         ActionContext.getContext().getValueStack().set("listpicture",libraryPicture);
         return "getpicture";
     }
+
 
     @Override
     public LibraryEntity getModel() {
