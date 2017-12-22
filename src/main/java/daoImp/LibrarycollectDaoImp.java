@@ -5,6 +5,17 @@ import entity.LibrarycollectEntity;
 import java.util.List;
 
 public class LibrarycollectDaoImp extends DAO<LibrarycollectEntity> implements LibrarycollectDao{
+
+    public boolean collect(int id_user,int id_library)
+    {
+        String sql="insert into LIB_COLLECT value(?,?)";
+        update(sql,id_user,id_library);
+        if(id_library!=0)
+        { return true;}
+        else
+            return false;
+    }
+
     public LibrarycollectEntity getOne(String name)
     {
         String sql="select * from USER where name=?";
