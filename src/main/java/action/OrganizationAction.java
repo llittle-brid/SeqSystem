@@ -1,36 +1,42 @@
 package action;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.OrganizationDao;
 import dao.PersonalCenterDao;
+import daoImp.OrganizationDaoImp;
 import daoImp.PersonalCenterDaoImp;
+import entity.OrganizationEntity;
 import entity.PersonalCenterEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+
 import java.util.List;
 import java.util.Map;
-public class PersonalCenterAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<PersonalCenterEntity>, Preparable {
-    private PersonalCenterDao personalcenterdao;
-    private PersonalCenterEntity PersonaCenter;
+
+public class OrganizationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<OrganizationEntity>, Preparable {
+    private OrganizationDao organizationdao;
+    private OrganizationEntity organization;
     private UserEntity user;
     private Map<String, Object> session;
+    private Map<String, Object> request;
     private Map<String, Object> dataMap;
-    public String ShowMyorganization(){
-        PersonaCenter = new PersonalCenterEntity();
-        personalcenterdao = new PersonalCenterDaoImp();
+    public String quitorg(){
+        organization = new OrganizationEntity();
+        organizationdao = new OrganizationDaoImp();
         user = (UserEntity)session.get("user");
         System.out.println(user.getName());
-        List list = personalcenterdao.getAll(user.getName());
-        ActionContext.getContext().getValueStack().set("list",list);
-        return "showmyorganization";
+        organizationdao.quit(user.getName());
+        return "quitorg";
     }
 
 
     @Override
     public void prepare() throws Exception {
-        PersonaCenter = new PersonalCenterEntity();
+        organization = new OrganizationEntity();
     }
 
 
@@ -41,7 +47,7 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
 
     @Override
     public void setRequest(Map<String, Object> request) {
-//        this.request = request;
+        this.request = request;
     }
 
 
@@ -56,8 +62,8 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
 
 
     @Override
-    public PersonalCenterEntity getModel() {
-        return PersonaCenter;
+    public OrganizationEntity getModel() {
+        return organization;
     }
 }
 

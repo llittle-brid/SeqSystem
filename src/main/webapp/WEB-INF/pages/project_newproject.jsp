@@ -11,7 +11,7 @@
     <![endif]-->
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
-    <meta httpequiv="refresh" content="0;ie.html" />
+
     <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
@@ -32,12 +32,12 @@
 </div>
 
 <div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
-    <div class="form-group">
+    <div class="form-group has-feedback">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
             <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称">
-            <div class="help-block help-block-error "></div>
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
 
     </div>
@@ -46,10 +46,11 @@
         <br/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
             <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称">
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
     </div>
 
@@ -79,11 +80,11 @@
         <br/>
     </div>
 
-    <div class="form-group">
+    <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
         <div class="col-sm-4">
             <textarea type="text"  id="intro" class="form-control text-center" placeholder="输入项目的基本介绍" rows="6"></textarea>
-            <div class="help-block help-block-error "></div>
+            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
         </div>
     </div>
 
@@ -173,6 +174,12 @@
         })
     }
 
+    $(function () {
+
+        $('a').click(function () {
+            $('input')[0].value = "";
+        })
+    })
 </script>
 
 </html>

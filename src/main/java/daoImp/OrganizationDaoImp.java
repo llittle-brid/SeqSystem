@@ -27,4 +27,10 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         List<OrganizationEntity> list = getForList(sql);
         return list;
     }
+
+    @Override
+    public void quit(String NAME) {
+        String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
+        update(sql,NAME);
+    }
 }

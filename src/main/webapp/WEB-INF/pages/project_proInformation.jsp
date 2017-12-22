@@ -29,14 +29,14 @@
     <link href="../../css/z_style.css" rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<body class="gray-bg animated fadeInDown">
 <div class="animated fadeInDown">
-
     <div class=" row wrapper white-bg">
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpCurrentProjectList"><span class="lzf_b">当前项目</span></a>
+                    >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>
                 </strong>
             </li>
         </ol>
