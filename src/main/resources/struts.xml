@@ -66,7 +66,7 @@
             </result>
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo</allowed-methods>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showList</allowed-methods>
         </action>
 
         <action name="organization-*" class="action.OrganizationAction" method="{1}">
