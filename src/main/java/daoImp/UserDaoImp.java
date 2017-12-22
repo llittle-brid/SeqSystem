@@ -4,6 +4,7 @@ import dao.DAO;
 import dao.UserDao;
 import entity.UserEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,12 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         else return false;
     }
 
+    public int num_pro(String name){
+        String sql="select count(*) from project_member where ID_USER=(select ID_USER from user where name=?)";
+        int count=Integer.valueOf(getForValue(sql,name).toString());
+        return count;
+    }
+
     public boolean replacepassword(String name,String password1,String password2,String password3)
     {
         if(password2.equals(password3))
@@ -45,6 +52,23 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         System.out.println(username+qq+address+mail+tel+introduce+gender);
         update(sql,qq,address,mail,tel,introduce,gender,username);
         return true;
+    }
+
+/*
+获取选择name的
+ */
+    public int getID(String name){
+        String sql="select ID_USER from user where NAME=?";
+        int ID = Integer.valueOf(getForValue(sql,name).toString());
+        return ID;
+    }
+    /*
+    获取组员在组内的level
+     */
+    public int level(int ID_USER){
+        String sql="select RANK from project_member where ID_USER=?";
+        int level = Integer.valueOf(getForValue(sql,ID_USER).toString());
+        return level;
     }
 
     public UserEntity getOne(String name)

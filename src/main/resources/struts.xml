@@ -77,5 +77,10 @@
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList,showCompletedList</allowed-methods>
         </action>
+
+        <action name="organization-*" class="action.OrganizationAction" method="{1}">
+            <result name="quitorg">
+            </result>
+        </action>
     </package>
 </struts>
