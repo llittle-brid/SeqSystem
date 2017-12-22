@@ -46,9 +46,9 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     }
 
     @Override
-    public List<ProjectEntity> getAll() {
-        String sql="select * from PROJECT";
-        List<ProjectEntity> project = getForList(sql);
+    public List<ProjectEntity> getAll(int state) {
+        String sql="select * from PROJECT where STATE = ?";
+        List<ProjectEntity> project = getForList(sql,state);
         return project;
     }
 }

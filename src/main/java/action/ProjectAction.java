@@ -54,15 +54,25 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return "select";
     }
 
-    public String showList() {
+    public String showCurrentList() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        List<ProjectEntity> list = projectDao.getAll();
+        List<ProjectEntity> list = projectDao.getAll(1);
         Gson gson = new Gson();
         String json = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
         dataMap.put("res",json);
-        return "projectList";
+        return "currentList";
+    }
+    public String showCompletedList() {
+        dataMap = new HashMap<String, Object>();
+        projectDao = new ProjectDaoImp();
+        List<ProjectEntity> list = projectDao.getAll(0);
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+//        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
+        dataMap.put("res",json);
+        return "completedList";
     }
     @Override
     public String execute() throws Exception {

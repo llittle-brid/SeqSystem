@@ -37,26 +37,24 @@
     </div>
 
     <div class="ibox-content">
-            <div class="bootstrap-table">
-                <table id="finishingTask" data-toggle="table"
-                       data-url="project-showList"
-                       data-click-to-select="true"
-                       data-search="true"
-                       data-show-refresh="true"
-                       data-show-toggle="true"
-                       data-show-columns="true"
-                       data-toolbar="#toolbar"
-                       data-query-params="quefryParams"
-                       data-pagination="true"
-                       data-halign="center"
-                       data-striped="true"
-                       data-page-size="5"
-                       data-height="600"
-                >
-                </table>
-            </div>
+        <div class="bootstrap-table">
+            <table id="finishingTask" data-toggle="table"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="5"
+                   data-height="600"
+            >
+            </table>
+        </div>
     </div>
-
 
 </div>
 </body>
@@ -93,11 +91,6 @@
                 title: '文档名称',
                 align: 'center'
             }, {
-                field: 'release_date',
-                title: '发布日期',
-                sortable: true,
-                align: 'center'
-            }, {
                 field: 'id_Organization',
                 title: '所属机构',
                 sortable: true,
@@ -120,7 +113,7 @@
     $.ajax(
         {
             type:"GET",
-            url:"project-showList",
+            url:"project-showCurrentList",
             dataType:"json",
             success:function(json){
                 var proList = JSON.parse(json.res);
