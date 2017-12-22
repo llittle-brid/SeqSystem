@@ -64,7 +64,6 @@
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">
-            <result name="getagain" type="json"><param name="root">dataMap</param></result>
             <result name="getall">/WEB-INF/pages/project_library.jsp</result>
             <result name="getcommon">/WEB-INF/pages/project_common_library.jsp</result>
             <result name="getuser">/WEB-INF/pages/project_user_library.jsp</result>
@@ -72,7 +71,7 @@
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
 
-            <allowed-methods>get,getagain,getcommon,getuser,getcase,getpicture,jmpLibrary</allowed-methods>
+            <allowed-methods>get,getagain,getcommon,getuser,getcase,getpicture</allowed-methods>
         </action>
     </package>
 </struts>

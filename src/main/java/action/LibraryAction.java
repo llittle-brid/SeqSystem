@@ -23,6 +23,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+    private  int page;
 
 
     public String get() {
@@ -42,19 +43,12 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryAllagain;
-        libraryAllagain=libraryDao.getAll((library.getPage()-1)*6,(library.getPage()-1)*6+6);
+        libraryAllagain=libraryDao.getAll((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("list",libraryAllagain);
-        boolean res=!(libraryAllagain.isEmpty());
-        dataMap.put("res", res);
-        return "getagain";
-    }
-
-    public String jmpLibrary(){
-        libraryDao = new LibraryDaoImp();
         int count=libraryDao.getAllcount();
         int num=count/6+1;
         request.put("num",num);
-        return "libraryPage";
+        return "getall";
     }
 
     public String getcommon() {
@@ -138,4 +132,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         this.dataMap = dataMap;
     }
 
+    public void setPage(int page) {
+        this.page = page;
+    }
 }

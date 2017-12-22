@@ -11,15 +11,6 @@ public class LibraryEntity {
     private int collect_num;
     private String mention;
     private Date time;
-    private int page;
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
 
     public Date getTime() {
         return time;

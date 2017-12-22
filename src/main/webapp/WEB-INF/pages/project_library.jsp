@@ -168,8 +168,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            alert($(this).html());
-
+            location.href="library-getagain?page="+$(this).html();
         });
     });
 </script>
