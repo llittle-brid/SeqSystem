@@ -1,35 +1,35 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
-
 package action;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import dao.OrganizationDao;
+import javax.servlet.http.HttpSession;
+
 import daoImp.OrganizationDaoImp;
 import entity.OrganizationEntity;
+
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-import java.util.Map;
 
-public class OrganizationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<OrganizationEntity>, Preparable {
-    private OrganizationDao organizationdao;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+public class InfomationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<OrganizationEntity>, Preparable {
+    private OrganizationDao organizationDao;
     private OrganizationEntity organization;
     private UserEntity user;
     private Map<String, Object> session;
-    private Map<String, Object> request;
     private Map<String, Object> dataMap;
-    public String quitorg(){
-        organization = new OrganizationEntity();
-        organizationdao = new OrganizationDaoImp();
-        user = (UserEntity)session.get("user");
-        System.out.println(user.getName());
-        organizationdao.quit(user.getName());
-        return "quitorg";
-    }
+
+
+    public String jmpmyinfomation(){
+        System.out.println("jmpmyinfomation");
+        return "information"; }
 
 
     @Override
@@ -45,7 +45,7 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
 
     @Override
     public void setRequest(Map<String, Object> request) {
-        this.request = request;
+//        this.request = request;
     }
 
 
