@@ -1,20 +1,18 @@
-package action;
+//        Created by IntelliJ IDEA.
+//        User: wwc
+//        Date: 22/12/2017
+//        Time: 15:55
 
-import com.opensymphony.xwork2.ActionContext;
+package action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.OrganizationDao;
-import dao.PersonalCenterDao;
 import daoImp.OrganizationDaoImp;
-import daoImp.PersonalCenterDaoImp;
 import entity.OrganizationEntity;
-import entity.PersonalCenterEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-
-import java.util.List;
 import java.util.Map;
 
 public class OrganizationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<OrganizationEntity>, Preparable {
