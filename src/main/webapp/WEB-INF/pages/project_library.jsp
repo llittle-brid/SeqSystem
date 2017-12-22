@@ -129,9 +129,8 @@
                                     </p>
                                 </div>
                                 <div style="float: right;margin: 0px -5px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                    </ul>
+                                    <i id="collect" class="fa fa-star-o modal-icon" style="font-size: 20px"></i>
+
                                 </div>
                             </div>
                         </div>
@@ -185,6 +184,47 @@
             else
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="library-getagain?page="+p;}
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("i#collect").click(function(){
+            $(this).addClass('fa-star');
+            $(this).removeClass('fa-star-o');
+            $.ajax({
+                url: "user-login",
+                data: {name: $("input#name").val(),password: $("input#password").val()},
+                dataType: "json",
+                type: "Post",
+                async: "false",
+                success: function (result) {
+                    if(result.res===true)  {
+//                    showtoast("success", "登录成功", "操作成功")
+                        location.href = "user-jmpTemp";
+                    }
+                    else  showtoast("error", "登录失败", "登录失败")
+                },
+                error: function (result) {
+                    showtoast("error", "登录失败", "登录失败")
+                }
+            })
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("i#collect").mouseenter(function(){
+            $(this).addClass('fa-star');
+            $(this).removeClass('fa-star-o');
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("i#collect"). mouseleave(function(){
+            $(this).addClass('fa-star-o');
+            $(this).removeClass('fa-star');
         });
     });
 </script>

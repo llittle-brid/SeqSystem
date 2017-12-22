@@ -123,10 +123,7 @@
                                     </p>
                                 </div>
                                 <div style="float: right;margin: 0px 3px 0px 0px">
-                                    <ul>
-                                        <li style="display: inline"><img src="/img/div1_2.png" height="20" width="20"/></li>
-                                        <li style="display: inline"><img src="/img/div1_3.png" height="20" width="20"/></li>
-                                    </ul>
+                                    <img src="/img/div1_2.png" height="20" width="20"/>
                                 </div>
                             </div>
                         </div>

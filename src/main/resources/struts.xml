@@ -73,5 +73,10 @@
 
             <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getusergain,getcase,getcaseagain,getpicture,getpictureagain</allowed-methods>
         </action>
+
+        <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
+
+            <allowed-methods></allowed-methods>
+        </action>
     </package>
 </struts>
