@@ -71,12 +71,12 @@
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
 
-            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getusergain,getcase,getcaseagain,getpicture,getpictureagain</allowed-methods>
+            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain</allowed-methods>
         </action>
 
         <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
-
-            <allowed-methods></allowed-methods>
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <allowed-methods>collect</allowed-methods>
         </action>
     </package>
 </struts>

@@ -72,8 +72,8 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryCommonagain;
-        libraryCommonagain=libraryDao.getAll((page-1)*6,(page-1)*6+6);
-        ActionContext.getContext().getValueStack().set("list",libraryCommonagain);
+        libraryCommonagain=libraryDao.getCommon((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcommon",libraryCommonagain);
         int count=libraryDao.getCommoncount();
         int num=count/6+1;
         request.put("num",num);
@@ -95,13 +95,13 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         return "getuser";
     }
 
-    public  String getusergain()
+    public  String getuseragain()
     {
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryUseragain;
-        libraryUseragain=libraryDao.getAll((page-1)*6,(page-1)*6+6);
-        ActionContext.getContext().getValueStack().set("list",libraryUseragain);
+        libraryUseragain=libraryDao.getUser((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listuser",libraryUseragain);
         int count=libraryDao.getUsercount();
         int num=count/6+1;
         request.put("num",num);
@@ -155,8 +155,8 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryPictureagain;
-        libraryPictureagain=libraryDao.getCase((page-1)*6,(page-1)*6+6);
-        ActionContext.getContext().getValueStack().set("listcase",libraryPictureagain);
+        libraryPictureagain=libraryDao.getPicture((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listpicture",libraryPictureagain);
         int count=libraryDao.getPicturecount();
         int num=count/6+1;
         request.put("num",num);
