@@ -30,6 +30,7 @@
             <result name="replacepasswordPage">/WEB-INF/pages/project_replacepassword.jsp</result>
             <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword</allowed-methods>
         </action>
+
         <action name="user-*" class="action.UserAction" method="{1}">
             <result name="tempPage">/WEB-INF/pages/temp.jsp</result>
             <result name="success" type="json"><param name="root">dataMap</param></result>
@@ -40,9 +41,27 @@
             <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
             <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="currentProjectList">/WEB-INF/pages/project_currentList.jsp</result>
+            <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
             <interceptor-ref name="myStack"/>
-        <allowed-methods>jmpSysManager1,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,editProfile,jmpTemp,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
-
+        <allowed-methods>jmpCompletedProjectList,jmpCurrentProjectList,jmpSysManager1,jmpSysManager2,jmpOrgManager1,jmpOrgManager2,editProfile,jmpTemp,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
         </action>
+
+        <action name="project-*" class="action.ProjectAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="select" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="projectList" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
+            <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showList</allowed-methods>
+        </action>
+
     </package>
 </struts>

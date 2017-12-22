@@ -44,16 +44,15 @@
                         <th style="width: 150px;text-align: center">用户名:</th>
                         <th>
                             ${sessionScope.user.name}
-                            <s:if test='#session.user.gender=="男"'>
-                                <img src="/img/u413.png">
-                            </s:if>
-                            <s:elseif test='#session.user.gender=="女"'>
-                                <img style="height: 30px;width: 30px" src="/img/famale.png">
-                            </s:elseif>
-                            <s:else>
-                                <img style="height: 30px;width: 30px" src="/img/gender.png">
-                            </s:else>
-
+                                <s:if test='#session.user.gender=="男"'>
+                                    <img src="/img/u413.png">
+                                </s:if>
+                                <s:elseif test='#session.user.gender=="女"'>
+                                    <img style="height: 30px;width: 30px" src="/img/famale.png">
+                                </s:elseif>
+                                <s:else>
+                                    <img style="height: 30px;width: 30px" src="/img/gender.png">
+                                </s:else>
                         </th>
                     </tr>
                     <tr >

@@ -38,9 +38,11 @@
                         <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
-                        </li>
-                        <li class="divider"></li>
+                        <s:if test='#session.rank=="1"'>
+                            <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
+                            </li>
+                            <li class="divider"></li>
+                        </s:if>
                         <li class="J_tabShowActive"><a href="user-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>

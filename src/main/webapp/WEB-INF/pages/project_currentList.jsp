@@ -38,7 +38,8 @@
 
     <div class="ibox-content">
             <div class="bootstrap-table">
-                <table id="finishingTask" data-toggle="table"
+                <table id="finishingTask"
+                       data-toggle="table"
                        data-url="project-showList"
                        data-click-to-select="true"
                        data-search="true"

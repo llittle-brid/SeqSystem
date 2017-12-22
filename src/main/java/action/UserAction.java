@@ -40,8 +40,11 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         dataMap.put("res", res);
         if(res==true) {
             user = userDao.getOne(user.getName());
+            int rank=userDao.getRank(user.getId_user());
             session.put("user",user);
+            session.put("rank",rank);
             System.out.println(user);
+            System.out.println(rank+"rank");
         }
         return "RES";
     }
@@ -93,7 +96,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpHomepage() {
         return "homePage";
     }
-    public String jmpTemp() { return "tempPage";}
+    public String jmpTemp() {
+        return "tempPage";
+    }
     public String jmpSysManager1(){
         return "SysManager1Page";
     }
