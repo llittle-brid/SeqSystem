@@ -71,7 +71,7 @@
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
 
-            <allowed-methods>get,getagain,getcommon,getuser,getcase,getpicture</allowed-methods>
+            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getusergain,getcase,getcaseagain,getpicture,getpictureagain</allowed-methods>
         </action>
     </package>
 </struts>

@@ -32,10 +32,11 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryAll;
         int page=1;
         libraryAll=libraryDao.getAll((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("list",libraryAll);
         int count=libraryDao.getAllcount();
         int num=count/6+1;
-        ActionContext.getContext().getValueStack().set("list",libraryAll);
         request.put("num",num);
+        request.put("page",page);
         return "getall";
     }
 
@@ -48,6 +49,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         int count=libraryDao.getAllcount();
         int num=count/6+1;
         request.put("num",num);
+        request.put("page",page);
         return "getall";
     }
 
@@ -59,8 +61,23 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         int count=libraryDao.getCommoncount();
         int num=count/6+1;
         request.put("num",num);
+        request.put("page",page);
         libraryCommon=libraryDao.getCommon((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listcommon",libraryCommon);
+        return "getcommon";
+    }
+
+    public  String getcommonagain()
+    {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryCommonagain;
+        libraryCommonagain=libraryDao.getAll((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("list",libraryCommonagain);
+        int count=libraryDao.getCommoncount();
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
         return "getcommon";
     }
 
@@ -72,8 +89,23 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         int count=libraryDao.getUsercount();
         int num=count/6+1;
         request.put("num",num);
+        request.put("page",page);
         libraryUser=libraryDao.getUser((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listuser",libraryUser);
+        return "getuser";
+    }
+
+    public  String getusergain()
+    {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryUseragain;
+        libraryUseragain=libraryDao.getAll((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("list",libraryUseragain);
+        int count=libraryDao.getUsercount();
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
         return "getuser";
     }
 
@@ -82,11 +114,25 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryDao = new LibraryDaoImp();
         List<LibraryEntity> libraryCase;
         int page=1;
+        libraryCase=libraryDao.getCase((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcase",libraryCase);
         int count=libraryDao.getCasecount();
         int num=count/6+1;
         request.put("num",num);
-        libraryCase=libraryDao.getCase((page-1)*6,(page-1)*6+6);
-        ActionContext.getContext().getValueStack().set("listcase",libraryCase);
+        request.put("page",page);
+        return "getcase";
+    }
+
+    public String getcaseagain(){
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryCaseagain;
+        libraryCaseagain=libraryDao.getCase((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcase",libraryCaseagain);
+        int count=libraryDao.getCasecount();
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
         return "getcase";
     }
 
@@ -98,10 +144,27 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         int count=libraryDao.getPicturecount();
         int num=count/6+1;
         request.put("num",num);
+        request.put("page",page);
         libraryPicture=libraryDao.getPicture((page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listpicture",libraryPicture);
         return "getpicture";
     }
+
+    public String getpictureagain()
+    {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> libraryPictureagain;
+        libraryPictureagain=libraryDao.getCase((page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listcase",libraryPictureagain);
+        int count=libraryDao.getPicturecount();
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
+        return "getpicture";
+    }
+
+
 
 
     @Override

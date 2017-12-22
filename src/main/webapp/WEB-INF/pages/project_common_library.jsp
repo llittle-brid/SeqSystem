@@ -106,7 +106,7 @@
                 </div>
             </div>
 
-            <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px">
+            <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
                     <s:iterator value="listcommon">
                     <div class="col-sm-4">
@@ -137,13 +137,17 @@
         </div>
         <div id="footer" style="clear: both;text-align: center; margin-top:45px">
             <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
-                <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                </button>
+                <s:if  test="#request.page==1">
+                    <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
+                </s:if>
+                <s:else><button type="button" class="btn btn-white turnpage lastPage"><i class="fa fa-chevron-left"></i></button></s:else>
                 <s:iterator begin="1" end="#request.num" step="1" status="st">
-                    <button class="btn btn-white  active"><s:property value='#st.index+1'/></button>
+                    <s:if test="#request.page==#st.index+1">
+                        <button type="button" class="btn btn-white active pagenum nowpage"><s:property value='#st.index+1'/></button></s:if>
+                    <s:else ><button type="button" class="btn btn-white pagenum"><s:property value='#st.index+1'/></button></s:else>
                 </s:iterator>
-                <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                </button>
+                <s:if test="#request.page==#request.num"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
+                <s:else><button type="button" class="btn btn-white turnpage nextPage"><i class="fa fa-chevron-right"></i></button></s:else>
             </div>
         </div>
     </div>
@@ -159,6 +163,25 @@
 <script src="/js/content.min.js?v=1.0.0"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.pagenum").click(function(){
+            location.href="library-getcommonagain?page="+$(this).html();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.turnpage").click(function(){
+            if($(this).hasClass("lastPage"))
+            {   var p=parseInt($("button.nowpage").html())-1;
+                location.href="library-getcommonagain?page="+p;}
+            else
+            {   var p=parseInt($("button.nowpage").html())+1;
+                location.href="library-getcommonagain?page="+p;}
+        });
+    });
 </script>
 </body>
 
