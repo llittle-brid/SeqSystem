@@ -97,7 +97,7 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="user-jmpMycollect"><span class="lzf_a">我的收藏</span></a></div>
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
