@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.Preparable;
 import dao.LibrarycollectDao;
 import daoImp.LibrarycollectDaoImp;
 import entity.LibrarycollectEntity;
+import entity.UserEntity;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -21,6 +22,14 @@ public class LibrarycollectAction extends ActionSupport implements RequestAware,
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+
+    public String collect() {
+        dataMap = new HashMap<String, Object>();
+        librarycollectDao = new LibrarycollectDaoImp();
+        boolean res=librarycollectDao.collect((((UserEntity)session.get("user")).getId_user()),librarycollect.getId_library());
+        dataMap.put("res", res);
+        return "RES";
+    }
 
 
 

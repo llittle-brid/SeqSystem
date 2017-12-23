@@ -20,6 +20,8 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/lzf.css" rel="stylesheet">
+    <link href="css/z_style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -114,7 +116,8 @@
                     <div class="col-sm-4">
                         <div class="contact-box">
                             <div>
-                                <div style="margin: 10px 10px 10px 15px;float: left"><s:if test="#request.id_template==1"><img src="/img/div11.png" height="80px" width="80px"/></s:if>
+                                <div style="margin: 10px 10px 10px 15px;float: left">
+                                    <s:if test="#request.id_template==1"><img src="/img/div11.png" height="80px" width="80px"/></s:if>
                                     <s:if test="#request.id_template==2"><img src="/img/div2.png" height="80px" width="80px"/></s:if>
                                     <s:if test="#request.id_template==3"><img src="/img/div3.png" height="80px" width="80px"/></s:if>
                                     <s:if test="#request.id_template==4"><img src="/img/div4.png" height="80px" width="80px"/></s:if>
@@ -128,9 +131,11 @@
                                         <s:property value="mention"/>
                                     </p>
                                 </div>
-                                <div style="float: right;margin: 0px -5px 0px 0px">
-                                    <i id="collect" class="fa fa-star-o modal-icon" style="font-size: 20px"></i>
-
+                                <div style="float: right;margin: -14px -19px 0px 0px">
+                                    <a class="btn btn-white btn-bitbucket collect" style="border: none" >
+                                      <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
+                                    </a>
+                                    <input style="display:none" type="text" id="collect<s:property value="id_library"/>" value="<s:property value="id_library"/>">
                                 </div>
                             </div>
                         </div>
@@ -165,6 +170,8 @@
 <script type="text/javascript" src="/js/contabs.min.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/toastr/toastr.min.js"></script>
+<script src="js/mjy.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -187,48 +194,29 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function(){
-        $("i#collect").click(function(){
-            $(this).addClass('fa-star');
-            $(this).removeClass('fa-star-o');
-            $.ajax({
-                url: "user-login",
-                data: {name: $("input#name").val(),password: $("input#password").val()},
-                dataType: "json",
-                type: "Post",
-                async: "false",
-                success: function (result) {
-                    if(result.res===true)  {
-//                    showtoast("success", "登录成功", "操作成功")
-                        location.href = "user-jmpTemp";
-                    }
-                    else  showtoast("error", "登录失败", "登录失败")
-                },
-                error: function (result) {
-                    showtoast("error", "登录失败", "登录失败")
-                }
-            })
-        });
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        $("i#collect").mouseenter(function(){
-            $(this).addClass('fa-star');
-            $(this).removeClass('fa-star-o');
-        });
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        $("i#collect"). mouseleave(function(){
-            $(this).addClass('fa-star-o');
-            $(this).removeClass('fa-star');
-        });
-    });
-</script>
 </body>
+<script>
+    $("a.collect").click(function () {
+        $(this).children().addClass("fa-star");
+        $(this).children().removeClass("fa-star-o");
+        $.ajax({
+            url: "librarycollect-collect",
+            data: {id_library: $(this).next().val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "收藏成功", "操作成功")
+                }
+                else  showtoast("error", "收藏失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "收藏失败", "操作失败")
+            }
+        })
+    })
+</script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

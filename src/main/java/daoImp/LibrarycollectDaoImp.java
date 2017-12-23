@@ -8,7 +8,7 @@ public class LibrarycollectDaoImp extends DAO<LibrarycollectEntity> implements L
 
     public boolean collect(int id_user,int id_library)
     {
-        String sql="insert into LIB_COLLECT value(?,?)";
+        String sql="insert into LIB_COLLECT (id_user,id_library) values(?,?)";
         update(sql,id_user,id_library);
         if(id_library!=0)
         { return true;}
@@ -25,7 +25,7 @@ public class LibrarycollectDaoImp extends DAO<LibrarycollectEntity> implements L
 
     public List<LibrarycollectEntity> getAll()
     {
-        String sql="select * from LIBRARY ";
+        String sql="select * from LIB_COLLECT ";
         List<LibrarycollectEntity> librarycollect1=getForList(sql);
         return librarycollect1;
     }
