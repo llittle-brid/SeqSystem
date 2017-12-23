@@ -40,7 +40,6 @@
             <result name="success" type="json"><param name="root">dataMap</param></result>
             <result name="homePage">/WEB-INF/pages/project_homepage.jsp</result>
             <result name="newprojectPage">/WEB-INF/pages/project_newproject.jsp</result>
-            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="componentPage">/WEB-INF/pages/project_component.jsp</result>
             <result name="casecomponentPage">/WEB-INF/pages/project_case_component.jsp</result>
             <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
@@ -48,8 +47,8 @@
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
             <interceptor-ref name="myStack"/>
             <allowed-methods>
-                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage
-                ,jmpNewproject,jmpMyprofile,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent
+                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile
+                ,jmpNewproject,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent
                 ,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
@@ -69,9 +68,12 @@
             <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showList</allowed-methods>
         </action>
 
-        <action name="organization-*" class="action.OrganizationAction" method="{1}">
-            <result name="quitorg">
+        <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">
+            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="orgList" type="json">
+                 <param name="root">dataMap</param>
             </result>
+            <allowed-methods>jmpMyprofile,showList</allowed-methods>
         </action>
     </package>
 </struts>

@@ -15,10 +15,10 @@ import java.util.List;
 public class PersonalCenterDaoImp extends DAO<PersonalCenterEntity> implements PersonalCenterDao {
 
     @Override
-    public List<PersonalCenterEntity> getAll(String NAME) {
-        String sql = "select * from VIEW_MYORGANIZATION where ADMIN_NAME = ?";
+    public List<PersonalCenterEntity> getAll(int ID) {
+        String sql = "select * from VIEW_showMYORG where ID_USER = ?";
         List list = new ArrayList();
-        list = getForList(sql,NAME);
+        list = getForList(sql,ID);
         return list;
     }
 }

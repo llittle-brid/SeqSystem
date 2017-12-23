@@ -10,6 +10,6 @@ import entity.PersonalCenterEntity;
 import java.util.List;
 
 public interface PersonalCenterDao {
-    List<PersonalCenterEntity> getAll(String NAME);
+    List<PersonalCenterEntity> getAll(int ID);
 }
 

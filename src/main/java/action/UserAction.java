@@ -1,5 +1,6 @@
 package action;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -18,6 +19,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,15 +87,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         }
         return "success";
     }
-    public String jmpMyprofile(){
-        PersonaCenter = new PersonalCenterEntity();
-        personalcenterdao = new PersonalCenterDaoImp();
-        user = (UserEntity)session.get("user");
-        System.out.println(user.getName());
-        List list = personalcenterdao.getAll(user.getName());
-        ActionContext.getContext().getValueStack().set("list",list);
-        return "myprofilePage";
-    }
+
 
     public String jmpLogin(){
         return "loginPage";

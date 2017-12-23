@@ -17,6 +17,13 @@
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+    <!-- bootstrap-table -->
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
@@ -115,44 +122,31 @@
                 </table>
             </div>
         </div>
-        <div class="ibox float-e-margins">
+
+
+
+        <div class="ibox-content">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>我的机构</strong></span></div>
                 <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newOrg">申请机构</button></div>
             </div>
-            <div class="ibox-content">
-
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>机构名</th>
-                        <th>机构管理员</th>
-                        <th>机构编码</th>
-                        <th>机构人数</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <s:iterator value="list" >
-                    <tr>
-                        <td><s:property value="NAME"/></td>
-                        <td><s:property value="ADIMIN_NAME"/></td>
-                        <td><s:property value="ID_ORGANIZATION"/></td>
-                        <td><s:property value="NUMBER_USER"/></td>
-                        <td><a href="" style="color: grey">管理</a>/<a href="" style="color: orangered">退出</a></td>
-                    </tr>
-                    </s:iterator>
-                    </tbody>
+            <div class="bootstrap-table">
+                <table id="finishingTask" data-toggle="table"
+                       data-url="project-showList"
+                       data-click-to-select="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       data-query-params="quefryParams"
+                       data-pagination="true"
+                       data-halign="center"
+                       data-striped="true"
+                       data-page-size="3"
+                       data-height="269"
+                >
                 </table>
-                <div style="height: 50px;margin-left: 40%" class="btn-group">
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-white">1</button>
-                    <button class="btn btn-white  active">2</button>
-                    <button class="btn btn-white">3</button>
-                    <button class="btn btn-white">4</button>
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -330,6 +324,8 @@
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
 <script>
     $("button#edit-button").click(function (){
@@ -351,6 +347,69 @@
             }
         })
     })
+
+</script>
+<script>
+    $('#finishingTask').bootstrapTable({
+            columns: [
+                {
+                    checkbox: true,
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: '机构编码',
+                    field: 'ID_ORGANIZATION',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'ORGANIZATIONNAME',
+                    title: '机构名称',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'ADMIN_NME',
+                    title: '管理员',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'NUM_USER',
+                    title: '机构人数',
+                    align: 'center'
+                },
+                {
+                    field: 'operate',
+                    title: '操作',
+                    align: 'center',
+                    formatter: AddFunctionAlty
+                }
+            ]
+        }
+    );
+    /**
+ * @return {string}
+ */
+function AddFunctionAlty(value,row,index) {
+        return[
+            '<a href="personalcenter-quit"><button id="discuss" class="btn btn-success text-center btn-xs">退出</button></a>',
+        ].join('');
+    }
+    $.ajax(
+        {
+            type:"GET",
+            url:"personalcenter-showList",
+            dataType:"json",
+            success:function(json){
+                var proList = JSON.parse(json.listorg);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',proList);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
 </script>
 
 </html>

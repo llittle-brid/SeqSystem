@@ -9,12 +9,10 @@ import java.sql.Date;
 
 public class PersonalCenterEntity {
     int ID_ORGANIZATION;
-    String NAME;
+    String ORGANIZATIONNAME;
+    String ADMIN_NME;
+    int NUM_USER;
     int ID_USER;
-    Date TIME;
-    String ADIMIN_NAME;
-    int COUNT_PROJECT;
-    int NUMBER_USER;
 
 //获取机构ID
     public int getID_ORGANIZATION() {
@@ -25,14 +23,32 @@ public class PersonalCenterEntity {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
     }
 //获取机构名称
-    public String getNAME() {
-        return NAME;
+    public String getORGANIZATIONNAME() {
+        return ORGANIZATIONNAME;
     }
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
+    public void setORGANIZATIONNAME(String ORGANIZATIONNAME) {
+        this.ORGANIZATIONNAME = ORGANIZATIONNAME;
     }
-//获取机构管理员ID
+
+//获取管理员名字
+    public String  getADMIN_NME() {
+        return ADMIN_NME;
+    }
+
+    public void setADMIN_NME(String ADMIN_NME) {
+        this.ADMIN_NME = ADMIN_NME;
+    }
+
+//获取机构下属人数
+    public int getNUM_USER() {
+        return NUM_USER;
+    }
+
+    public void setNUM_USER(int NUM_USER) {
+        this.NUM_USER = NUM_USER;
+    }
+//获取机构下的每个人ID
     public int getID_USER() {
         return ID_USER;
     }
@@ -40,47 +56,13 @@ public class PersonalCenterEntity {
     public void setID_USER(int ID_USER) {
         this.ID_USER = ID_USER;
     }
-//获取管理员名字
-    public String  getADIMIN_NAME() {
-        return ADIMIN_NAME;
-    }
 
-    public void setADIMIN_NAME(String ADIMIN_NAME) {
-        this.ADIMIN_NAME = ADIMIN_NAME;
-    }
-//获取机构创建时间
-    public Date getTIME() {
-        return TIME;
-    }
-
-    public void setTIME(Date TIME) {
-        this.TIME = TIME;
-    }
-//获取机构下属项目数
-    public int getCOUNT_PROJECT() {
-        return COUNT_PROJECT;
-    }
-
-    public void setCOUNT_PROJECT(int COUNT_PROJECT) {
-        this.COUNT_PROJECT = COUNT_PROJECT;
-    }
-//获取机构下属人数
-    public int getNUMBER_USER() {
-        return NUMBER_USER;
-    }
-
-    public void setNUMBER_USER(int NUMBER_USER) {
-        this.NUMBER_USER = NUMBER_USER;
-    }
-
-    public PersonalCenterEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, String ADIMIN_NAME, int COUNT_PROJECT, int NUMBER_USER) {
+    public PersonalCenterEntity(int ID_ORGANIZATION, String ORGANIZATIONNAME, String ADMIN_NME, int NUM_USER, int ID_USER) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
+        this.ORGANIZATIONNAME = ORGANIZATIONNAME;
+        this.ADMIN_NME = ADMIN_NME;
+        this.NUM_USER = NUM_USER;
         this.ID_USER = ID_USER;
-        this.NAME = NAME;
-        this.TIME = TIME;
-        this.ADIMIN_NAME = ADIMIN_NAME;
-        this.COUNT_PROJECT = COUNT_PROJECT;
-        this.NUMBER_USER = NUMBER_USER;
     }
 
     public PersonalCenterEntity() {
