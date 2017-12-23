@@ -173,7 +173,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         librarycollectAll=libraryDao.getMycollect((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*6+6);
         System.out.println(librarycollectAll);
         ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAll);
-        int count=libraryDao.getAllcount((((UserEntity)session.get("user")).getId_user()));
+        int count=libraryDao.getMycollectcount((((UserEntity)session.get("user")).getId_user()));
         int num=count/6+1;
         request.put("num",num);
         request.put("page",page);
@@ -186,7 +186,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> librarycollectAllagain;
         librarycollectAllagain=libraryDao.getMycollect((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*6+6);
         ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAllagain);
-        int count=libraryDao.getAllcount((((UserEntity)session.get("user")).getId_user()));
+        int count=libraryDao.getMycollectcount((((UserEntity)session.get("user")).getId_user()));
         int num=count/6+1;
         request.put("num",num);
         request.put("page",page);

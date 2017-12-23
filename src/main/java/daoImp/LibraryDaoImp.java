@@ -15,7 +15,7 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
     }
     public List<LibraryEntity> getAll(int num1,int num2)
     {
-        String sql="select * from LIBRARY limit ?,? ";
+        String sql="SELECT LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION,LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY FROM LIBRARY LEFT JOIN LIB_COLLECT ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY order by ID_LIBRARY limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
@@ -82,11 +82,11 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
 
     public List<LibraryEntity> getMycollect(int id_user,int num1,int num2)
     {
-        String sql="SELECT LIBRARY.`NAME`,LIB_COLLECT.ID_LIBRARY,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.MENTION,LIBRARY.TIME FROM LIB_COLLECT LEFT JOIN LIBRARY ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY and LIBRARY.ID_USER=? limit ?,?";
+        String sql="SELECT LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY,LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION FROM LIB_COLLECT INNER JOIN LIBRARY ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY where LIB_COLLECT.ID_USER=? limit ?,?";
         List<LibraryEntity> librarycollect1=getForList(sql,id_user,num1,num2);
         return librarycollect1;
     }
-    public int getAllcount(int id_user)
+    public int getMycollectcount(int id_user)
     {
         String sql="select count(*) from LIB_COLLECT where ID_USER=?";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());

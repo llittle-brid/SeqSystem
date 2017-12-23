@@ -17,6 +17,16 @@ public class LibrarycollectDaoImp extends DAO<LibrarycollectEntity> implements L
             return false;
     }
 
+    public boolean nocollect(int id_user,int id_library)
+    {
+        String sql="delete from LIB_COLLECT where id_user=? and id_library=?";
+        update(sql,id_user,id_library);
+        if(id_library!=0)
+        { return true;}
+        else
+            return false;
+    }
+
     public LibrarycollectEntity getOne(String name)
     {
         String sql="select * from USER where name=?";

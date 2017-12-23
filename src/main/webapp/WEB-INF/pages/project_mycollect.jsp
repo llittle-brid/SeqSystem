@@ -101,7 +101,7 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a"><u>我的收藏</u></span></a></div>
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
@@ -133,9 +133,9 @@
                                             </p>
                                         </div>
                                         <div style="float: right;margin: -14px -19px 0px 0px">
-                                            <a class="btn btn-white btn-bitbucket collect" style="border: none" >
-                                                <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
-                                            </a>
+                                                <a class="btn btn-white btn-bitbucket nocollect" style="border: none" >
+                                                    <i class="fa fa-star modal-icon " style="font-size: 20px"></i>
+                                                </a>
                                             <input style="display:none" type="text" value="<s:property value="id_library"/>">
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="library-Mycollectagain?page="+$(this).html();
+            location.href="librarycollect-getagain?page="+$(this).html();
         });
     });
 </script>
@@ -189,10 +189,10 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="library-Mycollectagain?page="+p;}
+                location.href="librarycollect-getagain?page="+p;}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="library-Mycollectagain?page="+p;}
+                location.href="library-getagain?page="+p;}
         });
     });
 </script>
@@ -202,6 +202,56 @@
             location.href=" structure-get?id_library="+$(this).next().val();
         });
     });
+</script>
+<script>
+    $(document).on("click","a.collect",function () {
+        $(this).addClass("nocollect");
+        $(this).removeClass("collect");
+        $(this).children().addClass("fa-star");
+        $(this).children().removeClass("fa-star-o");
+        $.ajax({
+            url: "librarycollect-collect",
+            data: {id_library: $(this).next().val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "收藏成功", "操作成功")
+
+                }
+                else  showtoast("error", "收藏失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "收藏失败", "操作失败")
+            }
+        })
+    })
+</script>
+<script>
+    $(document).on("click","a.nocollect",function () {
+        $(this).addClass("collect");
+        $(this).removeClass("nocollect");
+        $(this).children().addClass("fa-star-o");
+        $(this).children().removeClass("fa-star");
+        $.ajax({
+            url: "librarycollect-nocollect",
+            data: {id_library: $(this).next().val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "取消收藏成功", "操作成功")
+
+                }
+                else  showtoast("error", "取消收藏失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "取消收藏失败", "操作失败")
+            }
+        })
+    })
 </script>
 </body>
 

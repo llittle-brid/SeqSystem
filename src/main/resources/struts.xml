@@ -77,7 +77,7 @@
 
         <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <allowed-methods>collect</allowed-methods>
+            <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
         <action name="structure-*" class="action.StructureAction" method="{1}">

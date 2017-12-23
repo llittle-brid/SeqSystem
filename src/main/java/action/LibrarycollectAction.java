@@ -32,6 +32,14 @@ public class LibrarycollectAction extends ActionSupport implements RequestAware,
         return "RES";
     }
 
+    public String nocollect() {
+        dataMap = new HashMap<String, Object>();
+        librarycollectDao = new LibrarycollectDaoImp();
+        boolean res=librarycollectDao.nocollect((((UserEntity)session.get("user")).getId_user()),librarycollect.getId_library());
+        dataMap.put("res", res);
+        return "RES";
+    }
+
 
 
     @Override
