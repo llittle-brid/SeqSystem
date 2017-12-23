@@ -32,7 +32,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
     private ProjectDao projectDao;
     private ProjectEntity project;
-
+    private Map<String,Object> request;
+    private Map<String,Object> session;
     private Map<String, Object> dataMap;
 
     public String create() {
@@ -78,9 +79,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     @Override
     public String execute() throws Exception {
         dataMap = new HashMap<String, Object>();
-//        data = new ArrayList<Object>();
-//        jsonArray = new JsonArray();
-//        json = "";
+
         return null;
     }
 
@@ -90,17 +89,22 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String jmpProjectInfo() {
         return "projectInformation";
     }
+    public String jmpFinishedProjectInfo(){
+        return "finishedProjectInfo";
+    }
     @Override
     public void prepare() throws Exception {
         project = new ProjectEntity();
     }
 
     @Override
-    public void setRequest(Map<String, Object> map) {
+    public void setRequest(Map<String, Object> session) {
+        this.session = session;
     }
 
     @Override
-    public void setSession(Map<String, Object> map) {
+    public void setSession(Map<String, Object> request) {
+        this.request = request;
     }
 
     public Map<String, Object> getDataMap() {
@@ -110,23 +114,6 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
     }
-
-//    public JSONObject getJsonObject() {
-//        return jsonObject;
-//    }
-//
-//    public void setJsonObject(JSONObject jsonObject) {
-//        this.jsonObject = jsonObject;
-//    }
-
-
-//    public String getJson() {
-//        return json;
-//    }
-//
-//    public void setJson(String json) {
-//        this.json = json;
-//    }
 
     @Override
     public ProjectEntity getModel() {

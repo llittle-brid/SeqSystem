@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: zhiweixu
@@ -21,7 +22,6 @@
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
-
 </head>
 
 <body class="gray-bg animated fadeInDown">
@@ -39,6 +39,7 @@
     <div class="ibox-content">
         <div class="bootstrap-table">
             <table id="finishingTask" data-toggle="table"
+                   data-classes="table table-no-bordered"
                    data-click-to-select="true"
                    data-search="true"
                    data-show-refresh="true"
@@ -46,6 +47,8 @@
                    data-show-columns="true"
                    data-toolbar="#toolbar"
                    data-query-params="quefryParams"
+                   data-search-align="left"
+                   data-buttons-align="left"
                    data-pagination="true"
                    data-halign="center"
                    data-striped="true"
@@ -66,10 +69,6 @@
     $('#finishingTask').bootstrapTable({
         columns: [
             {
-                checkbox: true,
-                align: 'center',
-                valign: 'middle'
-            }, {
                 title: '项目ID',
                 field: 'id_Project',
                 align: 'center',
@@ -79,7 +78,7 @@
                 field: 'name',
                 title: '项目名称',
                 sortable: true,
-                align: 'center'
+                align: 'center',
             }, {
                 field: 'date',
                 title: '创建日期',
@@ -99,17 +98,12 @@
                 field: 'operate',
                 title: '操作',
                 align: 'center',
-                formatter: AddFunctionAlty
+                events: "actionEvents",
+                formatter: "operateFormatter"
             }
             ]
         }
     );
-    function AddFunctionAlty(value,row,index) {
-        return[
-            '<a href="project-jmp"><button id="discuss" class="btn btn-success text-center btn-xs">讨论区<sup>&nbsp;●</sup></button></a>',
-            '<a href="project-jmp"><button id="edit" href="user-jmpHomepage" class="btn btn-success text-center btn-xs " style="left: 10px">进入编辑</button></a>'
-        ].join('');
-    }
     $.ajax(
         {
             type:"GET",
@@ -124,7 +118,24 @@
                 alert("错误");
             }
         }
-    )
+    );
+
+    function operateFormatter(value,row,index) {
+        return '<a class="mod zfont3">进入</a>'
+    }
+
+    //表格  - 操作 - 事件
+    window.actionEvents = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            var id = row.id_Project;
+            var value = parseInt(id);
+            location.href="project-jmpProjectInfo?id_Project="+value;
+        },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
 </script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:52 GMT -->

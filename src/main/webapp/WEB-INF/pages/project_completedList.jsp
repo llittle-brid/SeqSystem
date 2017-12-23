@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: zhiweixu
@@ -33,10 +34,10 @@
             </li>
         </ol>
     </div>
-
     <div class="ibox-content">
         <div class="bootstrap-table">
             <table id="finishingTask" data-toggle="table"
+                   data-classes="table table-no-bordered"
                    data-click-to-select="true"
                    data-search="true"
                    data-show-refresh="true"
@@ -44,6 +45,8 @@
                    data-show-columns="true"
                    data-toolbar="#toolbar"
                    data-query-params="quefryParams"
+                   data-search-align="left"
+                   data-buttons-align="left"
                    data-pagination="true"
                    data-halign="center"
                    data-striped="true"
@@ -63,10 +66,6 @@
     $('#finishingTask').bootstrapTable({
             columns: [
                 {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                }, {
                     title: '项目ID',
                     field: 'id_Project',
                     align: 'center',
@@ -109,7 +108,7 @@
     function AddFunctionAlty(value,row,index) {
         return[
             '<a href="project-jmp"><button id="discuss" class="btn btn-success text-center btn-xs">讨论区<sup>&nbsp;●</sup></button></a>',
-            '<a href="project-jmp"><button id="edit" href="user-jmpHomepage" class="btn btn-success text-center btn-xs " style="left: 10px">进入编辑</button></a>'
+            '<a href="project-jmpFinishedProjectInfo" style="padding-left: 20px"><button href="user-jmpHomepage" class="btn btn-info text-center btn-xs " >查看项目</button></a>'
         ].join('');
     }
     $.ajax(
