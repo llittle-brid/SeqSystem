@@ -101,7 +101,7 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="librarycollect-Mycollect"><span class="lzf_a"><u>我的收藏</u></span></a></div>
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a"><u>我的收藏</u></span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
@@ -112,7 +112,7 @@
 
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
-                    <s:iterator value="list">
+                    <s:iterator value="listmycollect">
                         <a class="structure">
                             <div class="col-sm-4">
                                 <div class="contact-box">
@@ -180,7 +180,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="librarycollect-Mycollectagain?page="+$(this).html();
+            location.href="library-Mycollectagain?page="+$(this).html();
         });
     });
 </script>
@@ -189,10 +189,10 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="librarycollect-Mycollectagain?page="+p;}
+                location.href="library-Mycollectagain?page="+p;}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="librarycollect-Mycollectagain?page="+p;}
+                location.href="library-Mycollectagain?page="+p;}
         });
     });
 </script>

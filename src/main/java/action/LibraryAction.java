@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.Preparable;
 import dao.LibraryDao;
 import daoImp.LibraryDaoImp;
 import entity.LibraryEntity;
+import entity.UserEntity;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -95,7 +96,7 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         return "getuser";
     }
 
-    public  String getuseragain()
+    public String getuseragain()
     {
         dataMap = new HashMap<String, Object>();
         libraryDao = new LibraryDaoImp();
@@ -162,6 +163,34 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         request.put("num",num);
         request.put("page",page);
         return "getpicture";
+    }
+
+    public String Mycollect() {
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> librarycollectAll;
+        int page=1;
+        librarycollectAll=libraryDao.getMycollect((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*6+6);
+        System.out.println(librarycollectAll);
+        ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAll);
+        int count=libraryDao.getAllcount((((UserEntity)session.get("user")).getId_user()));
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
+        return "getMycollect";
+    }
+
+    public String Mycollectagain(){
+        dataMap = new HashMap<String, Object>();
+        libraryDao = new LibraryDaoImp();
+        List<LibraryEntity> librarycollectAllagain;
+        librarycollectAllagain=libraryDao.getMycollect((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*6+6);
+        ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAllagain);
+        int count=libraryDao.getAllcount((((UserEntity)session.get("user")).getId_user()));
+        int num=count/6+1;
+        request.put("num",num);
+        request.put("page",page);
+        return "getMycollect";
     }
 
 

@@ -70,14 +70,14 @@
             <result name="getcase">/WEB-INF/pages/project_case_library.jsp</result>
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
+            <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
 
-            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain</allowed-methods>
+            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain,Mycollect,Mycollectagain</allowed-methods>
         </action>
 
         <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
-            <allowed-methods>collect,Mycollect,Mycollectagain</allowed-methods>
+            <allowed-methods>collect</allowed-methods>
         </action>
 
         <action name="structure-*" class="action.StructureAction" method="{1}">

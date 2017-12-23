@@ -78,4 +78,19 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         int count=Integer.valueOf(getForValue(sql).toString());
         return count;
     }
+
+
+    public List<LibraryEntity> getMycollect(int id_user,int num1,int num2)
+    {
+        String sql="SELECT LIBRARY.`NAME`,LIB_COLLECT.ID_LIBRARY,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.MENTION,LIBRARY.TIME FROM LIB_COLLECT LEFT JOIN LIBRARY ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY and LIBRARY.ID_USER=? limit ?,?";
+        List<LibraryEntity> librarycollect1=getForList(sql,id_user,num1,num2);
+        return librarycollect1;
+    }
+    public int getAllcount(int id_user)
+    {
+        String sql="select count(*) from LIB_COLLECT where ID_USER=?";
+        int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        return count;
+    }
+
 }
