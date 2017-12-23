@@ -20,8 +20,16 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+    private int id_library;
 
-
+    public String get() {
+        dataMap = new HashMap<String, Object>();
+        structureDao = new StructureDaoImp();
+        List<StructureEntity> structureAll;
+        structureAll=structureDao.getAll(id_library);
+        ActionContext.getContext().getValueStack().set("liststructure",structureAll);
+        return "get";
+    }
     @Override
     public StructureEntity getModel() {
         return structure;
@@ -50,4 +58,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         this.dataMap = dataMap;
     }
 
+    public void setId_library(int id_library) {
+        this.id_library = id_library;
+    }
 }

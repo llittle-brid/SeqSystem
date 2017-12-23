@@ -76,7 +76,14 @@
 
         <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <allowed-methods>collect</allowed-methods>
+            <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
+            <allowed-methods>collect,Mycollect,Mycollectagain</allowed-methods>
+        </action>
+
+        <action name="structure-*" class="action.StructureAction" method="{1}">
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <result name="get">/WEB-INF/pages/project_common_component.jsp</result>
+            <allowed-methods>get</allowed-methods>
         </action>
     </package>
 </struts>

@@ -101,7 +101,7 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="user-jmpMycollect"><span class="lzf_a">我的收藏</span></a></div>
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="librarycollect-Mycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
@@ -113,7 +113,8 @@
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
                     <s:iterator value="list">
-                    <div class="col-sm-4">
+                    <a class="structure">
+                        <div class="col-sm-4">
                         <div class="contact-box">
                             <div>
                                 <div style="margin: 10px 10px 10px 15px;float: left">
@@ -135,11 +136,13 @@
                                     <a class="btn btn-white btn-bitbucket collect" style="border: none" >
                                       <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
                                     </a>
-                                    <input style="display:none" type="text" id="collect<s:property value="id_library"/>" value="<s:property value="id_library"/>">
+                                    <input style="display:none" type="text" value="<s:property value="id_library"/>">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </a>
+                        <input style="display:none" type="text" value="<s:property value="id_library"/>">
                     </s:iterator>
                 </div>
             </div>
@@ -191,6 +194,13 @@
             else
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="library-getagain?page="+p;}
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("a.structure").click(function(){
+                location.href=" structure-get?id_library="+$(this).next().val();
         });
     });
 </script>

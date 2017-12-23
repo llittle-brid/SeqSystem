@@ -11,10 +11,10 @@ public class StructureDaoImp extends DAO<StructureEntity> implements StructureDa
         return structure1;
     }
 
-    public List<StructureEntity> getAll(int id_user)
+    public List<StructureEntity> getAll(int id_library)
     {
-        String sql="select * from LIB_COLLECT where ID_USER=? ";
-        List<StructureEntity> structure1=getForList(sql,id_user);
+        String sql="select * from structure where ID_LIBRARY=? ";
+        List<StructureEntity> structure1=getForList(sql,id_library);
         return structure1;
     }
 }
