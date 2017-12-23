@@ -20,6 +20,8 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/lzf.css" rel="stylesheet">
+    <link href="css/z_style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -124,8 +126,18 @@
                                             <s:property value="mention"/>
                                         </p>
                                     </div>
-                                    <div style="float: right;margin: 0px 3px 0px 0px">
-                                        <img src="/img/div1_2.png" height="20" width="20"/>
+                                    <div style="float: right;margin: -14px -19px 0px 0px">
+                                        <s:if test="#request.id_user==#session.user.id_user">
+                                            <a class="btn btn-white btn-bitbucket nocollect" style="border: none" >
+                                                <i class="fa fa-star modal-icon " style="font-size: 20px"></i>
+                                            </a>
+                                        </s:if>
+                                        <s:else>
+                                            <a class="btn btn-white btn-bitbucket collect" style="border: none" >
+                                                <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
+                                            </a>
+                                        </s:else>
+                                        <input style="display:none" type="text" value="<s:property value="id_library"/>">
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +173,8 @@
 <script type="text/javascript" src="/js/contabs.min.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/toastr/toastr.min.js"></script>
+<script src="js/mjy.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -184,7 +198,64 @@
     });
 </script>
 </body>
+<script>
+    $(document).ready(function(){
+        $("a.structure").click(function(){
+            location.href=" structure-get?id_library="+$(this).next().val();
+        });
+    });
+</script>
+</body>
+<script>
+    $(document).on("click","a.collect",function () {
+        $(this).addClass("nocollect");
+        $(this).removeClass("collect");
+        $(this).children().addClass("fa-star");
+        $(this).children().removeClass("fa-star-o");
+        $.ajax({
+            url: "librarycollect-collect",
+            data: {id_library: $(this).next().val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "收藏成功", "操作成功")
 
+                }
+                else  showtoast("error", "收藏失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "收藏失败", "操作失败")
+            }
+        })
+    })
+</script>
+<script>
+    $(document).on("click","a.nocollect",function () {
+        $(this).addClass("collect");
+        $(this).removeClass("nocollect");
+        $(this).children().addClass("fa-star-o");
+        $(this).children().removeClass("fa-star");
+        $.ajax({
+            url: "librarycollect-nocollect",
+            data: {id_library: $(this).next().val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "取消收藏成功", "操作成功")
+
+                }
+                else  showtoast("error", "取消收藏失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "取消收藏失败", "操作失败")
+            }
+        })
+    })
+</script>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
 
