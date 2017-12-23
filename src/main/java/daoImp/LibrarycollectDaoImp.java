@@ -23,10 +23,10 @@ public class LibrarycollectDaoImp extends DAO<LibrarycollectEntity> implements L
         return librarycollect1;
     }
 
-    public List<LibrarycollectEntity> getAll()
+    public List<LibrarycollectEntity> getAll(int id_user)
     {
-        String sql="select * from LIB_COLLECT ";
-        List<LibrarycollectEntity> librarycollect1=getForList(sql);
+        String sql="select * from LIB_COLLECT where ID_USER=? ";
+        List<LibrarycollectEntity> librarycollect1=getForList(sql,id_user);
         return librarycollect1;
     }
 }

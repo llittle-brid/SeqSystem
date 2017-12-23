@@ -208,6 +208,7 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "收藏成功", "操作成功")
+
                 }
                 else  showtoast("error", "收藏失败", "操作失败")
             },
