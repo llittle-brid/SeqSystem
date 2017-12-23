@@ -84,7 +84,7 @@
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u14.png" style="height: 18px;width: 20px"></button>　项目简介：</label>
         <div class="col-sm-4">
             <textarea type="text"  id="intro" class="form-control text-center" placeholder="输入项目的基本介绍" rows="6"></textarea>
-            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
+            <a class="glyphicon glyphicon-remove form-control-feedback"style="pointer-events: auto"></a>
         </div>
     </div>
 
@@ -112,7 +112,6 @@
 </div>
 
 </body>
-
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
@@ -175,7 +174,6 @@
     }
 
     $(function () {
-
         $('a').click(function () {
             $('input')[0].value = "";
         })
