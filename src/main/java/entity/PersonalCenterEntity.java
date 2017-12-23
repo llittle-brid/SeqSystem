@@ -5,8 +5,6 @@
 
 package entity;
 
-import java.sql.Date;
-
 public class PersonalCenterEntity {
     int ID_ORGANIZATION;
     String ORGANIZATIONNAME;
