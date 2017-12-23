@@ -7,7 +7,7 @@ package entity;
 
 import java.sql.Date;
 
-public class PersonalCenterEntity {
+public class SysManagerEntity {
     int ID_ORGANIZATION;
     String NAME;
     int ID_USER;
@@ -73,7 +73,7 @@ public class PersonalCenterEntity {
         this.NUMBER_USER = NUMBER_USER;
     }
 
-    public PersonalCenterEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, String ADIMIN_NAME, int COUNT_PROJECT, int NUMBER_USER) {
+    public SysManagerEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, String ADIMIN_NAME, int COUNT_PROJECT, int NUMBER_USER) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
         this.ID_USER = ID_USER;
         this.NAME = NAME;
@@ -83,6 +83,6 @@ public class PersonalCenterEntity {
         this.NUMBER_USER = NUMBER_USER;
     }
 
-    public PersonalCenterEntity() {
+    public SysManagerEntity() {
     }
 }

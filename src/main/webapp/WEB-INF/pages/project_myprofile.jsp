@@ -280,6 +280,7 @@
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
+            <form action="organization-applyOrg" method="post">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
@@ -287,15 +288,16 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input id="OrgName" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                    <div class="form-group"><label>联系方式</label> <input id="mytel" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
-                    <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                    <div class="form-group"><label>机构名</label> <input name="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
+                    <div class="form-group"><label>联系电话</label> <input name="tel" type="text" placeholder="请输入联系电话" class="form-control" required="required"></div>
+                    <div class="form-group"><label>备注</label> <input name="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button id="newOrg-button" type="button" class="btn btn-primary">申请</button>
+                    <button id="newOrg-button" type="submit" class="btn btn-primary">申请</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -310,7 +312,7 @@
                     <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
                     <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
                     <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
-                    <div class="form-group"><label>联系电话</label> <input id="tel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
+                    <div class="form-group"><label>联系电话</label> <input id="mytel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
                     <div class="form-group"><label>个性签名</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
                     <div class="form-group">
                         <label>性别</label>
@@ -343,12 +345,12 @@
     $("button#edit-button").click(function (){
         $.ajax({
             url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
+            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#mytel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
-                if(result.res===true)  {
+                if(result.res==true)  {
                     showtoast("success", "修改成功", "操作成功")
                     location.href = "user-jmpMyprofile";
                 }

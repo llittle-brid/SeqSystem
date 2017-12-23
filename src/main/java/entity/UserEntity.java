@@ -18,8 +18,7 @@ public class UserEntity {
     private String mail;
     private String qq;
     private String tel;
-    private String photo;
-
+    private int status;
     public int getId_user() {
         return id_user;
     }
@@ -100,15 +99,15 @@ public class UserEntity {
         this.tel = tel;
     }
 
-    public String getPhoto() {
-        return photo;
+    public int getStatus() {
+        return status;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public UserEntity(int id_user, String password, String name, String gender, String address, String introduce, java.sql.Date dob, String mail, String qq, String tel, String photo) {
+    public UserEntity() {
         this.id_user = id_user;
         this.password = password;
         this.name = name;
@@ -119,9 +118,6 @@ public class UserEntity {
         this.mail = mail;
         this.qq = qq;
         this.tel = tel;
-        this.photo = photo;
-    }
-
-    public UserEntity() {
+        this.status = status;
     }
 }

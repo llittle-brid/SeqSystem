@@ -111,7 +111,7 @@
             }
             ]
         }
-    );
+    )
     function AddFunctionAlty(value,row,index) {
         return[
             '<a href="project-jmp"><button id="discuss" class="btn btn-success text-center btn-xs">讨论区<sup>&nbsp;●</sup></button></a>',

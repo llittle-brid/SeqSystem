@@ -55,10 +55,9 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         return user1;
     }
 
-    public int getRank(int id){
-        String sql = "select count(*) from USER_RANK where ID_USER=?";
+    public int orgManager(int id){
+        String sql="select count(*) from ORGANIZATION where ID_USER=?";
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
-
 }

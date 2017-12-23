@@ -50,7 +50,7 @@
         <action name="project-*" class="action.ProjectAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
-            </result>
+        </result>
             <result name="select" type="json">
                 <param name="root">dataMap</param>
             </result>
@@ -61,6 +61,27 @@
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <interceptor-ref name="myStack"/>
             <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showList</allowed-methods>
+        </action>
+
+        <action name="organization-*" class="action.ApplyOrganizationAction" method="{1}">
+            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>applyOrg</allowed-methods>
+        </action>
+
+        <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
+            <result name="organizationList" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>showList</allowed-methods>
+        </action>
+        <action name="showExitOrg-*" class="action.ShowExitOrgAction" method="{1}">
+            <result name="exitOrgList" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>showList</allowed-methods>
         </action>
 
     </package>

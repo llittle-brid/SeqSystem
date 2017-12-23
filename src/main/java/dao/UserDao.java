@@ -15,7 +15,7 @@ public interface UserDao {
 
 	UserEntity getOne(String name);
 
-	int getRank(int id);
-
     List<UserEntity> getAll();
+
+    int orgManager(int id);
 }

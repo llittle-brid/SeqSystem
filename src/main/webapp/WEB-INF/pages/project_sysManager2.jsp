@@ -13,10 +13,13 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="/example/favicon.ico">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -48,142 +51,89 @@
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <div class="row">
-                    <div class="col-sm-5 m-b-xs">
-                        <select class="input-sm form-control input-s-sm inline">
-                            <option value="0">请选择</option>
-                            <option value="1">用户筛选</option>
-                            <option value="2">时间筛选</option>
-                            <option value="3">备注筛选</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 m-b-xs">
-
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>机构名</th>
-                            <th>机构管理员</th>
-                            <th>机构编码</th>
-                            <th>机构人数</th>
-                            <th>机构项目数</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        <tr>
-                            <td>software</td>
-                            <td>赖菜李</td>
-                            <td>66</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td><a href="" style="color: orangered">注销</a></td>
-                        </tr>
-                        </tbody>
+                <div class="bootstrap-table">
+                    <table id="finishingTask"
+                           data-toggle="table"
+                           data-url="showExitOrg-showList"
+                           data-click-to-select="true"
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-toolbar="#toolbar"
+                           data-query-params="quefryParams"
+                           data-pagination="true"
+                           data-halign="center"
+                           data-striped="true"
+                           data-page-size="10"
+                           data-height="600"
+                           data-page-list="All"
+                    >
                     </table>
-                    <div style="height: 50px;margin-left: 40%" class="btn-group">
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                        </button>
-                        <button class="btn btn-white">1</button>
-                        <button class="btn btn-white  active">2</button>
-                        <button class="btn btn-white">3</button>
-                        <button class="btn btn-white">4</button>
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
 </body>
+<script>
+    $('#finishingTask').bootstrapTable({
+            columns: [
+                {
+                    title: '机构名',
+                    field: 'name',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'user_name',
+                    title: '机构管理员',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'id_organization',
+                    title: '机构编码',
+                    sortable: true,
+                    align: 'center'
+                },{
+                    field: 'time',
+                    title: '成立时间',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'num_user',
+                    title: '机构人数',
+                    align: 'center'
+                }, {
+                    field: 'num_project',
+                    title: '项目数',
+                    sortable: true,
+                    align: 'center'
+                }
+            ]
+        }
+    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"showExitOrg-showList",
+            dataType:"json",
+            success:function(json){
+                var exitOrgList = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',exitOrgList);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+</script>
 </html>

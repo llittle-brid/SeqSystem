@@ -13,10 +13,14 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="/example/favicon.ico">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
@@ -48,131 +52,84 @@
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <div class="row">
-                    <div class="col-sm-5 m-b-xs">
-                        <select class="input-sm form-control input-s-sm inline">
-                            <option value="0">请选择</option>
-                            <option value="1">用户筛选</option>
-                            <option value="2">时间筛选</option>
-                            <option value="3">备注筛选</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4 m-b-xs">
-
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>申请人</th>
-                            <th>联系方式</th>
-                            <th>申请时间</th>
-                            <th>备注</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        <tr>
-                            <td>德莱文</td>
-                            <td>151123123</td>
-                            <td>2017-10-20</td>
-                            <td>？？？</td>
-                            <td><a href="" style="color: grey">同意</a>/<a href="" style="color: orangered">拒绝</a></td>
-                        </tr>
-                        </tbody>
+                <div class="bootstrap-table">
+                    <table id="finishingTask"
+                           data-toggle="table"
+                           data-url="showApplyOrg-showList"
+                           data-click-to-select="true"
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-toolbar="#toolbar"
+                           data-query-params="quefryParams"
+                           data-pagination="true"
+                           data-halign="center"
+                           data-striped="true"
+                           data-page-size="10"
+                           data-height="600"
+                           data-page-list="All"
+                    >
                     </table>
-                    <div style="height: 50px;margin-left: 40%" class="btn-group">
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                        </button>
-                        <button class="btn btn-white">1</button>
-                        <button class="btn btn-white  active">2</button>
-                        <button class="btn btn-white">3</button>
-                        <button class="btn btn-white">4</button>
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
 </body>
+<script>
+    $('#finishingTask').bootstrapTable({
+            columns: [
+                {
+                    title: '申请人',
+                    field: 'name',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'tel',
+                    title: '联系方式',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'org_name',
+                    title: '申请机构名',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'date',
+                    title: '申请时间',
+                    align: 'center'
+                }, {
+                    field: 'message',
+                    title: '备注',
+                    sortable: true,
+                    align: 'center'
+                }
+            ]
+        }
+    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"showApplyOrg-showList",
+            dataType:"json",
+            success:function(json){
+                var orgList = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',orgList);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+</script>
 </html>
