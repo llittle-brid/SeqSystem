@@ -42,7 +42,7 @@
                 <input name="password" id="password"  type="password" class="form-control loginLine" style="font-size:13px" placeholder="请输入密码" required="">
             </div>
             <div class="form-group">
-                <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="catalogAdd()">登 录</button>
+                <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
 
             </div>
             <div class="form-group" >
