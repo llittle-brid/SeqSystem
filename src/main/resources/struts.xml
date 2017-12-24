@@ -85,15 +85,6 @@
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <result name="select" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <result name="currentList" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <result name="completedList" type="json">
-                <param name="root">dataMap</param>
-            </result>
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <result name="finishedProjectInfo">/WEB-INF/pages/project_proFinInformation.jsp</result>
