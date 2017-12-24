@@ -12,7 +12,6 @@ public class PersonalCenterEntity {
     int NUM_USER;
     int ID_USER;
 
-//获取机构ID
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;
     }
@@ -20,7 +19,7 @@ public class PersonalCenterEntity {
     public void setID_ORGANIZATION(int ID_ORGANIZATION) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
     }
-//获取机构名称
+
     public String getORGANIZATIONNAME() {
         return ORGANIZATIONNAME;
     }
@@ -29,7 +28,7 @@ public class PersonalCenterEntity {
         this.ORGANIZATIONNAME = ORGANIZATIONNAME;
     }
 
-//获取管理员名字
+
     public String  getADMIN_NME() {
         return ADMIN_NME;
     }
@@ -38,7 +37,7 @@ public class PersonalCenterEntity {
         this.ADMIN_NME = ADMIN_NME;
     }
 
-//获取机构下属人数
+
     public int getNUM_USER() {
         return NUM_USER;
     }
@@ -46,7 +45,7 @@ public class PersonalCenterEntity {
     public void setNUM_USER(int NUM_USER) {
         this.NUM_USER = NUM_USER;
     }
-//获取机构下的每个人ID
+
     public int getID_USER() {
         return ID_USER;
     }
