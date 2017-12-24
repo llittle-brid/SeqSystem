@@ -5,11 +5,11 @@
 
 package dao;
 
-import entity.SysManagerEntity;
+import entity.PersonalCenterEntity;
 
 import java.util.List;
 
-public interface SysManagerDao {
-    List<SysManagerEntity> getAll(String NAME);
+public interface PersonalCenterDao {
+    List<PersonalCenterEntity> getAll(int ID);
 }
 
