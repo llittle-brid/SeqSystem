@@ -20,52 +20,53 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         else return false;
     }
 
-    public boolean registration(String name,String password1,String password2)
-    {
-        if(password1.length()>=6&&password1.equals(password2))
-        {String sql="insert into USER (NAME,PASSWORD) values (?,?)";
-            update(sql,name,password1);
+    public boolean registration(String name, String password1, String password2) {
+        if (password1.length() >= 6 && password1.equals(password2)) {
+            String sql = "insert into USER (NAME,PASSWORD) values (?,?)";
+            update(sql, name, password1);
             return true;
         }
         else return false;
     }
 
-    public boolean replacepassword(String name,String password1,String password2,String password3)
-    {
-        if(password2.equals(password3))
-        {String sql="update USER set password=? where name=?";
-            update(sql,password2,name);
+    public boolean replacepassword(String name, String password1, String password2, String password3) {
+        if (password2.equals(password3)) {
+            String sql = "update USER set password=? where name=?";
+            update(sql, password2, name);
             return true;
         }
         else return false;
     }
-    public boolean edit(String username,String qq,String address,String mail,String tel,String introduce,String gender)
-    {
-        String sql="update USER set qq=?,address=?,mail=?,tel=?,introduce=?,gender=? where name=?";
-        System.out.println(username+qq+address+mail+tel+introduce+gender);
-        update(sql,qq,address,mail,tel,introduce,gender,username);
+
+    public boolean edit(String username, String qq, String address, String mail, String tel, String introduce, String gender) {
+        String sql = "update USER set qq=?,address=?,mail=?,tel=?,introduce=?,gender=? where name=?";
+        System.out.println(username + qq + address + mail + tel + introduce + gender);
+        update(sql, qq, address, mail, tel, introduce, gender, username);
         return true;
     }
 
-    public UserEntity getOne(String name)
-    {
-        String sql="select * from USER where name=?";
-        UserEntity user1=get(sql,name);
+    public UserEntity getOne(String name) {
+        String sql = "select * from USER where name=?";
+        UserEntity user1 = get(sql, name);
         return user1;
     }
 
 
-
-    public List<UserEntity> getAll()
-    {
-        String sql="select * from USER ";
-        List<UserEntity> user1=getForList(sql);
+    public List<UserEntity> getAll() {
+        String sql = "select * from USER ";
+        List<UserEntity> user1 = getForList(sql);
         return user1;
     }
 
     public int Mycollectcount(int id_user){
         String sql="SELECT COUNT(*) from LIB_COLLECT WHERE ID_USER=? ";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        return count;
+    }
+
+    public int orgManager(int id){
+        String sql="select count(*) from ORGANIZATION where ID_USER=?";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
 }

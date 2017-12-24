@@ -1,3 +1,8 @@
+//        Created by IntelliJ IDEA.
+//        User: wwc
+//        Date: 22/12/2017
+//        Time: 15:55
+
 package daoImp;
 
 import dao.DAO;
@@ -26,5 +31,11 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         String sql = "select * from ORGANIZATION";
         List<OrganizationEntity> list = getForList(sql);
         return list;
+    }
+
+    @Override
+    public void quit(String NAME) {
+        String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
+        update(sql,NAME);
     }
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: zhiweixu
@@ -21,7 +22,6 @@
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
-
 </head>
 
 <body class="gray-bg animated fadeInDown">
@@ -37,37 +37,27 @@
     </div>
 
     <div class="ibox-content">
-            <div class="bootstrap-table">
-                <table id="finishingTask" data-toggle="table"
-                       data-url="project-showList"
-                       data-click-to-select="true"
-                       data-search="true"
-                       data-show-refresh="true"
-                       data-show-toggle="true"
-                       data-show-columns="true"
-                       data-toolbar="#toolbar"
-                       data-query-params="queryParams"
-                       data-pagination="true"
-                       data-halign="center"
-                       data-striped="true"
-                       data-page-size="5"
-                >
-                    <thead>
-                    <tr>
-                        <th data-field="id_Project">项目ID</th>
-                        <th data-field="name">项目名称</th>
-                        <th data-field="date">创建日期</th>
-                        <th data-field="document_Name">文档名称</th>
-                        <th data-field="Version">当前版本</th>
-                        <th data-field="id_Organization">所属机构</th>
-                        <th data-field="intro">简介</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+        <div class="bootstrap-table">
+            <table id="finishingTask" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-search-align="left"
+                   data-buttons-align="left"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="5"
+                   data-height="600"
+            >
+            </table>
+        </div>
     </div>
-
 
 </div>
 </body>
@@ -76,14 +66,51 @@
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script>
+    $('#finishingTask').bootstrapTable({
+        columns: [
+            {
+                title: '项目ID',
+                field: 'id_Project',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                field: 'name',
+                title: '项目名称',
+                sortable: true,
+                align: 'center',
+            }, {
+                field: 'date',
+                title: '创建日期',
+                sortable: true,
+                align: 'center'
+            },
+            {
+                field: 'document_Name',
+                title: '文档名称',
+                align: 'center'
+            }, {
+                field: 'id_Organization',
+                title: '所属机构',
+                sortable: true,
+                align: 'center'
+            },{
+                field: 'operate',
+                title: '操作',
+                align: 'center',
+                events: "actionEvents",
+                formatter: "operateFormatter"
+            }
+            ]
+        }
+    );
     $.ajax(
         {
             type:"GET",
-            url:"project-showList",
+            url:"project-showCurrentList",
             dataType:"json",
             success:function(json){
                 var proList = JSON.parse(json.res);
-//                var data = JSON.parse('{"value": ' + proList + ', "defaults": "10000000000"}');
                 //finishingTask为table的id
                 $('#finishingTask').bootstrapTable('load',proList);
             },
@@ -91,7 +118,24 @@
                 alert("错误");
             }
         }
-    )
+    );
+
+    function operateFormatter(value,row,index) {
+        return '<a class="mod zfont3">进入</a>'
+    }
+
+    //表格  - 操作 - 事件
+    window.actionEvents = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            var id = row.id_Project;
+            var value = parseInt(id);
+            location.href="project-jmpProjectInfo?id_Project="+value;
+        },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
 </script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:52 GMT -->
