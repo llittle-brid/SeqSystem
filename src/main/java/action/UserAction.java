@@ -114,6 +114,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpCompletedProjectList() {
         return "completedProjectList";
     }
+    public String jmpMyprofile(){return "jmpMyprofile";}
 
     @Override
     public UserEntity getModel() {

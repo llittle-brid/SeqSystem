@@ -382,7 +382,8 @@
                     field: 'operate',
                     title: '操作',
                     align: 'center',
-                    formatter: AddFunctionAlty
+                    events: "actionEvents",
+                    formatter: "AddFunctionAlty"
                 }
             ]
         }
@@ -390,11 +391,7 @@
     /**
  * @return {string}
  */
-function AddFunctionAlty(value,row,index) {
-        return[
-            '<a href="personalcenter-quit"><button id="discuss" class="btn btn-success text-center btn-xs">退出</button></a>',
-        ].join('');
-    }
+
     $.ajax(
         {
             type:"GET",
@@ -410,6 +407,20 @@ function AddFunctionAlty(value,row,index) {
             }
         }
     )
+    function AddFunctionAlty(value,row,index) {
+        return '<a class="mod zfont3">退出</a>'
+    }
+    window.actionEvents = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            var id = row.ID_ORGANIZATION;
+            var ID_ORGANIZATION = parseInt(id);
+            location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
+        },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
 </script>
 
 </html>
