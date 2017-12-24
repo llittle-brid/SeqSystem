@@ -9,7 +9,9 @@ import com.opensymphony.xwork2.ActionInvocation;
 import entity.UserEntity;
 import org.apache.struts2.ServletActionContext;
 
+import java.beans.EventHandler;
 import java.util.Map;
+import java.util.Objects;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +23,24 @@ import javax.servlet.http.HttpSession;
             HttpSession session= ServletActionContext.getRequest().getSession();
             //取出名为user的session属性
             UserEntity user= (UserEntity) session.getAttribute("user");
-            System.out.println(user+"before_interceptor");
+            int orgManager=(int)session.getAttribute("orgManager");
+            String method =  invocation.getProxy().getMethod();
+            System.out.println(method+"/"+user+"/before_interceptor");
+            if(Objects.equals(method, "jmpSysManager1")|| Objects.equals(method, "jmpSysManager2")){
+                if(user.getStatus()==1){
+                    return invocation.invoke();
+                }
+                ((ActionSupport)invocation.getAction()).addActionError("sorry,you don't have permission!");
+                return Action.NONE;
+            }
+            if(Objects.equals(method, "jmpOrgManager1")|| Objects.equals(method, "jmpOrgManager2")){
+                if(orgManager!=0){
+                    return invocation.invoke();
+                }
+                ((ActionSupport)invocation.getAction()).addActionError("sorry,you don't have permission!");
+                return Action.NONE;
+            }
+
             if(user!=null){
             //    放行到下一个拦截器或者action中的方法
                     return invocation.invoke();

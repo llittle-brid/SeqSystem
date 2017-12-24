@@ -14,4 +14,5 @@ public interface OrganizationDao {
     List<OrganizationEntity> getAll();
     void quit(String NAME);
     List<OrganizationEntity> getMatched(String name);
+    List<OrganizationEntity> getMyOrg(int id);
 }

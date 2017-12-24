@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>个人中心</title>
+    <title>机构人员管理</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -25,7 +25,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpOrgManager1">机构管理</a>>>成员机构
+                    <a href="user-jmpHomepage">首页</a> >><a href="myOrganization-jmpOrgManager1">机构管理</a>>>成员机构
                 </strong>
             </li>
         </ol>
@@ -33,10 +33,10 @@
     <div class="form-group col-md-2">
         <ul class="nav navbar">
             <li>
-                <a href="user-jmpOrgManager1"><button class="btn-warning btn">成员管理</button></a>
+                <a href="myOrganization-jmpOrgManager1"><button class="btn-warning btn">成员管理</button></a>
             </li>
             <li>
-                <a href="user-jmpOrgManager2"><button class="btn-primary btn">查看项目</button></a>
+                <a href="myOrganization-jmpOrgManager2"><button class="btn-primary btn">查看项目</button></a>
             </li>
         </ul>
     </div>
@@ -45,6 +45,13 @@
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>当前成员</strong></span></div>
                 <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button></div>
+                <div style="float: right;width: 300px;margin-top: -10px">
+                    <select id="gender" class="form-control" name="gender">
+                        <s:iterator value="list">
+                            <option class="orgName"><s:property value="NAME"/> </option>
+                        </s:iterator>
+                    </select>
+                </div>
             </div>
             <div class="ibox-content">
 
@@ -184,5 +191,33 @@
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
+<script>
+    $(document).ready(function(){
+        $("option.orgName").click(function(){
+            location.href="library-getagain?name="+$(this).html();
+        });
+    });
+</script>
 </body>
+<script>
+    $("button#edit-button").click(function (){
+        $.ajax({
+            url: "user-editProfile",
+            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#mytel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res==true)  {
+                    showtoast("success", "修改成功", "操作成功")
+                    location.href = "user-jmpMyprofile";
+                }
+                else  showtoast("error", "修改失败", "操作失败")
+            },
+            error: function (result) {
+                showtoast("error", "修改失败", "修改失败")
+            }
+        })
+    })
+</script>
 </html>

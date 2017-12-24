@@ -289,7 +289,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group"><label>机构名</label> <input name="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
-                    <div class="form-group"><label>联系电话</label> <input name="tel" type="text" placeholder="请输入联系电话" class="form-control" required="required"></div>
                     <div class="form-group"><label>备注</label> <input name="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">

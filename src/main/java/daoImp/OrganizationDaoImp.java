@@ -21,6 +21,13 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
     }
 
     @Override
+    public List<OrganizationEntity> getMyOrg(int id) {
+        String sql = "select NAME from ORGANIZATION where ID_USER=?";
+        List<OrganizationEntity> MyOrgList = getForList(sql,id);
+        return MyOrgList;
+    }
+
+    @Override
     public OrganizationEntity getOne(String name) {
         String sql = "select * from ORGANIZATION where NAME = ? ";
         return get(sql,name);
@@ -38,4 +45,5 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
         update(sql,NAME);
     }
+
 }
