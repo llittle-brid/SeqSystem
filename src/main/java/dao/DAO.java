@@ -97,7 +97,6 @@ public class DAO<T> {
 
 
 	public void update(String sql,Object ... args){
-		System.out.println("Replace Success");
 		Connection connection=null;
 		try{
 			connection=JdbcUtils.getConnection();

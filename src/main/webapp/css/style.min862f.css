@@ -38,11 +38,12 @@ a:focus {
 .nav > li > a {
     color: #a7b1c2;
     font-weight: 600;
-    padding: 14px 20px 14px 25px
+    padding: 14px 20px 14px 10px
 }
 
 .nav li > a {
     display: block
+
 }
 
 .nav.navbar-right > li > a {
@@ -57,6 +58,7 @@ a:focus {
     background-color: #6D8389;
     color: #000
 }
+
 
 .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
     background: #fff
@@ -187,9 +189,9 @@ body.body-small .navbar-top-links li:last-child {
     background: #3e4c5a33
 }
 
-.nav.nav-second-level > li.active {
-    border: none
-}
+/*.nav.nav-second-level > li.active {*/
+    /*border: none*/
+/*}*/
 
 .nav.nav-second-level.collapse[style] {
     height: auto !important
@@ -262,11 +264,12 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-second-level li a {
     padding: 7px 15px 7px 10px;
-    padding-left: 52px
+    padding-left: 20px
 }
 
 .nav-third-level li a {
-    padding-left: 62px
+    padding: 7px 15px 7px 10px;
+    padding-left: 30px
 }
 
 .nav-second-level li:last-child {
@@ -430,7 +433,7 @@ body.fixed-sidebar.mini-navbar .navbar-static-side {
 }
 
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper, body.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 0 0 0px
+    margin: 0 0 0 70px
 }
 
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
@@ -2887,7 +2890,7 @@ body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, h
 }
 
 #page-wrapper {
-    min-height: 1000px;
+    min-height: auto
 }
 
 body.boxed-layout {
@@ -3039,7 +3042,7 @@ video {
 #page-wrapper {
     padding: 0 15px;
     position: inherit;
-    margin: 0 0 0 0px;
+    margin: 0 0 0 0px
 }
 
 .title-action {
@@ -6147,7 +6150,7 @@ body.rtls.mini-navbar.fixed-sidebar #page-wrapper {
 }
 
 body.rtls.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-    margin: 0 0px 0 0
+    margin: 0 220px 0 0
 }
 
 body.rtls.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
