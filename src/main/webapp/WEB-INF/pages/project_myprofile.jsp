@@ -144,7 +144,7 @@
                        data-halign="center"
                        data-striped="true"
                        data-page-size="3"
-                       data-height="269"
+                       data-height="259"
                 >
                 </table>
             </div>
