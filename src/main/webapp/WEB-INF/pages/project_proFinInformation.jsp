@@ -17,8 +17,9 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-
     <link rel="shortcut icon" href="../example/favicon.ico">
+    <!-- bootstrap-table -->
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
@@ -46,7 +47,7 @@
                     <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">修改资料</button></div>
                 </div>
                 <div style="padding-left: 80px" class="ibox-content">
-                    <table class="table" style="width:400px;border-left: none;border-right: none">
+                    <table class="" style="width:400px;border-left: none;border-right: none">
                         <tbody>
                         <tr >
                             <th style="width: 150px;text-align: center">项目名称:</th>
@@ -333,5 +334,59 @@
 <script src="../../js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="../../js/contabs.min.js"></script>
 <script src="../../js/plugins/pace/pace.min.js"></script>
-
+<script>
+    $('#infomation').bootstrapTable({
+            columns: [
+                {
+                    title: '项目ID',
+                    field: 'id_Project',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'name',
+                    title: '项目名称',
+                    sortable: true,
+                    align: 'center',
+                }, {
+                    field: 'date',
+                    title: '创建日期',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'document_Name',
+                    title: '文档名称',
+                    align: 'center'
+                }, {
+                    field: 'id_Organization',
+                    title: '所属机构',
+                    sortable: true,
+                    align: 'center'
+                },{
+                    field: 'operate',
+                    title: '操作',
+                    align: 'center',
+                    events: "actionEvents",
+                    formatter: "operateFormatter"
+                }
+            ]
+        }
+    );
+    $.ajax(
+        {
+            type:"GET",
+            url:"project-showCurrentList",
+            dataType:"json",
+            success:function(json){
+                var proList = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',proList);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    );
+</script>
 </html>
