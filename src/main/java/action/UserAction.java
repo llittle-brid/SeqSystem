@@ -71,6 +71,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
+        dataMap = new HashMap<String, Object>();
+        userDao = new UserDaoImp();
+        int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));
+        session.put("Mycollectcount",Mycollectcount);
         return "homePage";
     }
     public String jmpTemp() { return "tempPage";}

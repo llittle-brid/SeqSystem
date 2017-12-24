@@ -62,4 +62,10 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         List<UserEntity> user1=getForList(sql);
         return user1;
     }
+
+    public int Mycollectcount(int id_user){
+        String sql="SELECT COUNT(*) from LIB_COLLECT WHERE ID_USER=? ";
+        int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        return count;
+    }
 }

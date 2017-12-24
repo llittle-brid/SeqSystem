@@ -22,28 +22,28 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
 
     public List<LibraryEntity> getCommon(int num1,int num2)
     {
-        String sql="select * from LIBRARY where ID_TEMPLATE=1 limit ?,? ";
+        String sql="SELECT LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION,LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY FROM LIBRARY LEFT JOIN LIB_COLLECT ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY where LIBRARY.ID_TEMPLATE=1 order by ID_LIBRARY limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getUser(int num1,int num2)
     {
-        String sql="select * from LIBRARY where ID_TEMPLATE=2 limit ?,? ";
+        String sql="SELECT LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION,LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY FROM LIBRARY LEFT JOIN LIB_COLLECT ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY where LIBRARY.ID_TEMPLATE=2 order by ID_LIBRARY limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getCase(int num1,int num2)
     {
-        String sql="select * from LIBRARY where ID_TEMPLATE=3 limit ?,? ";
+        String sql="SELECT LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION,LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY FROM LIBRARY LEFT JOIN LIB_COLLECT ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY where LIBRARY.ID_TEMPLATE=3 order by ID_LIBRARY limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getPicture(int num1,int num2)
     {
-        String sql="select * from LIBRARY where ID_TEMPLATE=4 limit ?,? ";
+        String sql="SELECT LIBRARY.`NAME`,LIBRARY.ID_TEMPLATE,LIBRARY.COLLECT_NUM,LIBRARY.TIME,LIBRARY.MENTION,LIB_COLLECT.ID_USER,LIBRARY.ID_LIBRARY FROM LIBRARY LEFT JOIN LIB_COLLECT ON LIB_COLLECT.ID_LIBRARY = LIBRARY.ID_LIBRARY where LIBRARY.ID_TEMPLATE=4 order by ID_LIBRARY limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,num1,num2);
         return library1;
     }

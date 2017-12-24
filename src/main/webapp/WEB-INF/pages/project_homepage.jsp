@@ -50,7 +50,7 @@
             <a href="library-get"><img src="/img/Home3.jpg" height="160px"></a><br/>
             <span style="color:#365063 ">共享知识</span><br/>
             <span style="color:black">收藏了</span>
-            <span style="color: #ff0000">0</span>
+            <a href="library-Mycollect"><span style="color: #ff0000" class="lzf_a">${sessionScope.Mycollectcount}</span></a>
             <span style="color:black">个构件库</span>
         </div>
         <div class="col-md-2 ">
