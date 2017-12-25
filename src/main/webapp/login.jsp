@@ -46,7 +46,7 @@
 
             </div>
             <div class="form-group" >
-                <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a>
+                <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>修改密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a>
                 </p></div>
 
     </div>
