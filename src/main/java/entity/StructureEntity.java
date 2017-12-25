@@ -2,9 +2,10 @@ package entity;
 
 import java.util.List;
 
-public class StructureEntity {
+public class StructureEntity extends java.lang.Object{
     private int id_structure;
     private int id_library;
+    private String content;
 
     public int getId_structure() {
         return id_structure;
@@ -30,5 +31,4 @@ public class StructureEntity {
         this.content = content;
     }
 
-    private String content;
 }

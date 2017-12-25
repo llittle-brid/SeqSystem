@@ -10,7 +10,7 @@ import entity.StructureEntity;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-
+import util.Json;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,15 +20,25 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+    private Json json;
     private int id_library;
 
-    public String get() {
-        dataMap = new HashMap<String, Object>();
+    public String get()
+    {
         structureDao = new StructureDaoImp();
         List<StructureEntity> structureAll;
         structureAll=structureDao.getAll(id_library);
-        ActionContext.getContext().getValueStack().set("liststructure",structureAll);
+        ActionContext.getContext().getValueStack().set("list",structureAll);
         return "get";
+    }
+
+    public String insert()
+    {
+        structureDao = new StructureDaoImp();
+        structure.setContent("123");
+        System.out.println(json.toJoson(structure));
+        structureDao.insert(json.toJoson(structure));
+        return "insert";
     }
     @Override
     public StructureEntity getModel() {
