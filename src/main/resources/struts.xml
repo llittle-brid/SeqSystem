@@ -48,17 +48,11 @@
         <action name="project-*" class="action.ProjectAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
-        </result>
-            <result name="select" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <result name="projectList" type="json">
-                <param name="root">dataMap</param>
             </result>
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <interceptor-ref name="myStack"/>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo</allowed-methods>
+            <result name="finishedProjectInfo">/WEB-INF/pages/project_proFinInformation.jsp</result>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpFinishedProjectInfo,showCurrentList,showCompletedList</allowed-methods>
         </action>
 
         <action name="organization-*" class="action.ApplyOrganizationAction" method="{1}">

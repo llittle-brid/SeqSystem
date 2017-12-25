@@ -1,3 +1,5 @@
+<%@ page import="org.apache.struts2.json.annotations.JSON" %>
+<%@ page import="com.google.gson.Gson" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
@@ -57,7 +59,9 @@
                     <div class="m-b-md">
                         <a href="project-" class="btn btn-white btn-xs pull-right">编辑文档</a>
                         <h2>
-                            <%=request.getParameter("id_Project")%>
+                            <script>
+                                JSON.parse(<%= new Gson().toJson(request.getParameter("project"))%>)
+                            </script>
                         </h2>
                     </div>
                     <dl class="dl-horizontal">
