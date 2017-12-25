@@ -25,8 +25,8 @@ import java.util.Map;
 public class UserAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<UserEntity>, Preparable {
 
     private UserDao userDao;
-    private SysManagerDao personalcenterdao;
-    private SysManagerEntity PersonaCenter;
+    private PersonalCenterDao personalcenterdao;
+    private PersonalCenterEntity PersonaCenter;
     private UserEntity user;
     private Map<String,Object> request;
     private Map<String,Object> session;

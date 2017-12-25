@@ -60,4 +60,18 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
+
+    @Override
+    public int projectNumberNow(int id) {
+        String sql="select count(*) from projectMember where ID_USER=? and STATE=1";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
+        return count;
+    }
+
+    @Override
+    public int projectNumberHistory(int id) {
+        String sql="select count(*) from projectMember where ID_USER=? and STATE=0";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
+        return count;
+    }
 }

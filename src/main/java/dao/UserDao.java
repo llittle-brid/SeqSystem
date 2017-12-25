@@ -18,4 +18,7 @@ public interface UserDao {
     List<UserEntity> getAll();
 
     int orgManager(int id);
+
+    int projectNumberNow(int id);
+	int projectNumberHistory(int id);
 }
