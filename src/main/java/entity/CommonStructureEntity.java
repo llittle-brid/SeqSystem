@@ -15,6 +15,5 @@ public class CommonStructureEntity {
         this.content = content;
     }
 
-    public CommonStructureEntity() {
-    }
+    public CommonStructureEntity() {}
 }
