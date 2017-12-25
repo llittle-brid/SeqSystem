@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ApplyOrganizationDao {
     boolean applyOrg(int id,ApplyOrganizationEntity apply);
+    boolean createOrg(ApplyOrganizationEntity create);
 }

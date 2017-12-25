@@ -27,7 +27,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="myOrganization-jmpOrgManager1">机构管理</a>>>成员机构
+                    <a href="user-jmpHomepage">首页</a> >><a href="Organization-jmpOrgManager1">机构管理</a>>>成员机构
                 </strong>
             </li>
         </ol>
@@ -35,10 +35,10 @@
     <div class="form-group col-md-2">
         <ul class="nav navbar">
             <li>
-                <a href="myOrganization-jmpOrgManager1"><button class="btn-warning btn">成员管理</button></a>
+                <a href="Organization-jmpOrgManager1"><button class="btn-warning btn">成员管理</button></a>
             </li>
             <li>
-                <a href="myOrganization-jmpOrgManager2"><button class="btn-primary btn">查看项目</button></a>
+                <a href="Organization-jmpOrgManager2"><button class="btn-primary btn">查看项目</button></a>
             </li>
         </ul>
     </div>

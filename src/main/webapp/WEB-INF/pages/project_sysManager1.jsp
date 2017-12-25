@@ -46,13 +46,97 @@
             </li>
         </ul>
     </div>
+    <div class="col-md-10">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-options">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a href="project_detail.html#tab-1" data-toggle="tab">待处理申请</a>
+                        </li>
+                        <li class="">
+                            <a href="project_detail.html#tab-2" data-toggle="tab">已处理申请</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-1">
+                        <div style="margin:16px 0px 0px -60px" class="col-md-10">
+                            <div class="ibox-title">
+                                <h5>待处理申请</h5>
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="bootstrap-table" >
+                                        <table id="finishingTask"
+                                               data-toggle="table"
+                                               data-url="showApplyOrg-showList"
+                                               data-click-to-select="true"
+                                               data-search="true"
+                                               data-show-refresh="true"
+                                               data-show-toggle="true"
+                                               data-show-columns="true"
+                                               data-toolbar="#toolbar"
+                                               data-query-params="quefryParams"
+                                               data-pagination="true"
+                                               data-halign="center"
+                                               data-striped="true"
+                                               data-page-size="6"
+                                               data-height="410"
+                                               data-page-list="All"
+                                        >
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <div style="margin:16px 0px 0px -60px" class="col-md-10">
+                            <div class="ibox-title">
+                                <h5>待处理申请</h5>
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="bootstrap-table" >
+                                        <table id="finishingTask"
+                                               data-toggle="table"
+                                               data-url="showApplyOrg-showList"
+                                               data-click-to-select="true"
+                                               data-search="true"
+                                               data-show-refresh="true"
+                                               data-show-toggle="true"
+                                               data-show-columns="true"
+                                               data-toolbar="#toolbar"
+                                               data-query-params="quefryParams"
+                                               data-pagination="true"
+                                               data-halign="center"
+                                               data-striped="true"
+                                               data-page-size="6"
+                                               data-height="410"
+                                               data-page-list="All"
+                                        >
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div style="margin:16px 0px 0px -60px" class="col-md-10">
         <div class="ibox-title">
             <h5>待处理申请</h5>
         </div>
         <div class="ibox float-e-margins">
             <div class="ibox-content">
-                <div class="bootstrap-table">
+                <div class="bootstrap-table" >
                     <table id="finishingTask"
                            data-toggle="table"
                            data-url="showApplyOrg-showList"
@@ -66,8 +150,8 @@
                            data-pagination="true"
                            data-halign="center"
                            data-striped="true"
-                           data-page-size="10"
-                           data-height="600"
+                           data-page-size="6"
+                           data-height="410"
                            data-page-list="All"
                     >
                     </table>
@@ -107,6 +191,12 @@
                     title: '备注',
                     sortable: true,
                     align: 'center'
+                },{
+                    field: 'operate',
+                    title: '操作',
+                    align: 'center',
+                    events: "actionEvents",
+                    formatter: "operateFormatter"
                 }
             ]
         }
@@ -126,5 +216,18 @@
             }
         }
     )
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="agree" style="padding-left: 20px"><button class="btn btn-info text-center btn-xs " >同意</button></a>'
+        ].join('');
+    }
+    window.actionEvents = {
+        'click .agree': function(e, value, row, index) {
+            //修改操作
+            var id = row.id_Project;
+            var value = parseInt(id);
+            location.href="applyOrganization-createOrg?project="+row;
+        }
+    };
 </script>
 </html>

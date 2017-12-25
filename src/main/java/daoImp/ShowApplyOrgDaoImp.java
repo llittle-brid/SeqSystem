@@ -9,7 +9,7 @@ import java.util.List;
 public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> implements ShowApplyOrgDao {
     @Override
     public List<ShowApplyOrganizationEntity> getALL() {
-        String sql="select * from VIEW_showAPPLYORG";
+        String sql="select * from VIEW_showAPPLYORG where STATE=0";
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         return ShowApply;
     }

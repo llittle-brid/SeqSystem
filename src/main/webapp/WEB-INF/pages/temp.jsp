@@ -44,7 +44,7 @@
                             <li class="divider"></li>
                         </s:if>
                         <s:if test='#session.orgManager!="0"'>
-                        <li class="J_tabShowActive"><a href="myOrganization-jmpOrgManager1">机构管理</a>
+                        <li class="J_tabShowActive"><a href="Organization-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
                         </s:if>

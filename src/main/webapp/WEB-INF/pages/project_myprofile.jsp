@@ -280,7 +280,7 @@
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="organization-applyOrg" method="post">
+            <form action="applyOrganization-applyOrg" method="post">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>

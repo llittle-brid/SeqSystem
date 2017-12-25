@@ -49,7 +49,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     }
     public String showAllMember(){
         dataMap = new HashMap<String, Object>();
-        organizationdao = new OrganizationDaoImp();
         AllOrgMemberDao allOrgMemberDao = new AllOrgMemberDaoImp();
         UserEntity seesionUser=(UserEntity)session.get("user");
         List<ShowAllOrgMemEntity> orgMember = allOrgMemberDao.getAllMember();
@@ -68,7 +67,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     public void prepare() throws Exception {
         organization = new OrganizationEntity();
     }
-
 
     @Override
     public void setSession(Map<String, Object> session) {
