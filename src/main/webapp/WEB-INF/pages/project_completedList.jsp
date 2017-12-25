@@ -107,7 +107,6 @@
     );
     function AddFunctionAlty(value,row,index) {
         return[
-            '<a href="project-jmp"><button id="discuss" class="btn btn-success text-center btn-xs">讨论区<sup>&nbsp;●</sup></button></a>',
             '<a href="project-jmpFinishedProjectInfo" style="padding-left: 20px"><button href="user-jmpHomepage" class="btn btn-info text-center btn-xs " >查看项目</button></a>'
         ].join('');
     }

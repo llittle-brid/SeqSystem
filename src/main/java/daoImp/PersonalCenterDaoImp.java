@@ -21,11 +21,4 @@ public class PersonalCenterDaoImp extends DAO<PersonalCenterEntity> implements P
         list = getForList(sql,ID);
         return list;
     }
-
-    @Override
-    public void quitorg(int ID,int ID_ORG){
-        String sql = "delete from ORG_MEMBER where ID_USER = ? and ID_ORGANIZATION = ?";
-        System.out.println("out of Org");
-        update(sql,ID, ID_ORG);
-    };
 }
