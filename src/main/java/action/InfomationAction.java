@@ -1,7 +1,3 @@
-/**
- * 2017/12/25/00:29
- * wwc
- */
 package action;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
@@ -26,8 +22,8 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
     private UserEntity user;
     private Map<String, Object> session;
     private Map<String, Object> dataMap;
-    private int id_pro;
-    private int id_org;
+    private int ID_PROJECT;
+    private int ID_ORGANIZATION;
 
     public String showInfo(){
         System.out.println("helloshowinfo");
@@ -48,7 +44,7 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         user = (UserEntity)session.get("user");
         Integer id_user = user.getId_user();
         infodao.accept(information.getID_ORGANIZATION(),information.getID_PROJECT(),id_user);
-        System.out.println("^^^^"+id_pro+"$$$$$$"+id_org);
+        System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
         return "acc";
     }
 
@@ -87,11 +83,11 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         return information;
     }
 
-    public void setId_pro(int id_pro) {
-        this.id_pro = id_pro;
+    public void setID_PROJECT(int ID_PROJECT) {
+        this.ID_PROJECT = ID_PROJECT;
     }
-    public void setId_org(int id_org) {
-        this.id_org = id_org;
+    public void setID_ORGANIZATION(int ID_ORGANIZATION) {
+        this.ID_ORGANIZATION = ID_ORGANIZATION;
     }
 }
 

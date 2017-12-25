@@ -1,7 +1,3 @@
-/**
- * 2017/12/25/00:26
- * wwc
- */
 package dao;
 
 import entity.InformationEntity;
