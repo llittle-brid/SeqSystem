@@ -66,12 +66,6 @@
     $('#finishingTask').bootstrapTable({
             columns: [
                 {
-                    title: '项目ID',
-                    field: 'id_Project',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
                     field: 'name',
                     title: '项目名称',
                     sortable: true,
@@ -100,6 +94,7 @@
                     field: 'operate',
                     title: '操作',
                     align: 'center',
+                    searchable: false,
                     formatter: AddFunctionAlty
                 }
             ]

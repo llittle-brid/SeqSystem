@@ -35,16 +35,17 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+    private int id_Project;
 
     public String create() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        System.out.println(project.getName()+" "+project.getDocument_Name()+" "+project.getUsername());
+        System.out.println(project.getName()+" "+project.getDocument_Name());
         boolean res= projectDao.save(project);
-        projectDao.setPM(project);
         dataMap.put("res",res);
         return SUCCESS;
     }
+
 
     public String chooseOrg() throws Exception {
         dataMap = new HashMap<String, Object>();
@@ -63,7 +64,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         Gson gson = new Gson();
         String json = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
-        System.out.println("project_showList"+json);
+//        System.out.println("project_showList"+json);
         dataMap.put("res",json);
         return SUCCESS;
     }
@@ -90,6 +91,14 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String jmpProjectInfo() {
         return "projectInformation";
     }
+    public String getProjectInfo(){
+        id_Project = project.getId_Project();
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
+
+        session.put("project",project);
+        return SUCCESS;
+    }
     public String jmpFinishedProjectInfo(){
         return "finishedProjectInfo";
     }
@@ -98,14 +107,22 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         project = new ProjectEntity();
     }
 
-    @Override
-    public void setRequest(Map<String, Object> session) {
-        this.session = session;
+    public Map<String, Object> getRequest() {
+        return request;
     }
 
     @Override
-    public void setSession(Map<String, Object> request) {
+    public void setRequest(Map<String, Object> request) {
         this.request = request;
+    }
+
+    public Map<String, Object> getSession() {
+        return session;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     public Map<String, Object> getDataMap() {

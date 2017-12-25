@@ -69,16 +69,10 @@
     $('#finishingTask').bootstrapTable({
         columns: [
             {
-                title: '项目ID',
-                field: 'id_Project',
-                align: 'center',
-                valign: 'middle'
-            },
-            {
                 field: 'name',
                 title: '项目名称',
                 sortable: true,
-                align: 'center',
+                align: 'center'
             }, {
                 field: 'date',
                 title: '创建日期',
@@ -97,6 +91,7 @@
             },{
                 field: 'operate',
                 title: '操作',
+                searchable: false,
                 align: 'center',
                 events: "actionEvents",
                 formatter: "operateFormatter"
@@ -121,21 +116,33 @@
     );
 
     function operateFormatter(value,row,index) {
-        return '<a class="mod zfont3">进入</a>'
+        return '<a class="mod btn btn-info">查看项目</a>'
     }
 
     //表格  - 操作 - 事件
     window.actionEvents = {
-        'click .mod': function(e, value, row, index) {
-            //修改操作
-            var id = row.id_Project;
-            var value = parseInt(id);
-            location.href="project-jmpProjectInfo?project="+row;
-        },
+        'click .mod':
+            function(e, value, row, index) {
+                //修改操作
+                var id_Project = parseInt(row.id_Project);
+                $.ajax({
+                    type: "GET",
+                    url: "project-getProjectInfo",
+                    data: {Id_Project:id_Project},
+                    dataType: "json",
+                    success: function () {
+                        location.href = "project-jmpProjectInfo";
+                    },
+                    error: function () {
+                        alert("错误");
+                    }
+                })
+            },
         'click .delete' : function(e, value, row, index) {
             //删除操作
         }
     };
+
 </script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/404.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:52 GMT -->
