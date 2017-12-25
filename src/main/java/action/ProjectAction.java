@@ -35,7 +35,6 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
-    private int id_Project;
 
     public String create() {
         dataMap = new HashMap<String, Object>();
@@ -92,7 +91,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return "projectInformation";
     }
     public String getProjectInfo(){
-        id_Project = project.getId_Project();
+        int id_Project = project.getId_Project();
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
 
