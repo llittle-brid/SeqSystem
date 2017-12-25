@@ -5,12 +5,15 @@
 
 package action;
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.PersonalCenterDao;
 import daoImp.PersonalCenterDaoImp;
+import daoImp.ProjectDaoImp;
 import entity.PersonalCenterEntity;
+import entity.ProjectEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -25,8 +28,7 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
     private UserEntity user;
     private Map<String, Object> session;
     private Map<String, Object> dataMap;
-    private int ID_USER;
-    private int ID_ORGANIZATION;
+
     /**
      * 显示页面信息
      * @return
@@ -36,26 +38,14 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
         personalcenterdao = new PersonalCenterDaoImp();
         List<PersonalCenterEntity> list = new ArrayList<>();
         user = (UserEntity)session.get("user");
+        System.out.println("####"+user.getId_user());
         list = personalcenterdao.getAll(user.getId_user());
-        System.out.println("@@@@@@@"+user.getId_user());
         Gson gson = new Gson();
         String personallist = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
         dataMap.put("listorg",personallist);
+        System.out.println(personallist);
         return "orgList";
-    }
-    /**
-     * 退出一个机构
-     * @return
-     */
-
-
-    public String quitorg(){
-        personalcenterdao= new PersonalCenterDaoImp();
-        user = (UserEntity)session.get("user");
-        System.out.println("uSER:"+user.getId_user()+"org:"+PersonaCenter.getID_ORGANIZATION());
-        personalcenterdao.quitorg(user.getId_user(),PersonaCenter.getID_ORGANIZATION());
-        return "quitorg";
     }
 
     /**
@@ -70,7 +60,10 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
      *
      * @throws Exception
      */
-
+    @Override
+    public void prepare() throws Exception {
+        PersonaCenter = new PersonalCenterEntity();
+    }
 
 
     @Override
@@ -93,22 +86,10 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
         this.dataMap = dataMap;
     }
 
-    @Override
-    public void prepare() throws Exception {
-        PersonaCenter = new PersonalCenterEntity();
-    }
-
 
     @Override
     public PersonalCenterEntity getModel() {
         return PersonaCenter;
-    }
-
-    public void setID_USER(int ID_USER) {
-        this.ID_USER = ID_USER;
-    }
-    public void setID_ORGANIZATION(int ID_ORGANIZATION) {
-        this.ID_ORGANIZATION = ID_ORGANIZATION;
     }
 }
 

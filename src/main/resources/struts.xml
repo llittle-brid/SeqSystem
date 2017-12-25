@@ -27,6 +27,24 @@
         <action name="404">
             <result>/404.jsp</result>
         </action>
+        <!--<action name="account-*" class="accountAction" method="{1}">-->
+        <!--<result name="login" type="stream">-->
+        <!--<param name="contentType">text/html</param>-->
+        <!--<param name="inputName">inputStream</param>-->
+        <!--</result>-->
+        <!--<result name="error">/index.jsp</result>-->
+        <!--<result name="home">/WEB-INF/pages/homepage.jsp</result>-->
+        <!--<result name="changeStore" type="json">-->
+        <!--<param name="root">vStoreEntity</param>-->
+        <!--</result>-->
+        <!--<result name="changePassLogout">/index.jsp</result>-->
+        <!--<result name="changePass" type="json">-->
+        <!--<param name="root">loginFlag</param>-->
+        <!--</result>-->
+        <!--<allowed-methods>login,logout,home,changeStore,changePassLogout,changePass</allowed-methods>-->
+        <!--</action>-->
+
+
         <action name="login-*" class="action.UserAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="loginPage">/login.jsp</result>
@@ -35,6 +53,7 @@
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword</allowed-methods>
         </action>
+
         <action name="user-*" class="action.UserAction" method="{1}">
             <result name="tempPage">/WEB-INF/pages/temp.jsp</result>
             <result name="success" type="json"><param name="root">dataMap</param></result>
@@ -45,37 +64,39 @@
             <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
             <result name="currentProjectList">/WEB-INF/pages/project_currentList.jsp</result>
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
-            <result name="jmpMyprofile">/WEB-INF/pages/project_myprofile.jsp</result>
             <interceptor-ref name="myStack"/>
+            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="temp">/WEB-INF/pages/temp.jsp</result>
             <allowed-methods>
-                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile,jmpMyprofile
-                ,jmpNewproject,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent
-                ,jmpCurrentProjectList,jmpCompletedProjectList
+                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile,jmpNewproject,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
+        </action>
+
+
+        <action name="catalog-*" class="action.CatalogAction" method="{1}">
+            <result name="document">/WEB-INF/pages/template.jsp</result>
+            <result name="Re" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <result name="select" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <result name="currentList" type="json">
-                <param name="root">dataMap</param>
-            </result>
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList</allowed-methods>
+            <result name="finishedProjectInfo">/WEB-INF/pages/project_proFinInformation.jsp</result>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpFinishedProjectInfo,showCurrentList,showCompletedList</allowed-methods>
         </action>
 
         <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="quitorg">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="orgList" type="json">
                  <param name="root">dataMap</param>
             </result>
-            <allowed-methods>jmpMyprofile,showList,quitorg</allowed-methods>
+            <allowed-methods>jmpMyprofile,showList</allowed-methods>
         </action>
         
         <action name="discuss-*" class="action.DiscussAction" method="{1}">
@@ -85,13 +106,7 @@
             <allowed-methods>commit,getCatalogDis</allowed-methods>
         </action>
 
-        <action name="infomation-*" class="action.InfomationAction" method="{1}">
-            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="showinfo" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <allowed-methods>showInfo,Accept,Refuse</allowed-methods>
-        </action>
+
+
     </package>
 </struts>

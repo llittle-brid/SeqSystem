@@ -1,6 +1,3 @@
-/**
-* 2017/12/25/23:42
-*/
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -147,7 +144,7 @@
                        data-halign="center"
                        data-striped="true"
                        data-page-size="3"
-                       data-height="259"
+                       data-height="269"
                 >
                 </table>
             </div>
@@ -157,25 +154,114 @@
         <div class="ibox-title">
             <h5>消息中心</h5>
         </div>
-        <div class="bootstrap-table">
-            <table id="info" data-toggle="table"
-                   data-url="project-showList"
-                   data-click-to-select="true"
-                   data-search="true"
-                   data-show-refresh="true"
-                   data-show-toggle="true"
-                   data-show-columns="true"
-                   data-toolbar="#toolbar"
-                   data-query-params="quefryParams"
-                   data-pagination="true"
-                   data-halign="center"
-                   data-striped="true"
-                   data-page-size="8"
-                   data-height="259"
-            >
-            </table>
-        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-8 m-b-xs">
+                        <select class="input-sm form-control input-s-sm inline">
+                            <option value="0">请选择查找类型</option>
+                            <option value="1">用户筛选</option>
+                            <option value="2">时间筛选</option>
+                            <option value="3">备注筛选</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
 
+                            <th>邮件概述</th>
+                            <th>发件时间</th>
+                            <th>主题</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 50px;margin-left: 40%" class="btn-group">
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-white">1</button>
+                        <button class="btn btn-white  active">2</button>
+                        <button class="btn btn-white">3</button>
+                        <button class="btn btn-white">4</button>
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -274,7 +360,6 @@
                     title: '机构编码',
                     field: 'ID_ORGANIZATION',
                     align: 'center',
-                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -291,68 +376,13 @@
                 {
                     field: 'NUM_USER',
                     title: '机构人数',
-                    sortable: true,
                     align: 'center'
                 },
                 {
                     field: 'operate',
                     title: '操作',
                     align: 'center',
-                    events: "actionEvents",
-                    formatter: "AddFunctionAlty"
-                }
-            ]
-        }
-    );
-    $('#info').bootstrapTable({
-            columns: [
-                {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '机构ID',
-                    field: 'ID_ORGANIZATION',
-                    align: 'center',
-                    valign: 'middle'
-                },{
-                    title: '机构',
-                    field: 'ORG_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目ID',
-                    field: 'ID_PROJECT',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目',
-                    field: 'PRO_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    field: 'MESSAGE',
-                    title: '操作',
-                    sortable: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    field: 'date',
-                    title: '时间',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'operate',
-                    title: '操作',
-                    align: 'center',
-                    events: "acceptRefuse",
-                    formatter: "accRefu"
+                    formatter: AddFunctionAlty
                 }
             ]
         }
@@ -360,7 +390,11 @@
     /**
  * @return {string}
  */
-
+function AddFunctionAlty(value,row,index) {
+        return[
+            '<a href="personalcenter-quit"><button id="discuss" class="btn btn-success text-center btn-xs">退出</button></a>',
+        ].join('');
+    }
     $.ajax(
         {
             type:"GET",
@@ -376,62 +410,6 @@
             }
         }
     )
-    $.ajax(
-        {
-            type:"GET",
-            url:"infomation-showInfo",
-            dataType:"json",
-            success:function(json){
-                var infolist = JSON.parse(json.listinfo);
-                //finishingTask为table的id
-                $('#info').bootstrapTable('load',infolist);
-            },
-            error:function(){
-                alert("错误");
-            }
-        }
-    )
-    /**
-    *个人机构
-     * */
-    function AddFunctionAlty(value,row,index) {
-        return '<a class="mod zfont3">退出</a>'
-    }
-    window.actionEvents = {
-        'click .mod': function(e, value, row, index) {
-            //修改操作
-            var id = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id);
-            location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
-        }
-    };
-
-    /**
-     * 消息中心
-     * @param value
-     * @param row
-     * @param index
-     * @returns {string}
-     */
-    function accRefu(value,row,index) {
-        return '<a class="mod zfont3">接受</a>'
-    }
-    window.acceptRefuse = {
-        'click .mod': function(e, value, row, index) {
-            //修改操作
-            var id_ORG = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id_ORG);
-            var ID_PROJECT = parseInt(row.ID_PROJECT);
-            location.href="infomation-Accept?id_org="+ID_ORGANIZATION+"&id_pro="+ID_PROJECT;
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
-        }
-    };
-
 </script>
 
 </html>
