@@ -61,7 +61,7 @@
             <ol class="breadcrumb" style="margin-left: 50px">
                 <li style="font-size: 15px">
                     <strong>
-                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="library-get"><span class="lzf_b">构件库</span></a>
+                        <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="library-get"><span class="lzf_b">构件库</span></a>>><a href="library-Mycollect"><span class="lzf_b">我的收藏</span></a>
                     </strong>
                 </li>
             </ol>
@@ -77,7 +77,7 @@
                             <div id="component_menu" style="background-color:lightgrey;width: 90px;height: 150px;margin-top:-5px;display:none">
                                 <ul style="list-style: none;text-align: center;padding: 0px" role="menu">
                                     <li style="margin: 5px" class="J_tabShowActive">
-                                        <a href="library-get"><span class="lzf_a" style="font-size: 18px "><u>全部</u></span></a>
+                                        <a href="library-get"><span class="lzf_a" style="font-size: 18px ">全部</span></a>
                                     </li>
                                     <li style="margin: 5px" class="J_tabShowActive">
                                         <a href="library-getcommon" ><span class="lzf_a" style="font-size: 18px ">通用</span></a>
@@ -101,7 +101,7 @@
                     </div>
                     <div style="float: left;font-size:18px;width: 30px;text-align: center">|</div>
                     <div style="float: left">
-                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a">我的收藏</span></a></div>
+                        <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a"><u>我的收藏</u></span></a></div>
                     </div>
                 </div>
                 <div style="float: right;height: 50px" class="col-md-2">
