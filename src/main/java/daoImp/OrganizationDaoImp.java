@@ -8,7 +8,6 @@ package daoImp;
 import dao.DAO;
 import dao.OrganizationDao;
 import entity.OrganizationEntity;
-
 import java.util.List;
 
 public class OrganizationDaoImp extends DAO<OrganizationEntity> implements OrganizationDao {
@@ -26,6 +25,7 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         List<OrganizationEntity> MyOrgList = getForList(sql,id);
         return MyOrgList;
     }
+
 
     @Override
     public OrganizationEntity getOne(String name) {

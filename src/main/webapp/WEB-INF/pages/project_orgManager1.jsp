@@ -11,12 +11,14 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-
     <link rel="shortcut icon" href="/example/favicon.ico">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -54,59 +56,25 @@
                 </div>
             </div>
             <div class="ibox-content">
-
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-2">姓名</th>
-                        <th class="col-sm-2">职位</th>
-                        <th class="col-sm-2">邮箱</th>
-                        <th class="col-sm-2">电话</th>
-                        <th class="col-sm-3">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td >赖菜李</td>
-                        <td>组长</td>
-                        <td>123@qq.com</td>
-                        <td>15236456987</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-xs" >委任管理</button>
-                            <button type="button" class="btn btn-xs btn-danger">移除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >赖菜李</td>
-                        <td>组长</td>
-                        <td>123@qq.com</td>
-                        <td>15236456987</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-xs" >委任管理</button>
-                            <button type="button" class="btn btn-xs btn-danger">移除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >赖菜李</td>
-                        <td>组长</td>
-                        <td>123@qq.com</td>
-                        <td>15236456987</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-xs" >委任管理</button>
-                            <button type="button" class="btn btn-xs btn-danger">移除</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div style="height: 50px;margin-left: 40%" class="btn-group">
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-white">1</button>
-                    <button class="btn btn-white  active">2</button>
-                    <button class="btn btn-white">3</button>
-                    <button class="btn btn-white">4</button>
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                    </button>
+                <div class="bootstrap-table">
+                    <table id="finishingTask"
+                           data-toggle="table"
+                           data-url="myOrganization-showAllMember"
+                           data-click-to-select="true"
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-toolbar="#toolbar"
+                           data-query-params="quefryParams"
+                           data-pagination="true"
+                           data-halign="center"
+                           data-striped="true"
+                           data-page-size="3"
+                           data-height="600"
+                           data-page-list="All"
+                    >
+                    </table>
                 </div>
             </div>
         </div>
@@ -176,8 +144,8 @@
                 <h4 class="modal-title">邀请用户</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>用户名</label> <input id="OrgName" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                <div class="form-group"><label>用户名</label> <input id="OrgName" type="text" placeholder="请输入用户名" class="form-control" required="required"></div>
+                <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入备注" class="form-control" required=""></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
@@ -188,6 +156,7 @@
 </div>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
@@ -200,24 +169,42 @@
 </script>
 </body>
 <script>
-    $("button#edit-button").click(function (){
-        $.ajax({
-            url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#mytel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
-            dataType: "json",
-            type: "Post",
-            async: "false",
-            success: function (result) {
-                if(result.res==true)  {
-                    showtoast("success", "修改成功", "操作成功")
-                    location.href = "user-jmpMyprofile";
+    $('#finishingTask').bootstrapTable({
+            columns: [
+                {
+                    title: '姓名',
+                    field: 'name',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'mail',
+                    title: '邮箱',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'tel',
+                    title: '联系方式',
+                    align: 'center'
                 }
-                else  showtoast("error", "修改失败", "操作失败")
+            ]
+        }
+    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"myOrganization-showAllMember",
+            dataType:"json",
+            success:function(json){
+                var orgMemberList = JSON.parse(json.res);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',orgMemberList);
             },
-            error: function (result) {
-                showtoast("error", "修改失败", "修改失败")
+            error:function(){
+                alert("错误");
             }
-        })
-    })
+        }
+    )
 </script>
 </html>

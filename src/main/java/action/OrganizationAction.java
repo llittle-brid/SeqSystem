@@ -9,9 +9,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.AllOrgMemberDao;
 import dao.OrganizationDao;
+import daoImp.AllOrgMemberDaoImp;
 import daoImp.OrganizationDaoImp;
 import entity.OrganizationEntity;
+import entity.ShowAllOrgMemEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -23,14 +26,13 @@ import java.util.Map;
 public class OrganizationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<OrganizationEntity>, Preparable {
     private OrganizationDao organizationdao;
     private OrganizationEntity organization;
-    private UserEntity user;
     private Map<String, Object> session;
     private Map<String, Object> request;
     private Map<String, Object> dataMap;
     public String quitorg(){
         organization = new OrganizationEntity();
         organizationdao = new OrganizationDaoImp();
-        user = (UserEntity)session.get("user");
+        UserEntity user = (UserEntity) session.get("user");
         System.out.println(user.getName());
         organizationdao.quit(user.getName());
         return "quitorg";
@@ -44,6 +46,18 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
         ActionContext.getContext().getValueStack().set("list",list);
         System.out.println(list);
         return "OrgManager1Page";
+    }
+    public String showAllMember(){
+        dataMap = new HashMap<String, Object>();
+        organizationdao = new OrganizationDaoImp();
+        AllOrgMemberDao allOrgMemberDao = new AllOrgMemberDaoImp();
+        UserEntity seesionUser=(UserEntity)session.get("user");
+        List<ShowAllOrgMemEntity> orgMember = allOrgMemberDao.getAllMember();
+        Gson gson = new Gson();
+        String json = gson.toJson(orgMember);
+        System.out.println("OrgAllMember"+json);
+        dataMap.put("res",json);
+        return "showAllMember";
     }
 
     public String jmpOrgManager2(){
@@ -65,8 +79,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     public void setRequest(Map<String, Object> request) {
         this.request = request;
     }
-
-
 
     public Map<String, Object> getDataMap() {
         return dataMap;

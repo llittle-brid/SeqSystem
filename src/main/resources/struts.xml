@@ -62,20 +62,20 @@
         </action>
 
         <action name="organization-*" class="action.ApplyOrganizationAction" method="{1}">
-            <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
-            <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>applyOrg,</allowed-methods>
+            <allowed-methods>applyOrg</allowed-methods>
         </action>
 
         <action name="myOrganization-*" class="action.OrganizationAction" method="{1}">
             <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
             <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
+            <result name="showAllMember" type="json">
+                <param name="root">dataMap</param>
+            </result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>jmpOrgManager1,jmpOrgManager2,</allowed-methods>
+            <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember</allowed-methods>
         </action>
-
         <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
             <result name="organizationList" type="json">
                 <param name="root">dataMap</param>
