@@ -130,7 +130,7 @@
             //修改操作
             var id = row.id_Project;
             var value = parseInt(id);
-            location.href="project-jmpProjectInfo?project="+row;
+            location.href="project-jmpProjectInfo?id_Project="+value;
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作

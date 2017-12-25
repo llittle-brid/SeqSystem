@@ -53,7 +53,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         Gson gson = new Gson();
         String jsonString = gson.toJson(list);
         dataMap.put("res",jsonString);
-        return SUCCESS;
+        return "select";
     }
 
     public String showCurrentList() {
@@ -65,7 +65,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
         System.out.println("project_showList"+json);
         dataMap.put("res",json);
-        return SUCCESS;
+        return "currentList";
     }
     public String showCompletedList() {
         dataMap = new HashMap<String, Object>();
@@ -75,7 +75,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         String json = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
         dataMap.put("res",json);
-        return SUCCESS;
+        return "completedList";
     }
     @Override
     public String execute() throws Exception {
