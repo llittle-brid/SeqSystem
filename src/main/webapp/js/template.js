@@ -6,6 +6,45 @@
  * */
 var nowClick;
 var documentId=$("input#documentId").val();
+
+//评论区初始化
+function discussInit() {
+    $(".discuss").code(""); 
+}
+
+$("i.discussButton").click(function () {
+    var catalogIndex=$(nowClick).children("span.catalogIndex").text()
+    $.ajax({
+        url: "discuss-getCatalogDis",
+        data: {catalogIndex:catalogIndex, id_document:documentId},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            var content="",tempDis,date,state;
+            alert(result.test)
+            for (var i=0;i<result.wrapperList.length;i++){
+                tempDis=result.wrapperList[i].proDiscussEntity;
+                state=result.wrapperList[i].state;
+                date=tempDis.time.toString().split("T");
+                content+="  <div class='row'> <div class='ibox float-e-margins ' style='margin-bottom: 10px'> <div class='ibox-title'> <h5>";
+                content+=tempDis.name+" "+date[0]+" "+date[1]+"</h5>"
+                content+="  <button  class='btn";
+                if (state=="2")
+                    content+="btn-danger";
+                else content+="btn-default";
+                content+="btn-xs col-lg-push-1 m-l-sm'  type='button' style='margin-top: -3px'>删除</button> ";
+                content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
+                content+=tempDis.content+"  </div> </div> </div> </div>";
+            }
+            $("div.allDiscuss").html(content);
+        },
+        error: function (result) {
+            showtoast("dangerous","加载失败","加载目录失败")
+        }
+    })
+})
+
 $(document).on("click",".dic",function () {
     nowClick=$(this);
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
@@ -25,6 +64,7 @@ $(document).on("click",".dic",function () {
             content+="  "+catalog.title;
             $("h2#catalog_title").text(content);
             $("input#catalog-id").val(result.id_catalog);
+            discussInit();
         },
         error: function (result) {
             showtoast("dangerous","失败","获取失败")
@@ -150,6 +190,7 @@ function templateInit() {
     })
 
 }
+
 //新增按钮
 $(".li_add").click(function () {
    if(typeof(nowClick) == "undefined")
@@ -354,9 +395,23 @@ function catalogNew() {
     
 }
 
+//评论提交
 function commitDis() {
-    alert($(".click2edit.discuss").html());
-    
+    var discuss=$(".discuss").code();
+    var catalogIndex=$(nowClick).children("span.catalogIndex").text()
+    $.ajax({
+        url: "discuss-commit",
+        data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+
+        },
+        error: function (result) {
+            showtoast("dangerous","加载失败","加载目录失败")
+        }
+    })
 }
 
 

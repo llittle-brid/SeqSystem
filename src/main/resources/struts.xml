@@ -98,6 +98,13 @@
             </result>
             <allowed-methods>jmpMyprofile,showList</allowed-methods>
         </action>
+        
+        <action name="discuss-*" class="action.DiscussAction" method="{1}">
+            <result name="Re" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>commit,getCatalogDis</allowed-methods>
+        </action>
 
 
 

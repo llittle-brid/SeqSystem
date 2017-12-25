@@ -171,7 +171,7 @@
                         <div class="ibox-title">
 
                             <div class="ibox-tools">
-                                <i class="fa fa-commenting modal-icon" style="color: #6D8389"  data-toggle="modal" data-target="#myModal1" > </i>
+                                <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389"  data-toggle="modal" data-target="#myModal1" > </i>
                                 <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="temp_edit()" type="button">编辑</button>
                                 <button id="save" class="btn btn-primary  btn-xs m-l-sm" onclick="temp_save()" type="button" style="display:none;">保存</button>
                                 <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
@@ -218,10 +218,10 @@
                                 </div>
                             </div>
                             <!--自己的留言结束-->
-
+                            <div class="allDiscuss">
                             <!--一行留言-->
                             <div class="row">
-                                <div class="ibox float-e-margins" style="margin-bottom: 10px">
+                                <div class="ibox float-e-margins " style="margin-bottom: 10px">
                                     <div class="ibox-title">
                                         <h5>大毛同学 2017-2-6 17:15:56 </h5>
                                         <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm" onclick="save()" type="button" style="margin-top: -3px">删除</button>
@@ -233,30 +233,12 @@
                                         <div class=" wrapper">
                                             王炸
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                             <!--一行留言结束-->
-                            <!--一行留言-->
-                            <div class="row">
-                                <div class="ibox float-e-margins" style="margin-bottom: 10px">
-                                    <div class="ibox-title">
-                                        <h5>大毛同学 2017-2-6 13:15:56 </h5>
-                                        <button  class="btn btn-default  btn-xs col-lg-push-1 m-l-sm" onclick="save()" type="button" style="margin-top: -3px">删除</button>
-                                        <div class="ibox-tools">
-                                            <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：如何斗地主.doc</i>
-                                        </div>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <div class=" wrapper">
-                                            三代一
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
-                            <!--一行留言结束-->
+
                         </div>
 
                         <div class="modal-footer">

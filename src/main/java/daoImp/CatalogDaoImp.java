@@ -149,4 +149,10 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         return get(sql,id_document,first,second,third,fourth);
     }
 
+    @Override
+    public int getIdCatalog(int id_document, int first, int second, int third, int fourth) {
+        String sql="select id_catalog from CATALOG where id_document=? and first_index=? and second_index=? and third_index=? and fourth_index=?";
+        return getForValue(sql,id_document,first,second,third,fourth);
+    }
+
 }
