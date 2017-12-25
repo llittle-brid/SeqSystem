@@ -33,15 +33,6 @@ public class ApplyOrganizationAction extends ActionSupport implements RequestAwa
         return "myprofilePage";
     }
 
-
-    public String createOrg(){
-        System.out.println("start createOrg");
-        applyorganizationdao = new ApplyOrganizationDaoImp();
-        dataMap = new HashMap<String, Object>();
-        boolean res=applyorganizationdao.createOrg(applyorganization);
-        System.out.println(res);
-        return "SysManager1Page";
-    }
     @Override
     public ApplyOrganizationEntity getModel() {
         return applyorganization;

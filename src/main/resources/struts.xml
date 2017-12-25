@@ -59,7 +59,7 @@
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>applyOrg,createOrg</allowed-methods>
+            <allowed-methods>applyOrg</allowed-methods>
         </action>
 
         <action name="Organization-*" class="action.OrganizationAction" method="{1}">
@@ -72,11 +72,12 @@
             <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember,</allowed-methods>
         </action>
         <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
-            <result name="organizationList" type="json">
+            <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>showList</allowed-methods>
+            <allowed-methods>showList,showOthers,agreeOrg,refuseOrg</allowed-methods>
         </action>
         <action name="showExitOrg-*" class="action.ShowExitOrgAction" method="{1}">
             <result name="exitOrgList" type="json">

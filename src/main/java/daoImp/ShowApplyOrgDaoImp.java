@@ -4,6 +4,8 @@ import dao.DAO;
 import dao.ShowApplyOrgDao;
 import entity.ShowApplyOrganizationEntity;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> implements ShowApplyOrgDao {
@@ -12,5 +14,35 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql="select * from VIEW_showAPPLYORG where STATE=0";
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         return ShowApply;
+    }
+    @Override
+    public List<ShowApplyOrganizationEntity> getOthers() {
+        String sql="select * from VIEW_showAPPLYORG where STATE=1 or STATE=-1";
+        List<ShowApplyOrganizationEntity> ShowOthers = getForList(sql);
+        return ShowOthers;
+    }
+
+    @Override
+    public ShowApplyOrganizationEntity getOne(int id) {
+        String sql="select * from VIEW_showAPPLYORG where ID_ORG_APPLY=?";
+        ShowApplyOrganizationEntity ShowApply= get(sql,id);
+        return ShowApply;
+    }
+
+    @Override
+    public boolean createOrg(ShowApplyOrganizationEntity create) {
+        String sql1="update ORG_APPLY set STATE=1 where ORG_NAME=?";
+        String sql2="insert into ORGANIZATION (NAME,ID_USER,TIME) value(?,?,?)";
+        Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
+        update(sql1,create.getOrg_name());
+        update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
+        return true;
+    }
+
+    @Override
+    public boolean refuseOrg(ShowApplyOrganizationEntity refuse) {
+        String sql1="update ORG_APPLY set STATE=-1 where ORG_NAME=?";
+        update(sql1,refuse.getOrg_name());
+        return true;
     }
 }
