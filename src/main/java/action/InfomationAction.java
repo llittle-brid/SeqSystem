@@ -38,7 +38,7 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         dataMap.put("listinfo",infoList);
         return "showinfo";
     }
-    public String accept(){
+    public String Accept(){
         System.out.println("helloaccept");
         infodao = new InformationDaoImp();
         user = (UserEntity)session.get("user");
