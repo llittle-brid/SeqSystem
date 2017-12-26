@@ -5,6 +5,17 @@ public class LibrarydiscussEntity {
     private int id_lib_discuss;
     private int id_user;
     private int id_library;
+
+    public LibrarydiscussEntity(int id_lib_discuss, int id_user, int id_library, String content) {
+        this.id_lib_discuss = id_lib_discuss;
+        this.id_user = id_user;
+        this.id_library = id_library;
+        this.content = content;
+    }
+
+    public LibrarydiscussEntity() {
+    }
+
     private String content;
 
     public int getId_lib_discuss() {

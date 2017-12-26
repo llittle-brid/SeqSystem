@@ -28,4 +28,14 @@ public class UserStructureEntity {
     public void setPermissions(int permissions) {
         this.permissions = permissions;
     }
+
+    public UserStructureEntity(String roleName, String describe, int permissions) {
+        this.roleName = roleName;
+        this.describe = describe;
+        this.permissions = permissions;
+    }
+
+    public UserStructureEntity() {
+    }
+
 }

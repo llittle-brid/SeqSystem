@@ -7,6 +7,7 @@ public class LibraryEntity {
     private int id_library;
     private String name;
     private int id_template;
+
     private int id_user;
     private int collect_num;
     private String mention;
@@ -66,5 +67,18 @@ public class LibraryEntity {
 
     public void setCollect_num(int collect_num) {
         this.collect_num = collect_num;
+    }
+
+    public LibraryEntity(int id_library, String name, int id_template, int id_user, int collect_num, String mention, Date time) {
+        this.id_library = id_library;
+        this.name = name;
+        this.id_template = id_template;
+        this.id_user = id_user;
+        this.collect_num = collect_num;
+        this.mention = mention;
+        this.time = time;
+    }
+    public LibraryEntity() {
+
     }
 }

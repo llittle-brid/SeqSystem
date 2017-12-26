@@ -29,4 +29,13 @@ public class LibrarycollectEntity {
     public void setId_library(int id_library) {
         this.id_library = id_library;
     }
+
+    public LibrarycollectEntity(int id_lib_collect, int id_user, int id_library) {
+        this.id_lib_collect = id_lib_collect;
+        this.id_user = id_user;
+        this.id_library = id_library;
+    }
+
+    public LibrarycollectEntity() {
+    }
 }

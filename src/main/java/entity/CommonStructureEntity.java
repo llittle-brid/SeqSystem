@@ -16,4 +16,5 @@ public class CommonStructureEntity {
     }
 
     public CommonStructureEntity() {}
+
 }
