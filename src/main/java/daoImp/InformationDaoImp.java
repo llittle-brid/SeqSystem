@@ -11,10 +11,10 @@ import java.util.List;
 public class InformationDaoImp extends DAO<InformationEntity> implements InformationDao{
     @Override
     public List<InformationEntity> getAll(int ID) {
-        String sql1 = "select * from VIEW_ORGAPPLY where STATE = 1 and ID_USER = ?";
+        String sql1 = "select * from ORG_USER_APPLY where STATE = 1 and ID_USER = ?";
         List list1 = getForList(sql1,ID);
         System.out.println(list1);
-        String sql2 = "select * from VIEW_PROAPPLY where STATE = 1 and ID_USER = ?";
+        String sql2 = "select * from PROJECT_APPLY where STATE = 1 and ID_USER = ?";
         List list2 = getForList(sql2,ID);
         System.out.println(list2);
         List list = new ArrayList();
@@ -50,25 +50,26 @@ public class InformationDaoImp extends DAO<InformationEntity> implements Informa
     }
 
     @Override
-    public void accept(Integer ID_ORGANIZATION, Integer ID_PROJECT, int ID_USER) {
-        if(ID_ORGANIZATION != null) {
+    public void acceptOrg(Integer ID_ORGANIZATION, int ID_USER) {
             String sql = "update ORG_USER_APPLY set STATE=0 where ID_ORGANIZATION=? and ID_USER=?";
             update(sql,ID_ORGANIZATION,ID_USER);
-        }
-        if(ID_PROJECT != null) {
-            String sql = "update PROJECT_APPLY set STATE=0 where ID_PROJECT=? and ID_USER=?";
-            update(sql,ID_PROJECT,ID_USER);
-        }
     }
     @Override
-    public void refuse(Integer ID_ORGANIZATION, Integer ID_PROJECT, int ID_USER) {
+    public void acceptPro(Integer ID_ORGANIZATION, int ID_USER) {
+        String sql = "update PROJECT_APPLY set STATE=0 where ID_PROJECT=? and ID_USER=?";
+        update(sql,ID_ORGANIZATION,ID_USER);
+    }
+    @Override
+    public void refuseOrg(Integer ID_ORGANIZATION, int ID_USER) {
         if(ID_ORGANIZATION != null) {
             String sql = "update ORG_USER_APPLY set STATE=-1 where ID_ORGANIZATION=? and ID_USER=?";
             update(sql,ID_ORGANIZATION,ID_USER);
         }
-        if(ID_PROJECT != null) {
-            String sql = "update PROJECT_APPLY set STATE=-1 where ID_PROJECT=? and ID_USER=?";
-            update(sql,ID_PROJECT,ID_USER);
-        }
+    }
+
+    @Override
+    public void refusePro(Integer ID_PROJECT, int ID_USER) {
+        String sql = "update PROJECT_APPLY set STATE=-1 where ID_PROJECT=? and ID_USER=?";
+        update(sql,ID_PROJECT,ID_USER);
     }
 }

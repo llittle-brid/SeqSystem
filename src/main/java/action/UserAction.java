@@ -57,8 +57,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String registration() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword);
-        boolean res = userDao.registration(user.getName(), user.getPassword(),tempPassword);
+        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword+" "+user.getMail());
+        boolean res = userDao.registration(user.getName(), user.getPassword(),tempPassword,user.getMail());
         dataMap.put("res", res);
         return "RES";
     }
@@ -114,6 +114,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpCompletedProjectList() {
         return "completedProjectList";
     }
+    public String jmpMyprofile(){return "jmpMyprofile";}
 
     @Override
     public UserEntity getModel() {

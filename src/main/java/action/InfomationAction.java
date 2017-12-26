@@ -16,14 +16,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.sql.Types.NULL;
+
 public class InfomationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<InformationEntity>, Preparable {
     private InformationDao infodao;
     private InformationEntity information;
     private UserEntity user;
     private Map<String, Object> session;
     private Map<String, Object> dataMap;
-    private int ID_PROJECT;
-    private int ID_ORGANIZATION;
 
     public String showInfo(){
         System.out.println("helloshowinfo");
@@ -43,12 +44,27 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         infodao = new InformationDaoImp();
         user = (UserEntity)session.get("user");
         Integer id_user = user.getId_user();
-        infodao.accept(information.getID_ORGANIZATION(),information.getID_PROJECT(),id_user);
-        System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
+        System.out.println("@@@@"+information.getID_ORGANIZATION()+"#####"+information.getID_PROJECT());
+        if(information.getID_PROJECT()== null) {
+            infodao.acceptOrg(information.getID_ORGANIZATION(),id_user);
+        }
+        else if(information.getID_ORGANIZATION()== null) {
+            infodao.acceptPro(information.getID_PROJECT(),id_user);
+        }
         return "acc";
     }
 
     public String Refuse() {
+        infodao = new InformationDaoImp();
+        user = (UserEntity)session.get("user");
+        Integer id_user = user.getId_user();
+        if(information.getID_PROJECT()== null) {
+            infodao.refuseOrg(information.getID_ORGANIZATION(),id_user);
+        }
+        else if(information.getID_ORGANIZATION()== null) {
+            infodao.refusePro(information.getID_PROJECT(),id_user);
+        }
+        System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
         return "refuse";
     }
 
@@ -83,11 +99,5 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         return information;
     }
 
-    public void setID_PROJECT(int ID_PROJECT) {
-        this.ID_PROJECT = ID_PROJECT;
-    }
-    public void setID_ORGANIZATION(int ID_ORGANIZATION) {
-        this.ID_ORGANIZATION = ID_ORGANIZATION;
-    }
 }
 

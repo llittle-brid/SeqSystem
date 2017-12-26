@@ -42,6 +42,12 @@
         <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="password2" id="password2" type="password" class="form-control loginLine" style="font-size:12px" placeholder="请再次输入密码确认" required="">
         </div>
+        <div class="form-group col-sm-5 col-md-offset-2 loginLine">
+            <input name="email" id="email"  type="email" class="form-control loginLine" style="font-size:12px" placeholder="请填写验证码" required="">
+        </div>
+        <div class="form-group">
+            <button id="registration_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px">获取邮箱验证码</button>
+        </div>
         <div class="form-group col-md-offset-3">
             <table>
                 <tr>
@@ -114,7 +120,7 @@
     $("button#registration_button").click(function () {
         $.ajax({
             url: "login-registration",
-            data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val()},
+            data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val(),mail: $("input#email").val()},
             dataType: "json",
             type: "Post",
             async: "false",

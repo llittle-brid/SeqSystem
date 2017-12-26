@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wwc
-  Date: 2017/12/26
-  Time: 0:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -139,6 +132,7 @@
             </div>
             <div class="bootstrap-table">
                 <table id="finishingTask" data-toggle="table"
+                       data-classes="table table-no-bordered"
                        data-url="project-showList"
                        data-click-to-select="true"
                        data-search="true"
@@ -163,6 +157,7 @@
         </div>
         <div class="bootstrap-table">
             <table id="info" data-toggle="table"
+                   data-classes="table table-no-bordered"
                    data-url="project-showList"
                    data-click-to-select="true"
                    data-search="true"
@@ -271,10 +266,6 @@
     $('#finishingTask').bootstrapTable({
             columns: [
                 {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                }, {
                     title: '机构编码',
                     field: 'ID_ORGANIZATION',
                     align: 'center',
@@ -311,39 +302,10 @@
     $('#info').bootstrapTable({
             columns: [
                 {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '机构ID',
-                    field: 'ID_ORGANIZATION',
-                    align: 'center',
-                    valign: 'middle'
-                },{
-                    title: '机构',
-                    field: 'ORG_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目ID',
-                    field: 'ID_PROJECT',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目',
-                    field: 'PRO_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
                     field: 'MESSAGE',
-                    title: '操作',
+                    title: '消息',
                     sortable: true,
                     align: 'center',
-                    valign: 'middle'
                 },
                 {
                     field: 'date',
@@ -354,9 +316,15 @@
                 {
                     field: 'operate',
                     title: '操作',
-                    align: 'center',
-                    events: "acceptRefuse",
-                    formatter: "accRefu"
+                    align: 'right',
+                    events: "accRefu",
+                    formatter: "info"
+                },
+                {
+                    field: 'operator',
+                    align: 'left',
+                    events: "refuse",
+                    formatter: "infor"
                 }
             ]
         }
@@ -395,6 +363,21 @@
             }
         }
     )
+    $.ajax(
+        {
+            type:"GET",
+            url:"infomation-showInfo",
+            dataType:"json",
+            success:function(json){
+                var infolist = JSON.parse(json.listinfo);
+                //finishingTask为table的id
+                $('#infor').bootstrapTable('load',infolist);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
     /**
     *个人机构
      * */
@@ -420,16 +403,40 @@
      * @param index
      * @returns {string}
      */
-    function accRefu(value,row,index) {
+    function info(value,row,index) {
         return '<a class="mod zfont3">接受</a>'
     }
-    window.acceptRefuse = {
+    function infor(value,row,index) {
+        return '<a class="mod zfont3">拒绝</a>'
+    }
+    window.accRefu = {
         'click .mod': function(e, value, row, index) {
             //修改操作
             var id_ORG = row.ID_ORGANIZATION;
             var ID_ORGANIZATION = parseInt(id_ORG);
             var ID_PROJECT = parseInt(row.ID_PROJECT);
-            location.href="infomation-Accept?id_org="+ID_ORGANIZATION+"&id_pro="+ID_PROJECT;
+            if( isNaN(ID_ORGANIZATION) ){
+                location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
+            }
+            else if(isNaN(ID_PROJECT)){
+                location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
+            }
+
+        },
+    };
+    window.refuse = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            var id_ORG = row.ID_ORGANIZATION;
+            var ID_ORGANIZATION = parseInt(id_ORG);
+            var ID_PROJECT = parseInt(row.ID_PROJECT);
+            if( isNaN(ID_ORGANIZATION) ){
+                location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
+            }
+            else if(isNaN(ID_PROJECT)){
+                location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
+            }
+
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作
