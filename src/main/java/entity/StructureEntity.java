@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public class StructureEntity extends java.lang.Object{
+public class StructureEntity {
     private int id_structure;
     private int id_library;
     private String content;

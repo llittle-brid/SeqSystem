@@ -11,6 +11,7 @@ import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import util.Json;
+import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+
     private Json json;
     private int id_library;
 
@@ -70,5 +72,18 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
 
     public void setId_library(int id_library) {
         this.id_library = id_library;
+    }
+
+
+    public Json getJson() {
+        return json;
+    }
+
+    public void setJson(Json json) {
+        this.json = json;
+    }
+
+    public StructureAction(Json json) {
+        this.json = json;
     }
 }

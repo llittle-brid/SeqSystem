@@ -47,9 +47,7 @@
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
             <interceptor-ref name="myStack"/>
             <allowed-methods>
-                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage
-                ,jmpNewproject,jmpMyprofile,jmpTemp,jmpCasecomponent,jmpUsercomponent
-                ,jmpCurrentProjectList,jmpCompletedProjectList
+                login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
 
@@ -97,7 +95,8 @@
         <action name="structure-*" class="action.StructureAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_common_component.jsp</result>
-            <allowed-methods>get</allowed-methods>
+            <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
+            <allowed-methods>get,insert</allowed-methods>
         </action>
 
     </package>

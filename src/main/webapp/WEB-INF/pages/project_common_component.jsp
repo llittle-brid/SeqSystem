@@ -142,7 +142,7 @@
                         <img src="/img/camera.png" height="24" width="26"/>
                     </div>
                     <div style="height: 120px;float: left;margin: 88px 20px 0px 20px">
-                        <button type="button" class="btn btn-primary">　发表　</button>
+                        <a href="structure-insert"><button type="button" class="btn btn-primary">　发表　</button></a>
                     </div>
                 </div>
             </div>
