@@ -113,7 +113,7 @@
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
                     <s:iterator value="list">
-                    <a class="structure">
+                        <div style="cursor:pointer" class="structure">
                         <div class="col-sm-4">
                         <div class="contact-box">
                             <div>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    </a>
+                        </div>
                         <input style="display:none" type="text" value="<s:property value="id_library"/>">
                     </s:iterator>
                 </div>
@@ -206,8 +206,8 @@
 </script>
 <script>
     $(document).ready(function(){
-        $("a.structure").click(function(){
-                location.href=" structure-get?id_library="+$(this).next().val();
+        $("div.structure").click(function(){
+            location.href="structure-get?id_library="+$(this).next().val();
         });
     });
 </script>

@@ -8,7 +8,7 @@ import com.google.gson.Gson;
  * @author LZF
  */
 public class Json {
-    public String toJoson(Object obj) {
+    public String toJson(Object obj) {
         Gson gson = new Gson();
         String jsonObject = gson.toJson(obj); // {"name":"怪盗kidou","age":24}
         return jsonObject;
