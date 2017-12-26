@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +20,8 @@
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="/css/lzf.css" rel="stylesheet">
+    <link href="css/z_style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -50,20 +50,22 @@
             }
         };
     </script>
+
+
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<body class="fixed-sidebar  gray-bg" style="overflow:hidden">
 <div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
+    <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">
     <div class=" row wrapper white-bg">
-        <ol class="breadcrumb" style="margin-left: 40px">
+        <ol class="breadcrumb" style="margin-left: 50px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>>><a href="user-jmpCasecomponent"><span class="lzf_b">用例构件</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="library-get"><span class="lzf_b">构件库</span></a>
                 </strong>
             </li>
         </ol>
     </div>
-    <div id="background" style="width: 100%;margin: 0 auto" class="gray-bg">
-        <div id="main" style="height: 2000px;width:100%;margin: 0px ">
+        <div id="main" style="height: 1500px;width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                 <div style="float: left;height: 70px;width:300px;padding: 20px 20px 0px 20px">
                     <div style="float: left;margin: 0px 0px 0px 50px">
@@ -86,41 +88,28 @@
                     <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                 </div>
             </div>
-            <div id="mid" style="clear: both;height:750px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
-                <div id="div1" style="background-color: white;height: 300px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
+            <div id="mid" style="clear: both;height:450px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
+                <s:iterator value="list">
+                <div id="div1" style="background-color: white;height: 150px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                     <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">登陆</span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点描述 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">可用性描述 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">输入 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">输出：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">基本操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.  </span>
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property value="content"/></span>
                     </div>
                 </div>
+                </s:iterator>
             </div>
-            <div id="footer" style="clear: both;text-align: center; margin-top:-30px">
+            <div id="footer" style="clear: both;text-align: center; margin-top:45px">
                 <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-white  active">1</button>
-                    <button class="btn btn-white">2</button>
-                    <button class="btn btn-white">3</button>
-                    <button class="btn btn-white">4</button>
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                    </button>
+                    <s:if  test="#request.page==1">
+                        <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
+                    </s:if>
+                    <s:else><button type="button" class="btn btn-white turnpage lastPage"><i class="fa fa-chevron-left"></i></button></s:else>
+                    <s:iterator begin="1" end="#request.num" step="1" status="st">
+                        <s:if test="#request.page==#st.index+1">
+                            <button type="button" class="btn btn-white active pagenum nowpage"><s:property value='#st.index+1'/></button></s:if>
+                        <s:else ><button type="button" class="btn btn-white pagenum"><s:property value='#st.index+1'/></button></s:else>
+                    </s:iterator>
+                    <s:if test="#request.page==#request.num"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
+                    <s:else><button type="button" class="btn btn-white turnpage nextPage"><i class="fa fa-chevron-right"></i></button></s:else>
                 </div>
             </div>
             <div style="width:1200px;margin: 0 auto">
@@ -158,9 +147,31 @@
 <script type="text/javascript" src="/js/contabs.min.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/toastr/toastr.min.js"></script>
+<script src="js/mjy.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
+<script>
+    $(document).ready(function(){
+        $("button.pagenum").click(function(){
+            location.href="structure-get?page="+$(this).html()+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.turnpage").click(function(){
+            if($(this).hasClass("lastPage"))
+            {   var p=parseInt($("button.nowpage").html())-1;
+                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+            else
+            {   var p=parseInt($("button.nowpage").html())+1;
+                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+        });
+    });
+</script>
+</body>
 </body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->

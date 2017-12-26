@@ -114,6 +114,7 @@
                 <div class="row">
                     <s:iterator value="list">
                         <div style="cursor:pointer" class="structure">
+                            <input style="display:none" type="text" value="<s:property value="id_template"/>">
                         <div class="col-sm-4">
                         <div class="contact-box">
                             <div>
@@ -207,7 +208,7 @@
 <script>
     $(document).ready(function(){
         $("div.structure").click(function(){
-            location.href="structure-get?id_library="+$(this).next().val();
+            location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1;
         });
     });
 </script>
