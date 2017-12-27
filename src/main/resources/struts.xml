@@ -35,6 +35,7 @@
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword</allowed-methods>
         </action>
+
         <action name="user-*" class="action.UserAction" method="{1}">
             <result name="tempPage">/WEB-INF/pages/temp.jsp</result>
             <result name="success" type="json"><param name="root">dataMap</param></result>
@@ -50,6 +51,14 @@
                 login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,jmpNewproject,jmpMyprofile,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
+        <action name="infomation-*" class="action.InfomationAction" method="{1}">
+            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="showinfo" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>showInfo,accept,Refuse</allowed-methods>
+        </action>
 
 
         <action name="catalog-*" class="action.CatalogAction" method="{1}">
@@ -57,7 +66,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog</allowed-methods>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
@@ -98,6 +107,15 @@
             <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
             <allowed-methods>get,insert</allowed-methods>
         </action>
+
+        <action name="discuss-*" class="action.DiscussAction" method="{1}">
+            <result name="Re" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>commit,getCatalogDis,delete</allowed-methods>
+        </action>
+
+
 
     </package>
 </struts>
