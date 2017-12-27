@@ -9,12 +9,14 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.AllOrgMemberDao;
 import dao.OrganizationDao;
-import daoImp.AllOrgMemberDaoImp;
+import dao.ShowOrgProjectDao;
+import dao.UserDao;
 import daoImp.OrganizationDaoImp;
+import daoImp.ShowOrgProjectDaoImp;
+import daoImp.UserDaoImp;
 import entity.OrganizationEntity;
-import entity.ShowAllOrgMemEntity;
+import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -30,7 +32,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     private Map<String, Object> request;
     private Map<String, Object> dataMap;
     public String quitorg(){
-        organization = new OrganizationEntity();
         organizationdao = new OrganizationDaoImp();
         UserEntity user = (UserEntity) session.get("user");
         System.out.println(user.getName());
@@ -49,17 +50,47 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     }
     public String showAllMember(){
         dataMap = new HashMap<String, Object>();
-        AllOrgMemberDao allOrgMemberDao = new AllOrgMemberDaoImp();
-        UserEntity seesionUser=(UserEntity)session.get("user");
-        List<ShowAllOrgMemEntity> orgMember = allOrgMemberDao.getAllMember();
+        UserDao userdao = new UserDaoImp();
+        System.out.println(organization.getNAME());
+        List<UserEntity> orgMember = userdao.getOrgAllMem(organization.getNAME());
         Gson gson = new Gson();
         String json = gson.toJson(orgMember);
         System.out.println("OrgAllMember"+json);
         dataMap.put("res",json);
-        return "showAllMember";
+        return "display";
+    }
+
+    public String showAllProject(){
+        dataMap = new HashMap<String, Object>();
+        ShowOrgProjectDao showOrgProjectDao = new ShowOrgProjectDaoImp();
+        System.out.println(organization.getNAME());
+        List<ShowOrgProjectEntity> orgProject = showOrgProjectDao.getOrgPro(organization.getNAME());
+        Gson gson = new Gson();
+        String json = gson.toJson(orgProject);
+        System.out.println("OrgAllProject"+json);
+        dataMap.put("res",json);
+        return "display";
+    }
+
+    public String showHistoryProject(){
+        dataMap = new HashMap<String, Object>();
+        ShowOrgProjectDao showOrgProjectDao = new ShowOrgProjectDaoImp();
+        System.out.println(organization.getNAME());
+        List<ShowOrgProjectEntity> orgProject = showOrgProjectDao.getOrgHisPro(organization.getNAME());
+        Gson gson = new Gson();
+        String json = gson.toJson(orgProject);
+        System.out.println("OrgAllHisProject"+json);
+        dataMap.put("res",json);
+        return "display";
     }
 
     public String jmpOrgManager2(){
+        dataMap = new HashMap<String, Object>();
+        organizationdao = new OrganizationDaoImp();
+        UserEntity seesionUser=(UserEntity)session.get("user");
+        List<OrganizationEntity> list = organizationdao.getMyOrg(seesionUser.getId_user());
+        ActionContext.getContext().getValueStack().set("list",list);
+        System.out.println(list);
         return "OrgManager2Page";
     }
 

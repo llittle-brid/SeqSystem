@@ -2,6 +2,7 @@ package dao;
 
 import action.ProjectAction;
 import entity.ProjectEntity;
+import entity.ShowOrgProjectEntity;
 
 import java.util.List;
 

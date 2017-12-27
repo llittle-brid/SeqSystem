@@ -77,6 +77,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         dataMap.put("res",json);
         return SUCCESS;
     }
+
     @Override
     public String execute() throws Exception {
         dataMap = new HashMap<String, Object>();

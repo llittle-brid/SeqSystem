@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionContext;
 import dao.DAO;
 import dao.ProjectDao;
 import entity.ProjectEntity;
+import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
@@ -46,4 +47,5 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         List<ProjectEntity> project = getForList(sql,state);
         return project;
     }
+
 }

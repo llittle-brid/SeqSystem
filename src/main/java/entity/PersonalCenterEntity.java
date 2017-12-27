@@ -6,11 +6,11 @@
 package entity;
 
 public class PersonalCenterEntity {
-    int ID_ORGANIZATION;
-    String ORGANIZATIONNAME;
-    String ADMIN_NME;
-    int NUM_USER;
-    int ID_USER;
+    private int ID_ORGANIZATION;
+    private String ORGANIZATIONNAME;
+    private String ADMIN_NME;
+    private int NUM_USER;
+    private  int ID_USER;
 
 //获取机构ID
     public int getID_ORGANIZATION() {

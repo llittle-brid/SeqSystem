@@ -9,8 +9,8 @@ public class ShowApplyOrganizationEntity {
     private String message;
     private String org_name;
     private String state;
-    private int id_user;
     private int id_org_apply;
+    private int id_user;
 
     public String getName() {
         return name;
@@ -60,20 +60,20 @@ public class ShowApplyOrganizationEntity {
         this.state = state;
     }
 
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
-    }
-
     public int getId_org_apply() {
         return id_org_apply;
     }
 
     public void setId_org_apply(int id_org_apply) {
         this.id_org_apply = id_org_apply;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public ShowApplyOrganizationEntity() {
@@ -83,7 +83,7 @@ public class ShowApplyOrganizationEntity {
         this.message = message;
         this.org_name = org_name;
         this.state = state;
-        this.id_user = id_user;
         this.id_org_apply = id_org_apply;
+        this.id_user = id_user;
     }
 }

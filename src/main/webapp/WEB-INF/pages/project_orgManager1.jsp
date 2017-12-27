@@ -19,6 +19,7 @@
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -42,98 +43,119 @@
             </li>
         </ul>
     </div>
-    <div style="margin-left: -60px" class="col-md-10">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <div style="float: left;margin-left: 5px"><span><strong>当前成员</strong></span></div>
-                <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button></div>
-                <div style="float: right;width: 300px;margin-top: -10px">
+    <div class="col-md-10" style="padding: 15px 10px 0px 0px;margin-left: -50px">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-options col-md-4">
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a href="project_detail.html#tab-1" data-toggle="tab">当前成员</a>
+                        </li>
+                        <li class="">
+                            <a href="project_detail.html#tab-2" data-toggle="tab">发出的邀请</a>
+                        </li>
+                    </ul>
+                </div>
+                <div style="float: left;margin-top: 10px" class="col-md-4"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button></div>
+                <div style="float: right;width: 300px" class="col-md-4">
                     <select id="gender" class="form-control" name="gender">
                         <s:iterator value="list">
-                            <option class="orgName"><s:property value="NAME"/> </option>
+                            <option id="displayOrg" class="orgName"><s:property value="NAME"/> </option>
                         </s:iterator>
                     </select>
                 </div>
             </div>
-            <div class="ibox-content">
-                <div class="bootstrap-table">
-                    <table id="finishingTask"
-                           data-toggle="table"
-                           data-url="myOrganization-showAllMember"
-                           data-click-to-select="true"
-                           data-search="true"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-toolbar="#toolbar"
-                           data-query-params="quefryParams"
-                           data-pagination="true"
-                           data-halign="center"
-                           data-striped="true"
-                           data-page-size="3"
-                           data-height="600"
-                           data-page-list="All"
-                    >
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>发出的邀请</h5>
-            </div>
-            <div class="ibox-content">
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-1">
+                        <div style="margin:-30px 0px 0px 0px">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="bootstrap-table">
+                                        <table id="finishingTask"
+                                               data-toggle="table"
+                                               data-url="Organization-showAllMember"
+                                               data-click-to-select="true"
+                                               data-search="true"
+                                               data-show-refresh="true"
+                                               data-show-toggle="true"
+                                               data-show-columns="true"
+                                               data-toolbar="#toolbar"
+                                               data-query-params="quefryParams"
+                                               data-pagination="true"
+                                               data-halign="center"
+                                               data-striped="true"
+                                               data-page-size="6"
+                                               data-height="410"
+                                               data-page-list="All"
+                                        >
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <div style="margin:-30px 0px 0px 0px">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
 
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-2">姓名</th>
-                        <th class="col-sm-2">申请时间</th>
-                        <th class="col-sm-2">状态</th>
-                        <th class="col-sm-2">备注</th>
-                        <th class="col-sm-3"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td >芍药</td>
-                        <td>2017-7-8 12:36</td>
-                        <td>等待</td>
-                        <td>无</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td >桔梗</td>
-                        <td>2017-7-8 12:36</td>
-                        <td>接受</td>
-                        <td>无</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td >菱</td>
-                        <td>2017-7-8 12:36</td>
-                        <td>拒绝</td>
-                        <td>无</td>
-                        <td>
-                            <button type="button" class="btn btn-primary btn-xs" >重发</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div style="height: 50px;margin-left: 40%" class="btn-group">
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-white">1</button>
-                    <button class="btn btn-white  active">2</button>
-                    <button class="btn btn-white">3</button>
-                    <button class="btn btn-white">4</button>
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                    </button>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th class="col-sm-2">姓名</th>
+                                                <th class="col-sm-2">申请时间</th>
+                                                <th class="col-sm-2">状态</th>
+                                                <th class="col-sm-2">备注</th>
+                                                <th class="col-sm-3"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td >芍药</td>
+                                                <td>2017-7-8 12:36</td>
+                                                <td>等待</td>
+                                                <td>无</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td >桔梗</td>
+                                                <td>2017-7-8 12:36</td>
+                                                <td>接受</td>
+                                                <td>无</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td >菱</td>
+                                                <td>2017-7-8 12:36</td>
+                                                <td>拒绝</td>
+                                                <td>无</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-xs" >重发</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div style="height: 50px;margin-left: 40%" class="btn-group">
+                                            <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                                            </button>
+                                            <button class="btn btn-white">1</button>
+                                            <button class="btn btn-white  active">2</button>
+                                            <button class="btn btn-white">3</button>
+                                            <button class="btn btn-white">4</button>
+                                            <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <div  class="modal inmodal" id="invite" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -160,15 +182,17 @@
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
-<script>
-    $(document).ready(function(){
-        $("option.orgName").click(function(){
-            location.href="library-getagain?name="+$(this).html();
-        });
-    });
-</script>
+
 </body>
 <script>
+    $(document).ready(function(){
+        $("option.orgName").click(function () {
+            var element = $(this).val();
+            console.log(element);
+         Ffive(element);
+        }
+        );
+    });
     $('#finishingTask').bootstrapTable({
             columns: [
                 {
@@ -189,22 +213,32 @@
                     align: 'center'
                 }
             ]
+        },
+        function () {
+            var element = $(this).val();
+            Ffive(element)
         }
+
     )
-    $.ajax(
-        {
-            type:"GET",
-            url:"myOrganization-showAllMember",
-            dataType:"json",
-            success:function(json){
-                var orgMemberList = JSON.parse(json.res);
-                //finishingTask为table的id
-                $('#finishingTask').bootstrapTable('load',orgMemberList);
-            },
-            error:function(){
-                alert("错误");
+    function Ffive(element) {
+        $.ajax(
+            {
+                url:"Organization-showAllMember",
+                data: {NAME: element},
+                dataType:"json",
+                type: "Get",
+                async: "false",
+                success:function(json){
+                    var orgMemberList = JSON.parse(json.res);
+                    //finishingTask为table的id
+                    $('#finishingTask').bootstrapTable('load',orgMemberList);
+                },
+                error:function(){
+                    alert(" 错误");
+                }
             }
-        }
-    )
+        )
+    }
+
 </script>
 </html>

@@ -196,11 +196,9 @@
                 url: "showApplyOrg-agreeOrg",
                 data: {id_org_apply:id_org_apply},
                 dataType: "json",
-                success: function (result) {
-                    if(result.res===true)  {
-                        showtoast("success", "同意成功", "操作成功")
-                    }
-                    else  showtoast("error", "同意失败", "同意失败")
+                success: function (json) {
+                        var orgList = JSON.parse(json.res);
+                        $('#showOrgApply').bootstrapTable('load',orgList);
                 },
                 error: function (result) {
                     showtoast("error", "同意失败", "同意失败")
@@ -218,6 +216,7 @@
                 success: function (result) {
                     if(result.res===true)  {
                         showtoast("success", "拒绝成功", "操作成功")
+                        $('#showOrgApply').bootstrapTable('load',orgList);
                     }
                     else  showtoast("error", "同意失败", "同意失败")
                 },
@@ -293,6 +292,8 @@
                 success: function (result) {
                     if(result.res===true)  {
                         showtoast("success", "同意成功", "操作成功")
+                        $('#showOthersTable').bootstrapTable('load',orgList);
+
                     }
                     else  showtoast("error", "同意失败", "同意失败")
                 },

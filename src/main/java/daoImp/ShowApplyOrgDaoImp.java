@@ -15,6 +15,7 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         return ShowApply;
     }
+
     @Override
     public List<ShowApplyOrganizationEntity> getOthers() {
         String sql="select * from VIEW_showAPPLYORG where STATE=1 or STATE=-1";
@@ -30,13 +31,15 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
     }
 
     @Override
-    public boolean createOrg(ShowApplyOrganizationEntity create) {
+    public List<ShowApplyOrganizationEntity> createOrg(ShowApplyOrganizationEntity create) {
         String sql1="update ORG_APPLY set STATE=1 where ORG_NAME=?";
         String sql2="insert into ORGANIZATION (NAME,ID_USER,TIME) value(?,?,?)";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getOrg_name());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
-        return true;
+        String sql="select * from VIEW_showAPPLYORG where STATE=0";
+        List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
+        return ShowApply;
     }
 
     @Override

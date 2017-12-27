@@ -65,11 +65,11 @@
         <action name="Organization-*" class="action.OrganizationAction" method="{1}">
             <result name="OrgManager1Page">/WEB-INF/pages/project_orgManager1.jsp</result>
             <result name="OrgManager2Page">/WEB-INF/pages/project_orgManager2.jsp</result>
-            <result name="showAllMember" type="json">
+            <result name="display" type="json">
                 <param name="root">dataMap</param>
             </result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember,</allowed-methods>
+            <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember,showAllProject,showHistoryProject</allowed-methods>
         </action>
         <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
             <result name="success" type="json">

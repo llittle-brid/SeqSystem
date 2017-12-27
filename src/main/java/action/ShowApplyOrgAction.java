@@ -56,9 +56,11 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         int id_org_apply=ShowApplyOrganization.getId_org_apply();
         ShowApplyOrgDao = new ShowApplyOrgDaoImp();
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
-        boolean res=ShowApplyOrgDao.createOrg(ShowApplyOrganization);
-        dataMap.put("res",res);
-        return "RES";
+        List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.createOrg(ShowApplyOrganization);
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        dataMap.put("res",json);
+        return SUCCESS;
     }
 
     public String refuseOrg(){
