@@ -56,6 +56,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "RES";
     }
 
+
     public String registration() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
@@ -101,6 +102,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
+        userDao = new UserDaoImp();
+        user = (UserEntity)session.get("user");
+        session.put("countnow",userDao.projectNumberNow(user.getId_user()));
+        session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
         return "homePage";
     }
     public String jmpTemp() { return "tempPage";}

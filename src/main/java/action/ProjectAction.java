@@ -5,9 +5,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.oracle.javafx.jmx.json.JSONWriter;
 import dao.OrganizationDao;
 import dao.ProjectDao;
 
@@ -17,6 +19,7 @@ import daoImp.ProjectDaoImp;
 
 import entity.OrganizationEntity;
 import entity.ProjectEntity;
+import entity.UserEntity;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -59,7 +62,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String showCurrentList() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        List<ProjectEntity> list = projectDao.getAll(1);
+        UserEntity user = (UserEntity) ActionContext.getContext().getSession().get("user");
+        int ID_user = user.getId_user();
+        List<ProjectEntity> list = projectDao.getAll(1,ID_user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
@@ -70,10 +75,11 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String showCompletedList() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        List<ProjectEntity> list = projectDao.getAll(0);
+        UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
+        int ID_user = user.getId_user();
+        List<ProjectEntity> list = projectDao.getAll(0,ID_user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
-//        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
         dataMap.put("res",json);
         return SUCCESS;
     }
@@ -94,10 +100,65 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_Project = project.getId_Project();
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
+        UserEntity pm = projectDao.getPM(project);
 
+        session.put("PM",pm);
         session.put("project",project);
+        session.put("Id_Project",id_Project);
         return SUCCESS;
     }
+    public String getProjectMember(){
+        dataMap = new HashMap<String, Object>();
+        int id_Project = project.getId_Project();
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
+
+        List<UserEntity> members = projectDao.getMember(project);
+        Gson gson = new Gson();
+        String json = gson.toJson(members);
+
+        dataMap.put("res",json);
+        return SUCCESS;
+    }
+    public String setVPM(){
+
+        int id_User = project.getId_User();
+        int id_Project = project.getId_Project();
+
+        System.out.println(id_User);
+
+        projectDao = new ProjectDaoImp();
+        projectDao.setVPM(id_User,id_Project);
+
+        System.out.println(id_Project);
+
+        return SUCCESS;
+    }
+
+    public String dismissVPM(){
+        int id_User = project.getId_User();
+        int id_Project = project.getId_Project();
+
+        System.out.println(id_User);
+
+        projectDao = new ProjectDaoImp();
+        projectDao.dismissVPM(id_User,id_Project);
+
+        System.out.println(id_Project);
+
+        return SUCCESS;
+    }
+
+    public String deleteMember(){
+        int id_User = project.getId_User();
+        int id_Project = project.getId_Project();
+
+        projectDao = new ProjectDaoImp();
+        projectDao.deleteMember(id_User,id_Project);
+
+        return SUCCESS;
+    }
+
     public String jmpFinishedProjectInfo(){
         return "finishedProjectInfo";
     }

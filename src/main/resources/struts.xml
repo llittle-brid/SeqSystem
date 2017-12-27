@@ -88,7 +88,8 @@
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <result name="finishedProjectInfo">/WEB-INF/pages/project_proFinInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpFinishedProjectInfo,showCurrentList,showCompletedList,getProjectInfo</allowed-methods>
+
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpFinishedProjectInfo,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember</allowed-methods>
         </action>
 
         <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">

@@ -47,8 +47,11 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         UserEntity user1 = get(sql, name);
         return user1;
     }
-
-
+    public UserEntity getOne1(int id) {
+        String sql = "select * from USER where ID_USER=?";
+        UserEntity user1 = get(sql, id);
+        return user1;
+    }
     public List<UserEntity> getAll() {
         String sql = "select * from USER ";
         List<UserEntity> user1 = getForList(sql);
@@ -63,14 +66,14 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
 
     @Override
     public int projectNumberNow(int id) {
-        String sql="select count(*) from projectMember where ID_USER=? and STATE=1";
+        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=1";
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
 
     @Override
     public int projectNumberHistory(int id) {
-        String sql="select count(*) from projectMember where ID_USER=? and STATE=0";
+        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=0";
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
