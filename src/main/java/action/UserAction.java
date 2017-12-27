@@ -49,8 +49,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         if(res==true) {
             user = userDao.getOne(user.getName());
             session.put("user",user);
-            session.put("countnow",userDao.projectNumberNow(user.getId_user()));
-            session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
             System.out.println(user);
         }
         return "RES";
