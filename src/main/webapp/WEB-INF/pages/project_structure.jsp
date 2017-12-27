@@ -86,8 +86,8 @@
             <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">
                 <s:iterator value="list1">
                 <div  style="background-color: white;height: 115px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;"><s:property value="content"/></span>
+                    <div style="height:100px;margin: 10px 0px 0px 10px;overflow: hidden">
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';color: black;font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;overflow: hidden"><s:property value="content"/></span>
                     </div>
                 </div>
                 </s:iterator>
