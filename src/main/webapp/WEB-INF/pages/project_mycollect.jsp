@@ -113,7 +113,8 @@
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
                     <s:iterator value="listmycollect">
-                        <a class="structure">
+                        <div style="cursor:pointer" class="structure">
+                            <input style="display:none" type="text" value="<s:property value="id_template"/>">
                             <div class="col-sm-4">
                                 <div class="contact-box">
                                     <div>
@@ -133,15 +134,23 @@
                                             </p>
                                         </div>
                                         <div style="float: right;margin: -14px -19px 0px 0px">
+                                            <s:if test="#request.id_user==#session.user.id_user">
                                                 <a class="btn btn-white btn-bitbucket nocollect" style="border: none" >
                                                     <i class="fa fa-star modal-icon " style="font-size: 20px"></i>
                                                 </a>
+                                            </s:if>
+                                            <s:else>
+                                                <a class="btn btn-white btn-bitbucket collect" style="border: none" >
+                                                    <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
+                                                </a>
+                                            </s:else>
                                             <input style="display:none" type="text" value="<s:property value="id_library"/>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
+                        <input style="display:none" type="text" value="<s:property value="id_library"/>">
                     </s:iterator>
                 </div>
             </div>
@@ -180,7 +189,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="librarycollect-getagain?page="+$(this).html();
+            location.href="library-getagain?page="+$(this).html();
         });
     });
 </script>
@@ -189,7 +198,7 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="librarycollect-getagain?page="+p;}
+                location.href="library-getagain?page="+p;}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="library-getagain?page="+p;}
@@ -198,11 +207,12 @@
 </script>
 <script>
     $(document).ready(function(){
-        $("a.structure").click(function(){
-            location.href=" structure-get?id_library="+$(this).next().val();
+        $("div.structure").click(function(){
+            location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1;
         });
     });
 </script>
+</body>
 <script>
     $(document).on("click","a.collect",function () {
         $(this).addClass("nocollect");
@@ -253,7 +263,6 @@
         })
     })
 </script>
-</body>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

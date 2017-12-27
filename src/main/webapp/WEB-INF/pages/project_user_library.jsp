@@ -111,37 +111,44 @@
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
                 <div class="row">
                     <s:iterator value="listuser">
-                    <div class="col-sm-4">
-                        <div class="contact-box">
-                            <div  href="user-jmpUsercomponent">
-                                <div style="margin: 10px 10px 10px 15px;float: left">
-                                    <img src="/img/div2.png" height="80px" width="80px"/>
-                                </div>
-                                <div style="margin: 10px;float: left">
-                                    <h3><s:property value="name"/></h3>
-                                    <p>贡献人：官方<br>发布时间：<s:property value="time"/></p>
-                                </div>
-                                <div style="height:60px;clear: both;margin: 0px 10px 0px 10px;overflow: hidden">
-                                    <p>
-                                        <s:property value="mention"/>
-                                    </p>
-                                </div>
-                                <div style="float: right;margin: -14px -19px 0px 0px">
-                                    <s:if test="#request.id_user==#session.user.id_user">
-                                        <a class="btn btn-white btn-bitbucket nocollect" style="border: none" >
-                                            <i class="fa fa-star modal-icon " style="font-size: 20px"></i>
-                                        </a>
-                                    </s:if>
-                                    <s:else>
-                                        <a class="btn btn-white btn-bitbucket collect" style="border: none" >
-                                            <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
-                                        </a>
-                                    </s:else>
+                        <div class="col-sm-4">
+                            <div class="contact-box">
+                                <div>
+                                    <div style="cursor:pointer" class="structure">
+                                        <input style="display:none" type="text" value="<s:property value="id_template"/>">
+                                        <div style="margin: 10px 10px 10px 15px;float: left">
+                                            <s:if test="#request.id_template==1"><img src="/img/div11.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==2"><img src="/img/div2.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==3"><img src="/img/div3.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==4"><img src="/img/div4.png" height="80px" width="80px"/></s:if>
+                                        </div>
+                                        <div style="margin: 10px;float: left">
+                                            <h3><s:property value="name"/></h3>
+                                            <p>贡献人：官方<br>发布时间：<s:property value="time"/></p>
+                                        </div>
+                                        <div style="height:60px;clear: both;margin: 0px 10px 0px 10px;overflow: hidden">
+                                            <p>
+                                                <s:property value="mention"/>
+                                            </p>
+                                        </div>
+                                    </div>
                                     <input style="display:none" type="text" value="<s:property value="id_library"/>">
+                                    <div style="float: right;z-index:99999999;margin: -14px -19px 0px 0px">
+                                        <s:if test="#request.id_user==#session.user.id_user">
+                                            <a class="btn btn-white btn-bitbucket nocollect" style="border: none" >
+                                                <i class="fa fa-star modal-icon " style="font-size: 20px"></i>
+                                            </a>
+                                        </s:if>
+                                        <s:else>
+                                            <a class="btn btn-white btn-bitbucket collect" style="border: none" >
+                                                <i class="fa fa-star-o modal-icon " style="font-size: 20px"></i>
+                                            </a>
+                                        </s:else>
+                                        <input style="display:none" type="text" value="<s:property value="id_library"/>">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </s:iterator>
                 </div>
             </div>
@@ -180,7 +187,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="library-getuseragain?page="+$(this).html();
+            location.href="library-getagain?page="+$(this).html();
         });
     });
 </script>
@@ -189,18 +196,17 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="library-getuseragain?page="+p;}
+                location.href="library-getagain?page="+p;}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="library-getuseragain?page="+p;}
+                location.href="library-getagain?page="+p;}
         });
     });
 </script>
-</body>
 <script>
     $(document).ready(function(){
-        $("a.structure").click(function(){
-            location.href=" structure-get?id_library="+$(this).next().val();
+        $("div.structure").click(function(){
+            location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1;
         });
     });
 </script>

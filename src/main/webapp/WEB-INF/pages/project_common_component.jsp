@@ -88,9 +88,9 @@
                     <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                 </div>
             </div>
-            <div id="mid" style="clear: both;height:450px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
+            <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">
                 <s:iterator value="list">
-                <div id="div1" style="background-color: white;height: 150px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
+                <div id="div1" style="background-color: white;height: 115px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                     <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property value="content"/></span>
                     </div>

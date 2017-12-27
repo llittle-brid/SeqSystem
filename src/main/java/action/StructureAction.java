@@ -35,7 +35,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         List<StructureEntity> structureAll;
         Gson gson = new Gson();
         if(id_template==1){
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*6,(page-1)*6+6);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*6+9);
             int count=structureDao.count(structure.getId_library());
             int num=count/6+1;
             request.put("num",num);
