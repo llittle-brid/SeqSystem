@@ -68,7 +68,7 @@
         <div id="main" style="height: 1500px;width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                 <div style="float: left;height: 50px;width:350px;padding: 20px 20px 0px 20px;margin-left: 100px">
-                    <h2> ${requestScope.library.name}</h2>
+                    <h2 style="font-weight:700"> ${requestScope.library.name}</h2>
                 </div>
                 <div style="float: left;height: 50px;width:100px;padding: 40px 0px 20px 0px;text-align:center;margin-top:5px">
                         <p style="font-size: 16px;color: black">贡献人：官方</p>
@@ -82,15 +82,39 @@
                     <div style="margin:-22px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                 </div>
             </div>
+            <s:if test="#request.id_template==1">
             <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">
-                <s:iterator value="list">
-                <div id="div1" style="background-color: white;height: 115px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
+                <s:iterator value="list1">
+                <div  style="background-color: white;height: 115px;width:300px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
                     <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property value="content"/></span>
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">内容：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;"><s:property value="content"/></span>
                     </div>
                 </div>
                 </s:iterator>
             </div>
+            </s:if>
+            <s:if test="#request.id_template==2">
+            <div id="mid" style="clear: both;height:450px;width:1300px;margin-left:150px;padding: 20px 75px 20px 75px;overflow: hidden">
+                <s:iterator value="list2">
+                <div  style="background-color: white;height: 200px;width:520px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px;" class="col-md-4 contact-box">
+                    <div style="height:40px;margin: 10px 0px 0px 10px;overflow: hidden">
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;color: black">用户名：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;overflow: hidden"><s:property value="roleName"/></span>
+                    </div>
+                    <div style="height:80px;margin: 0px 0px 0px 10px;float: left; overflow: hidden">
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;color: black">用户描述：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:500;overflow: hidden"><s:property value="describe"/></span>
+                    </div>
+                    <div style="height:80px;margin: 0px 0px 0px 10px;float: left">
+                        <div style="width: 60px;float: left"><span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;color: black">用户权限:</span></div>
+                        <div style="float: left">
+                                <span style="font-family:'Arial Normal', 'Arial';font-weight:500;overflow: hidden">
+                                        <s:property value="permissions"/>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                </s:iterator>
+                </div>
+            </s:if>
             <div id="footer" style="clear: both;text-align: center; margin-top:45px">
                 <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                     <s:if  test="#request.page==1">

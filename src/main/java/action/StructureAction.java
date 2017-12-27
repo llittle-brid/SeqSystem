@@ -38,10 +38,10 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     {
         structureDao = new StructureDaoImp();
         libraryDao=new LibraryDaoImp();
-        List<StructureEntity> structureAll;
-        Gson gson = new Gson();
         library=libraryDao.getOne(structure.getId_library());
         request.put("library",library);
+        Gson gson = new Gson();
+        List<StructureEntity> structureAll;
         if(id_template==1){
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*6+9);
             int count=structureDao.count(structure.getId_library());
@@ -55,37 +55,39 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             {   CommonStructureEntity cs = gson.fromJson(structureAll.get(i).getContent(), CommonStructureEntity.class);
                 csList.add(cs);
             }
-            ActionContext.getContext().getValueStack().set("list",csList);
+            ActionContext.getContext().getValueStack().set("list1",csList);
         }
         else if(id_template==2) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*6+4);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
             int count=structureDao.count(structure.getId_library());
-            int num=count/6+1;
+            int num=count/4+1;
             request.put("num",num);
             request.put("page",page);
+            request.put("id_library",structure.getId_library());
+            request.put("id_template",id_template);
             List usList=new LinkedList<>();
             for(int i=0;i<structureAll.size();i++)
-            {   UserStructureEntity cs = gson.fromJson(structureAll.get(i).getContent(), UserStructureEntity.class);
-                usList.add(cs);
+            {   UserStructureEntity us = gson.fromJson(structureAll.get(i).getContent(), UserStructureEntity.class);
+                usList.add(us);
             }
-            ActionContext.getContext().getValueStack().set("list",usList);
-            request.put("id_library",structure.getId_library());
-            request.put("id_template",id_template);
+            System.out.println(usList);
+            System.out.println(structureAll);
+            ActionContext.getContext().getValueStack().set("list2",usList);
         }
         else if(id_template==3) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*6+4);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
             int count=structureDao.count(structure.getId_library());
-            int num=count/6+1;
+            int num=count/4+1;
             request.put("num",num);
             request.put("page",page);
-            List casList=new LinkedList<>();
-            for(int i=0;i<structureAll.size();i++)
-            {   CaseStructureEntity cs = gson.fromJson(structureAll.get(i).getContent(), CaseStructureEntity.class);
-                casList.add(cs);
-            }
-            ActionContext.getContext().getValueStack().set("list",casList);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
+            List casList=new LinkedList<>();
+            for(int i=0;i<structureAll.size();i++)
+            {   CaseStructureEntity cas = gson.fromJson(structureAll.get(i).getContent(), CaseStructureEntity.class);
+                casList.add(cas);
+            }
+            ActionContext.getContext().getValueStack().set("list3",casList);
         }
 
         return "get";
