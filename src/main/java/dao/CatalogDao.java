@@ -43,4 +43,6 @@ void update(int id_document, int first, int second);
     CatalogEntity getOne(int id_document,int first,int second,int third,int fourth);
 
     int getIdCatalog(int id_document,int first,int second,int third,int fourth);
+
+    void rename(String title,int id_document,int first,int second,int third,int fourth);
 }

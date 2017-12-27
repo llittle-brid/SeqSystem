@@ -27,22 +27,6 @@
         <action name="404">
             <result>/404.jsp</result>
         </action>
-        <!--<action name="account-*" class="accountAction" method="{1}">-->
-        <!--<result name="login" type="stream">-->
-        <!--<param name="contentType">text/html</param>-->
-        <!--<param name="inputName">inputStream</param>-->
-        <!--</result>-->
-        <!--<result name="error">/index.jsp</result>-->
-        <!--<result name="home">/WEB-INF/pages/homepage.jsp</result>-->
-        <!--<result name="changeStore" type="json">-->
-        <!--<param name="root">vStoreEntity</param>-->
-        <!--</result>-->
-        <!--<result name="changePassLogout">/index.jsp</result>-->
-        <!--<result name="changePass" type="json">-->
-        <!--<param name="root">loginFlag</param>-->
-        <!--</result>-->
-        <!--<allowed-methods>login,logout,home,changeStore,changePassLogout,changePass</allowed-methods>-->
-        <!--</action>-->
 
 
         <action name="login-*" class="action.UserAction" method="{1}">
@@ -71,6 +55,14 @@
                 login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile,jmpNewproject,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
+        <action name="infomation-*" class="action.InfomationAction" method="{1}">
+            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="showinfo" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>showInfo,accept,Refuse</allowed-methods>
+        </action>
 
 
         <action name="catalog-*" class="action.CatalogAction" method="{1}">
@@ -78,7 +70,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog</allowed-methods>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
@@ -104,7 +96,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>commit,getCatalogDis</allowed-methods>
+            <allowed-methods>commit,getCatalogDis,delete</allowed-methods>
         </action>
 
 

@@ -155,4 +155,10 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         return getForValue(sql,id_document,first,second,third,fourth);
     }
 
+    @Override
+    public void rename(String title,int id_document, int first, int second, int third, int fourth) {
+        String sql="update CATALOG set title=? where id_document=? and first_index=? and second_index=?  and third_index=? and fourth_index=? ";
+        update(sql,title,id_document,first,second,third,fourth);
+    }
+
 }
