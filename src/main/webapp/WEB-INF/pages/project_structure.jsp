@@ -22,6 +22,10 @@
     <link href="/css/lzf.css" rel="stylesheet">
     <link href="css/z_style.css" rel="stylesheet">
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="../css/mjy.css" rel="stylesheet">
+
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -142,7 +146,10 @@
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">）</span>
                     </p>
                 </div>
-                <div style="margin: 0px 0px 0px 100px">
+                <div style="margin: 0px 0px 0px 100px;width: 600px">
+                    <div class="click2edit wrapper discuss white-bg" style="width: 600px;height: 1880px;border:8px solid darkgrey;float: left" contenteditable="true">
+                        sadjaskdasl;dka;sldkal;sd
+                    </div>
                     <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true" class="white-bg">
                     </div>
                     <div style="height: 120px;float: left;margin: 98px 0px 0px 20px">
@@ -167,6 +174,9 @@
 <script src="/js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+<script src="../js/plugins/summernote/summernote.min.js"></script>
+<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="../js/template.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
