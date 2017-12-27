@@ -188,6 +188,10 @@
                 location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
         });
     });
+
+    $(document).ready(function () {
+        $(window.parent.document).find("div#content-main").height($(document).height())
+    })
 </script>
 </body>
 </body>

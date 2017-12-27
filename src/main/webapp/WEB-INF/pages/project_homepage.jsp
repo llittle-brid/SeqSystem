@@ -66,13 +66,19 @@
         <a href="user-jmpNewproject"><img class="col-md-offset-1" src="/img/u7.png"></a>
     </div>
 </div>
+
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
 </body>
-
+<script>
+    $(document).ready(function () {
+//        alert($(document).height())
+        $(window.parent.document).find("div#content-main").height($(window).height())
+    })
+</script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
