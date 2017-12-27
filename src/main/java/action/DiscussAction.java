@@ -33,6 +33,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     private int id_document;
     private CatalogDao catalogDao;
     private ProDiscussDao proDiscussDao;
+    private ProDiscussEntity proDiscussEntity;
 
     public String commit(){
         catalogDao=new CatalogDaoImp();
@@ -64,14 +65,24 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
 
+    public String delete(){
+        proDiscussDao=new ProDiscussDaoImp();
+        proDiscussDao.delete(proDiscussEntity.getId_pro_discuss());
+        return "Re";
+    }
+    public void prepareDelete(){
+
+
+    }
+
     @Override
     public ProDiscussEntity getModel() {
-        return null;
+        return proDiscussEntity;
     }
 
     @Override
     public void prepare() throws Exception {
-
+        proDiscussEntity=new ProDiscussEntity();
     }
 
 

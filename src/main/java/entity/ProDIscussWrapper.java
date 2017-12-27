@@ -13,9 +13,9 @@ import java.util.List;
  * @author MJY
  */
 public class ProDIscussWrapper {
-    private ProDiscussEntity proDiscussEntity;
+    public ProDiscussEntity proDiscussEntity;
     //0不是自己的留言，1留言过期，2可删除
-    private int state;
+    public int state;
 
     public ProDIscussWrapper(ProDiscussEntity proDiscussEntity,int id_user) {
         this.proDiscussEntity = proDiscussEntity;
@@ -23,7 +23,7 @@ public class ProDIscussWrapper {
     }
 
     private void getState(int id_user){
-        if (id_user==proDiscussEntity.getId_user()){
+        if (id_user!=proDiscussEntity.getId_user()){
             state=0;
             return;
         }
@@ -45,4 +45,19 @@ public class ProDIscussWrapper {
         return wrapperList;
     }
 
+    public ProDiscussEntity getProDiscussEntity() {
+        return proDiscussEntity;
+    }
+
+    public void setProDiscussEntity(ProDiscussEntity proDiscussEntity) {
+        this.proDiscussEntity = proDiscussEntity;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 }

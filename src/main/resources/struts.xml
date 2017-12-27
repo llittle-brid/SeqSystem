@@ -55,6 +55,14 @@
                 login,registration,replacepassword,jmpLogin,jmpRegistration,jmpReplacepassword,jmpHomepage,editProfile,jmpNewproject,jmpTemp,jmpComponent,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
         </action>
+        <action name="infomation-*" class="action.InfomationAction" method="{1}">
+            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="showinfo" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>showInfo,accept,Refuse</allowed-methods>
+        </action>
 
 
         <action name="catalog-*" class="action.CatalogAction" method="{1}">
@@ -62,7 +70,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog</allowed-methods>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
@@ -87,7 +95,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>commit,getCatalogDis</allowed-methods>
+            <allowed-methods>commit,getCatalogDis,delete</allowed-methods>
         </action>
 
 

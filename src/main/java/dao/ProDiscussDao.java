@@ -14,4 +14,6 @@ public interface ProDiscussDao {
     void commit(int id_user,int id_catalog,Timestamp time,String content);
 
     List<ProDiscussEntity> getCatalogDis(int id_catalog);
+
+    void delete(int id_pro_discuss);
 }
