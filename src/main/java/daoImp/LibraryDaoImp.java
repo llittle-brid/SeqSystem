@@ -7,10 +7,10 @@ import java.util.List;
 
 public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
 
-    public LibraryEntity getOne(String name)
+    public LibraryEntity getOne(int id_library)
     {
-        String sql="select * from USER where name=?";
-        LibraryEntity library1=get(sql,name);
+        String sql="select * from LIBRARY where ID_LIBRARY=?";
+        LibraryEntity library1=get(sql,id_library);
         return library1;
     }
     public List<LibraryEntity> getAll(int num1,int num2)

@@ -67,25 +67,19 @@
     </div>
         <div id="main" style="height: 1500px;width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
-                <div style="float: left;height: 70px;width:300px;padding: 20px 20px 0px 20px">
-                    <div style="float: left;margin: 0px 0px 0px 50px">
-                        <h2> OA系统用例构件</h2>
-                    </div>
+                <div style="float: left;height: 50px;width:350px;padding: 20px 20px 0px 20px;margin-left: 100px">
+                    <h2> ${requestScope.library.name}</h2>
                 </div>
-                <div style="float: left;height: 70px;width:150px;padding: 40px 0px 20px 30px">
-                    <div style="float: left;text-align:center">
-                        <p style="font-size: 16px">贡献人：官方</p>
-                    </div>
+                <div style="float: left;height: 50px;width:100px;padding: 40px 0px 20px 0px;text-align:center;margin-top:5px">
+                        <p style="font-size: 16px;color: black">贡献人：官方</p>
                 </div>
-                <div style="float: left;height: 70px;width:300px;padding: 40px 0px 20px 0px">
-                    <div style="float: left">
-                        <p style="font-size: 16px">发布时间：2017-11-03</p>
-                    </div>
+                <div style="float: left;height: 50px;width:200px;padding: 40px 0px 20px 0px;margin-top:5px;margin-left: 10px">
+                        <p style="font-size: 16px;color: black">发布时间：${requestScope.library.time}</p>
                 </div>
                 <div style="float: right;height: 60px;width: 450px" >
-                    <div style="margin:30px 0px 0px 253px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
-                    <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/star.png" height="35" width="35"/></div>
-                    <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
+                    <div style="margin:-22px 0px 0px 200px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
+                    <div style="margin:-22px 0px 0px 10px;float: left"><img src="/img/star.png" height="35" width="35"/></div>
+                    <div style="margin:-22px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                 </div>
             </div>
             <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">

@@ -5,7 +5,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.StructureDao;
+import dao.LibraryDao;
+import daoImp.LibraryDaoImp;
 import daoImp.StructureDaoImp;
+import entity.LibraryEntity;
 import entity.UserStructureEntity;
 import entity.CaseStructureEntity;
 import entity.CommonStructureEntity;
@@ -21,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 public class StructureAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<StructureEntity>, Preparable {
     private StructureDao structureDao;
+    private LibraryDao libraryDao;
+    private LibraryEntity library;
     private StructureEntity structure;
     private Map<String,Object> request;
     private Map<String,Object> session;
@@ -32,8 +37,11 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     public String get()
     {
         structureDao = new StructureDaoImp();
+        libraryDao=new LibraryDaoImp();
         List<StructureEntity> structureAll;
         Gson gson = new Gson();
+        library=libraryDao.getOne(structure.getId_library());
+        request.put("library",library);
         if(id_template==1){
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*6+9);
             int count=structureDao.count(structure.getId_library());
