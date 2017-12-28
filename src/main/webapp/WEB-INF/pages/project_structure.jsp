@@ -282,7 +282,7 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "成功", "发布评论成功")
-                    location.href="structure-get?page="+1+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};
+                    location.href="structure-get?pagedis="+1+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};
                 }
                 else  showtoast("error", "失败", "未输入任何内容")
             },
