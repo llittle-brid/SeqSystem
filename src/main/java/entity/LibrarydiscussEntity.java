@@ -9,16 +9,26 @@ public class LibrarydiscussEntity {
     private int id_library;
     private String content;
     private Date time;
+    private String name;
 
-    public LibrarydiscussEntity(int id_lib_discuss, int id_user, int id_library, String content, Date time) {
+    public LibrarydiscussEntity(int id_lib_discuss, int id_user, int id_library, String content, Date time, String name) {
         this.id_lib_discuss = id_lib_discuss;
         this.id_user = id_user;
         this.id_library = id_library;
         this.content = content;
         this.time = time;
+        this.name = name;
     }
 
     public LibrarydiscussEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getTime() {

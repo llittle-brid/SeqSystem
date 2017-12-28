@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE html>
 <html>
 
@@ -119,7 +118,7 @@
                 </s:iterator>
                 </div>
             </s:if>
-            <div id="footer" style="clear: both;text-align: center; margin-top:45px">
+            <div id="footer" style="clear: both;text-align: center; margin-top:25px">
                 <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                     <s:if  test="#request.page==1">
                         <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
@@ -134,8 +133,8 @@
                     <s:else><button type="button" class="btn btn-white turnpage nextPage"><i class="fa fa-chevron-right"></i></button></s:else>
                 </div>
             </div>
-            <div style="width:1200px;margin: 0 auto">
-                <div id="discuss" class="text " style="left: 0px; transform-origin: 184.5px 11px 0px;margin: 10px 105px 20px 90px">
+            <div style="width:1200px;margin-left: 200px">
+                <div id="discuss" style="left: 0px; transform-origin: 184.5px 11px 0px;margin: 10px 105px 20px 90px">
                     <p>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;color:#666666;font-size: 20px">【讨论区】</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#666666;font-size: 16px">OA系统图片构件库</span>
@@ -147,7 +146,8 @@
                     </p>
                 </div>
             </div>
-            <div class="row" style="width: 750px;margin-left: 265px">
+          <div class="modal-body">
+            <div class="row" style="width: 750px;margin-left: 370px">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>发表评论</h5>
@@ -161,6 +161,46 @@
                     </div>
                 </div>
             </div>
+            <div class="allDiscuss">
+                <!--一行留言-->
+                <s:iterator value="listdis">
+                <div class="row" style="width: 750px;margin-left: 370px">
+                    <div class="ibox float-e-margins " style="margin-bottom: 10px">
+                        <div class="ibox-title">
+                            <h5><s:property value="name"/></h5>
+                            <h5 style="margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
+                            <input style="display: none" class="id_dis">
+                            <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            <!--<div class="ibox-tools">
+                                <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
+                            </div>-->
+                        </div>
+                        <div class="ibox-content">
+                            <div class=" wrapper">
+                                <s:property value="content"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </s:iterator>
+                <!--一行留言结束-->
+            </div>
+              <div style="clear: both;text-align: center; margin-top:25px">
+                  <div  style="height: 50px;margin:0px auto;" class="btn-group">
+                      <s:if  test="#request.pagedis==1">
+                          <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
+                      </s:if>
+                      <s:else><button type="button" class="btn btn-white turnpagedis lastPagedis"><i class="fa fa-chevron-left"></i></button></s:else>
+                      <s:iterator begin="1" end="#request.numdis" step="1" status="st">
+                          <s:if test="#request.pagedis==#st.index+1">
+                              <button type="button" class="btn btn-white active pagenumdis nowpagedis"><s:property value='#st.index+1'/></button></s:if>
+                          <s:else ><button type="button" class="btn btn-white pagenumdis"><s:property value='#st.index+1'/></button></s:else>
+                      </s:iterator>
+                      <s:if test="#request.pagedis==#request.numdis"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
+                      <s:else><button type="button" class="btn btn-white turnpagedis nextPagedis"><i class="fa fa-chevron-right"></i></button></s:else>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 </div>
@@ -204,6 +244,25 @@
         $(window.parent.document).find("div#content-main").height($(document).height())
     })
 </script>
+<script>
+    $(document).ready(function(){
+        $("button.pagenumdis").click(function(){
+            location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + ${requestScope.id_template}+'&id_library=' +${requestScope.id_library};
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.turnpagedis").click(function(){
+            if($(this).hasClass("lastPagedis"))
+            {   var p=parseInt($("button.nowpagedis").html())-1;
+                location.href="structure-get?pagedis="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+            else
+            {   var p=parseInt($("button.nowpagedis").html())+1;
+                location.href="structure-get?pagedis="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+        });
+    });
+</script>
 </body>
 <script>
     function commitSend() {
@@ -217,14 +276,46 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "成功", "发布评论成功")
+                    location.href="structure-get?page="+1+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};
                 }
-                else  showtoast("error", "失败", "发布评论失败")
+                else  showtoast("error", "失败", "未输入任何内容")
             },
             error: function (result) {
                 showtoast("error", "失败", "发布评论失败")
             }
         })
     }
+</script>
+<script>
+    $(document).on("click",".deleteDis",function () {
+        if ($(this).hasClass("btn-danger")){
+            var id_pro_discuss=$(this).prev("input.id_dis").val()
+            swal({
+                title: "删除评论？",
+                text: "一旦删除无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    url: "discuss-delete",
+                    data: {id_pro_discuss: id_pro_discuss},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        $("button.cancel").click();
+                        showtoast("success","成功","删除评论成功")
+                        disReload()
+                    },
+                    error: function (result) {
+                        showtoast("dangerous","失败","删除评论失败")
+                    }
+                })
+            });}
+    })
 </script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->

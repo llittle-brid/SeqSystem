@@ -14,16 +14,16 @@ public class LibrarydiscussDaoImp extends DAO<LibrarydiscussEntity> implements L
        int count=Integer.valueOf(getForValue(sql,id_library).toString());
        return count;
    }
-   public List<LibrarydiscussEntity> getAll(int id_library)
+   public List<LibrarydiscussEntity> getAll(int id_library,int num1,int num2)
     {
-        String sql="select * from LIB_DISCUSS where ID_LIBRARY=?";
-        List<LibrarydiscussEntity> librarydiscuss1=getForList(sql,id_library);
+        String sql="SELECT LIB_DISCUSS.ID_LIB_DISCUSS,LIB_DISCUSS.TIME,LIB_DISCUSS.CONTENT,`USER`.`NAME`,LIB_DISCUSS.ID_LIBRARY,LIB_DISCUSS.ID_USER FROM`USER`RIGHT JOIN LIB_DISCUSS ON LIB_DISCUSS.ID_USER = `USER`.ID_USER WHERE LIB_DISCUSS.ID_LIBRARY=? limit ?,? ORDER BY LIB_DISCUSS.ID_LIB_DISCUSS DESC";
+        List<LibrarydiscussEntity> librarydiscuss1=getForList(sql,id_library,num1,num2);
         return librarydiscuss1;
     }
    public boolean insert(int id_user, int id_library, Date time,String content)
     {
 
-        if(content!=null) {
+        if(!content.equals("")&&content!=null) {
             String sql="insert into LIB_DISCUSS (ID_USER,ID_LIBRARY,TIME,CONTENT) values(?,?,?,?)";
             update(sql, id_user, id_library, time, content);
             return true;
