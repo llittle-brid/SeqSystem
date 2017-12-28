@@ -146,17 +146,18 @@
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">）</span>
                     </p>
                 </div>
-                <div style="margin: 0px 0px 0px 100px;width: 600px">
-                    <div class="click2edit wrapper discuss white-bg" style="width: 600px;height: 1880px;border:8px solid darkgrey;float: left" contenteditable="true">
-                        sadjaskdasl;dka;sldkal;sd
+            </div>
+            <div class="row" style="width: 750px;margin-left: 265px">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>发表评论</h5>
+                        <div class="ibox-tools">
+                            <button  class="btn btn-primary col-lg-push-1" onclick="commitSend()" type="button" style="margin-right: 10px;margin-top: -7px;padding-left: 20px;padding-right: 20px">发布</button>
+                        </div>
                     </div>
-                    <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true" class="white-bg">
-                    </div>
-                    <div style="height: 120px;float: left;margin: 98px 0px 0px 20px">
-                        <img src="/img/camera.png" height="24" width="26"/>
-                    </div>
-                    <div style="height: 120px;float: left;margin: 88px 20px 0px 20px">
-                        <a href="structure-insert"><button type="button" class="btn btn-primary">　发表　</button></a>
+                    <div class="ibox-content">
+                        <div class="click2edit wrapper discuss">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,7 +205,26 @@
     })
 </script>
 </body>
-</body>
+<script>
+    function commitSend() {
+        var content=$(".discuss").code();
+        $.ajax({
+            url: "discuss-commit",
+            data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success","成功","评论提交成功")
+                discussInit()
+                disReload()
+            },
+            error: function (result) {
+                showtoast("dangerous","加载失败","加载目录失败")
+            }
+        })
+    }
+</script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
