@@ -40,8 +40,9 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         librarydiscussDao = new LibrarydiscussDaoImp();
         libraryDao=new LibraryDaoImp();
 
-        List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,4);
+        List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
         ActionContext.getContext().getValueStack().set("listdis",discussAll);
+        System.out.println(discussAll);
         int discussnum=librarydiscussDao.getcount(structure.getId_library());
         int numdis=discussnum/4+1;
         request.put("pagedis",pagedis);
@@ -55,7 +56,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
 
         List<StructureEntity> structureAll;
         if(id_template==1){
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,9);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*9+9);
             int count=structureDao.count(structure.getId_library());
             int num=count/9+1;
             request.put("num",num);
@@ -70,7 +71,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             ActionContext.getContext().getValueStack().set("list1",csList);
         }
         else if(id_template==2) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,4);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
             int count=structureDao.count(structure.getId_library());
             int num=count/4+1;
             request.put("num",num);
@@ -87,7 +88,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             ActionContext.getContext().getValueStack().set("list2",usList);
         }
         else if(id_template==3) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,4);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
             int count=structureDao.count(structure.getId_library());
             int num=count/4+1;
             request.put("num",num);

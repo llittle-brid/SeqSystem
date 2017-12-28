@@ -199,6 +199,8 @@
                       <s:if test="#request.pagedis==#request.numdis"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
                       <s:else><button type="button" class="btn btn-white turnpagedis nextPagedis"><i class="fa fa-chevron-right"></i></button></s:else>
                   </div>
+                  <input class="id_library" type="text" style="display: none" value="${requestScope.id_library}">
+                  <input class="id_template" type="text" style="display: none" value="${requestScope.id_template}">
               </div>
           </div>
         </div>
@@ -224,7 +226,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="structure-get?page="+$(this).html()+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};
+            location.href="structure-get?page="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&pagedis='+${requestScope.pagedis};
         });
     });
 </script>
@@ -233,10 +235,10 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
         });
     });
 
@@ -247,7 +249,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenumdis").click(function(){
-            location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + ${requestScope.id_template}+'&id_library=' +${requestScope.id_library};
+            location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library=' +$("input.id_library").val()+'&page='+${requestScope.page};
         });
     });
 </script>
@@ -256,12 +258,16 @@
         $("button.turnpagedis").click(function(){
             if($(this).hasClass("lastPagedis"))
             {   var p=parseInt($("button.nowpagedis").html())-1;
-                location.href="structure-get?pagedis="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
             else
             {   var p=parseInt($("button.nowpagedis").html())+1;
-                location.href="structure-get?pagedis="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
         });
     });
+
+    $(document).ready(function () {
+        $(window.parent.document).find("div#content-main").height($(document).height())
+    })
 </script>
 </body>
 <script>
