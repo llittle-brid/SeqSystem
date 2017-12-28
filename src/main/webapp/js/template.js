@@ -428,6 +428,25 @@ function commitDis() {
         }
     })
 }
+
+function commitSend() {
+    var discuss=$(".discuss").code();
+    $.ajax({
+        url: "discuss-commit",
+        data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            showtoast("success","成功","评论提交成功")
+            discussInit()
+            disReload()
+        },
+        error: function (result) {
+            showtoast("dangerous","加载失败","加载目录失败")
+        }
+    })
+}
 //评论删除按钮
 $(document).on("click",".deleteDis",function () {
     if ($(this).hasClass("btn-danger")){

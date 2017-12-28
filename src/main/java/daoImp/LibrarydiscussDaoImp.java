@@ -8,21 +8,27 @@ import java.util.Date;
 
 public class LibrarydiscussDaoImp extends DAO<LibrarydiscussEntity> implements LibrarydiscussDao{
 
-   public int getAllcount(int id_library)
+   public int getcount(int id_library)
    {
-       String sql="select count(*) from LIB_DISCUSS where id_library=?";
+       String sql="select count(*) from LIB_DISCUSS where ID_LIBRARY=?";
        int count=Integer.valueOf(getForValue(sql,id_library).toString());
        return count;
    }
    public List<LibrarydiscussEntity> getAll(int id_library)
     {
-        String sql="select * from LIB_DISCUSS where id_library=?";
+        String sql="select * from LIB_DISCUSS where ID_LIBRARY=?";
         List<LibrarydiscussEntity> librarydiscuss1=getForList(sql,id_library);
         return librarydiscuss1;
     }
-   public void insert(int id_user, Date time,String content, int id_library)
+   public boolean insert(int id_user, int id_library, Date time,String content)
     {
-        String sql="insert into LIB_DISCUSS(ID_USER,TIME,CONTENT) values(?,?,?) where id_library=?";
-        update(sql,id_user,time,content,id_library);
+
+        if(content!=null) {
+            String sql="insert into LIB_DISCUSS (ID_USER,ID_LIBRARY,TIME,CONTENT) values(?,?,?,?)";
+            update(sql, id_user, id_library, time, content);
+            return true;
+        }
+        else
+            return false;
     }
 }

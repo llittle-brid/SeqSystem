@@ -141,7 +141,7 @@
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#666666;font-size: 16px">OA系统图片构件库</span>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">（</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#999999;">已有</span>
-                        <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#FF0000;">4</span>
+                        <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#FF0000;">${requestScope.dn}</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#999999;">条留言</span>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">）</span>
                     </p>
@@ -209,18 +209,19 @@
     function commitSend() {
         var content=$(".discuss").code();
         $.ajax({
-            url: "discuss-commit",
-            data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
+            url: "librarydiscuss-commit",
+            data: {content:content,id_library:${requestScope.id_library}, id_user:${sessionScope.user.id_user}},
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
-                showtoast("success","成功","评论提交成功")
-                discussInit()
-                disReload()
+                if(result.res===true)  {
+                    showtoast("success", "成功", "发布评论成功")
+                }
+                else  showtoast("error", "失败", "发布评论失败")
             },
             error: function (result) {
-                showtoast("dangerous","加载失败","加载目录失败")
+                showtoast("error", "失败", "发布评论失败")
             }
         })
     }

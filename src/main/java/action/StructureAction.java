@@ -4,9 +4,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.LibrarydiscussDao;
 import dao.StructureDao;
 import dao.LibraryDao;
 import daoImp.LibraryDaoImp;
+import daoImp.LibrarydiscussDaoImp;
 import daoImp.StructureDaoImp;
 import entity.LibraryEntity;
 import entity.UserStructureEntity;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 public class StructureAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<StructureEntity>, Preparable {
     private StructureDao structureDao;
+    private LibrarydiscussDao librarydiscussDao;
     private LibraryDao libraryDao;
     private LibraryEntity library;
     private StructureEntity structure;
@@ -37,6 +40,9 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     public String get()
     {
         structureDao = new StructureDaoImp();
+        librarydiscussDao = new LibrarydiscussDaoImp();
+        int discussnum=librarydiscussDao.getcount(structure.getId_library());
+        request.put("dn",discussnum);
         libraryDao=new LibraryDaoImp();
         library=libraryDao.getOne(structure.getId_library());
         request.put("library",library);

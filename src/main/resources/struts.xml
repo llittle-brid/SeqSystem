@@ -101,6 +101,13 @@
             <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
+        <action name="librarydiscuss-*" class="action.LibrarydiscussAction" method="{1}">
+            <result name="RES" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>commit</allowed-methods>
+        </action>
+
         <action name="structure-*" class="action.StructureAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_structure.jsp</result>
