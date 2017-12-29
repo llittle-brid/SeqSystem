@@ -281,13 +281,13 @@
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast("success", "成功", "发布评论成功")
+                    showtoast1("success", "成功", "发布评论成功")
                     location.href="structure-get?pagedis="+1+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};
                 }
-                else  showtoast("error", "失败", "未输入任何内容")
+                else  showtoast1("error", "失败", "未输入任何内容")
             },
             error: function (result) {
-                showtoast("error", "失败", "发布评论失败")
+                showtoast1("error", "失败", "发布评论失败")
             }
         })
     }
