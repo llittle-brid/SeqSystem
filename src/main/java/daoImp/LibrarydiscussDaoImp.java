@@ -31,4 +31,15 @@ public class LibrarydiscussDaoImp extends DAO<LibrarydiscussEntity> implements L
         else
             return false;
     }
+    public boolean delete(int id_lib_discuss)
+    {
+        if(id_lib_discuss!=0)
+        {
+            String sql="delete from LIB_DISCUSS where id_lib_discuss=?";
+            update(sql, id_lib_discuss);
+            return true;
+        }
+        else
+            return  false;
+    }
 }

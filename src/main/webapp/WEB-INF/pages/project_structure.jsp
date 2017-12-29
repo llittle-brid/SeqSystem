@@ -24,6 +24,7 @@
     <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
     <link href="../css/mjy.css" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <style>
         a   {color: black}
@@ -168,9 +169,12 @@
                     <div class="ibox float-e-margins " style="margin-bottom: 10px">
                         <div class="ibox-title">
                             <h5><s:property value="name"/></h5>
-                            <h5 style="margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
-                            <input style="display: none" class="id_dis">
-                            <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
+                            <input style="display: none" class="id_dis" value="<s:property value="id_lib_discuss" />">
+                            <s:if test="#request.id_user==#session.user.id_user"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            </s:if>
+                            <s:else><button  class="btn btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            </s:else>
                             <!--<div class="ibox-tools">
                                 <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
                             </div>-->
@@ -218,6 +222,7 @@
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
 <script src="js/lzf.js"></script>
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
 <script src="../js/template.js"></script>
@@ -296,7 +301,7 @@
 <script>
     $(document).on("click",".deleteDis",function () {
         if ($(this).hasClass("btn-danger")){
-            var id_pro_discuss=$(this).prev("input.id_dis").val()
+            var id_lib_discuss=$(this).prev("input.id_dis").val()
             swal({
                 title: "删除评论？",
                 text: "一旦删除无法恢复，请谨慎操作！",
@@ -307,18 +312,20 @@
                 closeOnConfirm: false
             }, function () {
                 $.ajax({
-                    url: "discuss-delete",
-                    data: {id_pro_discuss: id_pro_discuss},
+                    url: "librarydiscuss-delete",
+                    data: {id_lib_discuss: id_lib_discuss},
                     dataType: "json",
                     type: "Post",
                     async: "false",
                     success: function (result) {
-                        $("button.cancel").click();
-                        showtoast("success","成功","删除评论成功")
-                        disReload()
+                        if(result.res===true)  {
+                            showtoast1("success", "成功", "删除评论成功")
+                            location.href="structure-get?pagedis="+1+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};
+                        }
+                        else  showtoast1("error", "失败", "删除评论失败")
                     },
                     error: function (result) {
-                        showtoast("dangerous","失败","删除评论失败")
+                        showtoast1("error", "失败", "删除评论失败")
                     }
                 })
             });}

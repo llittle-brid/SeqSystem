@@ -31,6 +31,15 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
         return "RES";
     }
 
+    public String delete()
+    {
+        dataMap = new HashMap<String, Object>();
+        librarydiscussDao = new LibrarydiscussDaoImp();
+        boolean res=librarydiscussDao.delete(librarydiscuss.getId_lib_discuss());
+        dataMap.put("res", res);
+        return "RES";
+    }
+
 
     @Override
     public LibrarydiscussEntity getModel() {
