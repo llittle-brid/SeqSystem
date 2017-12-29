@@ -15,6 +15,8 @@ public class ProDiscussEntity {
     private  Date time;
     private String content;
     private String accessory;
+    private int id_Project;
+    private int id_Document;
 
     public int getId_pro_discuss() {
         return id_pro_discuss;
@@ -72,10 +74,26 @@ public class ProDiscussEntity {
         this.name = name;
     }
 
+    public int getId_Project() {
+        return id_Project;
+    }
+
+    public void setId_Project(int id_Project) {
+        this.id_Project = id_Project;
+    }
+
+    public int getId_Document() {
+        return id_Document;
+    }
+
+    public void setId_Document(int id_Document) {
+        this.id_Document = id_Document;
+    }
+
     public ProDiscussEntity() {
     }
 
-    public ProDiscussEntity(int id_pro_discuss, int id_user, String name, int id_catalog, Date time, String content, String accessory) {
+    public ProDiscussEntity(int id_pro_discuss, int id_user, String name, int id_catalog, Date time, String content, String accessory, int id_Project, int id_Document) {
         this.id_pro_discuss = id_pro_discuss;
         this.id_user = id_user;
         this.name = name;
@@ -83,6 +101,8 @@ public class ProDiscussEntity {
         this.time = time;
         this.content = content;
         this.accessory = accessory;
+        this.id_Project = id_Project;
+        this.id_Document = id_Document;
     }
 
     @Override

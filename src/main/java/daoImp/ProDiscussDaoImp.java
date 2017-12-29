@@ -21,9 +21,22 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     }
 
     @Override
+    public void commit1(int id_user, int id_project, Timestamp time, String content) {
+        String sql="insert into PRO_DISCUSS (id_user,id_project,time,content) values (?,?,?,?)";
+        update(sql,id_user,id_project,time,content);
+        return;
+    }
+
+    @Override
     public List<ProDiscussEntity> getCatalogDis(int id_catalog) {
         String sql="select * from VIEW_PRO_DISCUSS where id_catalog=? order by time desc";
         return getForList(sql,id_catalog);
+    }
+
+    @Override
+    public List<ProDiscussEntity> getProjectDis(int id_project) {
+        String sql="select * from VIEW_PRO_DISCUSS where id_project=? order by time desc";
+        return null;
     }
 
     @Override

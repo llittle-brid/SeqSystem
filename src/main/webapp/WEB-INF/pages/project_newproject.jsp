@@ -5,12 +5,14 @@
 <html>
 <head>
     <meta charset="UTF8">
-    <title>创建项目</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>创建项目</title>
 
     <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
@@ -32,13 +34,12 @@
     </ol>
 </div>
 
-<div>
 <form class="form-horizontal col-md-offset-3 " id="createForm" style="margin-top:50px">
     <div class="form-group has-feedback">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称" />
+            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称" required="true"/>
         </div>
 
     </div>
@@ -50,7 +51,7 @@
     <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称" />
+            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称" required="true"/>
         </div>
     </div>
 
@@ -91,7 +92,6 @@
     <div class="form-group">
         <br/>
     </div>
-</form>
 
     <div class="col-xs-10 col-xs-offset-1">
         <h4 id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以邀请加入，若信息无误请点击确认创建按钮</h4>
@@ -102,15 +102,17 @@
     </div>
 
     <div class="col-md-5 col-xs-offset-2">
-        <span class="col-md-2 col-xs-offset-2">
-            <button id="create_button" class="btn-danger btn">确认创建</button>
-        </span>
+    <span class="col-md-2 col-xs-offset-2">
+        <button id="create_button" class="btn-danger btn">确认创建</button>
+    </span>
         <span class="col-md-2 col-xs-offset-3">
-            <a href="user-jmpHomepage"><button class="btn-default btn">取消创建</button></a>
-        </span>
+        <a href="user-jmpHomepage"><button type="button" class="btn-default btn">取消创建</button></a>
+    </span>
     </div>
+</form>
 
-</div>
+
+
 </body>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
@@ -160,9 +162,13 @@
 
                 $("input#orgName").bsSuggest("destroy");
                 $("#orgName").bsSuggest({
+                    effectiveFields:["NAME"],
                     idField:"ID_ORGANIZATION",
                     keyField:"NAME",
-                    data:suggest
+                    data:suggest,
+                    listStyle: {
+                        'text-align': 'center'
+                    }
                 }).on('onDataRequestSuccess', function (e, result) {
                     console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
                 });

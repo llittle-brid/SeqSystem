@@ -73,8 +73,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         List<ProjectEntity> list = projectDao.getAll(1,ID_user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
-//        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
-//        System.out.println("project_showList"+json);
+
         dataMap.put("res",json);
         return SUCCESS;
     }

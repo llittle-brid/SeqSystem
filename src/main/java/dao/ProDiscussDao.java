@@ -13,7 +13,11 @@ import java.util.List;
 public interface ProDiscussDao {
     void commit(int id_user,int id_catalog,Timestamp time,String content);
 
+    void commit1(int id_user,int id_project,Timestamp time, String content);
+
     List<ProDiscussEntity> getCatalogDis(int id_catalog);
+
+    List<ProDiscussEntity> getProjectDis(int id_project);
 
     void delete(int id_pro_discuss);
 }

@@ -161,44 +161,45 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab-1">
-                                    <!--自己的留言开始-->
-                                    <div class="row">
-                                        <div class="ibox float-e-margins">
-                                            <div class="ibox-title">
-                                                <h5>我的留言</h5>
-                                                <div class="ibox-tools">
-                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
-                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDis()" type="button" style="margin-right: 10px">发布</button>
-                                                </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                                <div class="click2edit wrapper discuss">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--自己的留言结束-->
-                                    <div class="allDiscuss">
-                                        <!--一行留言-->
-                                        <div class="row">
-                                            <div class="ibox float-e-margins " style="margin-bottom: 10px">
-                                                <div class="ibox-title">
-                                                    <h5>大毛同学 2017-2-6 17:15:56 </h5>
-                                                    <input style="display: none" class="id_dis">
-                                                    <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
-                                                    <div class="ibox-tools">
-                                                        <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
+                                            <!--自己的留言开始-->
+                                            <div class="row">
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>我的留言</h5>
+                                                        <div class="ibox-tools">
+                                                            <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
+                                                            <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="button" style="margin-right: 10px">发布</button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <div class=" wrapper">
-                                                        王炸
+                                                    <div class="ibox-content">
+                                                        <div class="click2edit wrapper discuss">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!--一行留言结束-->
-                                    </div>
+                                            <!--自己的留言结束-->
+                                            <div class="allDiscuss">
+                                                <!--一行留言-->
+                                                <div class="row">
+                                                    <div class="ibox float-e-margins " style="margin-bottom: 10px">
+                                                        <div class="ibox-title">
+                                                            <h5>大毛同学 2017-2-6 17:15:56 </h5>
+                                                            <input style="display: none" class="id_dis">
+                                                            <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                                                            <div class="ibox-tools">
+                                                                <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ibox-content">
+                                                            <div class=" wrapper">
+                                                                王炸
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--一行留言结束-->
+                                            </div>
+
                                 </div>
                                 <div class="tab-pane" id="tab-2">
                                     <div id="toolbar1">
@@ -318,6 +319,7 @@
     );
 
     var id_Project = "<%=session.getAttribute("Id_Project")%>";
+    var id_User = "<s:property value="#session.user.id_user"/>";
     $.ajax(
         {
             type:"post",
@@ -597,6 +599,95 @@
         });
 </script>
 
+<%--评论区--%>
+<script>
+    //评论区初始化
+    function discussInit() {
+        $(".discuss").code("");
+    }
+    //评论加载
+    function discussReload() {
+        $.ajax({
+            url: "discuss-getProjectDis",
+            data: {id_Project: id_Project,
+            id_user: id_User},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                var content="",tempDis,date,state;
+                for (var i=0;i<result.wrapperList.length;i++){
+                    tempDis=result.wrapperList[i].proDiscussEntity;
+                    state=result.wrapperList[i].state;
+                    date=tempDis.time.toString().split("T");
+                    content+="  <div class='row'> <div class='ibox float-e-margins ' style='margin-bottom: 10px'> <div class='ibox-title'> <h5>";
+                    content+=tempDis.name+" "+date[0]+" "+date[1]+"</h5><input style='display: none' class='id_dis' value='"+tempDis.id_pro_discuss+"'>"
+                    content+="  <button  class='btn";
+                    if (state=="2")
+                        content+=" btn-danger ";
+                    else content+=" btn-default ";
+                    content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
+                    content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
+                    content+=tempDis.content+"  </div> </div> </div> </div>";
+                }
+                $("div.allDiscuss").html(content);
+            },
+            error: function (result) {
+                showtoast("dangerous","加载失败","加载目录失败")
+            }
+        })
+    }
+    //评论提交
+    function commitDiscuss() {
+        var discuss=$(".discuss").code();
+        $.ajax({
+            url: "discuss-commit2Project",
+            data: {disContent: discuss,id_Project:id_Project,id_user:id_User},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success","成功","评论提交成功");
+                discussInit();
+                discussReload();
+            },
+            error: function (result) {
+                showtoast("dangerous","加载失败","加载目录失败");
+            }
+        })
+    }
+    //评论删除按钮
+    $(document).on("click",".deleteDis",function () {
+        if ($(this).hasClass("btn-danger")){
+            var id_pro_discuss=$(this).prev("input.id_dis").val();
+            swal({
+                title: "删除评论？",
+                text: "一旦删除无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    url: "discuss-delete",
+                    data: {id_pro_discuss: id_pro_discuss},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        $("button.cancel").click();
+                        showtoast("success","成功","删除评论成功");
+                        discussReload()
+                    },
+                    error: function (result) {
+                        showtoast("dangerous","失败","删除评论失败")
+                    }
+                })
+            });}
+    })
+</script>
 
 
 </html>
