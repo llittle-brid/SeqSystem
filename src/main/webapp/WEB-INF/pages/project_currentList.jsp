@@ -120,7 +120,7 @@
     );
 
     function operateFormatter(value,row,index) {
-        return '<a class="mod btn btn-info">查看项目</a>'
+        return '<a class="mod fa fa-folder btn btn-info">查看项目</a>'
     }
 
     //表格  - 操作 - 事件

@@ -4,12 +4,10 @@ package daoImp;
 import com.opensymphony.xwork2.ActionContext;
 import dao.DAO;
 import dao.ProjectDao;
-import dao.UserDao;
 import entity.ProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
@@ -45,10 +43,27 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public List<UserEntity> getMember(ProjectEntity p) {
-        String sql="select USER.ID_USER, USER.NAME, MAIL, TEL, RANK from USER, VIEW_projectMember where USER.ID_USER=VIEW_projectMember.ID_USER and ID_PROJECT=?;";
+        String sql="select USER.ID_USER, USER.NAME, MAIL, TEL, RANK from USER, VIEW_projectMember where USER.ID_USER=VIEW_projectMember.ID_USER and ID_PROJECT=?";
         UserDaoImp userDao = new UserDaoImp();
         List<UserEntity> members = userDao.getForList(sql,p.getId_Project());
         return members;
+    }
+
+    @Override
+    public List<UserEntity> getMatched(ProjectEntity p, String name) {
+        name = "%"+name+"%";
+        String sql="select USER.ID_USER, USER.NAME, RANK from USER, VIEW_projectMember where USER.ID_USER=VIEW_projectMember.ID_USER and VIEW_projectMember.ID_PROJECT = ? and USER.NAME LIKE ?";
+        UserDaoImp userDao = new UserDaoImp();
+        List<UserEntity> members = userDao.getForList(sql,p.getId_Project(),name);
+        return members;
+    }
+
+    @Override
+    public void alterPM(int idUser, int idProject) {
+        String sql="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
+        update(sql,idProject);
+        String sql1="update PROJECT_MEMBER set RANK=3 where ID_USER = ? and ID_PROJECT = ?";
+        update(sql1,idUser,idProject);
     }
 
     @Override
@@ -67,6 +82,36 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     public void deleteMember(int idUser,int idProject) {
         String sql="delete from PROJECT_MEMBER where ID_USER = ? and ID_PROJECT = ?";
         update(sql,idUser,idProject);
+    }
+
+    @Override
+    public boolean inviteMember(int idUser, String PM, String projectname,int idProject) {
+
+        String content = PM+"邀请你加入项目: "+projectname;
+
+        String sql = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
+
+        Date date = new Date(new java.util.Date().getTime());
+
+        try {
+            update(sql,idProject,idUser,date,content);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public void end(int idProject) {
+        String sql = "update PROJECT set STATE = 0 where ID_PROJECT = ?";
+        update(sql,idProject);
+    }
+
+    @Override
+    public int getRank(int idProject, int idUser) {
+        String sql = "select RANK from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
+        return getForValue(sql,idProject,idUser);
     }
 
     @Override

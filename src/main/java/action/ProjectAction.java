@@ -10,13 +10,18 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import com.oracle.javafx.jmx.json.JSONWriter;
+import dao.DocumentDao;
 import dao.OrganizationDao;
 import dao.ProjectDao;
 
+import dao.UserDao;
+import daoImp.DocumentDaoImp;
 import daoImp.OrganizationDaoImp;
 import daoImp.ProjectDaoImp;
 
 
+import daoImp.UserDaoImp;
+import entity.DocumentEntity;
 import entity.OrganizationEntity;
 import entity.ProjectEntity;
 import entity.UserEntity;
@@ -52,6 +57,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String chooseOrg() throws Exception {
         dataMap = new HashMap<String, Object>();
         OrganizationDao organizationDao = new OrganizationDaoImp();
+
         List<OrganizationEntity> list = organizationDao.getMatched(project.getOrgName());
         Gson gson = new Gson();
         String jsonString = gson.toJson(list);
@@ -96,12 +102,16 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String jmpProjectInfo() {
         return "projectInformation";
     }
+
     public String getProjectInfo(){
         int id_Project = project.getId_Project();
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
         UserEntity pm = projectDao.getPM(project);
+        UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
 
+        int rank = projectDao.getRank(id_Project,user.getId_user());
+        session.put("rank",rank);
         session.put("PM",pm);
         session.put("project",project);
         session.put("Id_Project",id_Project);
@@ -110,6 +120,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String getProjectMember(){
         dataMap = new HashMap<String, Object>();
         int id_Project = project.getId_Project();
+
+        System.out.println(id_Project);
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
 
@@ -118,6 +130,36 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         String json = gson.toJson(members);
 
         dataMap.put("res",json);
+        return SUCCESS;
+    }
+
+    public String getDocument(){
+        dataMap = new HashMap<String, Object>();
+        DocumentDao documentDao = new DocumentDaoImp();
+
+        List<DocumentEntity> list = documentDao.getAll(project.getId_Project());
+
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(list);
+
+        dataMap.put("res",jsonString);
+        return SUCCESS;
+    }
+
+    public String alterPM(){
+        String username = project.getUsername();
+        UserDao userDao = new UserDaoImp();
+        UserEntity user = userDao.getOne(username);
+
+        System.out.println(username);
+
+        int id_Project = project.getId_Project();
+
+        System.out.println(id_Project);
+
+        projectDao = new ProjectDaoImp();
+        projectDao.alterPM(user.getId_user(),id_Project);
+
         return SUCCESS;
     }
     public String setVPM(){
@@ -156,6 +198,54 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         projectDao = new ProjectDaoImp();
         projectDao.deleteMember(id_User,id_Project);
 
+        return SUCCESS;
+    }
+
+    public String inviteMember(){
+        dataMap = new HashMap<String, Object>();
+
+        String username = project.getUsername();
+
+        int id_Project = project.getId_Project();
+
+        System.out.println(username);
+        System.out.println(id_Project);
+
+        UserDao userDao = new UserDaoImp();
+        UserEntity user = userDao.getOne(username);
+
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
+
+        UserEntity pm = projectDao.getPM(project);
+
+        boolean res = projectDao.inviteMember(user.getId_user(),pm.getName(),project.getName(),id_Project);
+
+        dataMap.put("res",res);
+        return SUCCESS;
+    }
+
+    public String end(){
+        int id_Project = (Integer)request.get("id_Project");
+        System.out.println(id_Project);
+        projectDao = new ProjectDaoImp();
+        projectDao.end(id_Project);
+        return "end";
+    }
+
+    public String chooseMember(){
+        dataMap = new HashMap<String, Object>();
+        int id_Project = project.getId_Project();
+        String username = project.getUsername();
+
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
+
+        List<UserEntity> members = projectDao.getMatched(project,username);
+        Gson gson = new Gson();
+        String json = gson.toJson(members);
+
+        dataMap.put("res",json);
         return SUCCESS;
     }
 

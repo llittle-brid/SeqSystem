@@ -229,6 +229,7 @@ $(".li_delete").click(function () {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "删除",
+            cancelButtonText: "取消",
             closeOnConfirm: false
         }, function () {
             catalogIndex=$(nowClick).children("span.catalogIndex").text()
@@ -439,6 +440,7 @@ $(document).on("click",".deleteDis",function () {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "删除",
+            cancelButtonText: "取消",
             closeOnConfirm: false
         }, function () {
             $.ajax({

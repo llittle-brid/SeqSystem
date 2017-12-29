@@ -52,6 +52,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         UserEntity user1 = get(sql, id);
         return user1;
     }
+
     public List<UserEntity> getAll() {
         String sql = "select * from USER ";
         List<UserEntity> user1 = getForList(sql);

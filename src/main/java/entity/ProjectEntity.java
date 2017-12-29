@@ -14,6 +14,7 @@ public class ProjectEntity {
     private String orgName;
 
     private int id_User;
+    private String username;
 
     public ProjectEntity() {
     }
@@ -100,5 +101,13 @@ public class ProjectEntity {
 
     public void setId_User(int id_User) {
         this.id_User = id_User;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
