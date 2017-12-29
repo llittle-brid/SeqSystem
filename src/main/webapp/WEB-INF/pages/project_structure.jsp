@@ -217,6 +217,7 @@
 <script src="/js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+<script src="js/lzf.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
 <script src="../js/template.js"></script>
