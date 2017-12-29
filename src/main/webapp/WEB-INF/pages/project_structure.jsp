@@ -224,14 +224,11 @@
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
 <script>
-    $(document).ready(function(){
         $("button.pagenum").click(function(){
             location.href="structure-get?page="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&pagedis='+${requestScope.pagedis};
         });
-    });
 </script>
 <script>
-    $(document).ready(function(){
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
@@ -240,21 +237,17 @@
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
         });
-    });
 
     $(document).ready(function () {
         $(window.parent.document).find("div#content-main").height($(document).height())
     })
 </script>
 <script>
-    $(document).ready(function(){
         $("button.pagenumdis").click(function(){
             location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library=' +$("input.id_library").val()+'&page='+${requestScope.page};
         });
-    });
 </script>
 <script>
-    $(document).ready(function(){
         $("button.turnpagedis").click(function(){
             if($(this).hasClass("lastPagedis"))
             {   var p=parseInt($("button.nowpagedis").html())-1;
@@ -263,7 +256,6 @@
             {   var p=parseInt($("button.nowpagedis").html())+1;
                 location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
         });
-    });
 
     $(document).ready(function () {
         $(window.parent.document).find("div#content-main").height($(document).height())

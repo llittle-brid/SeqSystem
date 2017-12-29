@@ -187,14 +187,11 @@
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
 <script>
-    $(document).ready(function(){
         $("button.pagenum").click(function(){
             location.href="library-getagain?page="+$(this).html();
         });
-    });
 </script>
 <script>
-    $(document).ready(function(){
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
@@ -203,14 +200,11 @@
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="library-getagain?page="+p;}
         });
-    });
 </script>
 <script>
-    $(document).ready(function(){
         $("div.structure").click(function(){
             location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1+'&pagedis='+1;
         });
-    });
 </script>
 </body>
 <script>
