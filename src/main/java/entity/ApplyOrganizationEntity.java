@@ -64,5 +64,6 @@ public class ApplyOrganizationEntity {
         this.org_name = org_name;
         this.date = date;
         this.message = message;
+        this.tel = tel;
     }
 }

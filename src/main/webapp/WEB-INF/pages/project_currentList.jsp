@@ -22,6 +22,8 @@
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg animated fadeInDown">
@@ -44,7 +46,6 @@
                    data-search="true"
                    data-show-refresh="true"
                    data-show-toggle="true"
-                   data-show-columns="true"
                    data-toolbar="#toolbar"
                    data-query-params="quefryParams"
                    data-search-align="left"
@@ -65,6 +66,7 @@
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     $('#finishingTask').bootstrapTable({
         columns: [
@@ -110,13 +112,15 @@
                 $('#finishingTask').bootstrapTable('load',proList);
             },
             error:function(){
-                alert("错误");
+                swal({
+                    icon: "error"
+                });
             }
         }
     );
 
     function operateFormatter(value,row,index) {
-        return '<a class="mod btn btn-info">查看项目</a>'
+        return '<a class="mod fa fa-folder btn btn-info">查看项目</a>'
     }
 
     //表格  - 操作 - 事件
@@ -134,7 +138,9 @@
                         location.href = "project-jmpProjectInfo";
                     },
                     error: function () {
-                        alert("错误");
+                        swal({
+                            icon: "error"
+                        });
                     }
                 })
             },

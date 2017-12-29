@@ -4,9 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.ApplyOrganizationDao;
-import dao.OrganizationDao;
 import daoImp.ApplyOrganizationDaoImp;
-import daoImp.OrganizationDaoImp;
 import daoImp.UserDaoImp;
 import entity.ApplyOrganizationEntity;
 import entity.UserEntity;
@@ -29,7 +27,10 @@ public class ApplyOrganizationAction extends ActionSupport implements RequestAwa
         applyorganizationdao = new ApplyOrganizationDaoImp();
         dataMap = new HashMap<String, Object>();
         UserEntity seesionUser=(UserEntity)session.get("user");
-        applyorganizationdao.applyOrg(seesionUser.getId_user(),applyorganization);
+        System.out.println(seesionUser.getId_user()+applyorganization.getId_org_apply());
+        boolean res= applyorganizationdao.applyOrg(seesionUser.getId_user(),applyorganization);
+        System.out.println(res);
+        dataMap.put("res", res);
         return "myprofilePage";
     }
 
