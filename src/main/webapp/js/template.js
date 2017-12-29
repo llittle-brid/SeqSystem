@@ -6,44 +6,6 @@
  * */
 var nowClick;
 var documentId=$("input#documentId").val();
-
-//评论区初始化
-function discussInit() {
-    $(".discuss").code(""); 
-}
-//评论加载
-function disReload() {
-    var catalogIndex=$(nowClick).children("span.catalogIndex").text()
-    $.ajax({
-        url: "discuss-getCatalogDis",
-        data: {catalogIndex:catalogIndex, id_document:documentId},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            var content="",tempDis,date,state;
-            for (var i=0;i<result.wrapperList.length;i++){
-                tempDis=result.wrapperList[i].proDiscussEntity;
-                state=result.wrapperList[i].state;
-                date=tempDis.time.toString().split("T");
-                content+="  <div class='row'> <div class='ibox float-e-margins ' style='margin-bottom: 10px'> <div class='ibox-title'> <h5>";
-                content+=tempDis.name+" "+date[0]+" "+date[1]+"</h5><input style='display: none' class='id_dis' value='"+tempDis.id_pro_discuss+"'>"
-                content+="  <button  class='btn";
-                if (state=="2")
-                    content+=" btn-danger ";
-                else content+=" btn-default ";
-                content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
-                content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
-                content+=tempDis.content+"  </div> </div> </div> </div>";
-            }
-            $("div.allDiscuss").html(content);
-        },
-        error: function (result) {
-            showtoast("dangerous","加载失败","加载目录失败")
-        }
-    })
-}
-//目录点击事件
 $(document).on("click",".dic",function () {
     nowClick=$(this);
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
@@ -54,40 +16,26 @@ $(document).on("click",".dic",function () {
         type: "Post",
         async: "false",
         success: function (result) {
-            var content;
-            $("#save").attr("style","display:none");
-            $("#edit").attr("style","display:show");
-            $("div.catalogNoneContent").hide();
-            $("div.catalogNotNoneContent").show();
-            //模板生成
-            content=result.template;
-            //附件模板生成
-            content+="<hr> <div  class='ibox-tools' style='margin-top: -10px'> <h3 class='col-lg-push-1'> <i class='fa fa-file-text-o ' style='color: #26d7d9' title='下载'> 附件：内容摘要.doc</i> <button  class='btn btn-danger  btn-xs col-lg-push-1 m-l-sm' onclick='save()' type='button' style='margin-top: -3px'>删除</button> </h3> </div>";
-            $("div.content").html(content);
-            var catalog=result.catalogEntity,title="";
-            if (catalog.first_index!="0")title+=catalog.first_index;
-             if(catalog.second_index!="0")title+="."+catalog.second_index;
-             if(catalog.third_index!="0")title+="."+catalog.third_index;
-             if(catalog.fourth_index!="0")title+="."+catalog.fourth_index;
-            title+="  "+catalog.title;
-            $("h2#catalog_title").text(title);
+            $("div.content").html(result.template);
+            var catalog=result.catalogEntity,content="";
+            if (catalog.first_index!="0")content+=catalog.first_index;
+             if(catalog.second_index!="0")content+="."+catalog.second_index;
+             if(catalog.third_index!="0")content+="."+catalog.third_index;
+             if(catalog.fourth_index!="0")content+="."+catalog.fourth_index;
+            content+="  "+catalog.title;
+            $("h2#catalog_title").text(content);
             $("input#catalog-id").val(result.id_catalog);
-            discussInit();
         },
         error: function (result) {
             showtoast("dangerous","失败","获取失败")
         }
     })
 })
-//新增弹框初始化
-function addModelInit() {
+
+function init() {
 $("input#add_title").val("");
 }
-//重命名弹框初始化
-function renameModelInit() {
-    $("input#re_title").val("");
-}
-//正文模板初始化
+
 function templateInit() {
     $.ajax({
         url: "catalog-getIndex",
@@ -202,19 +150,19 @@ function templateInit() {
     })
 
 }
-//新增按钮点击事件
+//新增按钮
 $(".li_add").click(function () {
    if(typeof(nowClick) == "undefined")
     {
         showtoast("warning","新增失败","没有选中任何目录","left");
     }
     if (!nowClick.hasClass("fourth")){
-        addModelInit();
+        init();
         $(".li_add_hidden").click();
     }
     else showtoast("warning","新增失败","只能新增四级目录");
 })
-//删除按钮点击事件
+//删除按钮
 $(".li_delete").click(function () {
     if(typeof(nowClick) == "undefined")
     {
@@ -229,7 +177,6 @@ $(".li_delete").click(function () {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "删除",
-            cancelButtonText: "取消",
             closeOnConfirm: false
         }, function () {
             catalogIndex=$(nowClick).children("span.catalogIndex").text()
@@ -252,7 +199,7 @@ $(".li_delete").click(function () {
         });
     }
 })
-//上移按钮点击事件
+//上移
 $(".li_up").click(function () {
     //取上一个li
     var lastLi=nowClick.parent().prev("li")
@@ -275,7 +222,7 @@ $(".li_up").click(function () {
         })
     }
 })
-//下移按钮点击事件
+
 $(".li_down").click(function () {
     //取上一个li
     var nextLi=nowClick.parent().next("li")
@@ -298,22 +245,19 @@ $(".li_down").click(function () {
         })
     }
 })
-//重命名按钮点击事件
-$(".li_rename").click(function () {
-    renameModelInit();
-})
-//页面初始化
+
+/**目录生成*/
 $(document).ready(function () {
     templateInit();
-    edit()
 })
-//数字转英文的函数
+
 function getNextRank(nowRank) {
     if (nowRank=="first")return "second";
     else if(nowRank=="second") return"third";
     else if(nowRank=="third") return"fourth";
 }
-//新增目录
+
+//新增按钮提交事件
 function catalogAdd() {
     var title=$("input#add_title").val(),id_template=$("#add_id_template").val()
     var place=$("input[name='add_place']:checked").val(),catalogIndex=$(nowClick).children("span.catalogIndex").text();
@@ -389,7 +333,7 @@ function catalogAdd() {
 
     }
 }
-//第一次新增目录
+
 function catalogNew() {
     var title=$("input#new_title").val(),id_template=$("#new_id_template").val();
     $.ajax({
@@ -409,110 +353,11 @@ function catalogNew() {
     })
     
 }
-//评论提交
+
 function commitDis() {
-    var discuss=$(".discuss").code();
-    var catalogIndex=$(nowClick).children("span.catalogIndex").text()
-    $.ajax({
-        url: "discuss-commit",
-        data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            showtoast("success","成功","评论提交成功")
-            discussInit()
-            disReload()
-        },
-        error: function (result) {
-            showtoast("dangerous","加载失败","加载目录失败")
-        }
-    })
+    alert($(".click2edit.discuss").html());
+    
 }
-//评论删除按钮
-$(document).on("click",".deleteDis",function () {
-    if ($(this).hasClass("btn-danger")){
-        var id_pro_discuss=$(this).prev("input.id_dis").val()
-        swal({
-            title: "删除评论？",
-            text: "一旦删除无法恢复，请谨慎操作！",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "删除",
-            cancelButtonText: "取消",
-            closeOnConfirm: false
-        }, function () {
-            $.ajax({
-                url: "discuss-delete",
-                data: {id_pro_discuss: id_pro_discuss},
-                dataType: "json",
-                type: "Post",
-                async: "false",
-                success: function (result) {
-                    $("button.cancel").click();
-                    showtoast("success","成功","删除评论成功")
-                    disReload()
-                },
-                error: function (result) {
-                    showtoast("dangerous","失败","删除评论失败")
-                }
-            })
-        });}
-})
-//目录重命名
-function catalogRename() {
-    var title= $("input#re_title").val(),catalogIndex=$(nowClick).children("span.catalogIndex").text();
-    $.ajax({
-        url: "catalog-rename",
-        data: {title: title,catalogIndex:catalogIndex, documentId:documentId},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            $("#catalog_title").text(title)
-            $(nowClick).children("span.indexName").text(title)
-            showtoast("success","成功","修改标题成功");
-        },
-        error: function (result) {
-            showtoast("dangerous","失败","修改标题失败")
-        }
-    })
-}
-//模板编辑按钮
-function temp_edit() {
-    $("#eg").addClass("no-padding");$(".click1edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
-        ['picture', ['picture']],
-        ['fullscreen', ['fullscreen']]
-    ]})
-    $("#edit").attr("style","display:none");
-    $("#save").attr("style","display:show");
-}
-//模板保存按钮
-function temp_save() {
-    $("#eg").removeClass("no-padding");
-    var aHTML=$(".click1edit").code();$(".click1edit").destroy();
-    $("#save").attr("style","display:none");
-    $("#edit").attr("style","display:show");
-}
-//评论编辑按钮
-function edit() {
-    $("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
-        ['picture', ['picture']]
-    ]})
-}
-//评论保存按钮
-function save() {
-    $("#eg").removeClass("no-padding");
-    var aHTML=$(".click2edit").code();
-}
+
+
+

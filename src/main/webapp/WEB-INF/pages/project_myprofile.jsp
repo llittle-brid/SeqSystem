@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wwc
-  Date: 2017/12/26
-  Time: 0:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -24,13 +17,6 @@
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
-    <!-- bootstrap-table -->
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/z_style.css" rel="stylesheet">
-
 </head>
 
 <body class="gray-bg">
@@ -58,16 +44,15 @@
                         <th style="width: 150px;text-align: center">用户名:</th>
                         <th>
                             ${sessionScope.user.name}
-                            <s:if test='#session.user.gender=="男"'>
-                                <img src="/img/u413.png">
-                            </s:if>
-                            <s:elseif test='#session.user.gender=="女"'>
-                                <img style="height: 30px;width: 30px" src="/img/famale.png">
-                            </s:elseif>
-                            <s:else>
-                                <img style="height: 30px;width: 30px" src="/img/gender.png">
-                            </s:else>
-
+                                <s:if test='#session.user.gender=="男"'>
+                                    <img src="/img/u413.png">
+                                </s:if>
+                                <s:elseif test='#session.user.gender=="女"'>
+                                    <img style="height: 30px;width: 30px" src="/img/famale.png">
+                                </s:elseif>
+                                <s:else>
+                                    <img style="height: 30px;width: 30px" src="/img/gender.png">
+                                </s:else>
                         </th>
                     </tr>
                     <tr >
@@ -129,31 +114,53 @@
                 </table>
             </div>
         </div>
-
-
-
-        <div class="ibox-content">
+        <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>我的机构</strong></span></div>
                 <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newOrg">申请机构</button></div>
             </div>
-            <div class="bootstrap-table">
-                <table id="finishingTask" data-toggle="table"
-                       data-url="project-showList"
-                       data-click-to-select="true"
-                       data-search="true"
-                       data-show-refresh="true"
-                       data-show-toggle="true"
-                       data-show-columns="true"
-                       data-toolbar="#toolbar"
-                       data-query-params="quefryParams"
-                       data-pagination="true"
-                       data-halign="center"
-                       data-striped="true"
-                       data-page-size="3"
-                       data-height="259"
-                >
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>机构名</th>
+                        <th>机构管理员</th>
+                        <th>机构编码</th>
+                        <th>机构人数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    <tr>
+                        <td>需求编辑组一</td>
+                        <td>赖菜一号</td>
+                        <td>001</td>
+                        <td>23</td>
+                    </tr>
+                    </tbody>
                 </table>
+                <div style="height: 50px;margin-left: 40%" class="btn-group">
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-white">1</button>
+                    <button class="btn btn-white  active">2</button>
+                    <button class="btn btn-white">3</button>
+                    <button class="btn btn-white">4</button>
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -161,29 +168,119 @@
         <div class="ibox-title">
             <h5>消息中心</h5>
         </div>
-        <div class="bootstrap-table">
-            <table id="info" data-toggle="table"
-                   data-url="project-showList"
-                   data-click-to-select="true"
-                   data-search="true"
-                   data-show-refresh="true"
-                   data-show-toggle="true"
-                   data-show-columns="true"
-                   data-toolbar="#toolbar"
-                   data-query-params="quefryParams"
-                   data-pagination="true"
-                   data-halign="center"
-                   data-striped="true"
-                   data-page-size="8"
-                   data-height="259"
-            >
-            </table>
-        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-8 m-b-xs">
+                        <select class="input-sm form-control input-s-sm inline">
+                            <option value="0">请选择查找类型</option>
+                            <option value="1">用户筛选</option>
+                            <option value="2">时间筛选</option>
+                            <option value="3">备注筛选</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
 
+                            <th>邮件概述</th>
+                            <th>发件时间</th>
+                            <th>主题</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>系统通知</td>
+                            <td>2017-10-20</td>
+                            <td>你创建了【快易需求】机构</td>
+                            <td>未读/<a href="" style="color: orangered">删除</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 50px;margin-left: 40%" class="btn-group">
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-white">1</button>
+                        <button class="btn btn-white  active">2</button>
+                        <button class="btn btn-white">3</button>
+                        <button class="btn btn-white">4</button>
+                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
+            <form action="applyOrganization-applyOrg" method="post">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
@@ -191,15 +288,15 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input id="OrgName" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                    <div class="form-group"><label>联系方式</label> <input id="mytel" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
-                    <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                    <div class="form-group"><label>机构名</label> <input name="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
+                    <div class="form-group"><label>备注</label> <input name="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button id="newOrg-button" type="button" class="btn btn-primary">申请</button>
+                    <button id="newOrg-button" type="submit" class="btn btn-primary">申请</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
     <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -214,7 +311,7 @@
                     <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
                     <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
                     <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
-                    <div class="form-group"><label>联系电话</label> <input id="tel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
+                    <div class="form-group"><label>联系电话</label> <input id="mytel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
                     <div class="form-group"><label>个性签名</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
                     <div class="form-group">
                         <label>性别</label>
@@ -242,19 +339,17 @@
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
 <script>
     $("button#edit-button").click(function (){
         $.ajax({
             url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
+            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#mytel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
-                if(result.res===true)  {
+                if(result.res==true)  {
                     showtoast("success", "修改成功", "操作成功")
                     location.href = "user-jmpMyprofile";
                 }
@@ -265,177 +360,6 @@
             }
         })
     })
-
-</script>
-<script>
-    $('#finishingTask').bootstrapTable({
-            columns: [
-                {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                }, {
-                    title: '机构编码',
-                    field: 'ID_ORGANIZATION',
-                    align: 'center',
-                    sortable: true,
-                    valign: 'middle'
-                },
-                {
-                    field: 'ORGANIZATIONNAME',
-                    title: '机构名称',
-                    sortable: true,
-                    align: 'center'
-                }, {
-                    field: 'ADMIN_NME',
-                    title: '管理员',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'NUM_USER',
-                    title: '机构人数',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'operate',
-                    title: '操作',
-                    align: 'center',
-                    events: "actionEvents",
-                    formatter: "AddFunctionAlty"
-                }
-            ]
-        }
-    );
-    $('#info').bootstrapTable({
-            columns: [
-                {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '机构ID',
-                    field: 'ID_ORGANIZATION',
-                    align: 'center',
-                    valign: 'middle'
-                },{
-                    title: '机构',
-                    field: 'ORG_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目ID',
-                    field: 'ID_PROJECT',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目',
-                    field: 'PRO_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    field: 'MESSAGE',
-                    title: '操作',
-                    sortable: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    field: 'date',
-                    title: '时间',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'operate',
-                    title: '操作',
-                    align: 'center',
-                    events: "acceptRefuse",
-                    formatter: "accRefu"
-                }
-            ]
-        }
-    );
-    /**
- * @return {string}
- */
-
-    $.ajax(
-        {
-            type:"GET",
-            url:"personalcenter-showList",
-            dataType:"json",
-            success:function(json){
-                var proList = JSON.parse(json.listorg);
-                //finishingTask为table的id
-                $('#finishingTask').bootstrapTable('load',proList);
-            },
-            error:function(){
-                alert("错误");
-            }
-        }
-    )
-    $.ajax(
-        {
-            type:"GET",
-            url:"infomation-showInfo",
-            dataType:"json",
-            success:function(json){
-                var infolist = JSON.parse(json.listinfo);
-                //finishingTask为table的id
-                $('#info').bootstrapTable('load',infolist);
-            },
-            error:function(){
-                alert("错误");
-            }
-        }
-    )
-    /**
-    *个人机构
-     * */
-    function AddFunctionAlty(value,row,index) {
-        return '<a class="mod zfont3">退出</a>'
-    }
-    window.actionEvents = {
-        'click .mod': function(e, value, row, index) {
-            //修改操作
-            var id = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id);
-            location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
-        }
-    };
-
-    /**
-     * 消息中心
-     * @param value
-     * @param row
-     * @param index
-     * @returns {string}
-     */
-    function accRefu(value,row,index) {
-        return '<a class="mod zfont3">接受</a>'
-    }
-    window.acceptRefuse = {
-        'click .mod': function(e, value, row, index) {
-            //修改操作
-            var id_ORG = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id_ORG);
-            var ID_PROJECT = parseInt(row.ID_PROJECT);
-            location.href="infomation-Accept?id_org="+ID_ORGANIZATION+"&id_pro="+ID_PROJECT;
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
-        }
-    };
-
 </script>
 
 </html>

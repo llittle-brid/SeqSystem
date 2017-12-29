@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>个人中心</title>
+    <title>机构项目管理</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -29,7 +29,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpOrgManager1">机构管理</a>>>查看项目
+                    <a href="user-jmpHomepage">首页</a> >><a href="Organization-jmpOrgManager1">机构管理</a>>>查看项目
                 </strong>
             </li>
         </ol>
@@ -37,10 +37,10 @@
     <div class="form-group col-md-2">
         <ul class="nav navbar">
             <li>
-                <a href="user-jmpOrgManager1"><button class="btn-primary btn">成员管理</button></a>
+                <a href="Organization-jmpOrgManager1"><button class="btn-primary btn">成员管理</button></a>
             </li>
             <li>
-                <a href="user-jmpOrgManager2"><button class="btn-warning btn">查看项目</button></a>
+                <a href="Organization-jmpOrgManager2"><button class="btn-warning btn">查看项目</button></a>
             </li>
         </ul>
     </div>

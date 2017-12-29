@@ -7,8 +7,10 @@ package daoImp;
 
 import dao.DAO;
 import dao.OrganizationDao;
+import entity.ApplyOrganizationEntity;
 import entity.OrganizationEntity;
 
+import java.sql.Date;
 import java.util.List;
 
 public class OrganizationDaoImp extends DAO<OrganizationEntity> implements OrganizationDao {
@@ -18,6 +20,13 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         name="%"+name+"%";
         String sql = "select * from ORGANIZATION where NAME LIKE ?";
         return getForList(sql,name);
+    }
+
+    @Override
+    public List<OrganizationEntity> getMyOrg(int id) {
+        String sql = "select NAME from ORGANIZATION where ID_USER=?";
+        List<OrganizationEntity> MyOrgList = getForList(sql,id);
+        return MyOrgList;
     }
 
     @Override
@@ -38,4 +47,5 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
         update(sql,NAME);
     }
+
 }

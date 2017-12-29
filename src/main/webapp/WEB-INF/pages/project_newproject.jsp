@@ -32,13 +32,12 @@
     </ol>
 </div>
 
-<div>
-<form class="form-horizontal col-md-offset-3 " id="createForm" style="margin-top:50px">
+<div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
     <div class="form-group has-feedback">
 
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称" />
+            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称">
         </div>
 
     </div>
@@ -50,7 +49,7 @@
     <div class="form-group has-feedback">
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称" />
+            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称">
         </div>
     </div>
 
@@ -91,11 +90,11 @@
     <div class="form-group">
         <br/>
     </div>
-</form>
 
     <div class="col-xs-10 col-xs-offset-1">
-        <h4 id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以邀请加入，若信息无误请点击确认创建按钮</h4>
+        <label id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
     </div>
+
 
     <div class="col-md-12">
         <br/><br/><br/>
@@ -109,8 +108,8 @@
             <a href="user-jmpHomepage"><button class="btn-default btn">取消创建</button></a>
         </span>
     </div>
-
 </div>
+
 </body>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
@@ -118,9 +117,7 @@
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/mjy.js"></script>
-<script>
 
-</script>
 <script>
 
     $("button#create_button").click(function () {

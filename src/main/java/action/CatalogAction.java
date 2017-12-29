@@ -30,12 +30,15 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private CatalogEntity catalogEntity;
     private String catalogIndex;
     private int place;
-    private String title;
 
     public String getIndex(){
+        System.out.println(documentId);
         dataMap = new HashMap<String, Object>();
         CatalogDao catalogDao=new CatalogDaoImp();
         List<CatalogEntity> catalogEntityList=catalogDao.getAllIndex(documentId);
+//        for (int i = 0; i < catalogEntityList.size(); i++) {
+//            System.out.println(i+" "+catalogEntityList.get(i).getTitle()+" "+catalogEntityList.get(i).getFirst_index()+" "+catalogEntityList.get(i).getSecond_index()+" "+catalogEntityList.get(i).getThird_index()+" "+catalogEntityList.get(i).getFourth_index());
+//        }
         dataMap.put("catalogList",catalogEntityList);
         return "Re";
     }
@@ -45,6 +48,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         return "document";
     }
     public String addState1(){//下一级别，需要新增ul
+        System.out.println(catalogEntity.getId_document()+" "+catalogEntity.getTitle()+" "+catalogEntity.getId_template()+" "+place+" "+catalogIndex);
         String[] tempList=catalogIndex.split(" ");
         dataMap=new HashMap<>();
         int first=Integer.valueOf(tempList[0]);
@@ -61,6 +65,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
     public String addState2(){//不需要新增，传最后一个元素的位置
+        System.out.println(documentId+" "+catalogEntity.getTitle()+" "+catalogEntity.getId_template()+" "+place+" "+catalogIndex);
         String[] tempList=catalogIndex.split(" ");
         dataMap=new HashMap<>();
         int first=Integer.valueOf(tempList[0]);
@@ -78,6 +83,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
     public String delete(){
+        System.out.println(documentId+" "+catalogIndex);
         String[] tempList=catalogIndex.split(" ");
         int first=Integer.valueOf(tempList[0]);
         int second=Integer.valueOf(tempList[1]);
@@ -92,6 +98,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String up(){
+        System.out.println(documentId+" "+catalogIndex);
         String[] tempList=catalogIndex.split(" ");
         int first=Integer.valueOf(tempList[0]);
         int second=Integer.valueOf(tempList[1]);
@@ -106,6 +113,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String down(){
+        System.out.println(documentId+" "+catalogIndex);
         String[] tempList=catalogIndex.split(" ");
         int first=Integer.valueOf(tempList[0]);
         int second=Integer.valueOf(tempList[1]);
@@ -138,18 +146,6 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         dataMap.put("catalogEntity",catalogEntity);
         return "Re";
     }
-
-    public String rename(){
-        String[] tempList=catalogIndex.split(" ");
-        int first=Integer.valueOf(tempList[0]);
-        int second=Integer.valueOf(tempList[1]);
-        int third=Integer.valueOf(tempList[2]);
-        int fourth=Integer.valueOf(tempList[3]);
-        CatalogDao catalogDao=new CatalogDaoImp();
-        catalogDao.rename(title,documentId,first,second,third,fourth);
-        return "Re";
-    }
-
     public void prepareNewCatalog(){
         catalogEntity=new CatalogEntity();
     }
@@ -199,9 +195,5 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setCatalogIndex(String catalogIndex) {
         this.catalogIndex = catalogIndex;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }
