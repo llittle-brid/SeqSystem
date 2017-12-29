@@ -57,7 +57,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpComponent"><span class="lzf_b">构件库</span></a>>><a href="user-jmpCasecomponent"><span class="lzf_b">用例构件库</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>>><a href="user-jmpCasecomponent"><span class="lzf_b">用例构件</span></a>
                 </strong>
             </li>
         </ol>
@@ -67,7 +67,7 @@
                 <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                     <div style="float: left;height: 70px;width:300px;padding: 20px 20px 0px 20px">
                         <div style="float: left;margin: 0px 0px 0px 50px">
-                            <h2> OA系统用例构件库</h2>
+                            <h2> OA系统用例构件</h2>
                         </div>
                     </div>
                     <div style="float: left;height: 70px;width:150px;padding: 40px 0px 20px 30px">
@@ -218,7 +218,6 @@
             </div>
         </div>
     </div>
-</div>
 <script src="/js/jquery.min.js?v=2.1.4"></script>
 <script src="/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>

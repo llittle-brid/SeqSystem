@@ -16,6 +16,7 @@ public interface UserDao {
 	UserEntity getOne(String name);
 
     List<UserEntity> getAll();
+	int Mycollectcount(int id_user);
 
     int orgManager(int id);
     int projectNumberNow(int id);

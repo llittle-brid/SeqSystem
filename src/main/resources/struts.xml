@@ -84,12 +84,28 @@
             <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpFinishedProjectInfo,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
         </action>
 
-        <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">
-            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="orgList" type="json">
-                 <param name="root">dataMap</param>
-            </result>
-            <allowed-methods>jmpMyprofile,showList</allowed-methods>
+        <action name="library-*" class="action.LibraryAction" method="{1}">
+            <result name="getall">/WEB-INF/pages/project_library.jsp</result>
+            <result name="getcommon">/WEB-INF/pages/project_common_library.jsp</result>
+            <result name="getuser">/WEB-INF/pages/project_user_library.jsp</result>
+            <result name="getcase">/WEB-INF/pages/project_case_library.jsp</result>
+            <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
+            <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
+            <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
+
+            <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain,Mycollect,Mycollectagain</allowed-methods>
+        </action>
+
+        <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <allowed-methods>collect,nocollect</allowed-methods>
+        </action>
+
+        <action name="structure-*" class="action.StructureAction" method="{1}">
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <result name="get">/WEB-INF/pages/project_structure.jsp</result>
+            <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
+            <allowed-methods>get,insert</allowed-methods>
         </action>
 
         <action name="discuss-*" class="action.DiscussAction" method="{1}">

@@ -49,15 +49,8 @@
             <div class="form-group ">
                 <button  id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
             </div>
-            <div class="form-group col-md-offset-3">
-                <table>
-                    <tr>
-                        <td>
-                            <button id="registration_button" class="btn btn-w-m btn-Bblack btn-sm">注 册</button>
-                            <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
-                        </td>
-                    </tr>
-                </table>
+            <div class="form-group " style="margin-left: -6px">
+                <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
             </div>
     </div>
 

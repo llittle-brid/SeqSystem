@@ -12,10 +12,11 @@ import java.util.List;
  * @author MJY
  */
 public class UserDaoImp extends DAO<UserEntity> implements UserDao {
-    public boolean login(String name, String password) {
-        String sql = "select count(*) from USER where name=? and password=?";
-        int count = Integer.valueOf(getForValue(sql, name, password).toString());
-        if (count == 1) return true;
+    public boolean login(String name,String password)
+    {
+        String sql="SELECT COUNT(*) from USER WHERE NAME=? and PASSWORD=?";
+        int count=Integer.valueOf(getForValue(sql,name,password).toString());
+        if(count==1)return true;
         else return false;
     }
 
@@ -24,7 +25,8 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             String sql = "insert into USER (NAME,PASSWORD) values (?,?)";
             update(sql, name, password1);
             return true;
-        } else return false;
+        }
+        else return false;
     }
 
     public boolean replacepassword(String name, String password1, String password2, String password3) {
@@ -32,7 +34,8 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             String sql = "update USER set password=? where name=?";
             update(sql, password2, name);
             return true;
-        } else return false;
+        }
+        else return false;
     }
 
     public boolean edit(String username, String qq, String address, String mail, String tel, String introduce, String gender) {
@@ -57,6 +60,12 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         String sql = "select * from USER ";
         List<UserEntity> user1 = getForList(sql);
         return user1;
+    }
+
+    public int Mycollectcount(int id_user){
+        String sql="SELECT COUNT(*) from LIB_COLLECT WHERE ID_USER=? ";
+        int count=Integer.valueOf(getForValue(sql,id_user).toString());
+        return count;
     }
 
     public int orgManager(int id){
