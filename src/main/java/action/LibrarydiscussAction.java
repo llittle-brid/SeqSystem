@@ -26,7 +26,6 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
         dataMap = new HashMap<String, Object>();
         librarydiscussDao = new LibrarydiscussDaoImp();
         Date a=new Date();
-        System.out.println(a);
         boolean res=librarydiscussDao.insert(librarydiscuss.getId_user(),librarydiscuss.getId_library(),a,librarydiscuss.getContent());
         dataMap.put("res", res);
         return "RES";

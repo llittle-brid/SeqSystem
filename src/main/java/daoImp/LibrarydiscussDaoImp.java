@@ -23,7 +23,7 @@ public class LibrarydiscussDaoImp extends DAO<LibrarydiscussEntity> implements L
    public boolean insert(int id_user, int id_library, Date time,String content)
     {
 
-        if(!content.equals("")&&content!=null) {
+        if(!content.trim().equals("")) {
             String sql="insert into LIB_DISCUSS (ID_USER,ID_LIBRARY,TIME,CONTENT) values(?,?,?,?)";
             update(sql, id_user, id_library, time, content);
             return true;
