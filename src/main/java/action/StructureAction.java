@@ -105,16 +105,6 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
 
         return "get";
     }
-
-    public String insert()
-    {
-        structureDao = new StructureDaoImp();
-        structure.setContent("1234");
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(structure);
-        structureDao.insert(jsonString);
-        return "insert";
-    }
     @Override
     public StructureEntity getModel() {
         return structure;
