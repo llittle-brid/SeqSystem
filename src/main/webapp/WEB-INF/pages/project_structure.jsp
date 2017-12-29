@@ -68,7 +68,7 @@
             </li>
         </ol>
     </div>
-        <div id="main" style="height: 1500px;width:100%;margin-top: 10px ">
+        <div id="main" style="width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                 <div style="float: left;height: 50px;width:350px;padding: 20px 20px 0px 20px;margin-left: 100px">
                     <h2 style="font-weight:700"> ${requestScope.library.name}</h2>
@@ -224,11 +224,14 @@
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
 <script>
+    $(document).ready(function(){
         $("button.pagenum").click(function(){
             location.href="structure-get?page="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&pagedis='+${requestScope.pagedis};
         });
+    });
 </script>
 <script>
+    $(document).ready(function(){
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
@@ -237,17 +240,21 @@
             {   var p=parseInt($("button.nowpage").html())+1;
                 location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
         });
+    });
 
     $(document).ready(function () {
         $(window.parent.document).find("div#content-main").height($(document).height())
     })
 </script>
 <script>
+    $(document).ready(function(){
         $("button.pagenumdis").click(function(){
             location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library=' +$("input.id_library").val()+'&page='+${requestScope.page};
         });
+    });
 </script>
 <script>
+    $(document).ready(function(){
         $("button.turnpagedis").click(function(){
             if($(this).hasClass("lastPagedis"))
             {   var p=parseInt($("button.nowpagedis").html())-1;
@@ -256,6 +263,7 @@
             {   var p=parseInt($("button.nowpagedis").html())+1;
                 location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
         });
+    });
 
     $(document).ready(function () {
         $(window.parent.document).find("div#content-main").height($(document).height())
