@@ -79,6 +79,16 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>showList,showOthers,agreeOrg,refuseOrg</allowed-methods>
         </action>
+        <action name="orgInvite-*" class="action.OrgInviteAction" method="{1}">
+            <result name="res" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>InviteUser,showList,grantOrg,deleteUser</allowed-methods>
+        </action>
         <action name="showExitOrg-*" class="action.ShowExitOrgAction" method="{1}">
             <result name="exitOrgList" type="json">
                 <param name="root">dataMap</param>

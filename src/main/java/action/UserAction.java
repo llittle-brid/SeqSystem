@@ -84,13 +84,13 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         }
         return "success";
     }
-    public String jmpMyprofile(){
-        return "myprofilePage";
-    }
 
     public String jmpLogin(){
         session.put("user",null);
         return "loginPage";
+    }
+    public String jmpMyprofile(){
+        return "myprofilePage";
     }
     public String jmpRegistration() {
         return "registrationPage";

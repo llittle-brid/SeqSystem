@@ -21,5 +21,5 @@ public interface UserDao {
 
     int projectNumberNow(int id);
 	int projectNumberHistory(int id);
-	List<UserEntity> getOrgAllMem(String name);
+	List<UserEntity> getOrgAllMem(int user_id,String name);
 }

@@ -59,6 +59,7 @@
                 </div>
                 <div style="float: right;width: 300px" class="col-md-4">
                     <select id="gender" class="form-control" name="gender">
+                        <option name="" disabled  selected="selected" >选择机构</option>
                         <s:iterator value="list">
                             <option id="displayOrg" class="orgName"><s:property value="NAME"/> </option>
                         </s:iterator>

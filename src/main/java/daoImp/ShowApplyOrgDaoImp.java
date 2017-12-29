@@ -26,17 +26,21 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
     @Override
     public ShowApplyOrganizationEntity getOne(int id) {
         String sql="select * from VIEW_showAPPLYORG where ID_ORG_APPLY=?";
-        ShowApplyOrganizationEntity ShowApply= get(sql,id);
-        return ShowApply;
+        ShowApplyOrganizationEntity One= get(sql,id);
+        return One;
     }
 
     @Override
     public List<ShowApplyOrganizationEntity> createOrg(ShowApplyOrganizationEntity create) {
         String sql1="update ORG_APPLY set STATE=1 where ORG_NAME=?";
         String sql2="insert into ORGANIZATION (NAME,ID_USER,TIME) value(?,?,?)";
+        String sql3="select ID_ORGANIZATION from ORGANIZATION where NAME=?";
+        String sql4="insert into ORG_MEMBER. (ID_USER,ID_ORGANIZATION) value(?,?)";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getOrg_name());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
+        int id_org=getForValue(sql3,create.getOrg_name())
+;       update(sql4,create.getId_user(),id_org);
         String sql="select * from VIEW_showAPPLYORG where STATE=0";
         List<ShowApplyOrganizationEntity> ShowApply = getForList(sql);
         return ShowApply;

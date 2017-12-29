@@ -59,8 +59,9 @@
                 <div style="float: left;margin-top: 10px" class="col-md-4"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button></div>
                 <div style="float: right;width: 300px" class="col-md-4">
                     <select id="gender" class="form-control" name="gender">
+                        <option name="" disabled  selected="selected" >选择机构</option>
                         <s:iterator value="list">
-                            <option id="displayOrg" class="orgName"><s:property value="NAME"/> </option>
+                            <option name="displayOrg" class="orgName"><s:property value="NAME"/> </option>
                         </s:iterator>
                     </select>
                 </div>
@@ -72,7 +73,7 @@
                             <div class="ibox float-e-margins">
                                 <div class="ibox-content">
                                     <div class="bootstrap-table">
-                                        <table id="finishingTask"
+                                        <table id="showOrgMember"
                                                data-toggle="table"
                                                data-url="Organization-showAllMember"
                                                data-click-to-select="true"
@@ -99,54 +100,27 @@
                         <div style="margin:-30px 0px 0px 0px">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-content">
-
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th class="col-sm-2">姓名</th>
-                                                <th class="col-sm-2">申请时间</th>
-                                                <th class="col-sm-2">状态</th>
-                                                <th class="col-sm-2">备注</th>
-                                                <th class="col-sm-3"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td >芍药</td>
-                                                <td>2017-7-8 12:36</td>
-                                                <td>等待</td>
-                                                <td>无</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td >桔梗</td>
-                                                <td>2017-7-8 12:36</td>
-                                                <td>接受</td>
-                                                <td>无</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td >菱</td>
-                                                <td>2017-7-8 12:36</td>
-                                                <td>拒绝</td>
-                                                <td>无</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary btn-xs" >重发</button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
+                                    <div class="bootstrap-table">
+                                        <table id="showOperate"
+                                               data-toggle="table"
+                                               data-url="orgInvite-showList"
+                                               data-click-to-select="true"
+                                               data-search="true"
+                                               data-show-refresh="true"
+                                               data-show-toggle="true"
+                                               data-show-columns="true"
+                                               data-toolbar="#toolbar"
+                                               data-query-params="quefryParams"
+                                               data-pagination="true"
+                                               data-halign="center"
+                                               data-striped="true"
+                                               data-page-size="6"
+                                               data-height="410"
+                                               data-page-list="All"
+                                        >
                                         </table>
-                                        <div style="height: 50px;margin-left: 40%" class="btn-group">
-                                            <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                                            </button>
-                                            <button class="btn btn-white">1</button>
-                                            <button class="btn btn-white  active">2</button>
-                                            <button class="btn btn-white">3</button>
-                                            <button class="btn btn-white">4</button>
-                                            <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                                            </button>
-                                        </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -166,12 +140,12 @@
                 <h4 class="modal-title">邀请用户</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>用户名</label> <input id="OrgName" type="text" placeholder="请输入用户名" class="form-control" required="required"></div>
-                <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入备注" class="form-control" required=""></div>
+                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" class="form-control" required="required"></div>
+                <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required=""></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                <button id="newOrg-button" type="button" class="btn btn-primary">邀请</button>
+                <button id="invite-button" type="button" class="btn btn-primary">邀请</button>
             </div>
         </div>
     </div>
@@ -189,11 +163,12 @@
         $("option.orgName").click(function () {
             var element = $(this).val();
             console.log(element);
-         Ffive(element);
-        }
+            Ffive(element);
+            Ffive2(element);
+            }
         );
     });
-    $('#finishingTask').bootstrapTable({
+    $('#showOrgMember').bootstrapTable({
             columns: [
                 {
                     title: '姓名',
@@ -211,16 +186,54 @@
                     field: 'tel',
                     title: '联系方式',
                     align: 'center'
+                },{
+                    field:'operate',
+                    title:'操作',
+                    align:'center',
+                    events: "actionEvents",
+                    width:"240px",
+                    formatter: "operateFormatter"
+                }
+            ]
+        }
+    );
+    $('#showOperate').bootstrapTable({
+            columns: [
+                {
+                    title: '姓名',
+                    field: 'USER_NAME',
+                    align: 'center',
+                    valign: 'middle'
+                },
+                {
+                    field: 'DATE',
+                    title: '邀请时间',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'MESSAGE',
+                    title: '备注信息',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'STATE',
+                    title: '状态',
+                    sortable: true,
+                    align: 'center',
+                    formatter: "rename"
                 }
             ]
         },
         function () {
-            var element = $(this).val();
-            Ffive(element)
+        alert("?")
+            var first=$("#gender").find("option:first").val();
+            console.log(first);
+            Ffive(first)
         }
-
-    )
-    function Ffive(element) {
+    );
+    function Ffive(element){
         $.ajax(
             {
                 url:"Organization-showAllMember",
@@ -231,7 +244,7 @@
                 success:function(json){
                     var orgMemberList = JSON.parse(json.res);
                     //finishingTask为table的id
-                    $('#finishingTask').bootstrapTable('load',orgMemberList);
+                    $('#showOrgMember').bootstrapTable('load',orgMemberList);
                 },
                 error:function(){
                     alert(" 错误");
@@ -239,6 +252,112 @@
             }
         )
     }
-
+    function Ffive2(element) {
+        $.ajax(
+            {
+                url:"orgInvite-showList",
+                data: {ORG_NAME: element},
+                dataType:"json",
+                type: "Get",
+                async: "false",
+                success:function(json){
+                    var orgOperateList = JSON.parse(json.res);
+                    //finishingTask为table的id
+                    $('#showOperate').bootstrapTable('load',orgOperateList);
+                },
+                error:function(){
+                    alert(" 错误");
+                }
+            }
+        )
+    }
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="grant" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >机构转移</button></a>',
+            '<a class="delete" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >踢出机构</button></a>'
+        ].join('');
+    }
+    function rename(value,row,index) {
+        var state=parseInt(row.STATE);
+        if(state==0)
+            return '未接受';
+        else if(state==1)
+            return '已同意';
+        else if(state==2)
+            return ['已拒绝',
+                '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新邀请</button></a>'].join('');
+    }
+    window.actionEvents = {
+        'click .grant': function(e, value, row, index) {
+            //转移机构管理权限
+            var id_user = parseInt(row.id_user);
+            console.log(id_user);
+            var currentOrg=$("#gender").val();
+            $.ajax({
+                type: "GET",
+                url: "orgInvite-grantOrg",
+                data: {ID_USER:id_user,ORG_NAME:currentOrg},
+                dataType: "json",
+                success: function (result) {
+                    if(result.res===true) {
+                        showtoast("success", "转移机构成功", "操作成功");
+                        location.href = "user-jmpTemp";
+                        }
+                },
+                error: function (result) {
+                    showtoast("error", "转移机构失败", "操作失败")
+                }
+            })
+        },
+        'click .delete' : function(e, value, row, index) {
+            //踢出机构
+            var id_user = parseInt(row.id_user);
+            var currentOrg=$("#gender").val();
+            $.ajax({
+                type: "GET",
+                url: "orgInvite-deleteUser",
+                data: {ID_USER:id_user,ORG_NAME:currentOrg},
+                dataType: "json",
+                success: function (result) {
+                    if(result.res===true)  {
+                        showtoast("success", "踢出成功", "操作成功")
+                        $('#showOrgApply').bootstrapTable('load',orgList);
+                    }
+                    else  showtoast("error", "踢出失败", "操作失败")
+                },
+                error: function (result) {
+                    showtoast("error", "踢出失败", "操作失败")
+                }
+            })
+        }
+    }
+</script>
+<script>
+    $("button#invite-button").click(function (){
+        var currentOrg=$("#gender").val();
+        $.ajax(
+            {
+                url:"orgInvite-InviteUser",
+                data:{ORG_NAME:currentOrg,USER_NAME:$("input#user_name").val(),MESSAGE:$("input#message").val()},
+                dataType:"json",
+                type:"Post",
+                async:"false",
+                success:function (result) {
+                    if(result.res===true) {
+                        showtoast("success", "邀请成功", "邀请成功");
+                        location.href="Organization-jmpOrgManager1";
+                    }
+                    else {
+                        showtoast("error", "邀请失败", "邀请失败")
+                        location.href="Organization-jmpOrgManager1";
+                    }
+                },
+                error: function (result) {
+                    showtoast("error", "邀请失败", "邀请失败")
+                    location.href="Organization-jmpOrgManager1";
+                }
+            }
+        )
+    })
 </script>
 </html>

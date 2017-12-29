@@ -60,6 +60,10 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         Gson gson = new Gson();
         String json = gson.toJson(list);
         dataMap.put("res",json);
+        List<ShowApplyOrganizationEntity> otherList = ShowApplyOrgDao.getOthers();
+        Gson gson1 = new Gson();
+        String json2 = gson1.toJson(otherList);
+        dataMap.put("res2",json2);
         return SUCCESS;
     }
 
@@ -69,10 +73,16 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         int id_org_apply=ShowApplyOrganization.getId_org_apply();
         ShowApplyOrgDao = new ShowApplyOrgDaoImp();
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
-        System.out.println(ShowApplyOrganization);
-        boolean res=ShowApplyOrgDao.refuseOrg(ShowApplyOrganization);
-        dataMap.put("res",res);
-        return "RES";
+        ShowApplyOrgDao.refuseOrg(ShowApplyOrganization);
+        List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.getALL();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        dataMap.put("res",json);
+        List<ShowApplyOrganizationEntity> otherList = ShowApplyOrgDao.getOthers();
+        Gson gson1 = new Gson();
+        String json2 = gson1.toJson(otherList);
+        dataMap.put("res2",json2);
+        return SUCCESS;
     }
     @Override
     public ShowApplyOrganizationEntity getModel() {

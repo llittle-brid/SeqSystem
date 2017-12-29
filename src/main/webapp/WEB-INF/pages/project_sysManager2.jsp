@@ -110,7 +110,7 @@
                 {
                     field: 'num_user',
                     title: '机构人数',
-                    align: 'center'
+                    align: 'center',
                 }, {
                     field: 'num_project',
                     title: '项目数',
