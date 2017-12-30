@@ -34,12 +34,12 @@
     </ol>
 </div>
 
-<form class="form-horizontal col-md-offset-3 " id="createForm" style="margin-top:50px">
+<div class="form-horizontal col-md-offset-3 "style="margin-top:50px">
     <div class="form-group has-feedback">
 
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：*</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称" required="true"/>
+            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称  (必填）" required="true"/>
         </div>
 
     </div>
@@ -49,9 +49,9 @@
     </div>
 
     <div class="form-group has-feedback">
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：*</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称" required="true"/>
+            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称（必填）" required="true"/>
         </div>
     </div>
 
@@ -63,7 +63,7 @@
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
         <div class="col-sm-4">
             <div class="input-group">
-                <input type="text" id="orgName" class="form-control text-center" autocomplete="true" placeholder="请输入机构名称" oninput="inputSuggest()">
+                <input type="text" id="orgName" class="form-control text-center" autocomplete="true" placeholder="选填，置空时为私人项目" oninput="inputSuggest()">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
@@ -75,7 +75,6 @@
             <!-- /btn-group -->
         </div>
     </div>
-
 
     <div class="form-group">
         <br/>
@@ -93,7 +92,7 @@
         <br/>
     </div>
 
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-10 col-xs-offset-2">
         <h4 id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以邀请加入，若信息无误请点击确认创建按钮</h4>
     </div>
 
@@ -102,14 +101,14 @@
     </div>
 
     <div class="col-md-5 col-xs-offset-2">
-    <span class="col-md-2 col-xs-offset-2">
-        <button id="create_button" class="btn-danger btn">确认创建</button>
-    </span>
+        <span class="col-md-2 col-xs-offset-2">
+            <button type="button" class="btn-danger btn" onclick="create()">确认创建</button>
+        </span>
         <span class="col-md-2 col-xs-offset-3">
-        <a href="user-jmpHomepage"><button type="button" class="btn-default btn">取消创建</button></a>
-    </span>
+            <a href="user-jmpHomepage"><button type="button" class="btn-default btn">取消创建</button></a>
+        </span>
     </div>
-</form>
+</div>
 
 
 
@@ -125,7 +124,7 @@
 </script>
 <script>
 
-    $("button#create_button").click(function () {
+    function create() {
         $.ajax({
             url: "project-create",
             data: {
@@ -136,17 +135,17 @@
             type: "Post",
             async: "false",
             success: function (result) {
-                if(result.res===true)  {
-                    showtoast("success", "创建成功", "操作成功")
-                    location.href = "user-jmpCurrentProjectList"
+                if(result.res===true) {
+                    showtoast("success", "创建成功", "操作成功");
+                    location.href = "user-jmpCurrentProjectList";
                 }
-                else  showtoast("error", "创建失败", "操作失败")
+                else  showtoast("error", "创建失败", "操作失败");
             },
             error: function (result) {
-                showtoast("error", "创建失败", "操作失败")
+                showtoast("error", "创建失败", "操作失败");
             }
         })
-    });
+    };
     function inputSuggest() {
         var orgName=$("input#orgName");
         $.ajax({

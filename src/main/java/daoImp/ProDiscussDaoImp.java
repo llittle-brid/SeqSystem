@@ -35,7 +35,7 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
 
     @Override
     public List<ProDiscussEntity> getProjectDis(int id_project) {
-        String sql="select * from PRO_DISCUSS where ID_PROJECT =? order by time desc";
+        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT =? order by time desc";
         return getForList(sql,id_project);
     }
 

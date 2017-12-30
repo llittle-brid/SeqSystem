@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
@@ -50,11 +49,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>邀请</label>
-                    <input id="MemberName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off">
+                    <input id="UserName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" id="button_cancel" class="btn btn-white" data-dismiss="modal">取消</button>
                 <button id="button_invite" type="button" class="btn btn-primary">邀请</button>
             </div>
         </div>
@@ -73,7 +72,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>转移给</label>
-                    <input id="UserName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off" onkeyup="inputSuggest()">
+                    <input id="MemberName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off" onkeyup="inputSuggest()">
                 </div>
             </div>
             <div class="modal-footer">
@@ -120,21 +119,22 @@
                 <div class="col-sm-5">
                     <dl class="dl-horizontal">
 
-                        <dt>项目组长：</dt>
-                        <dd><strong><s:property value="#session.PM.name"/></strong></dd>
+                        <dt><h3>项目组长：</h3></dt>
+                        <dd><h2><s:property value="#session.PM.name"/></h2></dd>
 
-                        <dt>版本：</dt>
-                        <dd>v1.4.2</dd>
+                        <dt><h3>所属机构：</h3></dt>
+                        <dd><h2><s:property value="#session.project.orgName"/></h2></dd>
 
                     </dl>
                 </div>
                 <div class="col-sm-7" id="cluster_info">
                     <dl class="dl-horizontal">
 
-                        <dt>最后更新：</dt>
-                        <dd>12/25/17</dd>
-                        <dt>创建于：</dt>
-                        <dd><s:property value="#session.project.date"/></dd>
+                        <dt><h3>最后更新：</h3></dt>
+                        <dd><h3>12/25/17</h3></dd>
+
+                        <dt><h3>创建于：</h3></dt>
+                        <dd><h3><s:property value="#session.project.date"/></h3></dd>
                     </dl>
                 </div>
             </div>
@@ -161,44 +161,27 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab-1">
-                                            <!--自己的留言开始-->
-                                            <div class="row">
-                                                <div class="ibox float-e-margins">
-                                                    <div class="ibox-title">
-                                                        <h5>我的留言</h5>
-                                                        <div class="ibox-tools">
-                                                            <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
-                                                            <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="button" style="margin-right: 10px">发布</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ibox-content">
-                                                        <div class="click2edit wrapper discuss">
-                                                        </div>
-                                                    </div>
+                                    <!--自己的留言开始-->
+                                    <div class="row">
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h5>我的留言</h5>
+                                                <div class="ibox-tools">
+                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
+                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="button" style="margin-right: 10px">发布</button>
                                                 </div>
                                             </div>
-                                            <!--自己的留言结束-->
-                                            <div class="allDiscuss">
-                                                <!--一行留言-->
-                                                <div class="row">
-                                                    <div class="ibox float-e-margins " style="margin-bottom: 10px">
-                                                        <div class="ibox-title">
-                                                            <h5>大毛同学 2017-2-6 17:15:56 </h5>
-                                                            <input style="display: none" class="id_dis">
-                                                            <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
-                                                            <div class="ibox-tools">
-                                                                <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ibox-content">
-                                                            <div class=" wrapper">
-                                                                王炸
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <div class="ibox-content">
+                                                <div class="click2edit wrapper discuss">
                                                 </div>
-                                                <!--一行留言结束-->
                                             </div>
+                                        </div>
+                                    </div>
+                                    <!--自己的留言结束-->
+                                    <div class="allDiscuss">
+                                        <!--一行留言-->
+                                        <!--一行留言结束-->
+                                    </div>
 
                                 </div>
                                 <div class="tab-pane" id="tab-2">
@@ -320,6 +303,7 @@
 
     var id_Project = "<%=session.getAttribute("Id_Project")%>";
     var id_User = "<s:property value="#session.user.id_user"/>";
+
     $.ajax(
         {
             type:"post",
@@ -330,6 +314,8 @@
                 var proList = JSON.parse(json.res);
                 //finishingTask为table的id
                 $('#projectMember').bootstrapTable('load',proList);
+                discussInit();
+                discussReload();
             },
             error:function(){
                 swal({
@@ -340,7 +326,7 @@
     );
     function rankFormatter(value,row,index) {
         if (row.rank==5) {
-            return '成员';
+            return '组员';
         }
         else if (row.rank==4){
             return '副组长';
@@ -506,7 +492,7 @@
             success: function (result) {
                 if(result.res===true)  {
                     showtoast("success", "邀请成功", "成功发送邀请");
-                    location.href = "project-jmpProjectInfo";
+                    $('button#button_cancel').click();
                 }
                 else  showtoast("error", "邀请失败", "用户名不存在!")
             },
@@ -517,7 +503,7 @@
     });
 
     $("button#button_alter").click(function () {
-        var username = $("input#UserName").val();
+        var username = $("input#MemberName").val();
         swal(
             {
                 title: "您确定要转移组长给这名成员吗",
@@ -616,12 +602,16 @@
             async: "false",
             success: function (result) {
                 var content="",tempDis,date,state;
+                var title = "";
                 for (var i=0;i<result.wrapperList.length;i++){
                     tempDis=result.wrapperList[i].proDiscussEntity;
+                    if (tempDis.name === "<s:property value="#session.PM.name"/>"){
+                        title += "<span class=\"label label-warning\">组长</span>&nbsp;";
+                    }
                     state=result.wrapperList[i].state;
                     date=tempDis.time.toString().split("T");
                     content+="  <div class='row'> <div class='ibox float-e-margins ' style='margin-bottom: 10px'> <div class='ibox-title'> <h5>";
-                    content+=tempDis.name+" "+date[0]+" "+date[1]+"</h5><input style='display: none' class='id_dis' value='"+tempDis.id_pro_discuss+"'>"
+                    content+=tempDis.name+title+" "+date[0]+" "+date[1]+"</h5><input style='display: none' class='id_dis' value='"+tempDis.id_pro_discuss+"'>"
                     content+="  <button  class='btn";
                     if (state=="2")
                         content+=" btn-danger ";
@@ -629,6 +619,8 @@
                     content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
                     content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
                     content+=tempDis.content+"  </div> </div> </div> </div>";
+
+                    title="";
                 }
                 $("div.allDiscuss").html(content);
             },

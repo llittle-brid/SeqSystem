@@ -86,7 +86,7 @@
                 title: '文档名称',
                 align: 'center'
             }, {
-                field: 'id_Organization',
+                field: 'orgName',
                 title: '所属机构',
                 sortable: true,
                 align: 'center'
@@ -129,6 +129,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id_Project = parseInt(row.id_Project);
+
                 $.ajax({
                     type: "GET",
                     url: "project-getProjectInfo",

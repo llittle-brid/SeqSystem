@@ -28,6 +28,7 @@ public class ProDIscussWrapper {
 
         if (rank==3) {
             state = 2;
+            return;
         }
 
         if (id_user!=proDiscussEntity.getId_user()){

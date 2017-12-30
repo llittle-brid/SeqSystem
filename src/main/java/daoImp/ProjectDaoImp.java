@@ -19,17 +19,38 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
         //use getTime() instead of getDate() to get current date.
         Date createDate = new Date(new java.util.Date().getTime());
-        int ID_Org = getForValue(sql2,p.getOrgName());
+        int ID_Org = 0;
+
+        if (p.getName().length()==0||p.getDocument_Name().length()==0){
+            return false;
+        }
+
+        if (p.getOrgName().length()==0){
+            ID_Org = 0;
+        }
+        else {
+            try {
+                ID_Org = getForValue(sql2,p.getOrgName());
+            } catch (Exception e){
+                return false;
+            }
+        }
+
+
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
         int ID_user = user.getId_user();
 
-        update(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
+        try{
+            update(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
 
 //        set PM of one Project
-        int Id_Project = getForValue("select ID_PROJECT from PROJECT where NAME = ?",p.getName());
-        update(sql3,Id_Project,ID_user,3);
+            int Id_Project = getForValue("select ID_PROJECT from PROJECT where NAME = ?",p.getName());
+            update(sql3,Id_Project,ID_user,3);
 
-        return true;
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 
@@ -85,9 +106,9 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     }
 
     @Override
-    public boolean inviteMember(int idUser, String PM, String projectname,int idProject) {
+    public boolean inviteMember(int idUser, String PM, String projectName,int idProject) {
 
-        String content = PM+"邀请你加入项目: "+projectname;
+        String content = PM+" invite you to join: "+projectName;
 
         String sql = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
 
@@ -116,14 +137,14 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public ProjectEntity getOne(int id) {
-        String sql="select * from PROJECT where ID_PROJECT=?";
+        String sql="select * from VIEW_projectINFO where ID_PROJECT=?";
         ProjectEntity project1 = get(sql,id);
         return project1;
     }
 
     @Override
     public List<ProjectEntity> getAll(int state,int id) {
-        String sql="select * from VIEW_projectMember where STATE = ? and ID_USER = ?";
+        String sql="select * from VIEW_projectINFO where STATE = ? and ID_USER = ?";
         List<ProjectEntity> project = getForList(sql,state,id);
         return project;
     }

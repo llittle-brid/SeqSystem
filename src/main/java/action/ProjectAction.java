@@ -70,6 +70,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         projectDao = new ProjectDaoImp();
         UserEntity user = (UserEntity) ActionContext.getContext().getSession().get("user");
         int ID_user = user.getId_user();
+
         List<ProjectEntity> list = projectDao.getAll(1,ID_user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
@@ -106,10 +107,12 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_Project = project.getId_Project();
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
+
         UserEntity pm = projectDao.getPM(project);
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
 
         int rank = projectDao.getRank(id_Project,user.getId_user());
+
         session.put("rank",rank);
         session.put("PM",pm);
         session.put("project",project);
