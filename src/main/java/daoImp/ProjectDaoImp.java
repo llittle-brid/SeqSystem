@@ -8,6 +8,7 @@ import entity.ProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
@@ -80,11 +81,23 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     }
 
     @Override
-    public void alterPM(int idUser, int idProject) {
-        String sql="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
-        update(sql,idProject);
-        String sql1="update PROJECT_MEMBER set RANK=3 where ID_USER = ? and ID_PROJECT = ?";
-        update(sql1,idUser,idProject);
+    public boolean alterPM(int idUser, int idProject) {
+//        判断被转移人是否在组内
+        String sql = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
+        if (Integer.valueOf(getForValue(sql,idProject,idUser))<1){
+            return false;
+        }
+        else {
+            String sql1 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
+            try {
+                update(sql1, idProject, idUser);
+            } catch (Exception e) {
+                return false;
+            }
+            String sql2="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
+            update(sql2,idProject);
+            return true;
+        }
     }
 
     @Override
@@ -107,20 +120,53 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public boolean inviteMember(int idUser, String PM, String projectName,int idProject) {
+        String verb = " invite you to join ";
+        String content = PM+verb+projectName;
 
-        String content = PM+" invite you to join: "+projectName;
+        String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
 
-        String sql = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
-
-        Date date = new Date(new java.util.Date().getTime());
-
-        try {
-            update(sql,idProject,idUser,date,content);
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
+        //判断邀请的成员是否已经在组内
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+            return false;
         }
-        return false;
+
+        else {
+            String sql = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
+
+            Timestamp time = new Timestamp(new java.util.Date().getTime());
+
+            try {
+                update(sql, idProject, idUser, time, content);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+    }
+
+    public boolean addMember(int idProject, int idUser){
+        String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
+        //判断邀请的成员是否已经在组内
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+            return false;
+        }
+
+        else {
+            //新增成员
+            String sql = "insert into PROJECT_MEMBER(ID_PROJECT,ID_USER,RANK) VALUES(?,?,?)";
+            update(sql, idProject,idUser,5);
+
+            //给组长发消息
+            String sql2 = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
+            Timestamp time = new Timestamp(new java.util.Date().getTime());
+
+            String verb = "agreed to join";
+            String content = idUser+verb+idProject;
+            update(sql, idProject, idUser, time, content);
+
+            return true;
+        }
     }
 
     @Override

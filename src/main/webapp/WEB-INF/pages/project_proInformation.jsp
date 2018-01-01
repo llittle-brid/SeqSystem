@@ -102,16 +102,23 @@
                         <h2>
                             <strong><s:property value="#session.project.name"/></strong>
                         </h2>
-                        <s:if test='#session.rank==3||#session.rank==4'>
-                            <button href="project-" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
-                        </s:if>
-                        <s:if test="#session.rank==3">
-                            <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
+                        <s:if test='#session.project.state==1'>
+                            <s:if test='#session.project.rank==3||#session.project.rank==4'>
+                                <button href="project-" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
+                            </s:if>
+                            <s:if test="#session.project.rank==3">
+                                <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
+                            </s:if>
                         </s:if>
                     </div>
                     <dl class="dl-horizontal">
                         <dt>状态：</dt>
-                        <dd><span class="label label-primary">进行中</span></dd>
+                        <s:if test='#session.project.state==1'>
+                            <dd><span class="label label-primary">进行中</span></dd>
+                        </s:if>
+                        <s:if test='#session.project.state==0'>
+                            <dd><span class="label label-default">已完成</span></dd>
+                        </s:if>
                     </dl>
                 </div>
             </div>
@@ -127,7 +134,7 @@
 
                     </dl>
                 </div>
-                <div class="col-sm-7" id="cluster_info">
+                <div class="col-sm-7">
                     <dl class="dl-horizontal">
 
                         <dt><h3>最后更新：</h3></dt>
@@ -135,6 +142,12 @@
 
                         <dt><h3>创建于：</h3></dt>
                         <dd><h3><s:property value="#session.project.date"/></h3></dd>
+                    </dl>
+                </div>
+                <div class="col-sm-7">
+                    <dl class="dl-horizontal">
+                        <dt><h3>项目简介</h3></dt>
+                        <dd><h3><s:property value="#session.project.intro"/></h3></dd>
                     </dl>
                 </div>
             </div>
@@ -167,7 +180,7 @@
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
                                                 <div class="ibox-tools">
-                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
+                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" type="button" style="margin-right: 10px">上传附件</button>
                                                     <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="button" style="margin-right: 10px">发布</button>
                                                 </div>
                                             </div>
@@ -186,13 +199,15 @@
                                 </div>
                                 <div class="tab-pane" id="tab-2">
                                     <div id="toolbar1">
-                                        <s:if test="#session.rank==3">
-                                            <button id="searchUser" class="btn btn-info" data-toggle="modal" data-target="#newUser">
-                                                <i class="glyphicon glyphicon-zoom-in"></i> 邀请成员
-                                            </button>
-                                            <button id="alterPM" class="btn btn-warning" data-toggle="modal" data-target="#switchPM">
-                                                <i class="glyphicon"></i> 转移组长
-                                            </button>
+                                        <s:if test='#session.project.state==1'>
+                                            <s:if test="#session.project.rank==3">
+                                                <button id="searchUser" class="btn btn-info" data-toggle="modal" data-target="#newUser">
+                                                    <i class="glyphicon glyphicon-zoom-in"></i> 邀请成员
+                                                </button>
+                                                <button id="alterPM" class="btn btn-warning" data-toggle="modal" data-target="#switchPM">
+                                                    <i class="glyphicon"></i> 转移组长
+                                                </button>
+                                            </s:if>
                                         </s:if>
                                     </div>
                                     <div class="bootstrap-table" >
@@ -254,6 +269,7 @@
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../../js/plugins/layer/layer.min.js"></script>
@@ -301,7 +317,7 @@
         }
     );
 
-    var id_Project = "<%=session.getAttribute("Id_Project")%>";
+    var id_Project = "<s:property value="#session.project.id_Project"/>";
     var id_User = "<s:property value="#session.user.id_user"/>";
 
     $.ajax(
@@ -336,7 +352,7 @@
         }
     }
     function operateFormatter(value,row,index) {
-        <s:if test="#session.rank==3">
+        <s:if test="#session.project.rank==3">
         if (row.rank==5){
             return ['<a class="mod btn-xs btn-info">设为副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
@@ -361,6 +377,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
+                                showtoast("success", "设置成功", "成功设为副组长");
                                 elem.text("撤销副组长");
                                 elem.removeClass("btn-info");
                                 elem.addClass("btn-warning");
@@ -379,6 +396,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
+                            showtoast("success", "撤销成功", "成功撤销该副组长");
                             elem.text("设为副组长");
                             elem.removeClass("btn-warning");
                             elem.addClass("btn-info");
@@ -525,8 +543,11 @@
                     type: "Post",
                     async: "false",
                     success: function (result) {
-                        showtoast("success", "转移成功", "成功转移组长给该成员");
-                        location.href="user-jmpCurrentProjectList";
+                        if (result.res===true) {
+                            showtoast("success", "转移成功", "成功转移组长给该成员");
+                            location.href = "user-jmpCurrentProjectList";
+                        }
+                        else showtoast("error", "转移失败", "用户名不存在!");
                     },
                     error: function (result) {
                         showtoast("error", "转移失败", "用户名不存在!")

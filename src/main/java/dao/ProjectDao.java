@@ -10,7 +10,7 @@ public interface ProjectDao {
     List<UserEntity> getMember(ProjectEntity p);
     List<UserEntity> getMatched(ProjectEntity p, String name);
 
-    void alterPM(int idUser,int idProject);
+    boolean alterPM(int idUser,int idProject);
     void setVPM(int idUser,int idProject);
     void dismissVPM(int idUser,int idProject);
     void deleteMember(int idUser,int idProject);
