@@ -5,5 +5,9 @@ public class CaseStructureEntity {
     private int priority;
     private String participate;
     private String describe;
+
+    private String input;
+    private String output;
+
     
 }
