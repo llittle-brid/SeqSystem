@@ -5,17 +5,20 @@
 <html>
 <head>
     <meta charset="UTF8">
-    <title>创建项目</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>创建项目</title>
 
     <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="../../css/xzw.css" rel="stylesheet">
     <link href="../../css/lzf.css" rel="stylesheet">
 
@@ -31,13 +34,12 @@
     </ol>
 </div>
 
-<div class="form-horizontal col-md-offset-3 " style="margin-top:50px">
+<div class="form-horizontal col-md-offset-3 "style="margin-top:50px">
     <div class="form-group has-feedback">
 
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：*</label>
         <div class="col-sm-4">
-            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称">
-            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
+            <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称  (必填）" required="true"/>
         </div>
 
     </div>
@@ -47,10 +49,9 @@
     </div>
 
     <div class="form-group has-feedback">
-        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：</label>
+        <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：*</label>
         <div class="col-sm-4">
-            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称">
-            <a class="glyphicon glyphicon-remove btn form-control-feedback"style="pointer-events: auto"></a>
+            <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称（必填）" required="true"/>
         </div>
     </div>
 
@@ -62,7 +63,7 @@
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="../../img/u13.png" style="height: 18px;width: 20px"></button>　机构名称：</label>
         <div class="col-sm-4">
             <div class="input-group">
-                <input type="text" id="orgName" class="form-control text-center" autocomplete="true" placeholder="请输入机构名称" oninput="inputSuggest()">
+                <input type="text" id="orgName" class="form-control text-center" autocomplete="true" placeholder="选填，置空时为私人项目" oninput="inputSuggest()">
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
@@ -74,7 +75,6 @@
             <!-- /btn-group -->
         </div>
     </div>
-
 
     <div class="form-group">
         <br/>
@@ -92,10 +92,9 @@
         <br/>
     </div>
 
-    <div class="col-xs-10 col-xs-offset-1">
-        <label id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以继续添加信息，若信息无误请点击确认创建按钮</label>
+    <div class="col-xs-10 col-xs-offset-2">
+        <h4 id="mylabel" style="font-size: 13px;margin-left: 75px">请确认项目的相关信息，组员后续可以邀请加入，若信息无误请点击确认创建按钮</h4>
     </div>
-
 
     <div class="col-md-12">
         <br/><br/><br/>
@@ -103,13 +102,15 @@
 
     <div class="col-md-5 col-xs-offset-2">
         <span class="col-md-2 col-xs-offset-2">
-            <button id="create_button" class="btn-danger btn">确认创建</button>
+            <button type="button" class="btn-danger btn" onclick="create()">确认创建</button>
         </span>
-        <span class="col-md-2 col-xs-offset-2">
-            <a href="user-jmpHomepage"><button class="btn-default btn">取消创建</button></a>
+        <span class="col-md-2 col-xs-offset-3">
+            <a href="user-jmpHomepage"><button type="button" class="btn-default btn">取消创建</button></a>
         </span>
     </div>
 </div>
+
+
 
 </body>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
@@ -118,33 +119,33 @@
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/mjy.js"></script>
-
 <script>
 
-    $("button#create_button").click(function () {
-        var username = "${sessionScope.username}";
+</script>
+<script>
+
+    function create() {
         $.ajax({
             url: "project-create",
             data: {
-                ProName: $("input#proName").val(), DocName: $("input#docName").val(),
-                OrgName: $("input#orgName").val(), Intro: $("textarea#intro").val(),
-                Username: username
+                name: $("input#proName").val(), document_Name: $("input#docName").val(),
+                orgName: $("input#orgName").val(), intro: $("textarea#intro").val()
             },
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
-                if(result.res===true)  {
-                    showtoast("success", "创建成功", "操作成功")
-                    location.href = "project-jmpProjectInfo"
+                if(result.res===true) {
+                    showtoast("success", "创建成功", "操作成功");
+                    location.href = "user-jmpCurrentProjectList";
                 }
-                else  showtoast("error", "创建失败", "操作失败")
+                else  showtoast("error", "创建失败", "操作失败");
             },
             error: function (result) {
-                showtoast("error", "创建失败", "操作失败")
+                showtoast("error", "创建失败", "操作失败");
             }
         })
-    })
+    };
     function inputSuggest() {
         var orgName=$("input#orgName");
         $.ajax({
@@ -160,9 +161,13 @@
 
                 $("input#orgName").bsSuggest("destroy");
                 $("#orgName").bsSuggest({
+                    effectiveFields:["NAME"],
                     idField:"ID_ORGANIZATION",
                     keyField:"NAME",
-                    data:suggest
+                    data:suggest,
+                    listStyle: {
+                        'text-align': 'center'
+                    }
                 }).on('onDataRequestSuccess', function (e, result) {
                     console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
                 });
@@ -175,7 +180,7 @@
 
     $(function () {
         $('a').click(function () {
-            $('input')[0].value = "";
+            $('textarea')[0].value = "";
         })
     })
 </script>

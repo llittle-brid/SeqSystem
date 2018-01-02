@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +56,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>>><a href="user-jmpUsercomponent"><span class="lzf_b">用户构件</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpLibrary"><span class="lzf_b">构件库</span></a>>><a href="user-jmpPicturecomponent"><span class="lzf_b">图片构件</span></a>
                 </strong>
             </li>
         </ol>
@@ -68,7 +66,7 @@
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                 <div style="float: left;height: 70px;width:300px;padding: 20px 20px 0px 20px">
                     <div style="float: left;margin: 0px 0px 0px 50px">
-                        <h2> OA系统用户构件</h2>
+                        <h2> OA系统图片构件</h2>
                     </div>
                 </div>
                 <div style="float: left;height: 70px;width:150px;padding: 40px 0px 20px 30px">
@@ -87,81 +85,47 @@
                     <div style="margin:30px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
                 </div>
             </div>
-            <div id="mid" style="clear: both;height:450px;width:1200px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
-                <div id="div1" style="background-color: white;height: 150px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:30px;margin: 10px 0px 0px 10px;float: left">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户名</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：系统管理员</span>
+            <div id="mid" style="clear: both;height:700px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
+                <div id="div1" style="background-color: white;margin-left:90px" class="col-sm-5 contact-box">
+                    <div style="margin: 10px 10px 10px 15px;float: left">
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
+                        <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
-                    <div style="height:60px;margin: 0px 0px 0px 10px;float: left; overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户描述</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;float: left">
-                        <div style="width: 60px;float: left"><span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户权限:</span></div>
-                        <div style="float: left">
-                                <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
-                                <ul>
-                                    <li><span>登陆</span></li>
-                            <li><span>系统管理</span></li>
-                            </ul>
-                            </span>
-                        </div>
+                    <div style="margin: 20px 0px 0px 10px;float: left">
+                        <p style="font-size: 20px">用例图</p>
+                        <div style="width: 250px;height:170px;word-wrap: break-word;font-size: 14px;overflow: hidden"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p></div>
                     </div>
                 </div>
-                <div id="div2" style="background-color: white;height: 150px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:30px;margin: 10px 0px 0px 10px;float: left">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户名</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：组织机构管理员</span>
+                <div id="div2" style="background-color: white;margin-left: 50px" class="col-sm-5 contact-box">
+
+                    <div style="margin: 10px 10px 10px 15px;float: left">
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
+                        <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
-                    <div style="height:60px;margin: 0px 0px 0px 10px;float: left; overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户描述</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;float: left">
-                        <div style="width: 60px;float: left"><span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户权限:</span></div>
-                        <div style="float: left">
-                                <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
-                                <ul>
-                                    <li><span>登陆</span></li>
-                            <li><span>系统管理</span></li>
-                            </ul>
-                            </span>
-                        </div>
+                    <div style="margin: 20px 0px 0px 10px;float: left">
+                        <p style="font-size: 20px">用例图</p>
+                        <div style="width: 250px;height:170px;word-wrap: break-word;font-size: 14px;overflow: hidden"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p></div>
                     </div>
                 </div>
-                <div id="div3" style="background-color: white;height: 150px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:30px;margin: 10px 0px 0px 10px;float: left">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户名</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：文档库管理员</span>
+
+                <div id="div3" style="background-color: white;margin-left:90px" class="col-sm-5 contact-box">
+                    <div style="margin: 10px 10px 10px 15px;float: left">
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
+                        <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
-                    <div style="height:60px;margin: 0px 0px 0px 10px;float: left; overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户描述</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;float: left">
-                        <div style="width: 60px;float: left"><span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户权限:</span></div>
-                        <div style="float: left">
-                                <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
-                                <ul>
-                                    <li><span>登陆</span></li>
-                            <li><span>系统管理</span></li>
-                            </ul>
-                            </span>
-                        </div>
+                    <div style="margin: 20px 0px 0px 10px;float: left">
+                        <p style="font-size: 20px">类图</p>
+                        <div style="width: 250px;height:170px;word-wrap: break-word;font-size: 14px;overflow: hidden"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p></div>
                     </div>
                 </div>
-                <div id="div4" style="background-color: white;height: 150px;width:505px;float:left;margin: 0px 0px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:30px;margin: 10px 0px 0px 10px;float: left">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户名</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：新闻发布管理员</span>
+                <div id="div4" style="background-color: white;margin-left: 50px" class="col-sm-5 contact-box">
+                    <div style="margin: 10px 10px 10px 15px;float: left">
+                        <div style="float: left"><img src="/img/div11.png" height="200" width="200"/> </div>
+                        <div style="clear:both;float: right"><img src="/img/magnifier_2.png" height="25" width="25"/></div>
                     </div>
-                    <div style="height:60px;margin: 0px 0px 0px 10px;float: left; overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户描述</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;">：Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. </span>
-                    </div>
-                    <div style="height:40px;margin: 0px 0px 0px 10px;float: left">
-                        <div style="width: 60px;float: left"><span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用户权限:</span></div>
-                        <div style="float: left">
-                                <span style="font-family:'Arial Normal', 'Arial';font-weight:400;">
-                                <ul>
-                                    <li><span>登陆</span></li>
-                            <li><span>系统管理</span></li>
-                            </ul>
-                            </span>
-                        </div>
+                    <div style="margin: 20px 0px 0px 10px;float: left">
+                        <p style="font-size: 20px">流程图</p>
+                        <div style="width: 250px;height:170px;word-wrap: break-word;font-size: 14px;overflow: hidden"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p></div>
                     </div>
                 </div>
             </div>
@@ -200,6 +164,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -220,3 +185,4 @@
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
+

@@ -29,10 +29,7 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
     private Map<String, Object> session;
     private Map<String, Object> dataMap;
 
-    /**
-     * 显示页面信息
-     * @return
-     */
+
     public String showList() {
         dataMap = new HashMap<String, Object>();
         personalcenterdao = new PersonalCenterDaoImp();
@@ -48,18 +45,12 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
         return "orgList";
     }
 
-    /**
-     * 转跳到个人中心
-     * @return
-     */
+
     public String jmpMyprofile(){
         return "myprofilePage";
     }
 
-    /**
-     *
-     * @throws Exception
-     */
+
     @Override
     public void prepare() throws Exception {
         PersonaCenter = new PersonalCenterEntity();

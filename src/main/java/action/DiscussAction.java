@@ -48,6 +48,14 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
 
+    public String commit2Project(){
+        int id_project = proDiscussEntity.getId_Project();
+        int id_user = proDiscussEntity.getId_user();
+        proDiscussDao = new ProDiscussDaoImp();
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent);
+        return "Re";
+    }
+
     public String getCatalogDis(){
         catalogDao=new CatalogDaoImp();
         proDiscussDao=new ProDiscussDaoImp();
@@ -59,15 +67,27 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         int fourth=Integer.valueOf(tempList[3]);
         int id_catalog=catalogDao.getIdCatalog(id_document,first,second,third,fourth);
         List<ProDiscussEntity> discussList=proDiscussDao.getCatalogDis(id_catalog);
-        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,1);
+        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,1,1);
         dataMap.put("wrapperList",wrapperList);
         dataMap.put("test",1);
+        return "Re";
+    }
+
+    public String getProjectDis(){
+        int id_project = proDiscussEntity.getId_Project();
+        int id_user = proDiscussEntity.getId_user();
+        proDiscussDao=new ProDiscussDaoImp();
+        dataMap=new HashMap<>();
+        List<ProDiscussEntity> discussList = proDiscussDao.getProjectDis(id_project);
+        List<ProDIscussWrapper> wrapperList = ProDIscussWrapper.getWrapperList(discussList,id_user,id_project);
+        dataMap.put("wrapperList",wrapperList);
         return "Re";
     }
 
     public String delete(){
         proDiscussDao=new ProDiscussDaoImp();
         proDiscussDao.delete(proDiscussEntity.getId_pro_discuss());
+
         return "Re";
     }
     public void prepareDelete(){
