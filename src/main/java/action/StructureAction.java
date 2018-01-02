@@ -42,7 +42,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
 
         List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
         ActionContext.getContext().getValueStack().set("listdis",discussAll);
-        System.out.println(discussAll);
+
         int discussnum=librarydiscussDao.getcount(structure.getId_library());
         int numdis=discussnum/4+1;
         request.put("pagedis",pagedis);
