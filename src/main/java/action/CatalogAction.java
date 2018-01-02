@@ -31,6 +31,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private String catalogIndex;
     private int place;
     private String title;
+    private String content;
 
     public String getIndex(){
         dataMap = new HashMap<String, Object>();
@@ -134,7 +135,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         TemplateDao templateDao=new TemplateDaoImp();
         TemplateEntity templateEntity=templateDao.getTemplate(catalogEntity.getId_template());
         dataMap=new HashMap<>();
-        dataMap.put("template",templateEntity.getContent());
+        dataMap.put("template",templateEntity);
         dataMap.put("catalogEntity",catalogEntity);
         return "Re";
     }
@@ -147,6 +148,32 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         int fourth=Integer.valueOf(tempList[3]);
         CatalogDao catalogDao=new CatalogDaoImp();
         catalogDao.rename(title,documentId,first,second,third,fourth);
+        return "Re";
+    }
+    public  String getRoleCount(){
+        CatalogDao catalogDao=new CatalogDaoImp();
+        dataMap=new HashMap<>();
+        dataMap.put("roleCount",catalogDao.getRoleCount(documentId));
+        return "Re";
+    }
+    public String saveTemplateOne(){
+        CatalogDao catalogDao=new CatalogDaoImp();
+        String[] tempList=catalogIndex.split(" ");
+        int first=Integer.valueOf(tempList[0]);
+        int second=Integer.valueOf(tempList[1]);
+        int third=Integer.valueOf(tempList[2]);
+        int fourth=Integer.valueOf(tempList[3]);
+        catalogDao.saveTemplateOne(documentId,first,second,third,fourth,content);
+        return "Re";
+    }
+
+    public String getRoles(){
+        CatalogDao catalogDao=new CatalogDaoImp();
+        String[] tempList=catalogIndex.split(" ");
+        int first=Integer.valueOf(tempList[0]);
+        int second=Integer.valueOf(tempList[1]);
+        int third=Integer.valueOf(tempList[2]);
+        int fourth=Integer.valueOf(tempList[3]);
         return "Re";
     }
 
@@ -203,5 +230,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

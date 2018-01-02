@@ -12,6 +12,7 @@ import daoImp.PersonalCenterDaoImp;
 import daoImp.UserDaoImp;
 import entity.PersonalCenterEntity;
 import entity.UserEntity;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -40,19 +41,16 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private String newPassword;
     private Map<String, Object> dataMap;
 
-
-
     public String login() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         boolean res = userDao.login(user.getName(), user.getPassword());
         dataMap.put("res", res);
-        if(res==true)
-        {   user=userDao.getOne(user.getName());
+        if(res==true) {
+            user = userDao.getOne(user.getName());
             session.put("user",user);
             System.out.println(user);
         }
-
         return "RES";
     }
 
@@ -101,6 +99,10 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
+        userDao = new UserDaoImp();
+        user = (UserEntity)session.get("user");
+        session.put("countnow",userDao.projectNumberNow(user.getId_user()));
+        session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));
@@ -130,7 +132,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "completedProjectList";
     }
 
-
     @Override
     public UserEntity getModel() {
         return user;
@@ -158,8 +159,6 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public void setDataMap(Map<String, Object> dataMap) {
         this.dataMap = dataMap;
     }
-
-
 
     public void setTempPassword(String tempPassword) {
         this.tempPassword = tempPassword;

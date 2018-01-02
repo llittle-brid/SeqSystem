@@ -161,4 +161,16 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         update(sql,title,id_document,first,second,third,fourth);
     }
 
+    @Override
+    public int getRoleCount(int id_document) {
+        String sql="select count(*) from CATALOG where id_document=? and id_template=2";
+        return Integer.valueOf(getForValue(sql,id_document).toString());
+    }
+
+    @Override
+    public void saveTemplateOne(int id_document, int first, int second, int third, int fourth, String content) {
+        String sql="update CATALOG set content=? where id_document=? and first_index=? and second_index=? and third_index=? and fourth_index=?";
+        update(sql,content,id_document,first,second,third,fourth);
+    }
+
 }

@@ -81,6 +81,13 @@ body.mini-navbar .navbar-default .nav >#allIndex> li > a {
     background: #38283c;
     color: #fff
 }
-
-.diss-blue{
+/*id_temp=3*/
+.table .funTr th{
+    text-align: center;
+}
+.table .usableTr th{
+    text-align: left;
+}
+.table .end th{
+    text-align: center;
 }

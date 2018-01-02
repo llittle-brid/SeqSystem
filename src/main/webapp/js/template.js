@@ -33,7 +33,7 @@ function disReload() {
                     content+=" btn-danger ";
                 else content+=" btn-default ";
                 content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
-                content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
+                content+="</div> <div class='ibox-content'> <div class=' wrapper'>";
                 content+=tempDis.content+"  </div> </div> </div> </div>";
             }
             $("div.allDiscuss").html(content);
@@ -60,10 +60,22 @@ $(document).on("click",".dic",function () {
             $("div.catalogNoneContent").hide();
             $("div.catalogNotNoneContent").show();
             //模板生成
-            content=result.template;
-            //附件模板生成
-            content+="<hr> <div  class='ibox-tools' style='margin-top: -10px'> <h3 class='col-lg-push-1'> <i class='fa fa-file-text-o ' style='color: #26d7d9' title='下载'> 附件：内容摘要.doc</i> <button  class='btn btn-danger  btn-xs col-lg-push-1 m-l-sm' onclick='save()' type='button' style='margin-top: -3px'>删除</button> </h3> </div>";
-            $("div.content").html(content);
+            template=result.template;
+            $("div.content").html(template.content);
+            if(template.id_template=="3"){//加载角色
+                $.ajax({
+                    url: "catalog-getRoles",
+                    data: { documentId:documentId,catalogIndex:catalogIndex},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                    },
+                    error: function (result) {
+                        showtoast("dangerous","失败","获取失败")
+                    }
+                })
+            }
             var catalog=result.catalogEntity,title="";
             if (catalog.first_index!="0")title+=catalog.first_index;
              if(catalog.second_index!="0")title+="."+catalog.second_index;
@@ -229,6 +241,7 @@ $(".li_delete").click(function () {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "删除",
+            cancelButtonText: "取消",
             closeOnConfirm: false
         }, function () {
             catalogIndex=$(nowClick).children("span.catalogIndex").text()
@@ -314,98 +327,121 @@ function getNextRank(nowRank) {
 }
 //新增目录
 function catalogAdd() {
-    var title=$("input#add_title").val(),id_template=$("#add_id_template").val()
-    var place=$("input[name='add_place']:checked").val(),catalogIndex=$(nowClick).children("span.catalogIndex").text();
-    var temp=$(nowClick).attr("class");
-    var classList=temp.split(' ');
-    var nowRank=classList[1];
 
-    if (place=="0"){//同级,传最后一个元素位置
-        catalogIndex=$(nowClick).parent().parent().children("li:last-child").children("a").children("span.catalogIndex").text();
+    var title = $("input#add_title").val(), id_template = $("#add_id_template").val()
+    var place = $("input[name='add_place']:checked").val(),
+        catalogIndex = $(nowClick).children("span.catalogIndex").text();
+    var temp = $(nowClick).attr("class");
+    var classList = temp.split(' ');
+    var nowRank = classList[1];
+    //需要判断文档能否新建功能模块
+    if (id_template == "3") {
         $.ajax({
-            url: "catalog-addState2",
-            data: {title: title,id_template:id_template,catalogIndex:catalogIndex, id_document:documentId},
+            url: "catalog-getRoleCount",
+            data: {documentId: documentId},
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
-                var lastNum,nextNum;
-                lastNum=nowClick.parent().parent().children("li:last-child").children("a").children("span:first-child").text();
-                nextNum=(parseInt(lastNum)+1);
-                var content="<li> <a href='#' class='dic "+nowRank+"'> <span class='nav-label'>"+nextNum+"</span><span class='catalogIndex' style='display: none'>"+result.spanText+"</span><span class='nav-label col-md-offset-1 indexName'>"+title+"</span></a></li>";
-                nowClick.parent().parent().append(content);
+                if (parseInt(result.roleCount) <= 0) {
+                    showtoast("warning", "失败", "需要先创建用户");
+                    return;
+                }
             },
             error: function (result) {
-                showtoast("dangerous","加载失败","加载目录失败")
+                showtoast("dangerous", "加载失败", "加载目录失败")
             }
         })
     }
-    else if(place=="1") {//下一级别，需要新增ul，传当前级别位置
-        var nextRank = getNextRank(nowRank), nowNum, nextNum;
-        if (typeof(nowClick.parent().children("ul").html()) == "undefined") {//需要新增一个ul
-            catalogIndex=nowClick.children("span.catalogIndex").text();
-            $.ajax({
-                url: "catalog-addState1",
-                data: {title: title,id_template:id_template,catalogIndex:catalogIndex,id_document:documentId},
-                dataType: "json",
-                type: "Post",
-                async: "false",
-                success: function (result) {
-                    nextNum = 1;
-                    nowClick.parent().append(" <ul class='nav nav-" + nextRank + "-level'></ul>")
-                    var content = "<li> <a href='#' class='dic " + nextRank + "'> <span class='nav-label'>" + nextNum + "</span><span class='catalogIndex' style='display: none'>"+result.spanText+"</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>";
-                    nowClick.parent().children("ul").append(content);
-                    $('#side-menu').metisMenu();
-                    $(nowClick).click();
-                },
-                error: function (result) {
-                    showtoast("dangerous","加载失败","加载目录失败")
-                }
-            })
-        }
-        else {//不需要新增，传最后一个元素的位置
-            catalogIndex=nowClick.parent().children("ul").children("li:last-child").children("a").children("span.catalogIndex").text();;
+
+        if (place == "0") {//同级,传最后一个元素位置
+            catalogIndex = $(nowClick).parent().parent().children("li:last-child").children("a").children("span.catalogIndex").text();
             $.ajax({
                 url: "catalog-addState2",
-                data: {title: title,id_template:id_template,catalogIndex:catalogIndex,id_document:documentId},
+                data: {title: title, id_template: id_template, catalogIndex: catalogIndex, id_document: documentId},
                 dataType: "json",
                 type: "Post",
                 async: "false",
                 success: function (result) {
-                    nowNum = nowClick.parent().children("ul").children("li:last-child").children("a").children("span:first-child").text();
-                    nextNum = (parseInt(nowNum) + 1);
-                    var content = "<li> <a href='#' class='dic " + nextRank + "'> <span class='nav-label'>" + nextNum + "</span><span class='catalogIndex' style='display: none'>"+result.spanText+"</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>";
-                    nowClick.parent().children("ul").append(content);
+                    var lastNum, nextNum;
+                    lastNum = nowClick.parent().parent().children("li:last-child").children("a").children("span:first-child").text();
+                    nextNum = (parseInt(lastNum) + 1);
+                    var content = "<li> <a href='#' class='dic " + nowRank + "'> <span class='nav-label'>" + nextNum + "</span><span class='catalogIndex' style='display: none'>" + result.spanText + "</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>";
+                    nowClick.parent().parent().append(content);
                 },
                 error: function (result) {
-                    showtoast("dangerous","加载失败","加载目录失败")
+                    showtoast("dangerous", "加载失败", "加载目录失败")
                 }
             })
-
-
         }
+        else if (place == "1") {//下一级别，需要新增ul，传当前级别位置
+            var nextRank = getNextRank(nowRank), nowNum, nextNum;
+            if (typeof(nowClick.parent().children("ul").html()) == "undefined") {//需要新增一个ul
+                catalogIndex = nowClick.children("span.catalogIndex").text();
+                $.ajax({
+                    url: "catalog-addState1",
+                    data: {title: title, id_template: id_template, catalogIndex: catalogIndex, id_document: documentId},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        nextNum = 1;
+                        nowClick.parent().append(" <ul class='nav nav-" + nextRank + "-level'></ul>")
+                        var content = "<li> <a href='#' class='dic " + nextRank + "'> <span class='nav-label'>" + nextNum + "</span><span class='catalogIndex' style='display: none'>" + result.spanText + "</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>";
+                        nowClick.parent().children("ul").append(content);
+                        $('#side-menu').metisMenu();
+                        $(nowClick).click();
+                    },
+                    error: function (result) {
+                        showtoast("dangerous", "加载失败", "加载目录失败")
+                    }
+                })
+            }
+            else {//不需要新增，传最后一个元素的位置
+                catalogIndex = nowClick.parent().children("ul").children("li:last-child").children("a").children("span.catalogIndex").text();
+                ;
+                $.ajax({
+                    url: "catalog-addState2",
+                    data: {title: title, id_template: id_template, catalogIndex: catalogIndex, id_document: documentId},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        nowNum = nowClick.parent().children("ul").children("li:last-child").children("a").children("span:first-child").text();
+                        nextNum = (parseInt(nowNum) + 1);
+                        var content = "<li> <a href='#' class='dic " + nextRank + "'> <span class='nav-label'>" + nextNum + "</span><span class='catalogIndex' style='display: none'>" + result.spanText + "</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>";
+                        nowClick.parent().children("ul").append(content);
+                    },
+                    error: function (result) {
+                        showtoast("dangerous", "加载失败", "加载目录失败")
+                    }
+                })
 
 
-    }
+            }
+        }
 }
 //第一次新增目录
 function catalogNew() {
     var title=$("input#new_title").val(),id_template=$("#new_id_template").val();
-    $.ajax({
-        url: "catalog-newCatalog",
-        data: {title:title, id_document:documentId,id_template:id_template},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            $("div#allIndex").html("<li> <a href='#' class='dic first'> <span class='nav-label'>1</span><span class='catalogIndex' style='display: none'>1 0 0 0</span><span class='nav-label col-md-offset-1 indexName'>"+title+"</span></a></li>")
-            $('#side-menu').metisMenu();
-            showtoast("success","成功","新增目录成功")
-        },
-        error: function (result) {
-            showtoast("dangerous","失败","新增目录失败")
-        }
-    })
+    if (id_template=="3")showtoast("warning","失败","需要先创建用户")
+    else {
+        $.ajax({
+            url: "catalog-newCatalog",
+            data: {title: title, id_document: documentId, id_template: id_template},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                $("div#allIndex").html("<li> <a href='#' class='dic first'> <span class='nav-label'>1</span><span class='catalogIndex' style='display: none'>1 0 0 0</span><span class='nav-label col-md-offset-1 indexName'>" + title + "</span></a></li>")
+                $('#side-menu').metisMenu();
+                showtoast("success", "成功", "新增目录成功")
+            },
+            error: function (result) {
+                showtoast("dangerous", "失败", "新增目录失败")
+            }
+        })
+    }
     
 }
 //评论提交
@@ -439,6 +475,7 @@ $(document).on("click",".deleteDis",function () {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "删除",
+            cancelButtonText: "取消",
             closeOnConfirm: false
         }, function () {
             $.ajax({
@@ -468,7 +505,9 @@ function catalogRename() {
         type: "Post",
         async: "false",
         success: function (result) {
-            $("#catalog_title").text(title)
+            var old_title=$("#catalog_title").text();
+            var temp=old_title.split(" ")
+            $("#catalog_title").text(temp[0]+" "+title)
             $(nowClick).children("span.indexName").text(title)
             showtoast("success","成功","修改标题成功");
         },
@@ -479,17 +518,23 @@ function catalogRename() {
 }
 //模板编辑按钮
 function temp_edit() {
-    $("#eg").addClass("no-padding");$(".click1edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
+    $("#eg").addClass("no-padding");$(".click1edit").summernote({
+        height:100,
+        minHeight:100,
+        maxHeight:100,
+        lang:"zh-CN",focus:true,toolbar: [
+        // ['style', ['bold', 'italic', 'underline', 'clear']],
+        // ['fontsize', ['fontsize']],
+        // ['color', ['color']],
+        // ['para', ['paragraph']],
+        // ['table', ['table']],
         ['picture', ['picture']],
         ['fullscreen', ['fullscreen']]
     ]})
+    if($("#describe").code().trim()=="暂无内容")$("#describe").code("")
     $("#edit").attr("style","display:none");
     $("#save").attr("style","display:show");
+    $(".dis").removeAttr("disabled")
 }
 //模板保存按钮
 function temp_save() {
@@ -497,15 +542,35 @@ function temp_save() {
     var aHTML=$(".click1edit").code();$(".click1edit").destroy();
     $("#save").attr("style","display:none");
     $("#edit").attr("style","display:show");
+
+    var id_template = $("#add_id_template").val(),catalogIndex = $(nowClick).children("span.catalogIndex").text();
+        if (id_template == "1") {//通用
+            var describe=$("#describe").code();
+            $.ajax({
+                url: "catalog-saveTemplateOne",
+                data: {documentId: documentId, catalogIndex: catalogIndex, content: describe},
+                dataType: "json",
+                type: "Post",
+                async: "false",
+                success: function (result) {
+                    showtoast("success", "保存成功", "内容保存成功")
+                },
+                error: function (result) {
+                    showtoast("dangerous", "保存失败", "内容保存失败")
+                }
+            })
+        }
+    $(".dis").attr("disabled","true");
 }
 //评论编辑按钮
 function edit() {
-    $("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
+    $("#eg").addClass("no-padding");$(".click2edit").summernote({
+        lang:"zh-CN",focus:true,toolbar: [
+        // ['style', ['bold', 'italic', 'underline', 'clear']],
+        // ['fontsize', ['fontsize']],
+        // ['color', ['color']],
+        // ['para', ['paragraph']],
+        // ['table', ['table']],
         ['picture', ['picture']]
     ]})
 }

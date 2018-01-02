@@ -36,7 +36,7 @@
             <a href="user-jmpCurrentProjectList"><img src="../../img/Home1.png" height="160px"><br/></a>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
-            <span style="color: #ff0000"> <%=session.getAttribute("countnow") %></span>
+            <span style="color: #ff0000"> <s:property value="#session.countnow"/></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">

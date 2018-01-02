@@ -15,8 +15,14 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     public boolean login(String name,String password)
     {
         String sql="SELECT COUNT(*) from USER WHERE NAME=? and PASSWORD=?";
+//        String sql1 = "SELECT STATUS FROM USER WHERE NAME=? and PASSWORD=?";
+//        String sql2 = "UPDATE USER SET STATUS = 1 WHERE NAME=? AND PASSWORD=?";
         int count=Integer.valueOf(getForValue(sql,name,password).toString());
-        if(count==1)return true;
+//        int status = Integer.valueOf(getForValue(sql1,name,password).toString());
+        if(count==1) {
+//            update(sql2,name,password);
+            return true;
+        }
         else return false;
     }
 
@@ -50,7 +56,11 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         UserEntity user1 = get(sql, name);
         return user1;
     }
-
+    public UserEntity getOne1(int id) {
+        String sql = "select * from USER where ID_USER=?";
+        UserEntity user1 = get(sql, id);
+        return user1;
+    }
 
     public List<UserEntity> getAll() {
         String sql = "select * from USER ";
@@ -66,6 +76,20 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
 
     public int orgManager(int id){
         String sql="select count(*) from ORGANIZATION where ID_USER=?";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
+        return count;
+    }
+
+    @Override
+    public int projectNumberNow(int id) {
+        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=1";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
+        return count;
+    }
+
+    @Override
+    public int projectNumberHistory(int id) {
+        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=0";
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
