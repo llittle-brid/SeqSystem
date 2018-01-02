@@ -107,6 +107,22 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             }
             ActionContext.getContext().getValueStack().set("list3",casList);
         }
+        else if(id_template==4)
+        {
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
+            int count=structureDao.count(structure.getId_library());
+            int num=count/4+1;
+            request.put("num",num);
+            request.put("page",page);
+            request.put("id_library",structure.getId_library());
+            request.put("id_template",id_template);
+            List psList=new LinkedList<>();
+            for(int i=0;i<structureAll.size();i++)
+            {   PictureStructureEntity ps = gson.fromJson(structureAll.get(i).getContent(), PictureStructureEntity.class);
+                psList.add(ps);
+            }
+            ActionContext.getContext().getValueStack().set("list4",psList);
+        }
 
         return "get";
     }
