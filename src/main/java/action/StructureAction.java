@@ -16,15 +16,15 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import util.Json;
 import com.google.gson.Gson;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 public class StructureAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<StructureEntity>, Preparable {
     private StructureDao structureDao;
     private LibrarydiscussDao librarydiscussDao;
     private LibraryDao libraryDao;
     private LibraryEntity library;
+    private LibrarydiscussEntity librarydiscuss;
     private StructureEntity structure;
     private Map<String,Object> request;
     private Map<String,Object> session;
@@ -41,7 +41,12 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         libraryDao=new LibraryDaoImp();
 
         List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
-        ActionContext.getContext().getValueStack().set("listdis",discussAll);
+        List<LiDicussE> ldList=new LinkedList<>();
+        for (int i = 0; i < discussAll.size(); i++) {
+            Date a=new Date();
+            ldList.add(new LiDicussE(discussAll.get(i),discussAll.get(i).getTime().getTime()-a.getTime()));
+        }
+        ActionContext.getContext().getValueStack().set("listdis",ldList);
 
         int discussnum=librarydiscussDao.getcount(structure.getId_library());
         int numdis=discussnum/4+1;

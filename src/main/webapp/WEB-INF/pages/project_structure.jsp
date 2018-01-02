@@ -168,10 +168,10 @@
                 <div class="row" style="width: 750px;margin-left: 370px">
                     <div class="ibox float-e-margins " style="margin-bottom: 10px">
                         <div class="ibox-title">
-                            <h5><s:property value="name"/></h5>
-                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
-                            <input style="display: none" class="id_dis" value="<s:property value="id_lib_discuss" />">
-                            <s:if test="#request.id_user==#session.user.id_user"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            <h5><s:property value="LibrarydiscussEntity.name"/></h5>
+                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="LibrarydiscussEntity.time" format="yyyy-MM-dd HH:mm:ss"/></h5>
+                            <input style="display: none" class="id_dis" value="<s:property value="LibrarydiscussEntity.id_lib_discuss" />">
+                            <s:if test="#request.id_user==#session.user.id_user&&#request.state<=7200000"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
                             </s:if>
                             <s:else><button  class="btn btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
                             </s:else>
@@ -181,7 +181,7 @@
                         </div>
                         <div class="ibox-content">
                             <div class=" wrapper">
-                                <s:property value="content"/>
+                                <s:property escapeHtml="false" value="LibrarydiscussEntity.content"/>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,6 @@
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
-<script src="../js/template.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -331,6 +330,23 @@
             });}
     })
 </script>
+<script>
+        $(".click2edit").addClass("no-padding");
+        $(".click2edit").summernote({
+            height: 100,
+            minHeight: 100,
+            maxHeight: 100,
+            lang: "zh-CN", focus: true, toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['paragraph']],
+                ['table', ['table']],
+                ['picture', ['picture']],
+                ['fullscreen', ['fullscreen']]
+            ]
+        })
 
+</script>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>
