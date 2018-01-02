@@ -25,14 +25,21 @@
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
     <!-- bootstrap-table -->
     <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
     <link href="../../css/z_style.css" rel="stylesheet">
     <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
     <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="../../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+    <%--jQueryFileUpload--%>
+    <link href="../../css/plugins/jQueryFileUpload/jquery.fileupload.css" rel="stylesheet">
+    <link href="../../css/plugins/jQueryFileUpload/jquery.fileupload-ui.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg animated fadeInDown">
@@ -87,7 +94,13 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpCurrentProjectList">当前项目<span class="lzf_b"></span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >>
+                    <s:if test='#session.project.state==1'>
+                        <a href="user-jmpCurrentProjectList">当前项目<span class="lzf_b"></span></a>
+                    </s:if>
+                    <s:if test='#session.project.state==0'>
+                        <a href="user-jmpCompletedProjectList">历史项目<span class="lzf_b"></span></a>
+                    </s:if>
                     >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>
                 </strong>
             </li>
@@ -160,7 +173,7 @@
                                     <li>
                                         <a href="#tab-1" data-toggle="tab">讨论区</a>
                                     </li>
-                                    <li class="">
+                                    <li>
                                         <a href="#tab-2" data-toggle="tab">成员管理</a>
                                     </li>
                                     <li>
@@ -179,10 +192,49 @@
                                         <div class="ibox float-e-margins">
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
-                                                <div class="ibox-tools">
-                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" type="button" style="margin-right: 10px">上传附件</button>
-                                                    <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="button" style="margin-right: 10px">发布</button>
-                                                </div>
+                                                <%--<div class="ibox-tools">--%>
+                                                        <%--<span class="btn btn-primary btn-xs fileinput-button">--%>
+                                                            <%--<i class="glyphicon glyphicon-plus"></i>--%>
+                                                            <%--&lt;%&ndash;<span>上传附件</span>&ndash;%&gt;--%>
+                                                            <%--<!-- The file input field used as target for the file upload widget -->--%>
+                                                            <%--<input id="fileupload" type="file" name="files[]" multiple>--%>
+                                                        <%--</span>--%>
+                                                    <%--<button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="submit" style="margin-right: 10px">发布</button>--%>
+                                                <%--</div>--%>
+                                                <!-- The file upload form used as target for the file upload widget -->
+                                                <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
+                                                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                                                    <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+                                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                                    <div class="row fileupload-buttonbar">
+                                                        <div class="col-lg-7">
+                                                            <!-- The fileinput-button span is used to style the file input field as button -->
+                                                            <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+                                                                <i class="glyphicon glyphicon-plus"></i>
+                                                                <span>Add files...</span>
+                                                                <input type="file" name="files[]" multiple ng-disabled="disabled">
+                                                            </span>
+                                                            <button type="button" class="btn btn-primary start" data-ng-click="submit()">
+                                                                <i class="glyphicon glyphicon-upload"></i>
+                                                                <span>Start upload</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
+                                                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                                                <span>Cancel upload</span>
+                                                            </button>
+                                                            <!-- The global file processing state -->
+                                                            <span class="fileupload-process"></span>
+                                                        </div>
+                                                        <!-- The global progress state -->
+                                                        <div class="col-lg-5 fade" data-ng-class="{in: active()}">
+                                                            <!-- The global progress bar -->
+                                                            <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+                                                            <!-- The extended global progress state -->
+                                                            <div class="progress-extended">&nbsp;</div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
                                             </div>
                                             <div class="ibox-content">
                                                 <div class="click2edit wrapper discuss">
@@ -268,8 +320,10 @@
 </body>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<%--bootstrap-table--%>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
 <script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="../../js/plugins/layer/layer.min.js"></script>
@@ -278,12 +332,43 @@
 <script src="../../js/plugins/pace/pace.min.js"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 <script src="../../js/mjy.js"></script>
-<script src="../../js/template.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
+
 <script src="../../js/plugins/summernote/summernote.min.js"></script>
 <script src="../../js/plugins/summernote/summernote-zh-CN.js"></script>
+
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="../../js/plugins/jQueryFileUpload/blueimp/tmpl.min.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/blueimp/jquery.blueimp-gallery.min.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/blueimp/load-image.all.min.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/blueimp/canvas-to-blob.min.js"></script>
+
+<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-process.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/jquery.iframe-transport.js"></script>
+
+<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-ui.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-jquery-ui.js"></script>
+
+<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-angular.js"></script>
+<script src="../../js/plugins/jQueryFileUpload/app.js"></script>
+
+<script>
+    $(function () {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('<p/>').text(file.name).appendTo(document.body);
+                });
+            }
+        });
+    });
+</script>
+
 <script>
     $('#projectMember').bootstrapTable({
             columns: [
@@ -606,8 +691,12 @@
         });
 </script>
 
+
+<script>window.addEventListener('load',function(){window.cookieconsent.initialise({palette:{popup:{background:'#428bca'},button:{background:'#fff'}}})})</script>
 <%--评论区--%>
 <script>
+    var id_Project = "<s:property value="#session.project.id_Project"/>";
+    var id_User = "<s:property value="#session.user.id_user"/>";
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
@@ -637,10 +726,15 @@
                     if (state=="2")
                         content+=" btn-danger ";
                     else content+=" btn-default ";
-                    content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
-                    content+="<div class='ibox-tools'> <i class='fa fa-file-text-o ' style='color: #26d7d9'  title='下载'> 附件：内容摘要.doc</i> </div> </div> <div class='ibox-content'> <div class=' wrapper'>";
-                    content+=tempDis.content+"  </div> </div> </div> </div>";
+                    var accessory = "accessories/"+tempDis.accessory;
 
+                    content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
+                    content+="<div class='ibox-tools'>";
+                    content+='<a class="fa fa-file" href="'+accessory+'">附件';
+                    content+=i+1;
+                    content+='</a>';
+                    content+="</div> </div> <div class='ibox-content'> <div class=' wrapper'>";
+                    content+=tempDis.content+"  </div> </div> </div> </div>";
                     title="";
                 }
                 $("div.allDiscuss").html(content);
@@ -650,14 +744,22 @@
             }
         })
     }
+
     //评论提交
     function commitDiscuss() {
         var discuss=$(".discuss").code();
+        var formData = new FormData();
+        formData.append('disContent',discuss);
+        formData.append('id_Project',id_Project);
+        formData.append('id_user',id_User);
+        formData.append('MyFile', $('#fileupload')[0].files[0]);
         $.ajax({
             url: "discuss-commit2Project",
-            data: {disContent: discuss,id_Project:id_Project,id_user:id_User},
-            dataType: "json",
+            data: formData,
             type: "Post",
+            cache: false,
+            processData: false,
+            contentType:false,
             async: "false",
             success: function (result) {
                 showtoast("success","成功","评论提交成功");
@@ -669,6 +771,7 @@
             }
         })
     }
+
     //评论删除按钮
     $(document).on("click",".deleteDis",function () {
         if ($(this).hasClass("btn-danger")){
@@ -699,7 +802,26 @@
                     }
                 })
             });}
+    });
+
+    //评论编辑按钮
+    function edit() {
+        $("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['paragraph']],
+            ['table', ['table']],
+            ['picture', ['picture']]
+        ]})
+    }
+
+    //页面初始化
+    $(document).ready(function () {
+        edit()
     })
+
+
 </script>
 
 
