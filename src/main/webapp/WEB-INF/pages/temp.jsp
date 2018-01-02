@@ -47,7 +47,13 @@
                         <li class="J_tabShowActive"><a href="Organization-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
+<<<<<<< HEAD
                         </s:if>
+=======
+                        <li class="J_tabShowActive"><a>机构管理</a>
+                        </li>
+                        <li class="divider"></li>
+>>>>>>> origin/master
                         <li class="J_tabCloseAll"><a href="login-jmpLogin">安全退出</a>
                         </li>
                     </ul>

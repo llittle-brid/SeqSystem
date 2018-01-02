@@ -308,11 +308,56 @@
                     <h4 class="modal-title">修改资料</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                    <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
-                    <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
-                    <div class="form-group"><label>联系电话</label> <input id="mytel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
-                    <div class="form-group"><label>个性签名</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
+                    <div class="form-group"><label>邮箱</label>
+                        <input id="mail" type="text"
+                        <s:if test='#session.user.mail==""'>
+                               placeholder="请输入邮箱"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.mail"/>"
+                        </s:else>
+                               class="form-control" required="required">
+                    </div>
+                    <div class="form-group"><label>QQ</label>
+                        <input id="qq" type="text"
+                        <s:if test='#session.user.qq==""'>
+                               placeholder="请输入QQ"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.qq"/>"
+                        </s:else>
+                               class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>所在地</label>
+                        <input id="address" type="text"
+                        <s:if test='#session.user.address==""'>
+                               placeholder="请输入所在地"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.address"/>"
+                        </s:else>
+                               class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>联系电话</label>
+                        <input id="mytel" type="text"
+                        <s:if test='#session.user.tel==""'>
+                               placeholder="请输入联系电话"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.tel"/>"
+                        </s:else>
+                               class="form-control" required="">
+                        </div>
+                    <div class="form-group"><label>个性签名</label>
+                        <input id="introduce" type="text"
+                            <s:if test='#session.user.introduce==""'>
+                               placeholder="请输入个人简介"
+                            </s:if>
+                            <s:else>
+                                value="<s:property value="#session.user.introduce"/>"
+                            </s:else>
+                               class="form-control" required="">
+                    </div>
                     <div class="form-group">
                         <label>性别</label>
                         <div class="form-group">
