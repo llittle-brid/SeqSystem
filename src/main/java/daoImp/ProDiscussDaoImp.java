@@ -21,9 +21,9 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     }
 
     @Override
-    public void commit1(int id_user, int id_project, Timestamp time, String content) {
-        String sql="insert into PRO_DISCUSS (id_user,id_project,time,content) values (?,?,?,?)";
-        update(sql,id_user,id_project,time,content);
+    public void commit1(int id_user, int id_project, Timestamp time, String content, String accessory) {
+        String sql="insert into PRO_DISCUSS (id_user,id_project,time,content,accessory) values (?,?,?,?,?)";
+        update(sql,id_user,id_project,time,content,accessory);
         return;
     }
 
