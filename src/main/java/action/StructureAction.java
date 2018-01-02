@@ -44,7 +44,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         List<LiDicussE> ldList=new LinkedList<>();
         for (int i = 0; i < discussAll.size(); i++) {
             Date a=new Date();
-            ldList.add(new LiDicussE(discussAll.get(i),discussAll.get(i).getTime().getTime()-a.getTime()));
+            ldList.add(new LiDicussE(discussAll.get(i),a.getTime()-discussAll.get(i).getTime().getTime()));
         }
         ActionContext.getContext().getValueStack().set("listdis",ldList);
 
