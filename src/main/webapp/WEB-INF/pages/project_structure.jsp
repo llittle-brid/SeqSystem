@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
 <!DOCTYPE html>
 <html>
 
@@ -22,6 +21,11 @@
     <link href="/css/lzf.css" rel="stylesheet">
     <link href="css/z_style.css" rel="stylesheet">
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="../css/mjy.css" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -65,7 +69,7 @@
             </li>
         </ol>
     </div>
-        <div id="main" style="height: 1500px;width:100%;margin-top: 10px ">
+        <div id="main" style="width:100%;margin-top: 10px ">
             <div id="head" style="width:1200px;font-size:x-small;margin: 0 auto">
                 <div style="float: left;height: 50px;width:350px;padding: 20px 20px 0px 20px;margin-left: 100px">
                     <h2 style="font-weight:700"> ${requestScope.library.name}</h2>
@@ -115,7 +119,7 @@
                 </s:iterator>
                 </div>
             </s:if>
-            <div id="footer" style="clear: both;text-align: center; margin-top:45px">
+            <div id="footer" style="clear: both;text-align: center; margin-top:25px">
                 <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
                     <s:if  test="#request.page==1">
                         <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
@@ -130,29 +134,79 @@
                     <s:else><button type="button" class="btn btn-white turnpage nextPage"><i class="fa fa-chevron-right"></i></button></s:else>
                 </div>
             </div>
-            <div style="width:1200px;margin: 0 auto">
-                <div id="discuss" class="text " style="left: 0px; transform-origin: 184.5px 11px 0px;margin: 10px 105px 20px 90px">
+            <div style="width:1200px;margin-left: 200px">
+                <div id="discuss" style="left: 0px; transform-origin: 184.5px 11px 0px;margin: 10px 105px 20px 90px">
                     <p>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;color:#666666;font-size: 20px">【讨论区】</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;color:#666666;font-size: 16px">OA系统图片构件库</span>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">（</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#999999;">已有</span>
-                        <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#FF0000;">4</span>
+                        <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#FF0000;">${requestScope.dn}</span>
                         <span style="font-family:'Arial Normal', 'Arial';font-weight:400;font-size:16px;color:#999999;">条留言</span>
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;font-size:16px;color:#999999;">）</span>
                     </p>
                 </div>
-                <div style="margin: 0px 0px 0px 100px">
-                    <div style="width: 800px;height: 120px;border:8px solid darkgrey;float: left" contenteditable="true" class="white-bg">
+            </div>
+          <div class="modal-body">
+            <div class="row" style="width: 750px;margin-left: 370px">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>发表评论</h5>
+                        <div class="ibox-tools">
+                            <button  class="btn btn-primary col-lg-push-1" onclick="commitSend()" type="button" style="margin-right: 10px;margin-top: -7px;padding-left: 20px;padding-right: 20px">发布</button>
+                        </div>
                     </div>
-                    <div style="height: 120px;float: left;margin: 98px 0px 0px 20px">
-                        <img src="/img/camera.png" height="24" width="26"/>
-                    </div>
-                    <div style="height: 120px;float: left;margin: 88px 20px 0px 20px">
-                        <a href="structure-insert"><button type="button" class="btn btn-primary">　发表　</button></a>
+                    <div class="ibox-content">
+                        <div class="click2edit wrapper discuss">
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="allDiscuss">
+                <!--一行留言-->
+                <s:iterator value="listdis">
+                <div class="row" style="width: 750px;margin-left: 370px">
+                    <div class="ibox float-e-margins " style="margin-bottom: 10px">
+                        <div class="ibox-title">
+                            <h5><s:property value="name"/></h5>
+                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
+                            <input style="display: none" class="id_dis" value="<s:property value="id_lib_discuss" />">
+                            <s:if test="#request.id_user==#session.user.id_user"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            </s:if>
+                            <s:else><button  class="btn btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            </s:else>
+                            <!--<div class="ibox-tools">
+                                <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
+                            </div>-->
+                        </div>
+                        <div class="ibox-content">
+                            <div class=" wrapper">
+                                <s:property value="content"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </s:iterator>
+                <!--一行留言结束-->
+            </div>
+              <div style="clear: both;text-align: center; margin-top:25px">
+                  <div  style="height: 50px;margin:0px auto;" class="btn-group">
+                      <s:if  test="#request.pagedis==1">
+                          <button type="button" class="btn btn-gray"><i class="fa fa-chevron-left"></i></button>
+                      </s:if>
+                      <s:else><button type="button" class="btn btn-white turnpagedis lastPagedis"><i class="fa fa-chevron-left"></i></button></s:else>
+                      <s:iterator begin="1" end="#request.numdis" step="1" status="st">
+                          <s:if test="#request.pagedis==#st.index+1">
+                              <button type="button" class="btn btn-white active pagenumdis nowpagedis"><s:property value='#st.index+1'/></button></s:if>
+                          <s:else ><button type="button" class="btn btn-white pagenumdis"><s:property value='#st.index+1'/></button></s:else>
+                      </s:iterator>
+                      <s:if test="#request.pagedis==#request.numdis"><button type="button" class="btn btn-gray"><i class="fa fa-chevron-right"></i></button></s:if>
+                      <s:else><button type="button" class="btn btn-white turnpagedis nextPagedis"><i class="fa fa-chevron-right"></i></button></s:else>
+                  </div>
+                  <input class="id_library" type="text" style="display: none" value="${requestScope.id_library}">
+                  <input class="id_template" type="text" style="display: none" value="${requestScope.id_template}">
+              </div>
+          </div>
         </div>
     </div>
 </div>
@@ -167,13 +221,18 @@
 <script src="/js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+<script src="js/lzf.js"></script>
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="../js/plugins/summernote/summernote.min.js"></script>
+<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="../js/template.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="structure-get?page="+$(this).html()+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};
+            location.href="structure-get?page="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&pagedis='+${requestScope.pagedis};
         });
     });
 </script>
@@ -182,10 +241,33 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="structure-get?page="+p+'&id_template=' + ${requestScope.id_template}+'&id_library='+${requestScope.id_library};}
+                location.href="structure-get?page="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+ $("input.id_library").val()+'&pagedis='+${requestScope.pagedis};}
+        });
+    });
+
+    $(document).ready(function () {
+        $(window.parent.document).find("div#content-main").height($(document).height())
+    })
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.pagenumdis").click(function(){
+            location.href="structure-get?pagedis="+$(this).html()+'&id_template=' + $("input.id_template").val()+'&id_library=' +$("input.id_library").val()+'&page='+${requestScope.page};
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("button.turnpagedis").click(function(){
+            if($(this).hasClass("lastPagedis"))
+            {   var p=parseInt($("button.nowpagedis").html())-1;
+                location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
+            else
+            {   var p=parseInt($("button.nowpagedis").html())+1;
+                location.href="structure-get?pagedis="+p+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};}
         });
     });
 
@@ -194,7 +276,61 @@
     })
 </script>
 </body>
-</body>
+<script>
+    function commitSend() {
+        var content=$(".discuss").code();
+        $.ajax({
+            url: "librarydiscuss-commit",
+            data: {content:content,id_library:${requestScope.id_library}, id_user:${sessionScope.user.id_user}},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast1("success", "成功", "发布评论成功")
+                    location.href="structure-get?pagedis="+1+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};
+                }
+                else  showtoast1("error", "失败", "未输入任何内容")
+            },
+            error: function (result) {
+                showtoast1("error", "失败", "发布评论失败")
+            }
+        })
+    }
+</script>
+<script>
+    $(document).on("click",".deleteDis",function () {
+        if ($(this).hasClass("btn-danger")){
+            var id_lib_discuss=$(this).prev("input.id_dis").val()
+            swal({
+                title: "删除评论？",
+                text: "一旦删除无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    url: "librarydiscuss-delete",
+                    data: {id_lib_discuss: id_lib_discuss},
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        if(result.res===true)  {
+                            showtoast1("success", "成功", "删除评论成功")
+                            location.href="structure-get?pagedis="+1+'&id_template=' + $("input.id_template").val()+'&id_library='+$("input.id_library").val()+'&page='+${requestScope.page};
+                        }
+                        else  showtoast1("error", "失败", "删除评论失败")
+                    },
+                    error: function (result) {
+                        showtoast1("error", "失败", "删除评论失败")
+                    }
+                })
+            });}
+    })
+</script>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

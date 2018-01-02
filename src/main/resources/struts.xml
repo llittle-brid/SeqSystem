@@ -69,7 +69,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename</allowed-methods>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,getRoles</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
@@ -98,11 +98,17 @@
             <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
+        <action name="librarydiscuss-*" class="action.LibrarydiscussAction" method="{1}">
+            <result name="RES" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <allowed-methods>commit</allowed-methods>
+        </action>
+
         <action name="structure-*" class="action.StructureAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_structure.jsp</result>
-            <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
-            <allowed-methods>get,insert</allowed-methods>
+            <allowed-methods>get</allowed-methods>
         </action>
 
         <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">

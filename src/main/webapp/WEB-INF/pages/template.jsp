@@ -127,8 +127,8 @@
                                                         <div class="form-group">
                                                             <select class="form-control" name="add_id_template" id="new_id_template">
                                                                 <option value="1">纯文本</option>
-                                                                <option value="2">用例</option>
-                                                                <option value="3">用户</option>
+                                                                <option value="2">用户</option>
+                                                                <option value="3">用例</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -158,7 +158,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                                                    <button type="button" class="btn btn-primary showtoastr" onclick="catalogRename()" data-dismiss="modal">新增</button>
+                                                    <button type="button" class="btn btn-primary showtoastr" onclick="catalogRename()" data-dismiss="modal">修改</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,7 +199,6 @@
                                 <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389" onclick="disReload()"  data-toggle="modal" data-target="#myModal1" > </i>
                                 <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="temp_edit()" type="button">编辑</button>
                                 <button id="save" class="btn btn-primary  btn-xs m-l-sm" onclick="temp_save()" type="button" style="display:none;">保存</button>
-                                <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
                             </div>
                         </div>
                         <div class="ibox-content form-horizontal content catalogNotNoneContent" style="display:none">
@@ -258,7 +257,6 @@
                             </div>
                             <!--一行留言结束-->
                             </div>
-
                         </div>
 
                         <div class="modal-footer">
@@ -312,6 +310,7 @@
 <script src="../js/plugins/toastr/toastr.min.js"></script>
 <script src="../js/mjy.js"></script>
 <script src="../js/template.js"></script>
+<script src="../js/template3.js"></script>
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>

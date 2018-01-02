@@ -7,14 +7,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by DELL on 2017/12/25.
- *  ProDiscussEntity的包装器类，用于加一个属性判断该讨论能否被删除
- * @author MJY
- */
+
 public class ProDIscussWrapper {
     public ProDiscussEntity proDiscussEntity;
-    //0不是自己的留言，1留言过期，2可删除
+
     public int state;
 
     public ProDIscussWrapper(ProDiscussEntity proDiscussEntity,int id_user,int id_project) {

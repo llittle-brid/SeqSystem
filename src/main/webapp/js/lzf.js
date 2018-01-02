@@ -1,4 +1,4 @@
-function showtoast(type, title, msg) {
+function showtoast1(type, title, msg) {
     var $showDuration = "3000";
     var $hideDuration = "1000";
     var $timeOut = "5000";
@@ -11,7 +11,7 @@ function showtoast(type, title, msg) {
         closeButton: true,
         debug: false,
         progressBar: true,
-        positionClass: "toast-top-right",
+        positionClass: "toast-bottom-left",
         onclick: null
     };
     if ($showDuration) {
@@ -43,5 +43,3 @@ function showtoast(type, title, msg) {
     }
     var $toast = toastr[type](msg, title);
 }
-
-
