@@ -13,10 +13,13 @@ public class ProjectEntity {
     private String intro;
     private String orgName;
 
+    private int id_User;
+    private String username;
+
     public ProjectEntity() {
     }
 
-    public ProjectEntity(int id_Project, String name, Date date, String document_Name, int state, int id_Organization, String intro, String orgName) {
+    public ProjectEntity(int id_Project, String name, Date date, String document_Name, int state, int id_Organization, String intro, String orgName,int id_User) {
         this.id_Project = id_Project;
         this.name = name;
         this.date = date;
@@ -25,6 +28,7 @@ public class ProjectEntity {
         this.id_Organization = id_Organization;
         this.intro = intro;
         this.orgName = orgName;
+        this.id_User = id_User;
     }
 
     public int getId_Project() {
@@ -91,4 +95,19 @@ public class ProjectEntity {
         this.orgName = orgName;
     }
 
+    public int getId_User() {
+        return id_User;
+    }
+
+    public void setId_User(int id_User) {
+        this.id_User = id_User;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

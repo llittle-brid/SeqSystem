@@ -1,5 +1,6 @@
 package action;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -14,7 +15,9 @@ import entity.SysManagerEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
-
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,8 +102,18 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
+        userDao = new UserDaoImp();
+        user = (UserEntity)session.get("user");
+        session.put("countnow",userDao.projectNumberNow(user.getId_user()));
+        session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
+        dataMap = new HashMap<String, Object>();
+        userDao = new UserDaoImp();
+        int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));
+        session.put("Mycollectcount",Mycollectcount);
         return "homePage";
     }
+
+
     public String jmpTemp() {
         return "tempPage";
     }
@@ -113,6 +126,15 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String jmpNewproject(){
         return "newprojectPage";
     }
+
+    public String jmpLibrary(){ return "libraryPage"; }
+    public String jmpUserlibrary(){return "userlibraryPage";}
+    public String jmpCaselibrary(){return "caselibraryPage";}
+    public String jmpCommonlibrary(){return "commonlibraryPage";}
+    public String jmpPicturelibrary(){return "picturelibraryPage";}
+    public String jmpCommoncomponent(){return "commoncomponentPage";}
+    public String jmpPicturecomponent(){return "picturecomponentPage";}
+    public String jmpMycollect(){return "mycollectPage";}
     public String jmpComponent(){ return "componentPage"; }
     public String jmpCasecomponent(){return "casecomponentPage";}
     public String jmpUsercomponent(){return "usercomponentPage";}

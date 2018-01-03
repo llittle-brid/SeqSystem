@@ -309,9 +309,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group"><label>邮箱</label>
-                        <input id="mail" type="text"
+                        <input id="mail" type="text" maxlength="20"
                         <s:if test='#session.user.mail==""'>
-                               placeholder="请输入邮箱"
+                               placeholder="请输入邮箱(不超过20个字符)"
                         </s:if>
                         <s:else>
                                value="<s:property value="#session.user.mail"/>"
@@ -319,9 +319,9 @@
                                class="form-control" required="required">
                     </div>
                     <div class="form-group"><label>QQ</label>
-                        <input id="qq" type="text"
+                        <input id="qq" type="text" maxlength="20"
                         <s:if test='#session.user.qq==""'>
-                               placeholder="请输入QQ"
+                               placeholder="请输入QQ(不超过20个字符)"
                         </s:if>
                         <s:else>
                                value="<s:property value="#session.user.qq"/>"
@@ -329,9 +329,9 @@
                                class="form-control" required="">
                     </div>
                     <div class="form-group"><label>所在地</label>
-                        <input id="address" type="text"
+                        <input id="address" type="text" maxlength="40"
                         <s:if test='#session.user.address==""'>
-                               placeholder="请输入所在地"
+                               placeholder="请输入所在地(不超过40个字符)"
                         </s:if>
                         <s:else>
                                value="<s:property value="#session.user.address"/>"
@@ -339,9 +339,9 @@
                                class="form-control" required="">
                     </div>
                     <div class="form-group"><label>联系电话</label>
-                        <input id="mytel" type="text"
+                        <input id="mytel" type="text" maxlength="20"
                         <s:if test='#session.user.tel==""'>
-                               placeholder="请输入联系电话"
+                               placeholder="请输入联系电话(不超过20个字符)"
                         </s:if>
                         <s:else>
                                value="<s:property value="#session.user.tel"/>"
@@ -349,9 +349,9 @@
                                class="form-control" required="">
                         </div>
                     <div class="form-group"><label>个性签名</label>
-                        <input id="introduce" type="text"
+                        <input id="introduce" type="text" maxlength="40"
                             <s:if test='#session.user.introduce==""'>
-                               placeholder="请输入个人简介"
+                               placeholder="请输入个人简介(不超过40个字符)"
                             </s:if>
                             <s:else>
                                 value="<s:property value="#session.user.introduce"/>"

@@ -59,7 +59,8 @@
                                     <input style="display: none" value="${requestScope.documentId}" id="documentId"></i>
                                 </li>
                                 <li class="li_fun">
-                                    <span class="li_add li_fa fa col-md-offset-1  fa-plus black"  ></span>
+                                    <span class="li_rename li_fa fa col-md-offset-1  fa-pencil-square-o black"   title="重命名" data-toggle="modal" data-target="#myModal3"></span>
+                                    <span class="li_add li_fa fa col-md-offset-1  fa-plus black"   title="新增目录"></span>
                                     <span class="li_add_hidden li_fa fa col-md-offset-1  fa-plus black" style="display: none" data-toggle="modal" data-target="#myModal"></span>
                                     <span class="li_up li_fa fa col-md-offset-1  fa-arrow-up black" title="上移目录"></span>
                                     <span class="li_down fa li_fa col-md-offset-1  fa-arrow-down black" title="下移目录"></span>
@@ -140,6 +141,29 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated bounceInRight">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                                                    </button>
+                                                    <i class="fa fa-pencil-square-o modal-icon"></i>
+                                                    <h4 class="modal-title">修改名称</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group"><label>模块名称</label>
+                                                        <input name="re_title" id="re_title" placeholder="请输入模块名称" class="form-control"></div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                                    <button type="button" class="btn btn-primary showtoastr" onclick="catalogRename()" data-dismiss="modal">新增</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </li>
                             </div>
                             <div id="allIndex">
@@ -164,28 +188,23 @@
             </div>
             <!--中间部分开始-->
             <div class="col-md-7" >
-                <div class="main"><h2 id="catalog_title">1.1编写目的</h2></div>
+                <div class="main"><h2 id="catalog_title"></h2></div>
                 <input id="catalog-id" style="display: none">
                 <div class="row">
                     <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-
-                            <div class="ibox-tools">
-                                <i class="fa fa-commenting modal-icon" style="color: #6D8389"  data-toggle="modal" data-target="#myModal1" > </i>
+                        <div class="catalogNoneContent" style="text-align: center">
+                        <img src="/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
+                        <div class="ibox-title catalogNotNoneContent" style="display:none;">
+                            <div class="ibox-tools ">
+                                <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389" onclick="disReload()"  data-toggle="modal" data-target="#myModal1" > </i>
                                 <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="temp_edit()" type="button">编辑</button>
                                 <button id="save" class="btn btn-primary  btn-xs m-l-sm" onclick="temp_save()" type="button" style="display:none;">保存</button>
                                 <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
                             </div>
                         </div>
-                        <div class="ibox-content form-horizontal content">
-                            <div class="click1edit wrapper">
-                                说明编写本软件需求规格<img src="../img/a1.jpg">说明书的目的，指出预期读者
-                            </div>
-                            <hr>
-                            <div  class="ibox-tools" style="margin-top: -10px">
-                            <h3 class="col-lg-push-1"> <i class="fa fa-file-text-o " style="color: #26d7d9" title="下载"> 附件：内容摘要.doc</i></h3>
-                            </div>
+                        <div class="ibox-content form-horizontal content catalogNotNoneContent" style="display:none">
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -218,13 +237,14 @@
                                 </div>
                             </div>
                             <!--自己的留言结束-->
-
+                            <div class="allDiscuss">
                             <!--一行留言-->
                             <div class="row">
-                                <div class="ibox float-e-margins" style="margin-bottom: 10px">
+                                <div class="ibox float-e-margins " style="margin-bottom: 10px">
                                     <div class="ibox-title">
                                         <h5>大毛同学 2017-2-6 17:15:56 </h5>
-                                        <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm" onclick="save()" type="button" style="margin-top: -3px">删除</button>
+                                        <input style="display: none" class="id_dis">
+                                        <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
                                         <div class="ibox-tools">
                                             <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
                                         </div>
@@ -233,30 +253,12 @@
                                         <div class=" wrapper">
                                             王炸
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                             <!--一行留言结束-->
-                            <!--一行留言-->
-                            <div class="row">
-                                <div class="ibox float-e-margins" style="margin-bottom: 10px">
-                                    <div class="ibox-title">
-                                        <h5>大毛同学 2017-2-6 13:15:56 </h5>
-                                        <button  class="btn btn-default  btn-xs col-lg-push-1 m-l-sm" onclick="save()" type="button" style="margin-top: -3px">删除</button>
-                                        <div class="ibox-tools">
-                                            <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：如何斗地主.doc</i>
-                                        </div>
-                                    </div>
-                                    <div class="ibox-content">
-                                        <div class=" wrapper">
-                                            三代一
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
-                            <!--一行留言结束-->
+
                         </div>
 
                         <div class="modal-footer">
@@ -313,39 +315,6 @@
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
-<script>
-    //    $(document).ready(function(){$(".summernote").summernote({lang:"zh-CN"})});
-    var temp_edit=function(){$("#eg").addClass("no-padding");$(".click1edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
-        ['picture', ['picture']],
-        ['fullscreen', ['fullscreen']]
-    ]})
-        $("#edit").attr("style","display:none");
-        $("#save").attr("style","display:show");
-    };
-    var temp_save=function(){$("#eg").removeClass("no-padding");
-        var aHTML=$(".click1edit").code();$(".click1edit").destroy();
-        $("#save").attr("style","display:none");
-        $("#edit").attr("style","display:show");};
-    var edit=function(){$("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['paragraph']],
-        ['table', ['table']],
-        ['picture', ['picture']]
-    ]})
-    };
-    var save=function(){$("#eg").removeClass("no-padding");
-        var aHTML=$(".click2edit").code();};
-    $(document).ready(function () {
-        edit();
-    })
-</script>
 
 
 </html>
