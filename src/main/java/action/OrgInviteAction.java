@@ -24,14 +24,30 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     private OrgInviteEntity orgInvite;
     private OrgInviteDao orgInviteDao;
 
-
     public String InviteUser(){
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
         System.out.println("InviteUser.org"+orgInvite.getORG_NAME());
-        boolean res = orgInviteDao.inviteUser(orgInvite);
-        dataMap.put("res",res);
-        return "res";
+        orgInviteDao.inviteUser(orgInvite);
+        List<OrgInviteEntity> list=orgInviteDao.getlist(orgInvite.getORG_NAME());
+        Gson gson = new Gson();
+        String showOperate = gson.toJson(list);
+        dataMap.put("res",showOperate);
+        System.out.println("showOrgList"+showOperate);
+        return SUCCESS;
+    }
+
+    public String reInviteUser(){
+        dataMap = new HashMap<String, Object>();
+        orgInviteDao = new OrgInviteDaoImp();
+        System.out.println("InviteUser.org"+orgInvite.getORG_NAME());
+        orgInviteDao.reInviteUser(orgInvite);
+        List<OrgInviteEntity> list=orgInviteDao.getlist(orgInvite.getORG_NAME());
+        Gson gson = new Gson();
+        String showOperate = gson.toJson(list);
+        dataMap.put("res",showOperate);
+        System.out.println("showOrgList"+showOperate);
+        return SUCCESS;
     }
 
     public String showList(){
@@ -57,15 +73,21 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         int orgManager=userDao.orgManager(sessionUser.getId_user());
         session.put("orgManager",orgManager);
         dataMap.put("res",res);
-        return "res";
+        return SUCCESS;
     }
 
     public String deleteUser(){
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
-        boolean res=orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
-        dataMap.put("res",res);
-        return "res";
+        orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
+        UserDao userdao = new UserDaoImp();
+        UserEntity seesionUser=(UserEntity)session.get("user");
+        List<UserEntity> orgMember = userdao.getOrgAllMem(seesionUser.getId_user(),orgInvite.getORG_NAME());
+        Gson gson = new Gson();
+        String json = gson.toJson(orgMember);
+        System.out.println("OrgAllMember"+json);
+        dataMap.put("res",json);
+        return SUCCESS;
     }
     @Override
     public OrgInviteEntity getModel() {

@@ -12,15 +12,17 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../example/favicon.ico">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <!-- bootstrap-table -->
     <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
     <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -125,14 +127,22 @@
         </div>
     </div>
 </div>
+
+</body>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="../../js/content.min.js?v=1.0.0"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../js/plugins/layer/layer.min.js"></script>
+<script src="../../js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="../../js/contabs.min.js"></script>
+<script src="../../js/plugins/pace/pace.min.js"></script>
+<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="../../js/mjy.js"></script>
-</body>
+<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script>
     $('#showOrgApply').bootstrapTable({
             columns: [
@@ -145,17 +155,16 @@
                 {
                     field: 'org_name',
                     title: '申请机构名',
-                    sortable: true,
                     align: 'center'
                 },
                 {
                     field: 'date',
                     title: '申请时间',
+                    sortable: true,
                     align: 'center'
                 }, {
                     field: 'message',
                     title: '备注',
-                    sortable: true,
                     align: 'center'
                 },{
                     field: 'operate',
@@ -192,45 +201,73 @@
         'click .agree': function(e, value, row, index) {
             //同意操作
             var id_org_apply = parseInt(row.id_org_apply);
-            $.ajax({
-                type: "GET",
-                url: "showApplyOrg-agreeOrg",
-                data: {id_org_apply:id_org_apply},
-                dataType: "json",
-                success: function (json) {
-                        showtoast("success", "同意成功", "操作成功")
-                        var orgList = JSON.parse(json.res);
-                        $('#showOrgApply').bootstrapTable('load',orgList);
-                        var otherList = JSON.parse(json.res2);
-                        $('#showOthersTable').bootstrapTable('load',otherList);
-                },
-                error: function (result) {
-                    showtoast("error", "同意失败", "操作失败")
-                }
-            })
-        },
+            swal(
+                {
+                    title: "您确定要同意该机构申请吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "同意",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "showApplyOrg-agreeOrg",
+                        data: {id_org_apply: id_org_apply},
+                        dataType: "json",
+                        success: function (json) {
+                            swal("同意成功！", "您已同意该机构申请。", "success");
+                            var orgList = JSON.parse(json.res);
+                            $('#showOrgApply').bootstrapTable('load', orgList);
+                            var otherList = JSON.parse(json.res2);
+                            $('#showOthersTable').bootstrapTable('load', otherList);
+                        },
+                        error: function (result) {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+                    })
+                })
+            },
         'click .refuse' : function(e, value, row, index) {
             //拒绝操作
             var id_org_apply = parseInt(row.id_org_apply);
-            $.ajax({
-                type: "GET",
-                url: "showApplyOrg-refuseOrg",
-                data: {id_org_apply:id_org_apply},
-                dataType: "json",
-                success: function (json) {
-                        showtoast("success", "拒绝成功", "操作成功")
-                        var orgList = JSON.parse(json.res);
-                        $('#showOrgApply').bootstrapTable('load',orgList);
-                        var otherList = JSON.parse(json.res2);
-                        $('#showOthersTable').bootstrapTable('load',otherList);
+            swal(
+                {
+                    title: "您确定要拒绝该机构申请吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "拒绝",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "showApplyOrg-refuseOrg",
+                        data: {id_org_apply: id_org_apply},
+                        dataType: "json",
+                        success: function (json) {
+                            swal("拒绝成功！", "您已拒绝该机构申请。", "success");
+                            var orgList = JSON.parse(json.res);
+                            $('#showOrgApply').bootstrapTable('load', orgList);
+                            var otherList = JSON.parse(json.res2);
+                            $('#showOthersTable').bootstrapTable('load', otherList);
 
-                },
-                error: function (result) {
-                    showtoast("error", "拒绝失败", "拒绝失败")
-                }
-            })
-        }
-    };
+                        },
+                        error: function (result) {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+                    })
+                })
+            }
+        };
 </script>
 <script>
     $('#showOthersTable').bootstrapTable({
@@ -289,23 +326,37 @@
         'click .reAgree': function(e, value, row, index) {
             //同意操作
             var id_org_apply = parseInt(row.id_org_apply);
-            $.ajax({
-                type: "GET",
-                url: "showApplyOrg-agreeOrg",
-                data: {id_org_apply:id_org_apply},
-                dataType: "json",
-                success: function (json) {
-                    showtoast("success", "同意成功", "操作成功")
-                    var orgList = JSON.parse(json.res);
-                    $('#showOrgApply').bootstrapTable('load',orgList);
-                    var otherList = JSON.parse(json.res2);
-                    $('#showOthersTable').bootstrapTable('load',otherList);
-                },
-                error: function (result) {
-                    showtoast("error", "同意失败", "操作失败")
-                }
-            })
-        }
-    };
+            swal(
+                {
+                    title: "您确定要重新同意该机构申请吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "重新同意",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "showApplyOrg-agreeOrg",
+                        data: {id_org_apply: id_org_apply},
+                        dataType: "json",
+                        success: function (json) {
+                            swal("重新同意成功！", "您已同意该机构申请。", "success");
+                            var orgList = JSON.parse(json.res);
+                            $('#showOrgApply').bootstrapTable('load', orgList);
+                            var otherList = JSON.parse(json.res2);
+                            $('#showOthersTable').bootstrapTable('load', otherList);
+                        },
+                        error: function (result) {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+                    })
+                })
+            }
+        };
 </script>
 </html>

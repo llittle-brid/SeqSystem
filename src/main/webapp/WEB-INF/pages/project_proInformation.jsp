@@ -368,22 +368,22 @@
                 var elem = $(this);
                 if (elem.hasClass("btn-info")) {
                     $.ajax({
-                        type: "post",
-                        url: "project-setVPM",
-                        data: {id_User: id_user, id_Project: id_Project},
-                        dataType: "json",
-                        success: function () {
-                                elem.text("撤销副组长");
-                                elem.removeClass("btn-info");
-                                elem.addClass("btn-warning");
-                        },
-                        error: function () {
-                            swal({
-                                icon: "error"
-                            });
-                        }
-                    })
-                }
+                    type: "post",
+                    url: "project-setVPM",
+                    data: {id_User: id_user, id_Project: id_Project},
+                    dataType: "json",
+                    success: function () {
+                        elem.text("撤销副组长");
+                        elem.removeClass("btn-info");
+                        elem.addClass("btn-warning");
+                    },
+                    error: function () {
+                        swal({
+                            icon: "error"
+                        });
+                    }
+                })
+            }
                 else {
                     $.ajax({
                         type: "post",
@@ -408,16 +408,16 @@
                 //修改操作
                 var id_user = parseInt(row.id_user);
                 swal(
-                    {
-                        title: "您确定要移除这名成员吗",
-                        text: "请谨慎操作！",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "移除",
-                        cancelButtonText: "取消",
-                        closeOnConfirm: false
-                    },function () {
+                        {
+                            title: "您确定要移除这名成员吗",
+                            text: "请谨慎操作！",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "移除",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: false
+                        },function () {
                         $.ajax({
                             type: "post",
                             url: "project-deleteMember",

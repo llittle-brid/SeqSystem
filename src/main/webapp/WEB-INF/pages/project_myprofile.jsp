@@ -11,12 +11,18 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-
-    <link rel="shortcut icon" href="/example/favicon.ico">
+    <link rel="shortcut icon" href="../example/favicon.ico">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <!-- bootstrap-table -->
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/z_style.css" rel="stylesheet">
+    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
@@ -280,7 +286,6 @@
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="applyOrganization-applyOrg" method="post">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
@@ -288,15 +293,14 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input name="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
-                    <div class="form-group"><label>备注</label> <input name="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
+                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
+                    <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button id="newOrg-button" type="submit" class="btn btn-primary">申请</button>
                 </div>
             </div>
-            </form>
         </div>
     </div>
     <div  class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -377,33 +381,93 @@
         </div>
     </div>
 </div>
-
-
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../../js/content.min.js?v=1.0.0"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../js/plugins/layer/layer.min.js"></script>
+<script src="../../js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="../../js/contabs.min.js"></script>
+<script src="../../js/plugins/pace/pace.min.js"></script>
+<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="../../js/mjy.js"></script>
+<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
 <script>
     $("button#edit-button").click(function (){
-        $.ajax({
-            url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#mytel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
-            dataType: "json",
-            type: "Post",
-            async: "false",
-            success: function (result) {
-                if(result.res==true)  {
-                    showtoast("success", "修改成功", "操作成功")
-                    location.href = "user-jmpMyprofile";
-                }
-                else  showtoast("error", "修改失败", "操作失败")
-            },
-            error: function (result) {
-                showtoast("error", "修改失败", "修改失败")
-            }
-        })
+        swal(
+            {
+                title: "您确认保存本次修改吗？",
+                text: "确认请点击保存",
+                type: "",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "保存",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            },function () {
+                $.ajax({
+                    url: "user-editProfile",
+                    data: {
+                        mail: $("input#mail").val(),
+                        qq: $("input#qq").val(),
+                        address: $("input#address").val(),
+                        tel: $("input#mytel").val(),
+                        introduce: $("input#introduce").val(),
+                        gender: $("select#gender").val()
+                    },
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        if (result.res == true) {
+                            swal("修改成功！", "您已成功修改个人资料。", "success");
+                            location.href = "user-jmpMyprofile";
+                        }
+                        else swal("修改失败！", "操作失败", "success");
+                    },
+                    error: function () {
+                        swal({
+                            icon: "error"
+                        });
+                    }
+                })
+            })
+    })
+    $("button#newOrg-button").click(function (){
+        swal(
+            {
+                title: "您确认申请该机构吗？",
+                text: "确认请点击申请",
+                type: "",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "申请",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            },function () {
+                $.ajax({
+                    url: "applyOrganization-applyOrg",
+                    data: {
+                        org_name: $("input#org_name").val(),
+                        message: $("input#message").val(),
+                    },
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function () {
+                            swal("申请成功！", "机构申请已受理", "success");
+                    },
+                    error: function () {
+                        swal({
+                            icon: "error"
+                        });
+                    }
+                })
+            })
     })
 </script>
 

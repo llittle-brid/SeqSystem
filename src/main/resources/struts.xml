@@ -56,6 +56,9 @@
         </action>
 
         <action name="applyOrganization-*" class="action.ApplyOrganizationAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
             <interceptor-ref name="myStack"/>
@@ -87,7 +90,7 @@
                 <param name="root">dataMap</param>
             </result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>InviteUser,showList,grantOrg,deleteUser</allowed-methods>
+            <allowed-methods>InviteUser,showList,grantOrg,deleteUser,reInviteUser</allowed-methods>
         </action>
         <action name="showExitOrg-*" class="action.ShowExitOrgAction" method="{1}">
             <result name="exitOrgList" type="json">

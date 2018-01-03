@@ -11,8 +11,8 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../example/favicon.ico">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
@@ -20,6 +20,8 @@
     <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
     <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
@@ -56,7 +58,9 @@
                         </li>
                     </ul>
                 </div>
-                <div style="float: left;margin-top: 10px" class="col-md-4"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button></div>
+                <div style="float: left;margin-top: 10px" class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">邀请用户</button>
+                </div>
                 <div style="float: right;width: 300px" class="col-md-4">
                     <select id="gender" class="form-control" name="gender">
                         <option name="" disabled  selected="selected" >选择机构</option>
@@ -153,11 +157,18 @@
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="../../js/content.min.js?v=1.0.0"></script>
+<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../js/plugins/layer/layer.min.js"></script>
+<script src="../../js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="../../js/contabs.min.js"></script>
+<script src="../../js/plugins/pace/pace.min.js"></script>
+<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
+<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
 </body>
 <script>
     $(document).ready(function(){
@@ -192,7 +203,6 @@
                     title:'操作',
                     align:'center',
                     events: "actionEvents",
-                    width:"240px",
                     formatter: "operateFormatter"
                 }
             ]
@@ -223,15 +233,10 @@
                     title: '状态',
                     sortable: true,
                     align: 'center',
+                    events: "actionEvents2",
                     formatter: "rename"
                 }
             ]
-        },
-        function () {
-        alert("?")
-            var first=$("#gender").find("option:first").val();
-            console.log(first);
-            Ffive(first)
         }
     );
     function Ffive(element){
@@ -292,73 +297,174 @@
         'click .grant': function(e, value, row, index) {
             //转移机构管理权限
             var id_user = parseInt(row.id_user);
-            console.log(id_user);
             var currentOrg=$("#gender").val();
-            $.ajax({
-                type: "GET",
-                url: "orgInvite-grantOrg",
-                data: {ID_USER:id_user,ORG_NAME:currentOrg},
-                dataType: "json",
-                success: function (result) {
-                    if(result.res===true) {
-                        showtoast("success", "转移机构成功", "操作成功");
-                        location.href = "user-jmpTemp";
+            swal(
+                {
+                    title: "您确定将此机构转让给该用户吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "转让",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "orgInvite-grantOrg",
+                        data: {ID_USER: id_user, ORG_NAME: currentOrg},
+                        dataType: "json",
+                        success: function () {
+                            swal("转让成功！", "您已将机构抓让该用户。", "success");
+                            location.href = "user-jmpTemp";
+                        },
+                        error: function (result) {
+                            swal("操作失败！", "出现未知错误，请重试。", "error");
                         }
-                },
-                error: function (result) {
-                    showtoast("error", "转移机构失败", "操作失败")
-                }
-            })
+                    })
+                })
         },
         'click .delete' : function(e, value, row, index) {
             //踢出机构
             var id_user = parseInt(row.id_user);
             var currentOrg=$("#gender").val();
-            $.ajax({
-                type: "GET",
-                url: "orgInvite-deleteUser",
-                data: {ID_USER:id_user,ORG_NAME:currentOrg},
-                dataType: "json",
-                success: function (result) {
-                    if(result.res===true)  {
-                        showtoast("success", "踢出成功", "操作成功")
-                        $('#showOrgApply').bootstrapTable('load',orgList);
-                    }
-                    else  showtoast("error", "踢出失败", "操作失败")
-                },
-                error: function (result) {
-                    showtoast("error", "踢出失败", "操作失败")
-                }
-            })
+            swal(
+                {
+                    title: "您确定将该用户移出机构吗",
+                    text: "请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "移出",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "orgInvite-deleteUser",
+                        data: {ID_USER: id_user, ORG_NAME: currentOrg},
+                        dataType: "json",
+                        success: function (json) {
+                                swal("移出成功！", "您已将该用户移出机构。", "success");
+                                var orgMemberList = JSON.parse(json.res);
+                                $('#showOrgMember').bootstrapTable('load',orgMemberList);
+                        },
+                        error: function (result) {
+                            showtoast("error", "踢出失败", "操作失败")
+                        }
+                    })
+                })
         }
-    }
+    };
+    window.actionEvents2 = {
+        'click .reAgree': function(e, value, row, index) {
+            var user_name = row.USER_NAME;
+            var message = row.MESSAGE;
+            var currentOrg=$("#gender").val();
+            swal(
+                {
+                    title: "您确定要重新邀请该用户加入机构吗",
+                    text: "确认请按重新邀请",
+                    type: "",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "重新邀请",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },function () {
+                    $.ajax({
+                        url: "orgInvite-reInviteUser",
+                        data: {ORG_NAME: currentOrg, USER_NAME: user_name, MESSAGE: message},
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success:function(json){
+                            swal("重新邀请成功！", "您已重新向该用户发出邀请信息。", "success");
+                            var orgOperateList = JSON.parse(json.res);
+                            //finishingTask为table的id
+                            $('#showOperate').bootstrapTable('load',orgOperateList);
+                        },
+                        error:function(){
+                            alert(" 错误");
+                        }
+                    })
+                })
+        }
+    };
 </script>
 <script>
-    $("button#invite-button").click(function (){
-        var currentOrg=$("#gender").val();
-        $.ajax(
-            {
-                url:"orgInvite-InviteUser",
-                data:{ORG_NAME:currentOrg,USER_NAME:$("input#user_name").val(),MESSAGE:$("input#message").val()},
-                dataType:"json",
-                type:"Post",
-                async:"false",
-                success:function (result) {
-                    if(result.res===true) {
-                        showtoast("success", "邀请成功", "邀请成功");
-                        location.href="Organization-jmpOrgManager1";
-                    }
-                    else {
-                        showtoast("error", "邀请失败", "邀请失败")
-                        location.href="Organization-jmpOrgManager1";
-                    }
-                },
-                error: function (result) {
-                    showtoast("error", "邀请失败", "邀请失败")
-                    location.href="Organization-jmpOrgManager1";
-                }
-            }
-        )
+    $("button#invite-button").click(function () {
+        var currentOrg = $("#gender").val();
+        console.log(currentOrg)
+        if(currentOrg == null){
+            alert("请先选择机构")
+        }
+        else {
+            swal(
+                {
+                    title: "您确定要邀请该用户加入机构吗",
+                    text: "确认请按邀请按钮",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "邀请",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax(
+                        {
+                            url: "orgInvite-InviteUser",
+                            data: {
+                                ORG_NAME: currentOrg,
+                                USER_NAME: $("input#user_name").val(),
+                                MESSAGE: $("input#message").val()
+                            },
+                            dataType: "json",
+                            type: "Post",
+                            async: "false",
+                            success: function (json) {
+                                swal("邀请成功！", "您已向该用户发出邀请信息。", "success");
+                                var orgOperateList = JSON.parse(json.res);
+                                //finishingTask为table的id
+                                $('#showOperate').bootstrapTable('load', orgOperateList);
+                            },
+                            error: function () {
+                                alert(" 错误");
+                            }
+                        }
+                    )
+                })
+        }
     })
+
+    function inputSuggest() {
+        var memberName=$("input#MemberName");
+        $.ajax({
+            url: "project-chooseMember",
+            data: {
+                Id_Project:id_Project,
+                Username: memberName.val()
+            },
+            dataType: "json",
+            type: "post",
+            async: "false",
+            success: function (result) {
+                var memberList = result.res;
+                var suggest = JSON.parse('{"value": ' + memberList + ', "defaults": "10000000000"}');
+
+//                $("input#MemberName").bsSuggest("destroy");
+                $("input#MemberName").bsSuggest({
+                    idField:"id_user",
+                    keyField:"name",
+                    data:suggest
+                }).on('onDataRequestSuccess', function (e, result) {
+                    console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
+        })
+    }
 </script>
 </html>

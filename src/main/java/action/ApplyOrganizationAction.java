@@ -29,8 +29,9 @@ public class ApplyOrganizationAction extends ActionSupport implements RequestAwa
         applyorganizationdao = new ApplyOrganizationDaoImp();
         dataMap = new HashMap<String, Object>();
         UserEntity seesionUser=(UserEntity)session.get("user");
-        applyorganizationdao.applyOrg(seesionUser.getId_user(),applyorganization);
-        return "myprofilePage";
+        boolean res=applyorganizationdao.applyOrg(seesionUser.getId_user(),applyorganization);
+        dataMap.put("res",res);
+        return SUCCESS;
     }
 
     @Override

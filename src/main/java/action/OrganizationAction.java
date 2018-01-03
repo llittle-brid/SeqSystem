@@ -50,7 +50,6 @@ public class OrganizationAction extends ActionSupport implements RequestAware, S
     public String showAllMember(){
         dataMap = new HashMap<String, Object>();
         UserDao userdao = new UserDaoImp();
-        System.out.println(organization.getNAME());
         UserEntity seesionUser=(UserEntity)session.get("user");
         List<UserEntity> orgMember = userdao.getOrgAllMem(seesionUser.getId_user(),organization.getNAME());
         Gson gson = new Gson();

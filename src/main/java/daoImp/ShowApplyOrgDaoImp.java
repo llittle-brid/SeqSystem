@@ -35,7 +35,7 @@ public class ShowApplyOrgDaoImp extends DAO<ShowApplyOrganizationEntity> impleme
         String sql1="update ORG_APPLY set STATE=1 where ORG_NAME=?";
         String sql2="insert into ORGANIZATION (NAME,ID_USER,TIME) value(?,?,?)";
         String sql3="select ID_ORGANIZATION from ORGANIZATION where NAME=?";
-        String sql4="insert into ORG_MEMBER. (ID_USER,ID_ORGANIZATION) value(?,?)";
+        String sql4="insert into ORG_MEMBER (ID_USER,ID_ORGANIZATION) value(?,?)";
         Timestamp NowTime = new Timestamp(new java.util.Date().getTime());
         update(sql1,create.getOrg_name());
         update(sql2,create.getOrg_name(),create.getId_user(),NowTime);
