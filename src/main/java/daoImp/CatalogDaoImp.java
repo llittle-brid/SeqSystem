@@ -168,9 +168,9 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
     }
 
     @Override
-    public void saveTemplateOne(int id_document, int first, int second, int third, int fourth, String content) {
-        String sql="update CATALOG set content=? where id_document=? and first_index=? and second_index=? and third_index=? and fourth_index=?";
-        update(sql,content,id_document,first,second,third,fourth);
+    public void saveContent(int id_catalog, String content) {
+        String sql="update CATALOG set content=? where id_catalog=?";
+        update(sql,content,id_catalog);
     }
 
 }

@@ -4,7 +4,7 @@
 /*
  * nowClick:最近一次点击
  * */
-var nowClick;
+var nowClick,nowCatalog;
 var documentId=$("input#documentId").val();
 
 //评论区初始化
@@ -62,35 +62,51 @@ $(document).on("click",".dic",function () {
             //模板生成
             template=result.template;
             $("div.content").html(template.content);
-            if(template.id_template=="3"){//加载角色
-                $.ajax({
-                    url: "catalog-getRoles",
-                    data: { documentId:documentId,catalogIndex:catalogIndex},
-                    dataType: "json",
-                    type: "Post",
-                    async: "false",
-                    success: function (result) {
-                    },
-                    error: function (result) {
-                        showtoast("dangerous","失败","获取失败")
-                    }
-                })
-            }
-            var catalog=result.catalogEntity,title="";
-            if (catalog.first_index!="0")title+=catalog.first_index;
-             if(catalog.second_index!="0")title+="."+catalog.second_index;
-             if(catalog.third_index!="0")title+="."+catalog.third_index;
-             if(catalog.fourth_index!="0")title+="."+catalog.fourth_index;
-            title+="  "+catalog.title;
+            nowCatalog=result.catalogEntity,title="";
+            if (nowCatalog.first_index!="0")title+=nowCatalog.first_index;
+             if(nowCatalog.second_index!="0")title+="."+nowCatalog.second_index;
+             if(nowCatalog.third_index!="0")title+="."+nowCatalog.third_index;
+             if(nowCatalog.fourth_index!="0")title+="."+nowCatalog.fourth_index;
+            title+="  "+nowCatalog.title;
             $("h2#catalog_title").text(title);
-            $("input#catalog-id").val(result.id_catalog);
             discussInit();
+            entity=result.entity;
+            if(template.id_template=="3"){//加载角色
+                // getRole();
+            }
+            else if(template.id_template=="2"){
+                var roleName=entity.roleName;
+                var describe=entity.describe;
+                var permissions=entity.permissions;
+                $("#roleName").val(roleName);
+                $("#describe").html(describe);
+                $("#permissions").html(permissions);
+            }
+            else if (template.id_template=="1"){
+                var content=entity.content;
+                $("#describe").html(content);
+            }
         },
         error: function (result) {
             showtoast("dangerous","失败","获取失败")
         }
     })
 })
+//加载角色
+function getRole() {
+    $.ajax({
+        url: "catalog-getRoles",
+        data: { documentId:documentId},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+        },
+        error: function (result) {
+            showtoast("dangerous","失败","获取失败")
+        }
+    })
+}
 //新增弹框初始化
 function addModelInit() {
 $("input#add_title").val("");
@@ -530,8 +546,9 @@ function temp_edit() {
         // ['table', ['table']],
         ['picture', ['picture']],
         ['fullscreen', ['fullscreen']]
-    ]})
-    if($("#describe").code().trim()=="暂无内容")$("#describe").code("")
+    ],
+        placeholder: '暂无内容',
+    })
     $("#edit").attr("style","display:none");
     $("#save").attr("style","display:show");
     $(".dis").removeAttr("disabled")
@@ -543,23 +560,41 @@ function temp_save() {
     $("#save").attr("style","display:none");
     $("#edit").attr("style","display:show");
 
-    var id_template = $("#add_id_template").val(),catalogIndex = $(nowClick).children("span.catalogIndex").text();
+    var id_template = nowCatalog.id_template,id_catalog=nowCatalog.id_catalog;
         if (id_template == "1") {//通用
-            var describe=$("#describe").code();
-            $.ajax({
-                url: "catalog-saveTemplateOne",
-                data: {documentId: documentId, catalogIndex: catalogIndex, content: describe},
-                dataType: "json",
-                type: "Post",
-                async: "false",
-                success: function (result) {
-                    showtoast("success", "保存成功", "内容保存成功")
-                },
-                error: function (result) {
-                    showtoast("dangerous", "保存失败", "内容保存失败")
-                }
-            })
-        }
+        var describe=$("#describe").code();
+        $.ajax({
+            url: "catalog-saveTemplateOne",
+            data: {id_catalog: id_catalog, content: describe},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success", "保存成功", "内容保存成功")
+            },
+            error: function (result) {
+                showtoast("dangerous", "保存失败", "内容保存失败")
+            }
+        })
+    }
+    else if (id_template == "2") {//角色
+        var roleName=$("input#roleName").val();
+        var describe=$("#describe").code();
+        var permissions=$("#permissions").code();
+        $.ajax({
+            url: "catalog-saveTemplateTwo",
+            data: {id_catalog: id_catalog, content: describe,describe:describe,permissions:permissions},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success", "保存成功", "内容保存成功")
+            },
+            error: function (result) {
+                showtoast("dangerous", "保存失败", "内容保存失败")
+            }
+        })
+    }
     $(".dis").attr("disabled","true");
 }
 //评论编辑按钮

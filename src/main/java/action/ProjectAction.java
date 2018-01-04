@@ -9,7 +9,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import com.oracle.javafx.jmx.json.JSONWriter;
 import dao.DocumentDao;
 import dao.OrganizationDao;
 import dao.ProjectDao;

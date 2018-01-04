@@ -36,7 +36,7 @@
     <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3s.css" rel="stylesheet">
     <link href="../css/mjy.css" rel="stylesheet">
 
 </head>
@@ -189,7 +189,7 @@
             <!--中间部分开始-->
             <div class="col-md-7" >
                 <div class="main"><h2 id="catalog_title"></h2></div>
-                <input id="catalog-id" style="display: none">
+                <input id="id_catalog" style="display: none">
                 <div class="row">
                     <div class="ibox float-e-margins">
                         <div class="catalogNoneContent" style="text-align: center">

@@ -1,5 +1,6 @@
 package action;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -8,7 +9,9 @@ import dao.TemplateDao;
 import daoImp.CatalogDaoImp;
 import daoImp.TemplateDaoImp;
 import entity.CatalogEntity;
+import entity.CommonStructureEntity;
 import entity.TemplateEntity;
+import entity.UserStructureEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -32,6 +35,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private int place;
     private String title;
     private String content;
+    private int  id_catalog;
+    private String describe;
+    private String permissions;
 
     public String getIndex(){
         dataMap = new HashMap<String, Object>();
@@ -134,7 +140,16 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         CatalogEntity catalogEntity=catalogDao.getOne(documentId,first,second,third,fourth);
         TemplateDao templateDao=new TemplateDaoImp();
         TemplateEntity templateEntity=templateDao.getTemplate(catalogEntity.getId_template());
+        Gson gson = new Gson();
         dataMap=new HashMap<>();
+        if (catalogEntity.getId_template()==1){//通用
+            CommonStructureEntity entity=gson.fromJson(catalogEntity.getContent(),CommonStructureEntity.class);
+            dataMap.put("entity",entity);
+        }
+        else if(catalogEntity.getId_template()==2){
+            UserStructureEntity entity=gson.fromJson(catalogEntity.getContent(),UserStructureEntity.class);
+            dataMap.put("entity",entity);
+        }
         dataMap.put("template",templateEntity);
         dataMap.put("catalogEntity",catalogEntity);
         return "Re";
@@ -158,12 +173,17 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
     public String saveTemplateOne(){
         CatalogDao catalogDao=new CatalogDaoImp();
-        String[] tempList=catalogIndex.split(" ");
-        int first=Integer.valueOf(tempList[0]);
-        int second=Integer.valueOf(tempList[1]);
-        int third=Integer.valueOf(tempList[2]);
-        int fourth=Integer.valueOf(tempList[3]);
-        catalogDao.saveTemplateOne(documentId,first,second,third,fourth,content);
+        CommonStructureEntity structureEntity=new CommonStructureEntity(content);
+        Gson gson = new Gson();
+        catalogDao.saveContent(id_catalog,gson.toJson(structureEntity));
+        return "Re";
+    }
+
+    public  String saveTemplateTwo(){
+        CatalogDao catalogDao=new CatalogDaoImp();
+        UserStructureEntity structureEntity=new UserStructureEntity(content,describe,permissions);
+        Gson gson = new Gson();
+        catalogDao.saveContent(id_catalog,gson.toJson(structureEntity));
         return "Re";
     }
 
@@ -234,5 +254,17 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setId_catalog(int id_catalog) {
+        this.id_catalog = id_catalog;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
     }
 }

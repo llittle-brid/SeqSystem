@@ -69,7 +69,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,getRoles</allowed-methods>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,getRoles,saveTemplateTwo</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">
