@@ -1,7 +1,3 @@
-/**
- * 2018/1/5 17：33
- * wwc
- */
 package action;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;

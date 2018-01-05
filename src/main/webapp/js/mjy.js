@@ -43,3 +43,5 @@ function showtoast(type, title, msg) {
     }
     var $toast = toastr[type](msg, title);
 }
+
+

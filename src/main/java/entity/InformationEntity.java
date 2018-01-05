@@ -1,7 +1,3 @@
-/**
- * 2018/1/5 17：33
- * wwc
- */
 package entity;
 
 import java.sql.Date;

@@ -72,10 +72,9 @@
 
         <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="quitorg" >/WEB-INF/pages/project_myprofile.jsp</result>
-            <!--<result name="quitorg" type="json">-->
-                <!--<param name="root">dataMap</param>-->
-            <!--</result>-->
+            <result name="quitorg" type="json">
+                <param name="root">dataMap</param>
+            </result>
             <result name="orgList" type="json">
                  <param name="root">dataMap</param>
             </result>

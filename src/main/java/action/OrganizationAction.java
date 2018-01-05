@@ -1,7 +1,7 @@
-/**
- * 2018/1/5 17：33
- * wwc
- */
+//        Created by IntelliJ IDEA.
+//        User: wwc
+//        Date: 22/12/2017
+//        Time: 15:55
 
 package action;
 import com.opensymphony.xwork2.ActionSupport;
