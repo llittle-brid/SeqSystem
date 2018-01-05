@@ -104,4 +104,19 @@ public class FunStructureEntity {
 
     public FunStructureEntity() {
     }
+
+    @Override
+    public String toString() {
+        return "FunStructureEntity{" +
+                "funName='" + funName + '\'' +
+                ", priority=" + priority +
+                ", describe='" + describe + '\'' +
+                ", funRoleList=" + funRoleList +
+                ", funUsableList=" + funUsableList +
+                ", in='" + in + '\'' +
+                ", out='" + out + '\'' +
+                ", basic='" + basic + '\'' +
+                ", alternative='" + alternative + '\'' +
+                '}';
+    }
 }

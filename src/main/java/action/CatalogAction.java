@@ -142,38 +142,42 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         catalogDao.newCatalog(catalogEntity.getId_template(),catalogEntity.getTitle(),catalogEntity.getId_document());
         return "Re";
     }
-    public String getCatalog(){
-        String[] tempList=catalogIndex.split(" ");
-        int first=Integer.valueOf(tempList[0]);
-        int second=Integer.valueOf(tempList[1]);
-        int third=Integer.valueOf(tempList[2]);
-        int fourth=Integer.valueOf(tempList[3]);
-        CatalogDao catalogDao=new CatalogDaoImp();
-        CatalogEntity catalogEntity=catalogDao.getOne(documentId,first,second,third,fourth);
-        TemplateDao templateDao=new TemplateDaoImp();
-        TemplateEntity templateEntity=templateDao.getTemplate(catalogEntity.getId_template());
+    public String getCatalog() {
+        String[] tempList = catalogIndex.split(" ");
+        int first = Integer.valueOf(tempList[0]);
+        int second = Integer.valueOf(tempList[1]);
+        int third = Integer.valueOf(tempList[2]);
+        int fourth = Integer.valueOf(tempList[3]);
+        CatalogDao catalogDao = new CatalogDaoImp();
+        CatalogEntity catalogEntity = catalogDao.getOne(documentId, first, second, third, fourth);
+        TemplateDao templateDao = new TemplateDaoImp();
+        TemplateEntity templateEntity = templateDao.getTemplate(catalogEntity.getId_template());
         Gson gson = new Gson();
-        dataMap=new HashMap<>();
-        if (catalogEntity.getId_template()==1){//通用
-            CommonStructureEntity entity=gson.fromJson(catalogEntity.getContent(),CommonStructureEntity.class);
-            dataMap.put("entity",entity);
-        }
-        else if(catalogEntity.getId_template()==2){
-            UserStructureEntity entity=gson.fromJson(catalogEntity.getContent(),UserStructureEntity.class);
-            dataMap.put("entity",entity);
-        }
-        else if(catalogEntity.getId_template()==3){
-            List<CatalogEntity> catalogEntityList=catalogDao.getAllRole(documentId);
-            List<UserStructureEntity> roleList=new ArrayList<>();
+        dataMap = new HashMap<>();
+        if (catalogEntity.getId_template() == 1) {//通用
+            CommonStructureEntity entity = gson.fromJson(catalogEntity.getContent(), CommonStructureEntity.class);
+            dataMap.put("entity", entity);
+        } else if (catalogEntity.getId_template() == 2) {
+            UserStructureEntity entity = gson.fromJson(catalogEntity.getContent(), UserStructureEntity.class);
+            dataMap.put("entity", entity);
+        } else if (catalogEntity.getId_template() == 3) {
+            //获取角色列表
+            List<CatalogEntity> catalogEntityList = catalogDao.getAllRole(documentId);
+            List<UserStructureEntity> roleList = new ArrayList<>();
             for (int i = 0; i < catalogEntityList.size(); i++) {
-                roleList.add(gson.fromJson(catalogEntityList.get(i).getContent(),UserStructureEntity.class));
-            }
-            dataMap.put("roleList",roleList);
+                roleList.add(gson.fromJson(catalogEntityList.get(i).getContent(), UserStructureEntity.class));  }
+                //获取当前catalog内容
+                FunStructureEntity entity = gson.fromJson(catalogEntity.getContent(), FunStructureEntity.class);
+            //这个是内容类
+                dataMap.put("entity", entity);
+                dataMap.put("roleList", roleList);
         }
-        dataMap.put("template",templateEntity);
-        dataMap.put("catalogEntity",catalogEntity);
-        return "Re";
+            dataMap.put("template", templateEntity);
+            //这个包括目录
+            dataMap.put("catalogEntity", catalogEntity);
+         return "Re";
     }
+
 
     public String rename(){
         String[] tempList=catalogIndex.split(" ");
@@ -216,11 +220,10 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 //        System.out.println(funUsables);
         type= new TypeToken<ArrayList<FunRole>>() {}.getType();
         List<FunRole> funRoles;
-//        System.out.println(funRoleList);
+        System.out.println(funRoleList);
         funRoles=gson.fromJson(funRoleList,type);
-//        System.out.println(funRoles);
-        FunStructureEntity funStructureEntity=new FunStructureEntity(funName,priority,describe,funRoles,funUsables,inDiv,outDiv,basic,alternative);
-        System.out.println(funStructureEntity.toString());
+        System.out.println(funRoles);
+        FunStructureEntity funStructureEntity=new FunStructureEntity(funName,priority,content,funRoles,funUsables,inDiv,outDiv,basic,alternative);
         catalogDao.saveContent(id_catalog,gson.toJson(funStructureEntity));
         return "Re";
     }
