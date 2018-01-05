@@ -12,12 +12,6 @@ public class StructureDaoImp extends DAO<StructureEntity> implements StructureDa
         return structure1;
     }
 
-    public void insert(String toJson)
-    {
-        String sql="insert into STRUCTURE (CONTENT) values (?)";
-        update(sql,toJson);
-    }
-
     public int count(int id_library){
         String sql="select count(*) from STRUCTURE where ID_LIBRARY=?";
         int count=Integer.valueOf(getForValue(sql,id_library).toString());

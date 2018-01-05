@@ -1,5 +1,6 @@
 package action;
 
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -9,11 +10,14 @@ import daoImp.CatalogDaoImp;
 import daoImp.ProDiscussDaoImp;
 import entity.ProDIscussWrapper;
 import entity.ProDiscussEntity;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +52,31 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
 
+    public String commit2Project(){
+        int id_project = proDiscussEntity.getId_Project();
+        int id_user = proDiscussEntity.getId_user();
+        File MyFile = proDiscussEntity.getMyFile();
+        String MyFileFileName = proDiscussEntity.getMyFileFileName();
+        /* Copy file to a safe location */
+        String DestPath = "/Users/zhiweixu/Documents/GitHub/SeqSystem/src/main/webapp/accessories";
+        String accessory = MyFileFileName;
+        if (MyFile != null) {
+            try {
+                System.out.println("Src File name: " + MyFile);
+                System.out.println("Dst File name: " + MyFileFileName);
+
+                File destFile = new File(DestPath, MyFileFileName);
+                FileUtils.copyFile(MyFile, destFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        proDiscussDao = new ProDiscussDaoImp();
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,accessory);
+        return "Re";
+    }
+
     public String getCatalogDis(){
         catalogDao=new CatalogDaoImp();
         proDiscussDao=new ProDiscussDaoImp();
@@ -59,15 +88,27 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         int fourth=Integer.valueOf(tempList[3]);
         int id_catalog=catalogDao.getIdCatalog(id_document,first,second,third,fourth);
         List<ProDiscussEntity> discussList=proDiscussDao.getCatalogDis(id_catalog);
-        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,1);
+        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,1,1);
         dataMap.put("wrapperList",wrapperList);
         dataMap.put("test",1);
+        return "Re";
+    }
+
+    public String getProjectDis(){
+        int id_project = proDiscussEntity.getId_Project();
+        int id_user = proDiscussEntity.getId_user();
+        proDiscussDao=new ProDiscussDaoImp();
+        dataMap=new HashMap<>();
+        List<ProDiscussEntity> discussList = proDiscussDao.getProjectDis(id_project);
+        List<ProDIscussWrapper> wrapperList = ProDIscussWrapper.getWrapperList(discussList,id_user,id_project);
+        dataMap.put("wrapperList",wrapperList);
         return "Re";
     }
 
     public String delete(){
         proDiscussDao=new ProDiscussDaoImp();
         proDiscussDao.delete(proDiscussEntity.getId_pro_discuss());
+
         return "Re";
     }
     public void prepareDelete(){

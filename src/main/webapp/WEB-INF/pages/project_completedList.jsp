@@ -85,7 +85,7 @@
                     sortable: true,
                     align: 'center'
                 }, {
-                    field: 'id_Organization',
+                    field: 'orgName',
                     title: '所属机构',
                     sortable: true,
                     align: 'center'

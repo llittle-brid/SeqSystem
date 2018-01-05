@@ -45,4 +45,8 @@ void update(int id_document, int first, int second);
     int getIdCatalog(int id_document,int first,int second,int third,int fourth);
 
     void rename(String title,int id_document,int first,int second,int third,int fourth);
+
+    int getRoleCount(int id_document);
+
+    void saveTemplateOne(int id_document,int first,int second,int third,int fourth,String content);
 }

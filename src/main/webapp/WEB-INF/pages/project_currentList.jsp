@@ -74,7 +74,8 @@
                 field: 'name',
                 title: '项目名称',
                 sortable: true,
-                align: 'center'
+                align: 'center',
+                formatter: "nameFormatter"
             }, {
                 field: 'date',
                 title: '创建日期',
@@ -86,7 +87,7 @@
                 title: '文档名称',
                 align: 'center'
             }, {
-                field: 'id_Organization',
+                field: 'orgName',
                 title: '所属机构',
                 sortable: true,
                 align: 'center'
@@ -119,6 +120,15 @@
         }
     );
 
+    function nameFormatter(value,row,index) {
+        if (row.rank == 3) {
+            return row.name + ' ' + '<label class="label label-danger">我是组长</label>';
+        }
+        else if (row.rank == 4)
+            return row.name + ' ' + '<label class="label label-warning">我是副组长</label>';
+        else
+            return row.name;
+    }
     function operateFormatter(value,row,index) {
         return '<a class="mod fa fa-folder btn btn-info">查看项目</a>'
     }
@@ -129,6 +139,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id_Project = parseInt(row.id_Project);
+
                 $.ajax({
                     type: "GET",
                     url: "project-getProjectInfo",

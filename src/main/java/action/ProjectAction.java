@@ -57,11 +57,11 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         projectDao = new ProjectDaoImp();
         UserEntity user = (UserEntity) ActionContext.getContext().getSession().get("user");
         int ID_user = user.getId_user();
+
         List<ProjectEntity> list = projectDao.getAll(1,ID_user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
-//        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
-//        System.out.println("project_showList"+json);
+
         dataMap.put("res",json);
         return SUCCESS;
     }
@@ -95,14 +95,15 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_Project = project.getId_Project();
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
+
         UserEntity pm = projectDao.getPM(project);
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
 
         int rank = projectDao.getRank(id_Project,user.getId_user());
-        session.put("rank",rank);
+
         session.put("PM",pm);
         session.put("project",project);
-        session.put("Id_Project",id_Project);
+
         return SUCCESS;
     }
     public String getProjectMember(){
@@ -135,6 +136,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String alterPM(){
+        dataMap = new HashMap<String, Object>();
         String username = project.getUsername();
         UserDao userDao = new UserDaoImp();
         UserEntity user = userDao.getOne(username);
@@ -146,7 +148,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         System.out.println(id_Project);
 
         projectDao = new ProjectDaoImp();
-        projectDao.alterPM(user.getId_user(),id_Project);
+        boolean res = projectDao.alterPM(user.getId_user(),id_Project);
+        dataMap.put("res",res);
 
         return SUCCESS;
     }
@@ -237,9 +240,6 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return SUCCESS;
     }
 
-    public String jmpFinishedProjectInfo(){
-        return "finishedProjectInfo";
-    }
     @Override
     public void prepare() throws Exception {
         project = new ProjectEntity();

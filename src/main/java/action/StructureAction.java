@@ -4,15 +4,13 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.LibrarydiscussDao;
 import dao.StructureDao;
 import dao.LibraryDao;
 import daoImp.LibraryDaoImp;
+import daoImp.LibrarydiscussDaoImp;
 import daoImp.StructureDaoImp;
-import entity.LibraryEntity;
-import entity.UserStructureEntity;
-import entity.CaseStructureEntity;
-import entity.CommonStructureEntity;
-import entity.StructureEntity;
+import entity.*;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -24,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 public class StructureAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<StructureEntity>, Preparable {
     private StructureDao structureDao;
+    private LibrarydiscussDao librarydiscussDao;
     private LibraryDao libraryDao;
     private LibraryEntity library;
     private StructureEntity structure;
@@ -32,20 +31,34 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     private Map<String, Object> dataMap;
     private int id_template;
     private int page;
+    private int pagedis;
 
 
     public String get()
     {
         structureDao = new StructureDaoImp();
+        librarydiscussDao = new LibrarydiscussDaoImp();
         libraryDao=new LibraryDaoImp();
+
+        List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
+        ActionContext.getContext().getValueStack().set("listdis",discussAll);
+        System.out.println(discussAll);
+        int discussnum=librarydiscussDao.getcount(structure.getId_library());
+        int numdis=discussnum/4+1;
+        request.put("pagedis",pagedis);
+        request.put("dn",discussnum);
+        request.put("numdis",numdis);
+
         library=libraryDao.getOne(structure.getId_library());
         request.put("library",library);
+
         Gson gson = new Gson();
+
         List<StructureEntity> structureAll;
         if(id_template==1){
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*6+9);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*9+9);
             int count=structureDao.count(structure.getId_library());
-            int num=count/6+1;
+            int num=count/9+1;
             request.put("num",num);
             request.put("page",page);
             request.put("id_library",structure.getId_library());
@@ -92,16 +105,6 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
 
         return "get";
     }
-
-    public String insert()
-    {
-        structureDao = new StructureDaoImp();
-        structure.setContent("1234");
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(structure);
-        structureDao.insert(jsonString);
-        return "insert";
-    }
     @Override
     public StructureEntity getModel() {
         return structure;
@@ -136,5 +139,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
     public void setPage(int page) {
         this.page = page;
     }
-
+    public void setPagedis(int pagedis) {
+        this.pagedis = pagedis;
+    }
 }
