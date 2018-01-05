@@ -21,8 +21,7 @@ import javax.servlet.http.HttpSession;
             UserEntity user= (UserEntity) session.getAttribute("user");
             System.out.println(user+"before_interceptor");
             if(user!=null){
-
-                    return invocation.invoke();
+                return invocation.invoke();
             }
             ((ActionSupport)invocation.getAction()).addActionError("sorry,not login");
 

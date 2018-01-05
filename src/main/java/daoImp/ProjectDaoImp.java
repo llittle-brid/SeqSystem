@@ -126,7 +126,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
 
         //判断邀请的成员是否已经在组内
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
             return false;
         }
 
@@ -148,7 +148,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     public boolean addMember(int idProject, int idUser){
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
         //判断邀请的成员是否已经在组内
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
             return false;
         }
 

@@ -1,5 +1,6 @@
 package action;
 
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -9,11 +10,14 @@ import daoImp.CatalogDaoImp;
 import daoImp.ProDiscussDaoImp;
 import entity.ProDIscussWrapper;
 import entity.ProDiscussEntity;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +55,25 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     public String commit2Project(){
         int id_project = proDiscussEntity.getId_Project();
         int id_user = proDiscussEntity.getId_user();
+        File MyFile = proDiscussEntity.getMyFile();
+        String MyFileFileName = proDiscussEntity.getMyFileFileName();
+        /* Copy file to a safe location */
+        String DestPath = "/Users/zhiweixu/Documents/GitHub/SeqSystem/src/main/webapp/accessories";
+        String accessory = MyFileFileName;
+        if (MyFile != null) {
+            try {
+                System.out.println("Src File name: " + MyFile);
+                System.out.println("Dst File name: " + MyFileFileName);
+
+                File destFile = new File(DestPath, MyFileFileName);
+                FileUtils.copyFile(MyFile, destFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         proDiscussDao = new ProDiscussDaoImp();
-        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent);
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,accessory);
         return "Re";
     }
 
