@@ -19,17 +19,17 @@ function addUsabelLine() {
     var para=$("#para").val();
     var content;
     if (typeof (nowLine)=="undefined"||  nowLine=="undefined"){
-        content=" <tr class='usableTr'> <th colspan='2'>全局可用性："+usableName+"</th> <th >发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
+        content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>全局可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
         $(".funTable tfoot").append(content);
         return;
     }
-    content=" <tr class='usableTr'> <th colspan='2'>局部可用性："+usableName+"</th> <th >发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
+    content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>局部可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
     $(nowLine).after(content);
     $(nowLine).children("th:last-child").children("button").hide();
 
 }
 function addFunlLine() {
-    var content="   <tr class='funTr'> <th > <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black'></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></th> <th> <select class='form-control' name='' disabled> <option>系统管理员</option> <option>角色2</option> <option>角色3</option> <option>角色4</option> </select> </th> <th> <textarea   class='form-control'   style='max-width: 100%' disabled>新增的</textarea> </th> <th> <button  class='btn btn-primary  btn-xs col-lg-push-1'  id='addUsable'  data-toggle='modal' data-target='#addUsableModel' onclick='addUsable(this)' type='button' style='margin-right: 10px'>新增可用性</button> </th> </tr>"
+    var content="   <tr class='funTr'> <th > <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black'></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></th> <th> <select class='form-control roleName dis' name='' name='roleName'  > <option>系统管理员</option> <option>角色2</option> <option>角色3</option> <option>角色4</option> </select> </th> <th> <textarea   class='form-control roleDescribe dis'   style='max-width: 100%' name='roleDescribe'    ></textarea> </th> <th> <button  class='btn btn-primary  btn-xs col-lg-push-1'  id='addUsable'  data-toggle='modal' data-target='#addUsableModel' onclick='addUsable(this)' type='button' style='margin-right: 10px'>新增可用性</button> </th> </tr>"
     $(".funTable").children("tbody").children("tr:last-child").before(content);
 }
 $(document).on("click",".fun_down",function () {

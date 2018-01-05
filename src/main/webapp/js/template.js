@@ -6,7 +6,10 @@
  * */
 var nowClick,nowCatalog;
 var documentId=$("input#documentId").val();
-
+//初始化的时候调用getUsable()函数赋值
+var usableList;
+// 加载模板3时调用getRole()函数
+var roleList;
 //评论区初始化
 function discussInit() {
     $(".discuss").code(""); 
@@ -72,7 +75,7 @@ $(document).on("click",".dic",function () {
             discussInit();
             entity=result.entity;
             if(template.id_template=="3"){//加载角色
-                // getRole();
+                UsableInit();
             }
             else if(template.id_template=="2"){
                 var roleName=entity.roleName;
@@ -92,21 +95,6 @@ $(document).on("click",".dic",function () {
         }
     })
 })
-//加载角色
-function getRole() {
-    $.ajax({
-        url: "catalog-getRoles",
-        data: { documentId:documentId},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-        },
-        error: function (result) {
-            showtoast("dangerous","失败","获取失败")
-        }
-    })
-}
 //新增弹框初始化
 function addModelInit() {
 $("input#add_title").val("");
@@ -330,11 +318,45 @@ $(".li_down").click(function () {
 $(".li_rename").click(function () {
     renameModelInit();
 })
+//获取可用性
+function getUsable() {
+    $.ajax({
+        url: "catalog-getUsable",
+        data: {},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            usableList=result.usableList;
+        },
+        error: function (result) {
+            showtoast("dangerous","失败","修改标题失败")
+        }
+    })
+}
+//可用性初始化
+function UsableInit() {
+    var content="";
+    for (var i=0;i<usableList.length;i++){
+        content+=" <option value='"+i+"' onclick='usableClick(this)'>"+(i+1)+"."+usableList[i].name+"</option>"
+    }
+    $("select#uaSelect").html(content);
+}
+//加载详细可用性内容
+function usableClick(obj) {
+var id=parseInt($(obj).val());
+$("#uaname").text(usableList[id].name);
+    $("#uaproblem").text(usableList[id].rang);
+    $("#uasolution").text(usableList[id].solution);
+    $("#uaexample").text(usableList[id].example);
+}
 //页面初始化
 $(document).ready(function () {
     templateInit();
-    edit()
+    getUsable()
+    edit();
 })
+
 //数字转英文的函数
 function getNextRank(nowRank) {
     if (nowRank=="first")return "second";
@@ -583,7 +605,7 @@ function temp_save() {
         var permissions=$("#permissions").code();
         $.ajax({
             url: "catalog-saveTemplateTwo",
-            data: {id_catalog: id_catalog, content: describe,describe:describe,permissions:permissions},
+            data: {id_catalog: id_catalog, content: roleName,describe:describe,permissions:permissions},
             dataType: "json",
             type: "Post",
             async: "false",
@@ -595,6 +617,64 @@ function temp_save() {
             }
         })
     }
+    else  if(id_template == "3"){
+            var funName=$("input#funName").val();
+            var priority=$("select#priority").val();
+            var describe=$("#describe").html();
+            var inDiv=$("#in").html();
+            var outDiv=$("#out").html();
+            var basic=$("#basic").html();
+            var alternative=$("#alternative").html();
+            var  funRoleList="[";
+            var roleName,roleDescribe,usableName,usablePara,last="";
+            $(".funTable tbody").find("tr").each(function () {
+             if ($(this).hasClass("funTr")){//开头
+                  if (last==""){//第一次，没有,
+                     funRoleList+="{"
+                 }
+                 else   funRoleList+="},{"
+                 roleName=$(this).children("th").eq(1).children(".roleName").find("option:selected").text();
+                  // alert($(this).children("th").eq(2).children(".roleDescribe"))
+                 roleDescribe=$(this).children("th").eq(2).children(".roleDescribe").val();
+                 funRoleList+="\"roleName\":\""+roleName+"\",\"roleDescribe\":\""+roleDescribe+"\"";
+                 last="funTr";
+             }
+            else if ($(this).hasClass("usableTr")){//开头
+                 usableName=$(this).children("th:first-child").text();
+                 usablePara=$(this).children("th").eq(1).text();
+                 funRoleList+=",\"usableName\":\""+usableName+"\",\"usablePara\":\""+usablePara+"\"";
+                 last="usableTr";
+             }
+            })
+            funRoleList+="}]";
+            var funUsableList="[",usableName,usablePara,first="yes";
+            $(".funTable tfoot").find("tr").each(function () {
+                    if (first=="yes"){//第一次，没有,
+                        funUsableList+="{"
+                    }
+                    else   funUsableList+=",{"
+                    usableName=$(this).children("th:first-child").text();
+                    usablePara=$(this).children("th").eq(1).text();
+                funUsableList+="\"usableName\":\""+usableName+"\",\"usablePara\":\""+usablePara+"\"}";
+                    first="no";
+            })
+            funUsableList+="]";
+            $.ajax({
+                url: "catalog-saveTemplateThree",
+                data: {id_catalog: id_catalog,funName: funName, priority: priority,content:describe,
+                    inDiv:inDiv,outDiv:outDiv,basic:basic,alternative:alternative,
+                    funRoleList:funRoleList,funUsableList:funUsableList},
+                dataType: "json",
+                type: "Post",
+                async: "false",
+                success: function (result) {
+                    showtoast("success", "保存成功", "内容保存成功")
+                },
+                error: function (result) {
+                    showtoast("dangerous", "保存失败", "内容保存失败")
+                }
+            })
+        }
     $(".dis").attr("disabled","true");
 }
 //评论编辑按钮

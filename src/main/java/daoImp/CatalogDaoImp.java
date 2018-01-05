@@ -173,4 +173,10 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         update(sql,content,id_catalog);
     }
 
+    @Override
+    public List<CatalogEntity> getAllRole(int id_document) {
+        String sql="select * from CATALOG where id_document=? and id_template=2";
+        return  getForList(sql,id_document);
+    }
+
 }

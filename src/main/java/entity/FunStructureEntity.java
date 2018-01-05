@@ -10,7 +10,6 @@ import java.util.List;
 public class FunStructureEntity {
     private String funName;
     private int priority;
-    //参与用户根据表来生成
     private String describe;
     private List<FunRole> funRoleList;
     private List<FunUsable> funUsableList;
