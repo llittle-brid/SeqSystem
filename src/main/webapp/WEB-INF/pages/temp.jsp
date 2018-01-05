@@ -35,28 +35,32 @@
 
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile" data-index="1">修改个人信息</a>
+                        <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a class="J_menuItem">系统管理</a>
+                        <s:if test='#session.sysManager!="0"'>
+                            <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
+                            </li>
+                            <li class="divider"></li>
+                        </s:if>
+                        <s:if test='#session.orgManager!="0"'>
+                        <li class="J_tabShowActive"><a href="Organization-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a class="J_menuItem">机构管理</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a  href="login-jmpLogin">安全退出</a>
+                        </s:if>
+                        <li class="J_tabCloseAll"><a href="login-jmpLogin">安全退出</a>
                         </li>
                     </ul>
 
                     <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false" href="login-jmpLogin">
+                        <a class="right-sidebar-toggle" aria-expanded="false" href="login-jmpLogin"">
                             <img src="/img/exit.png">
                         </a>
                     </li>
                 </ul>
             </nav>
         </div>
-        <div  class="row J_mainContent" id="content-main">
+        <div style="height: 800px" class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="user-jmpHomepage" frameborder="0" data-id="" seamless></iframe>
         </div>
 
@@ -65,12 +69,7 @@
 </div>
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="js/contabs.min.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
 </body>

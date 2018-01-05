@@ -10,7 +10,6 @@ var documentId=$("input#documentId").val();
 var usableList;
 // 加载模板3时初始化
 var roleList;
-var nowLine;
 //评论区初始化
 function discussInit() {
     $(".discuss").code(""); 
@@ -76,42 +75,14 @@ $(document).on("click",".dic",function () {
             discussInit();
             entity=result.entity;
             if(template.id_template=="3"){//加载角色+内容
-                UsableInit()
                 roleList=result.roleList;
                $("input#funName").val(entity.funName);
                $("select#priority").val(entity.priority);
                 $("#describe").html(entity.describe);
-                $("#in").html(entity.input);
-                $("#out").html(entity.output);
+                $("#in").html(entity.in);
+                $("#out").html(entity.out);
                 $("#basic").html(entity.basic);
                 $("#alternative").html(entity.alternative);
-                //生成表格
-                var funRoleList=entity.funRoleList;
-                var funUsableList=entity.funUsableList;
-                var funRoleContent="";
-                for (var i=0;i<funRoleList.length;i++){
-                    funRoleContent+=" <tr class='funTr'> <th > <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
-
-                    for (var j=0;j<roleList.length;j++){
-                        funRoleContent+="<option";
-                        if(funRoleList[i].roleName==roleList[j].roleName)funRoleContent+=" selected";
-                        funRoleContent+=" >"+roleList[j].roleName+"</option>";
-                    }
-                    funRoleContent+="</select> </th> <th> <textarea   class='form-control roleDescribe dis'  name='roleDescribe'   style='max-width: 100%' disabled>";
-                    funRoleContent+=funRoleList[i].roleDescribe+"</textarea> </th>";
-                    if(funRoleList[i].usableName==null){//新增按钮
-                        funRoleContent+=" <th> <button  class='btn btn-primary  btn-xs col-lg-push-1 dis'  id='addUsable'  data-toggle='modal' data-target='#addUsableModel' onclick='addUsable(this)' type='button' style='margin-right: 10px' disabled>新增可用性</button> </th></tr>";
-                    }else {
-                        funRoleContent+="</tr>";
-                        funRoleContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funRoleList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funRoleList[i].usablePara+"</th> <th style='text-align: center' > <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
-                    }
-                }
-                $(".funTable tbody").prepend(funRoleContent);
-                var funUsableContent="";
-                for (var i=0;i<funUsableList.length;i++){
-                    funUsableContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funUsableList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funUsableList[i].usablePara+"</th> <th style='text-align: center' >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
-                }
-                $(".funTable tfoot").append(funUsableContent);
             }
             else if(template.id_template=="2"){
                 var roleName=entity.roleName;
@@ -595,6 +566,7 @@ function temp_edit() {
     $("#eg").addClass("no-padding");$(".click1edit").summernote({
         height:100,
         minHeight:100,
+        maxHeight:100,
         lang:"zh-CN",focus:true,toolbar: [
         // ['style', ['bold', 'italic', 'underline', 'clear']],
         // ['fontsize', ['fontsize']],
@@ -694,6 +666,7 @@ function temp_save() {
                     first="no";
             })
             funUsableList+="]";
+            alert(describe)
             $.ajax({
                 url: "catalog-saveTemplateThree",
                 data: {id_catalog: id_catalog,funName: funName, priority: priority,content:describe,
@@ -735,7 +708,7 @@ function save() {
  *以下为模板3的功能
  */
 
-
+var nowLine;
 function deleteUsable(obj) {
     $(obj).parent().parent().prev().children("th:last-child").children("button").show();
     $(obj).parent().parent().remove();
@@ -755,18 +728,18 @@ function addUsabelLine() {
     var para=$("#para").val();
     var content;
     if (typeof (nowLine)=="undefined"||  nowLine=="undefined"){
-        content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>全局可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th style='text-align: center'  >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
+        content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>全局可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
         $(".funTable tfoot").append(content);
         return;
     }
-    content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>局部可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th style='text-align: center'>  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
+    content=" <tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>局部可用性："+usableName+"</th> <th  name='usablePara' class='usablePara'>发生条件："+para+"</th> <th>  <button  class='btn btn-danger  btn-xs col-lg-push-1' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px'>删除可用性</button></th> </tr>"
     $(nowLine).after(content);
     $(nowLine).children("th:last-child").children("button").hide();
 
 }
 
 function addFunlLine() {
-    var optionCon=""
+    var optionCon="";
     for (var i=0;i<roleList.length;i++){
         optionCon+="<option>"+roleList[i].roleName+"</option>";
     }
