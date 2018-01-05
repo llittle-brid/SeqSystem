@@ -291,7 +291,7 @@
             return '未接受';
         else if(state==1)
             return '已同意';
-        else if(state==2)
+        else if(state==-1)
             return ['已拒绝',
                 '<a class="reAgree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >重新邀请</button></a>'].join('');
     }
