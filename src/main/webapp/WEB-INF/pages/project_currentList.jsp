@@ -32,7 +32,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >><a href="user-jmpCurrentProjectList"><span class="lzf_b">当前项目</span></a>
+                    <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >> <a href="user-jmpCurrentProjectList"><span class="lzf_b">当前项目</span></a>
                 </strong>
             </li>
         </ol>

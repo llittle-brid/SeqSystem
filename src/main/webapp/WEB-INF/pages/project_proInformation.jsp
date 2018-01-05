@@ -101,7 +101,8 @@
                     <s:if test='#session.project.state==0'>
                         <a href="user-jmpCompletedProjectList">历史项目<span class="lzf_b"></span></a>
                     </s:if>
-                    >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>
+                     >>
+                    <a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>
                 </strong>
             </li>
         </ol>
@@ -192,6 +193,10 @@
                                         <div class="ibox float-e-margins">
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
+                                                <div class="ibox-content">
+                                                    <div class="click2edit wrapper discuss">
+                                                    </div>
+                                                </div>
                                                 <div class="file-loading">
                                                     <!-- The file input field used as target for the file upload widget -->
                                                     <input id="fileupload" name="MyFile" type="file" class="file" multiple data-msg-placeholder="选择要上传的文件">
@@ -200,10 +205,6 @@
                                                 <div id="alterable" style="visibility: visible">
                                                     <button class="btn btn-success  btn-xs pull-right" onclick="commitDiscuss()" type="submit">发布评论</button>
                                                     <label class="pull-right">没有附件？直接点这里--></label>
-                                                </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                                <div class="click2edit wrapper discuss">
                                                 </div>
                                             </div>
                                         </div>
@@ -605,6 +606,8 @@
 
 <%--评论区--%>
 <script>
+    var id_Project = "<s:property value="#session.project.id_Project"/>";
+    var id_User = "<s:property value="#session.user.id_user"/>";
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
@@ -639,8 +642,8 @@
                     content+="<div class='ibox-tools'>";
 
                     for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
-                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].filename + '">附件';
-                        content += j + 1;
+                        content += '<a class="fa fa-file" href="' + "WEB-INF/upload/"+tempDis.accessoryEntityList[j].path+ '">';
+                        content += tempDis.accessoryEntityList[j].filename;
                         content += '</a>';
                     }
 
@@ -676,7 +679,7 @@
             success: function (result) {
                 showtoast("success","成功","评论提交成功");
                 discussInit();
-                discussReload();
+                discussReload2();
             },
             error: function (result) {
                 showtoast("dangerous","加载失败","加载目录失败");
