@@ -74,6 +74,12 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         return count;
     }
 
+    public int sysManager(int id){
+        String sql="select count(*) from USER_RANK where ID_USER=? and ID_RANK=1";
+        int count = Integer.valueOf(getForValue(sql,id).toString());
+        return count;
+    }
+
     @Override
     public int projectNumberNow(int id) {
         String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=1";

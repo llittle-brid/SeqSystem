@@ -38,7 +38,7 @@
                         <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
-                        <s:if test='#session.user.status=="1"'>
+                        <s:if test='#session.sysManager!="0"'>
                             <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
                             </li>
                             <li class="divider"></li>

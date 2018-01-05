@@ -19,6 +19,7 @@ public interface UserDao {
 	int Mycollectcount(int id_user);
 
     int orgManager(int id);
+	int sysManager(int id);
     int projectNumberNow(int id);
 	int projectNumberHistory(int id);
 	List<UserEntity> getOrgAllMem(int user_id,String name);

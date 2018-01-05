@@ -24,10 +24,11 @@ import javax.servlet.http.HttpSession;
             //取出名为user的session属性
             UserEntity user= (UserEntity) session.getAttribute("user");
             int orgManager=(int)session.getAttribute("orgManager");
+            int sysManager=(int)session.getAttribute("sysManager");
             String method =  invocation.getProxy().getMethod();
             System.out.println(method+"/"+user+"/before_interceptor");
             if(Objects.equals(method, "jmpSysManager1")|| Objects.equals(method, "jmpSysManager2")){
-                if(user.getStatus()==1){
+                if(sysManager!=0){
                     return invocation.invoke();
                 }
                 ((ActionSupport)invocation.getAction()).addActionError("sorry,you don't have permission!");
