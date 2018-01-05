@@ -145,10 +145,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" class="form-control" required="required"></div>
-                <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required=""></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button id="cancel-invite"type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                 <button id="invite-button" type="button" class="btn btn-primary">邀请</button>
             </div>
         </div>
@@ -417,54 +416,26 @@
                             data: {
                                 ORG_NAME: currentOrg,
                                 USER_NAME: $("input#user_name").val(),
-                                MESSAGE: $("input#message").val()
                             },
                             dataType: "json",
                             type: "Post",
                             async: "false",
-                            success: function (json) {
-                                swal("邀请成功！", "您已向该用户发出邀请信息。", "success");
-                                var orgOperateList = JSON.parse(json.res);
-                                //finishingTask为table的id
-                                $('#showOperate').bootstrapTable('load', orgOperateList);
+                            success: function (result) {
+                                if(result.res===true) {
+                                    swal("邀请成功！", "您已向该用户发出邀请信息。", "success");
+                                    var orgOperateList = JSON.parse(result.showOperate);
+                                    $('#showOperate').bootstrapTable('load', orgOperateList);
+                                    $('button#cancel-invite').click();
+                                }
+                                else  swal("邀请失败！", "用户名不存在。", "error");
                             },
                             error: function () {
-                                alert(" 错误");
+                                swal("邀请失败！", "用户名不存在。", "error");
                             }
                         }
                     )
                 })
         }
     })
-
-    function inputSuggest() {
-        var memberName=$("input#MemberName");
-        $.ajax({
-            url: "project-chooseMember",
-            data: {
-                Id_Project:id_Project,
-                Username: memberName.val()
-            },
-            dataType: "json",
-            type: "post",
-            async: "false",
-            success: function (result) {
-                var memberList = result.res;
-                var suggest = JSON.parse('{"value": ' + memberList + ', "defaults": "10000000000"}');
-
-//                $("input#MemberName").bsSuggest("destroy");
-                $("input#MemberName").bsSuggest({
-                    idField:"id_user",
-                    keyField:"name",
-                    data:suggest
-                }).on('onDataRequestSuccess', function (e, result) {
-                    console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
-                });
-            },
-            error: function (result) {
-                alert('error');
-            }
-        })
-    }
 </script>
 </html>

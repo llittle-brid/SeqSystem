@@ -3,9 +3,7 @@ package daoImp;
 import dao.ApplyOrganizationDao;
 import dao.DAO;
 import entity.ApplyOrganizationEntity;
-import entity.ShowApplyOrganizationEntity;
 import java.sql.Timestamp;
-import java.util.List;
 
 
 public class ApplyOrganizationDaoImp extends DAO<ApplyOrganizationEntity> implements ApplyOrganizationDao{

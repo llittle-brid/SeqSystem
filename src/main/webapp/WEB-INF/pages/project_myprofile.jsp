@@ -297,7 +297,7 @@
                     <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="cancel-apply" type="button" class="btn btn-white" data-dismiss="modal">取消</button>
                     <button id="newOrg-button" type="submit" class="btn btn-primary">申请</button>
                 </div>
             </div>
@@ -460,6 +460,7 @@
                     async: "false",
                     success: function () {
                             swal("申请成功！", "机构申请已受理", "success");
+                            $('button#cancel-apply').click();
                     },
                     error: function () {
                         swal({
@@ -470,5 +471,4 @@
             })
     })
 </script>
-
 </html>

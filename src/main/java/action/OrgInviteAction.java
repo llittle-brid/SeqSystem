@@ -27,12 +27,13 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     public String InviteUser(){
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
-        System.out.println("InviteUser.org"+orgInvite.getORG_NAME());
-        orgInviteDao.inviteUser(orgInvite);
+        UserEntity sessionUser = (UserEntity)session.get("user");
+        boolean res=orgInviteDao.inviteUser(orgInvite,sessionUser);
         List<OrgInviteEntity> list=orgInviteDao.getlist(orgInvite.getORG_NAME());
         Gson gson = new Gson();
         String showOperate = gson.toJson(list);
-        dataMap.put("res",showOperate);
+        dataMap.put("res",res);
+        dataMap.put("showOperate",showOperate);
         System.out.println("showOrgList"+showOperate);
         return SUCCESS;
     }

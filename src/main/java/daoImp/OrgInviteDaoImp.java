@@ -3,21 +3,28 @@ package daoImp;
 import dao.DAO;
 import dao.OrgInviteDao;
 import entity.OrgInviteEntity;
+import entity.UserEntity;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 public class OrgInviteDaoImp extends DAO<OrgInviteEntity> implements OrgInviteDao {
     @Override
-    public boolean inviteUser(OrgInviteEntity a) {
+    public boolean inviteUser(OrgInviteEntity a,UserEntity b) {
+        String content = b.getName()+"invite you to join "+a.getORG_NAME();
         String sql1 = "select ID_USER from USER where NAME = ?";
         int id_user = getForValue(sql1,a.getUSER_NAME());
         String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";
         int id_org = getForValue(sql2,a.getORG_NAME());
         Timestamp date = new Timestamp(new java.util.Date().getTime());
         String sql3 = "insert into ORG_USER_APPLY (ID_ORGANIZATION,ID_USER,DATE,MESSAGE) value(?,?,?,?)";
-        update(sql3,id_org,id_user,date,a.getMESSAGE());
-        return true;
+        try {
+            update(sql3,id_org,id_user,date,content);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
