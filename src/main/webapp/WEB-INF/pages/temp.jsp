@@ -35,16 +35,16 @@
 
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a href="user-jmpMyprofile">修改个人信息</a>
+                        <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile" data-index="1">修改个人信息</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>系统管理</a>
+                        <li class="J_tabShowActive"><a class="J_menuItem">系统管理</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabShowActive"><a>机构管理</a>
+                        <li class="J_tabShowActive"><a class="J_menuItem">机构管理</a>
                         </li>
                         <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a href="login-jmpLogin">安全退出</a>
+                        <li class="J_tabCloseAll"><a  href="login-jmpLogin">安全退出</a>
                         </li>
                     </ul>
 
@@ -65,7 +65,12 @@
 </div>
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="js/contabs.min.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
 </body>
