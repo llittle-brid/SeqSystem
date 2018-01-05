@@ -92,6 +92,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
 
     public String jmpLogin(){
         session.put("user",null);
+        session.put("sysManager",null);
+        session.put("orgManager",null);
         return "loginPage";
     }
     public String jmpMyprofile(){
