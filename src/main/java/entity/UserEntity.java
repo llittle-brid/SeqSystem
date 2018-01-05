@@ -18,7 +18,6 @@ public class UserEntity {
     private String mail;
     private String qq;
     private String tel;
-    private int status;
     public int getId_user() {
         return id_user;
     }
@@ -99,14 +98,6 @@ public class UserEntity {
         this.tel = tel;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public UserEntity() {
         this.id_user = id_user;
         this.password = password;
@@ -118,6 +109,5 @@ public class UserEntity {
         this.mail = mail;
         this.qq = qq;
         this.tel = tel;
-        this.status = status;
     }
 }

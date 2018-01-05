@@ -1,12 +1,13 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class OrgInviteEntity {
     private int ID_ORG_USER_APPLY;
     private int ID_ORGANIZATION;
     private int ID_USER;
-    private Date DATE;
+    private Timestamp DATE;
     private String MESSAGE;
     private int STATE;
     private String USER_NAME;
@@ -36,11 +37,11 @@ public class OrgInviteEntity {
         this.ID_USER = ID_USER;
     }
 
-    public Date getDATE() {
+    public Timestamp getDATE() {
         return DATE;
     }
 
-    public void setDATE(Date DATE) {
+    public void setDATE(Timestamp DATE) {
         this.DATE = DATE;
     }
 
@@ -76,7 +77,7 @@ public class OrgInviteEntity {
         this.ORG_NAME = ORG_NAME;
     }
 
-    public OrgInviteEntity(int ID_ORG_USER_APPLY, int ID_ORGANIZATION, int ID_USER, Date DATE, String MESSAGE, int STATE, String USER_NAME, String ORG_NAME) {
+    public OrgInviteEntity(int ID_ORG_USER_APPLY, int ID_ORGANIZATION, int ID_USER, Timestamp DATE, String MESSAGE, int STATE, String USER_NAME, String ORG_NAME) {
         this.ID_ORG_USER_APPLY = ID_ORG_USER_APPLY;
         this.ID_ORGANIZATION = ID_ORGANIZATION;
         this.ID_USER = ID_USER;

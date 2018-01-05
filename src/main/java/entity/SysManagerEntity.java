@@ -1,17 +1,16 @@
 package entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class SysManagerEntity {
-    int ID_ORGANIZATION;
-    String NAME;
-    int ID_USER;
-    Date TIME;
-    String ADIMIN_NAME;
-    int COUNT_PROJECT;
-    int NUMBER_USER;
+    private int ID_ORGANIZATION;
+    private String NAME;
+    private int ID_USER;
+    private Timestamp TIME;
+    private String ADIMIN_NAME;
+    private int COUNT_PROJECT;
+    private int NUMBER_USER;
 
-    //获取机构ID
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;
     }
@@ -19,7 +18,7 @@ public class SysManagerEntity {
     public void setID_ORGANIZATION(int ID_ORGANIZATION) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
     }
-    //获取机构名称
+
     public String getNAME() {
         return NAME;
     }
@@ -27,7 +26,7 @@ public class SysManagerEntity {
     public void setNAME(String NAME) {
         this.NAME = NAME;
     }
-    //获取机构管理员ID
+
     public int getID_USER() {
         return ID_USER;
     }
@@ -35,23 +34,23 @@ public class SysManagerEntity {
     public void setID_USER(int ID_USER) {
         this.ID_USER = ID_USER;
     }
-    //获取管理员名字
-    public String  getADIMIN_NAME() {
+
+    public Timestamp getTIME() {
+        return TIME;
+    }
+
+    public void setTIME(Timestamp TIME) {
+        this.TIME = TIME;
+    }
+
+    public String getADIMIN_NAME() {
         return ADIMIN_NAME;
     }
 
     public void setADIMIN_NAME(String ADIMIN_NAME) {
         this.ADIMIN_NAME = ADIMIN_NAME;
     }
-    //获取机构创建时间
-    public Date getTIME() {
-        return TIME;
-    }
 
-    public void setTIME(Date TIME) {
-        this.TIME = TIME;
-    }
-    //获取机构下属项目数
     public int getCOUNT_PROJECT() {
         return COUNT_PROJECT;
     }
@@ -59,7 +58,7 @@ public class SysManagerEntity {
     public void setCOUNT_PROJECT(int COUNT_PROJECT) {
         this.COUNT_PROJECT = COUNT_PROJECT;
     }
-    //获取机构下属人数
+
     public int getNUMBER_USER() {
         return NUMBER_USER;
     }
@@ -68,10 +67,10 @@ public class SysManagerEntity {
         this.NUMBER_USER = NUMBER_USER;
     }
 
-    public SysManagerEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Date TIME, String ADIMIN_NAME, int COUNT_PROJECT, int NUMBER_USER) {
+    public SysManagerEntity(int ID_ORGANIZATION, String NAME, int ID_USER, Timestamp TIME, String ADIMIN_NAME, int COUNT_PROJECT, int NUMBER_USER) {
         this.ID_ORGANIZATION = ID_ORGANIZATION;
-        this.ID_USER = ID_USER;
         this.NAME = NAME;
+        this.ID_USER = ID_USER;
         this.TIME = TIME;
         this.ADIMIN_NAME = ADIMIN_NAME;
         this.COUNT_PROJECT = COUNT_PROJECT;

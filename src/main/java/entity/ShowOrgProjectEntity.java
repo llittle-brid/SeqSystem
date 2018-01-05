@@ -1,11 +1,12 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ShowOrgProjectEntity {
     private int id_project;
     private String project_name;
-    private Date date;
+    private Timestamp date;
     private String document_name;
     private int state;
     private int id_organization;
@@ -32,11 +33,11 @@ public class ShowOrgProjectEntity {
         this.project_name = project_name;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -112,7 +113,7 @@ public class ShowOrgProjectEntity {
         this.mail = mail;
     }
 
-    public ShowOrgProjectEntity(int id_project, String project_name, Date date, String document_name, int state, int id_organization, String intro, int id_user, int rank, String user_name, String tel, String mail) {
+    public ShowOrgProjectEntity(int id_project, String project_name, Timestamp date, String document_name, int state, int id_organization, String intro, int id_user, int rank, String user_name, String tel, String mail) {
         this.id_project = id_project;
         this.project_name = project_name;
         this.date = date;

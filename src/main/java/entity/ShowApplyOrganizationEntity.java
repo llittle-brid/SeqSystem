@@ -1,11 +1,11 @@
 package entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ShowApplyOrganizationEntity {
     private String name;
     private String tel;
-    private Date date;
+    private Timestamp date;
     private String message;
     private String org_name;
     private String state;
@@ -28,11 +28,11 @@ public class ShowApplyOrganizationEntity {
         this.tel = tel;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -76,7 +76,7 @@ public class ShowApplyOrganizationEntity {
         this.id_user = id_user;
     }
 
-    public ShowApplyOrganizationEntity() {
+    public ShowApplyOrganizationEntity(String name, String tel, Timestamp date, String message, String org_name, String state, int id_org_apply, int id_user) {
         this.name = name;
         this.tel = tel;
         this.date = date;
@@ -85,5 +85,8 @@ public class ShowApplyOrganizationEntity {
         this.state = state;
         this.id_org_apply = id_org_apply;
         this.id_user = id_user;
+    }
+
+    public ShowApplyOrganizationEntity() {
     }
 }
