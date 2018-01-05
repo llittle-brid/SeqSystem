@@ -23,7 +23,7 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     }
 
     @Override
-    public void commit1(int id_user, int id_project, Timestamp time, String content, List<String> MyFileFileName) {
+    public void commit1(int id_user, int id_project, Timestamp time, String content, List<String> MyFileFileName, List<String> Path) {
         String sql="insert into PRO_DISCUSS (id_user,id_project,time,content) values (?,?,?,?)";
 
         int id_pro_discuss = insert(sql,id_user,id_project,time,content);
@@ -33,11 +33,11 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
 //
 //        int id_pro_discuss = Integer.valueOf(getForValue(sql0).toString())-1;
 
-        String sql1="insert into ACCESSORY (id_pro_discuss,filename) values(?,?)";
+        String sql1="insert into ACCESSORY (id_pro_discuss,filename,path) values(?,?,?)";
 
         if (MyFileFileName != null) {
             for (int i = 0; i < MyFileFileName.size(); i++) {
-                update(sql1, id_pro_discuss, MyFileFileName.get(i));
+                update(sql1, id_pro_discuss, MyFileFileName.get(i),Path.get(i));
             }
         }
 
@@ -51,7 +51,7 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
 
     @Override
     public List<ProDiscussEntity> getProjectDis(int id_project) {
-        String sql="select NAME,ID_PRO_DISCUSS,TIME,CONTENT from VIEW_PRO_DISCUSS where ID_PROJECT =? order by time desc";
+        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT =? order by time desc";
 
         List<ProDiscussEntity> proDiscussEntityList = getForList(sql,id_project);
 
