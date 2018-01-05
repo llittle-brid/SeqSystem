@@ -154,11 +154,13 @@
                     title: '项目名',
                     field: 'project_name',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
                     field: 'intro',
                     title: '简介',
+                    sortable: true,
                     align: 'center'
                 },
                 {
@@ -170,6 +172,7 @@
                 {
                     field: 'mail',
                     title: '邮箱',
+                    sortable: true,
                     align: 'center'
                 }
             ]

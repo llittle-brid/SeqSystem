@@ -185,6 +185,7 @@
                     title: '姓名',
                     field: 'name',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -196,11 +197,13 @@
                 {
                     field: 'tel',
                     title: '联系方式',
+                    sortable: true,
                     align: 'center'
                 },{
                     field:'operate',
                     title:'操作',
                     align:'center',
+                    sortable: true,
                     events: "actionEvents",
                     formatter: "operateFormatter"
                 }
@@ -213,6 +216,7 @@
                     title: '姓名',
                     field: 'USER_NAME',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -224,7 +228,6 @@
                 {
                     field: 'MESSAGE',
                     title: '备注信息',
-                    sortable: true,
                     align: 'center'
                 },
                 {

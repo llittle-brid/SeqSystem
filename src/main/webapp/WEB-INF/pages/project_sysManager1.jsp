@@ -150,11 +150,13 @@
                     title: '申请人',
                     field: 'name',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
                     field: 'org_name',
                     title: '申请机构名',
+                    sortable: true,
                     align: 'center'
                 },
                 {
@@ -165,11 +167,13 @@
                 }, {
                     field: 'message',
                     title: '备注',
+                    sortable: true,
                     align: 'center'
                 },{
                     field: 'operate',
                     title: '操作',
                     align: 'center',
+                    sortable: true,
                     events: "actionEvents",
                     formatter: "operateFormatter"
                 }
@@ -276,6 +280,7 @@
                     title: '申请人',
                     field: 'name',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -287,6 +292,7 @@
                 {
                     field: 'date',
                     title: '申请时间',
+                    sortable: true,
                     align: 'center'
                 }, {
                     field: 'state',

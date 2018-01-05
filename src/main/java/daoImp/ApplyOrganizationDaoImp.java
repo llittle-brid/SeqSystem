@@ -13,7 +13,6 @@ public class ApplyOrganizationDaoImp extends DAO<ApplyOrganizationEntity> implem
         String sql="insert into ORG_APPLY(ID_USER,ORG_NAME,DATE,MESSAGE,TEL) values(?,?,?,?,?)";
         System.out.println("location:applyOrgimp");
         Timestamp createDate = new Timestamp(new java.util.Date().getTime());
-        System.out.println(apply.getOrg_name()+" "+createDate);
         update(sql,id,apply.getOrg_name(),createDate,apply.getMessage(),apply.getTel());
         return true;
     }

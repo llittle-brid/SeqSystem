@@ -89,6 +89,7 @@
                     title: '机构名',
                     field: 'name',
                     align: 'center',
+                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -110,6 +111,7 @@
                 {
                     field: 'num_user',
                     title: '机构人数',
+                    sortable: true,
                     align: 'center',
                 }, {
                     field: 'num_project',
