@@ -16,15 +16,15 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import util.Json;
 import com.google.gson.Gson;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 public class StructureAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<StructureEntity>, Preparable {
     private StructureDao structureDao;
     private LibrarydiscussDao librarydiscussDao;
     private LibraryDao libraryDao;
     private LibraryEntity library;
+    private LibrarydiscussEntity librarydiscuss;
     private StructureEntity structure;
     private Map<String,Object> request;
     private Map<String,Object> session;
@@ -41,8 +41,13 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         libraryDao=new LibraryDaoImp();
 
         List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
-        ActionContext.getContext().getValueStack().set("listdis",discussAll);
-        System.out.println(discussAll);
+        List<LiDicussE> ldList=new LinkedList<>();
+        for (int i = 0; i < discussAll.size(); i++) {
+            Date a=new Date();
+            ldList.add(new LiDicussE(discussAll.get(i),a.getTime()-discussAll.get(i).getTime().getTime()));
+        }
+        ActionContext.getContext().getValueStack().set("listdis",ldList);
+
         int discussnum=librarydiscussDao.getcount(structure.getId_library());
         int numdis=discussnum/4+1;
         request.put("pagedis",pagedis);
@@ -101,6 +106,22 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
                 casList.add(cas);
             }
             ActionContext.getContext().getValueStack().set("list3",casList);
+        }
+        else if(id_template==4)
+        {
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
+            int count=structureDao.count(structure.getId_library());
+            int num=count/4+1;
+            request.put("num",num);
+            request.put("page",page);
+            request.put("id_library",structure.getId_library());
+            request.put("id_template",id_template);
+            List psList=new LinkedList<>();
+            for(int i=0;i<structureAll.size();i++)
+            {   PictureStructureEntity ps = gson.fromJson(structureAll.get(i).getContent(), PictureStructureEntity.class);
+                psList.add(ps);
+            }
+            ActionContext.getContext().getValueStack().set("list4",psList);
         }
 
         return "get";

@@ -24,7 +24,6 @@ import entity.DocumentEntity;
 import entity.OrganizationEntity;
 import entity.ProjectEntity;
 import entity.UserEntity;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.json.JSONArray;

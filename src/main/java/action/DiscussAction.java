@@ -1,6 +1,7 @@
 package action;
 
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -55,25 +56,28 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     public String commit2Project(){
         int id_project = proDiscussEntity.getId_Project();
         int id_user = proDiscussEntity.getId_user();
-        File MyFile = proDiscussEntity.getMyFile();
-        String MyFileFileName = proDiscussEntity.getMyFileFileName();
+        List<File> MyFile = proDiscussEntity.getMyFile();
+        List<String> MyFileFileName = proDiscussEntity.getMyFileFileName();
+
         /* Copy file to a safe location */
         String DestPath = "/Users/zhiweixu/Documents/GitHub/SeqSystem/src/main/webapp/accessories";
-        String accessory = MyFileFileName;
-        if (MyFile != null) {
-            try {
-                System.out.println("Src File name: " + MyFile);
-                System.out.println("Dst File name: " + MyFileFileName);
+        if (MyFile!=null) {
+            for (int i = 0; i < MyFile.size(); i++) {
+                try {
+                    System.out.println("Src File name: " + MyFile.get(i));
+                    System.out.println("Dst File name: " + MyFileFileName.get(i));
+                    File destFile = new File(DestPath, MyFileFileName.get(i));
+                    FileUtils.copyFile(MyFile.get(i), destFile);
 
-                File destFile = new File(DestPath, MyFileFileName);
-                FileUtils.copyFile(MyFile, destFile);
-            } catch (IOException e) {
-                e.printStackTrace();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         proDiscussDao = new ProDiscussDaoImp();
-        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,accessory);
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,MyFileFileName);
         return "Re";
     }
 
@@ -106,14 +110,36 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String delete(){
+
         proDiscussDao=new ProDiscussDaoImp();
         proDiscussDao.delete(proDiscussEntity.getId_pro_discuss());
-
         return "Re";
     }
-    public void prepareDelete(){
 
 
+    public String fileDelete(){
+        dataMap=new HashMap<>();
+        String fileName=request.get("filename").toString();
+
+        System.out.println("delete filename:"+fileName);
+        String path="/Users/zhiweixu/Documents/GitHub/SeqSystem/src/main/webapp/accessories";
+        boolean flag=true;
+        try{
+            File file=new File(path);
+            File[] f=file.listFiles();
+            for(int i=0;i<f.length;i++){
+                if(f[i].getName().equals(fileName)){
+                    //删除文件
+                    f[i].delete();
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            flag=false;
+        }
+
+        dataMap.put("res",flag);
+        return "Re";
     }
 
     @Override
