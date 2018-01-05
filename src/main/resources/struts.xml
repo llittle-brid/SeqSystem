@@ -51,7 +51,7 @@
             </result>
             <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList,showCompletedList,getProjectInfo</allowed-methods>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList,showCompletedList,getProjectInfo,getDocument,getProjectMember</allowed-methods>
         </action>
 
         <action name="applyOrganization-*" class="action.ApplyOrganizationAction" method="{1}">
@@ -102,14 +102,14 @@
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_structure.jsp</result>
             <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
-            <allowed-methods>get,insert</allowed-methods>
+            <allowed-methods>get</allowed-methods>
         </action>
 
         <action name="discuss-*" class="action.DiscussAction" method="{1}">
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>commit,getCatalogDis,delete</allowed-methods>
+            <allowed-methods>commit,getCatalogDis,delete,commit2Project,getProjectDis</allowed-methods>
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">
