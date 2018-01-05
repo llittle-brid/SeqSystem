@@ -7,20 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>机构项目管理</title>
+    <title>个人中心</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
     <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="../../css/z_style.css" rel="stylesheet">
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -29,7 +25,7 @@
         <ol class="breadcrumb" style="margin-left: 40px">
             <li style="font-size: 15px">
                 <strong>
-                    <a href="user-jmpHomepage">首页</a> >><a href="Organization-jmpOrgManager1">机构管理</a>>>查看项目
+                    <a href="user-jmpHomepage">首页</a> >><a href="user-jmpOrgManager1">机构管理</a>>>查看项目
                 </strong>
             </li>
         </ol>
@@ -37,93 +33,121 @@
     <div class="form-group col-md-2">
         <ul class="nav navbar">
             <li>
-                <a href="Organization-jmpOrgManager1"><button class="btn-primary btn">成员管理</button></a>
+                <a href="user-jmpOrgManager1"><button class="btn-primary btn">成员管理</button></a>
             </li>
             <li>
-                <a href="Organization-jmpOrgManager2"><button class="btn-warning btn">查看项目</button></a>
+                <a href="user-jmpOrgManager2"><button class="btn-warning btn">查看项目</button></a>
             </li>
         </ul>
     </div>
-    <div class="col-md-10" style="padding: 15px 10px 0px 0px;margin-left: -50px">
-        <div class="panel">
-            <div class="panel-heading">
-                <div class="panel-options col-md-4">
-                    <ul class="nav nav-tabs">
-                        <li>
-                            <a href="project_detail.html#tab-1" data-toggle="tab">当前项目</a>
-                        </li>
-                        <li class="">
-                            <a href="project_detail.html#tab-2" data-toggle="tab">历史项目</a>
-                        </li>
-                    </ul>
-                </div>
-                <div style="float: right;width: 300px" class="col-md-4">
-                    <select id="gender" class="form-control" name="gender">
-                        <option name="" disabled  selected="selected" >选择机构</option>
-                        <s:iterator value="list">
-                            <option id="displayOrg" class="orgName"><s:property value="NAME"/> </option>
-                        </s:iterator>
-                    </select>
+    <div style="margin-left: -60px" class="col-md-10">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>当前项目</h5>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-2">项目名</th>
+                        <th class="col-sm-2">项目组长</th>
+                        <th class="col-sm-2">联系方式</th>
+                        <th class="col-sm-2">创建时间</th>
+                        <th class="col-sm-3">人员数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td >快易</td>
+                        <td>组长</td>
+                        <td>123@qq.com</td>
+                        <td>15236456987</td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >快易</td>
+                        <td>组长</td>
+                        <td>123@qq.com</td>
+                        <td>15236456987</td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >快易</td>
+                        <td>组长</td>
+                        <td>123@qq.com</td>
+                        <td>15236456987</td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="height: 50px;margin-left: 40%" class="btn-group">
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-white">1</button>
+                    <button class="btn btn-white  active">2</button>
+                    <button class="btn btn-white">3</button>
+                    <button class="btn btn-white">4</button>
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
-            <div class="panel-body">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab-1">
-                        <div style="margin:-30px 0px 0px 0px">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                    <div class="bootstrap-table">
-                                        <table id="showProject"
-                                               data-toggle="table"
-                                               data-url="Organization-showAllProject"
-                                               data-click-to-select="true"
-                                               data-search="true"
-                                               data-show-refresh="true"
-                                               data-show-toggle="true"
-                                               data-show-columns="true"
-                                               data-toolbar="#toolbar"
-                                               data-query-params="quefryParams"
-                                               data-pagination="true"
-                                               data-halign="center"
-                                               data-striped="true"
-                                               data-page-size="6"
-                                               data-height="410"
-                                               data-page-list="All"
-                                        >
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="tab-2">
-                        <div style="margin:-30px 0px 0px 0px">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-content">
-                                    <div class="bootstrap-table">
-                                        <table id="showHistoryProject"
-                                               data-toggle="table"
-                                               data-url="Organization-showHistoryProject"
-                                               data-click-to-select="true"
-                                               data-search="true"
-                                               data-show-refresh="true"
-                                               data-show-toggle="true"
-                                               data-show-columns="true"
-                                               data-toolbar="#toolbar"
-                                               data-query-params="quefryParams"
-                                               data-pagination="true"
-                                               data-halign="center"
-                                               data-striped="true"
-                                               data-page-size="6"
-                                               data-height="410"
-                                               data-page-list="All"
-                                        >
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>历史项目</h5>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-2">项目名</th>
+                        <th class="col-sm-2">项目组长</th>
+                        <th class="col-sm-2">联系方式</th>
+                        <th class="col-sm-2">结束时间</th>
+                        <th class="col-sm-3"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td >快易</td>
+                        <td>赖菜李</td>
+                        <td>1511157</td>
+                        <td>昨天</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td >快易</td>
+                        <td>赖菜李</td>
+                        <td>1511157</td>
+                        <td>昨天</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td >快易</td>
+                        <td>赖菜李</td>
+                        <td>1511157</td>
+                        <td>昨天</td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="height: 50px;margin-left: 40%" class="btn-group">
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-white">1</button>
+                    <button class="btn btn-white  active">2</button>
+                    <button class="btn btn-white">3</button>
+                    <button class="btn btn-white">4</button>
+                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -131,126 +155,8 @@
 </div>
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
-<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
 </body>
-<script>
-    $(document).ready(function(){
-        $("option.orgName").click(function () {
-                var element = $(this).val();
-                console.log(element);
-                Ffive(element);
-                Ffive2(element);
-            }
-        );
-    });
-    $('#showProject').bootstrapTable({
-            columns: [
-                {
-                    title: '项目名',
-                    field: 'project_name',
-                    align: 'center',
-                    sortable: true,
-                    valign: 'middle'
-                },
-                {
-                    field: 'intro',
-                    title: '简介',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'user_name',
-                    title: '项目组长',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'mail',
-                    title: '邮箱',
-                    sortable: true,
-                    align: 'center'
-                }
-            ]
-        },
-        function () {
-            var element = $(this).val();
-            Ffive(element)
-        }
-    );
-    $('#showHistoryProject').bootstrapTable({
-            columns: [
-                {
-                    title: '项目名',
-                    field: 'project_name',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    field: 'intro',
-                    title: '简介',
-                    align: 'center'
-                },
-                {
-                    field: 'user_name',
-                    title: '项目组长',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'mail',
-                    title: '邮箱',
-                    align: 'center'
-                }
-            ]
-        },
-        function () {
-            var element = $(this).val();
-            Ffive2(element)
-        }
-    );
-    function Ffive(element) {
-        $.ajax(
-            {
-                url:"Organization-showAllProject",
-                data: {NAME: element},
-                dataType:"json",
-                type: "Get",
-                async: "false",
-                success:function(json){
-                    var orgProjectList = JSON.parse(json.res);
-                    //finishingTask为table的id
-                    $('#showProject').bootstrapTable('load',orgProjectList);
-                },
-                error:function(){
-                    alert(" 错误");
-                }
-            }
-        )
-    }
-    function Ffive2(element) {
-        $.ajax(
-            {
-                url:"Organization-showHistoryProject",
-                data: {NAME: element},
-                dataType:"json",
-                type: "Get",
-                async: "false",
-                success:function(json){
-                    var orgHisProjectList = JSON.parse(json.res);
-                    //finishingTask为table的id
-                    $('#showHistoryProject').bootstrapTable('load',orgHisProjectList);
-                },
-                error:function(){
-                    alert(" 错误");
-                }
-            }
-        )
-    }
-
-</script>
 </html>

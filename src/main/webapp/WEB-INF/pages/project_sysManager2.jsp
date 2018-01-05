@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>已有机构</title>
+    <title>个人中心</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -65,8 +65,8 @@
                            data-pagination="true"
                            data-halign="center"
                            data-striped="true"
-                           data-page-size="6"
-                           data-height="410"
+                           data-page-size="10"
+                           data-height="600"
                            data-page-list="All"
                     >
                     </table>
@@ -78,7 +78,6 @@
 <script src="../../js/jquery.min.js?v=2.1.4"></script>
 <script src="../../js/bootstrap.min.js?v=3.3.6"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script src="../../js/content.min.js?v=1.0.0"></script>
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/mjy.js"></script>
@@ -90,7 +89,6 @@
                     title: '机构名',
                     field: 'name',
                     align: 'center',
-                    sortable: true,
                     valign: 'middle'
                 },
                 {
@@ -112,8 +110,7 @@
                 {
                     field: 'num_user',
                     title: '机构人数',
-                    sortable: true,
-                    align: 'center',
+                    align: 'center'
                 }, {
                     field: 'num_project',
                     title: '项目数',
