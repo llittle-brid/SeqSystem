@@ -5,7 +5,6 @@
 
 package dao;
 
-import entity.ApplyOrganizationEntity;
 import entity.OrganizationEntity;
 
 import java.util.List;
@@ -15,5 +14,4 @@ public interface OrganizationDao {
     List<OrganizationEntity> getAll();
     void quit(String NAME);
     List<OrganizationEntity> getMatched(String name);
-    List<OrganizationEntity> getMyOrg(int id);
 }

@@ -639,8 +639,8 @@
                     content+="<div class='ibox-tools'>";
 
                     for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
-                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].path+ '">';
-                        content += tempDis.accessoryEntityList[j].filename;
+                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].filename + '">附件';
+                        content += j + 1;
                         content += '</a>';
                     }
 
