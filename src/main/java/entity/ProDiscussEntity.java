@@ -2,6 +2,7 @@ package entity;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by DELL on 2017/12/25.
@@ -15,11 +16,12 @@ public class ProDiscussEntity {
     private int id_catalog;
     private  Date time;
     private String content;
-    private String accessory;
+
     private int id_Project;
     private int id_Document;
-    private File MyFile;
-    private String MyFileFileName;
+    private List<File> MyFile;
+    private List<String> MyFileFileName;
+    private List<AccessoryEntity> accessoryEntityList;
 
     public int getId_pro_discuss() {
         return id_pro_discuss;
@@ -61,14 +63,6 @@ public class ProDiscussEntity {
         this.content = content;
     }
 
-    public String getAccessory() {
-        return accessory;
-    }
-
-    public void setAccessory(String accessory) {
-        this.accessory = accessory;
-    }
-
     public String getName() {
         return name;
     }
@@ -93,37 +87,45 @@ public class ProDiscussEntity {
         this.id_Document = id_Document;
     }
 
-    public File getMyFile() {
+    public List<File> getMyFile() {
         return MyFile;
     }
 
-    public void setMyFile(File myFile) {
+    public void setMyFile(List<File> myFile) {
         MyFile = myFile;
     }
 
-    public String getMyFileFileName() {
+    public List<String> getMyFileFileName() {
         return MyFileFileName;
     }
 
-    public void setMyFileFileName(String myFileFileName) {
+    public void setMyFileFileName(List<String> myFileFileName) {
         MyFileFileName = myFileFileName;
     }
 
-    public ProDiscussEntity() {
+    public List<AccessoryEntity> getAccessoryEntityList() {
+        return accessoryEntityList;
     }
 
-    public ProDiscussEntity(int id_pro_discuss, int id_user, String name, int id_catalog, Date time, String content, String accessory, int id_Project, int id_Document, File myFile, String myFileFileName) {
+    public void setAccessoryEntityList(List<AccessoryEntity> accessoryEntityList) {
+        this.accessoryEntityList = accessoryEntityList;
+    }
+
+    public ProDiscussEntity(int id_pro_discuss, int id_user, String name, int id_catalog, Date time, String content, int id_Project, int id_Document, List<File> myFile, List<String> myFileFileName, List<AccessoryEntity> accessoryEntityList) {
         this.id_pro_discuss = id_pro_discuss;
         this.id_user = id_user;
         this.name = name;
         this.id_catalog = id_catalog;
         this.time = time;
         this.content = content;
-        this.accessory = accessory;
         this.id_Project = id_Project;
         this.id_Document = id_Document;
         MyFile = myFile;
         MyFileFileName = myFileFileName;
+        this.accessoryEntityList = accessoryEntityList;
+    }
+
+    public ProDiscussEntity() {
     }
 
     @Override
@@ -131,10 +133,14 @@ public class ProDiscussEntity {
         return "ProDiscussEntity{" +
                 "id_pro_discuss=" + id_pro_discuss +
                 ", id_user=" + id_user +
+                ", name='" + name + '\'' +
                 ", id_catalog=" + id_catalog +
                 ", time=" + time +
                 ", content='" + content + '\'' +
-                ", accessory='" + accessory + '\'' +
+                ", id_Project=" + id_Project +
+                ", id_Document=" + id_Document +
+                ", MyFile=" + MyFile +
+                ", MyFileFileName=" + MyFileFileName +
                 '}';
     }
 }
