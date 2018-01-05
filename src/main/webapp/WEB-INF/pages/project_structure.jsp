@@ -80,11 +80,6 @@
                 <div style="float: left;height: 50px;width:200px;padding: 40px 0px 20px 0px;margin-top:5px;margin-left: 10px">
                         <p style="font-size: 16px;color: black">发布时间：${requestScope.library.time}</p>
                 </div>
-                <div style="float: right;height: 60px;width: 450px" >
-                    <div style="margin:-22px 0px 0px 200px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
-                    <div style="margin:-22px 0px 0px 10px;float: left"><img src="/img/star.png" height="35" width="35"/></div>
-                    <div style="margin:-22px 0px 0px 10px;float: left"><img src="/img/back.png" height="35" width="35"/></div>
-                </div>
             </div>
             <s:if test="#request.id_template==1">
             <div id="mid" style="clear: both;height:450px;width:1200px;margin-left:200px;padding: 20px 75px 20px 75px;overflow: hidden">
@@ -118,6 +113,23 @@
                 </div>
                 </s:iterator>
                 </div>
+            </s:if>
+            <s:if test="#request.id_template==4">
+            <div id="mid" style="clear: both;height:450px;width:1300px;margin:0 auto;padding: 20px 75px 20px 75px;overflow: hidden">
+                <s:iterator value="list4">
+                    <div  style="background-color: white;height: 200px;width:480px;float:left;margin: 0px 37.5px 30px 48px;padding: 5px;" class="col-md-4 contact-box">
+                    <div style="margin: 10px 10px 10px 15px;float: left">
+                        <div style="float: left"><img src="<s:property value="src"/>" height="170" width="160"/> </div>
+                    </div>
+                    <div style="margin-top: 10px;margin-left:20px;float: left">
+                        <div style="width: 260px;height:185px;word-wrap: break-word;font-size: 14px;overflow: hidden;">
+                            <p style="font-size: 20px">图片描述：</p>
+                            <p><s:property value="mention"/></p>
+                        </div>
+                    </div>
+                </div>
+                </s:iterator>
+            </div>
             </s:if>
             <div id="footer" style="clear: both;text-align: center; margin-top:25px">
                 <div id="pages" style="height: 50px;margin:0px auto;" class="btn-group">
@@ -168,10 +180,10 @@
                 <div class="row" style="width: 750px;margin-left: 370px">
                     <div class="ibox float-e-margins " style="margin-bottom: 10px">
                         <div class="ibox-title">
-                            <h5><s:property value="name"/></h5>
-                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></h5>
-                            <input style="display: none" class="id_dis" value="<s:property value="id_lib_discuss" />">
-                            <s:if test="#request.id_user==#session.user.id_user"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
+                            <h5><s:property value="LibrarydiscussEntity.name"/></h5>
+                            <h5 style="margin-top:2px;margin-left: 30px"><s:date name="LibrarydiscussEntity.time" format="yyyy-MM-dd HH:mm:ss"/></h5>
+                            <input style="display: none" class="id_dis" value="<s:property value="LibrarydiscussEntity.id_lib_discuss" />">
+                            <s:if test="#request.LibrarydiscussEntity.id_user==#session.user.id_user&&#request.state<=7200000"><button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
                             </s:if>
                             <s:else><button  class="btn btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
                             </s:else>
@@ -181,7 +193,7 @@
                         </div>
                         <div class="ibox-content">
                             <div class=" wrapper">
-                                <s:property value="content"/>
+                                <s:property escapeHtml="false" value="LibrarydiscussEntity.content"/>
                             </div>
                         </div>
                     </div>
@@ -225,7 +237,6 @@
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
-<script src="../js/template.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -331,6 +342,23 @@
             });}
     })
 </script>
+<script>
+        $(".click2edit").addClass("no-padding");
+        $(".click2edit").summernote({
+            height: 100,
+            minHeight: 100,
+            maxHeight: 100,
+            lang: "zh-CN", focus: true, toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['paragraph']],
+                ['table', ['table']],
+                ['picture', ['picture']],
+                ['fullscreen', ['fullscreen']]
+            ]
+        })
 
+</script>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

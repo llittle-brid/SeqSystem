@@ -48,5 +48,7 @@ void update(int id_document, int first, int second);
 
     int getRoleCount(int id_document);
 
-    void saveTemplateOne(int id_document,int first,int second,int third,int fourth,String content);
+    void saveContent(int id_catalog,String content);
+
+    List<CatalogEntity> getAllRole(int id_document);
 }
