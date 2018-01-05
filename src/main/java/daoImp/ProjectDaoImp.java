@@ -1,3 +1,7 @@
+/**
+ * 2018/1/5 17：33
+ * wwc
+ */
 package daoImp;
 
 
@@ -181,6 +185,14 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String sql="select * from VIEW_projectINFO where ID_PROJECT=?";
         ProjectEntity project1 = get(sql,id);
         return project1;
+    }
+//获取项目ID对应的NAME
+    @Override
+    public String findName(int id_Project) {
+        String sql = "select NAME from PROJECT where ID_PROJECT = ?";
+        String name = getForValue(sql,id_Project);
+        System.out.println("orgName:"+name);
+        return name;
     }
 
     @Override

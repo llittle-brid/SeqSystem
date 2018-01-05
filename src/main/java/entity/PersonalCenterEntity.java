@@ -1,16 +1,15 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
-
+/**
+ * 2018/1/5 17：33
+ * wwc
+ */
 package entity;
 
 public class PersonalCenterEntity {
-    int ID_ORGANIZATION;
-    String ORGANIZATIONNAME;
-    String ADMIN_NME;
-    int NUM_USER;
-    int ID_USER;
+    private int ID_ORGANIZATION;
+    private String ORGANIZATIONNAME;
+    private String ADMIN_NME;
+    private int NUM_USER;
+    private int ID_USER;
 
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;

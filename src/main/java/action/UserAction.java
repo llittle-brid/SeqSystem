@@ -12,10 +12,12 @@ import daoImp.PersonalCenterDaoImp;
 import daoImp.UserDaoImp;
 import entity.PersonalCenterEntity;
 import entity.UserEntity;
+import entity.postmailEntity;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import util.MailUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+ import javax.mail.*;
+ import javax.mail.internet.InternetAddress;
+ import javax.mail.internet.MimeMessage;
+ import java.util.Properties;
 /**
  * Created by DELL on 2017/11/28.
  *
@@ -39,6 +45,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private Map<String,Object> session;
     private String tempPassword;
     private String newPassword;
+    private String verification;
     private Map<String, Object> dataMap;
 
     public String login() {
@@ -57,9 +64,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String registration() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword);
-        boolean res = userDao.registration(user.getName(), user.getPassword(),tempPassword);
-        dataMap.put("res", res);
+        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword+" "+user.getMail()+" "+verification+" "+"session注册码:"+session.get("verification"));
+        if(Integer.parseInt(verification) == (int) session.get("verification")) {
+            System.out.println("verificationSUCCESE");
+            boolean res = userDao.registration(user.getName(), user.getPassword(), tempPassword, user.getMail());
+            dataMap.put("res", res);
+        }
         return "RES";
     }
 
@@ -87,6 +97,26 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         }
         return "success";
     }
+    //发送验证码
+    public String postVerification(){
+        userDao = new UserDaoImp();
+        dataMap = new HashMap<String, Object>();
+        System.out.println("helloverficication");
+        int temp = (int) ((Math.random()*9+1)*100000);
+        String email = user.getMail();
+        session.put("verification",temp);
+        System.out.println("email:"+email+"  verification:"+session.get("verification"));
+        String mail = user.getMail(); //发送对象的邮箱
+        String title = "快易需求助手注册验证码";
+        String content = String.valueOf(temp);
+        postmailEntity info = new postmailEntity();
+        info.setToAddress(mail);
+        info.setSubject(title);
+        info.setContent(content);
+        boolean res= userDao.postmail(info,title);
+        dataMap.put("res",res);
+        return "RES";
+    }
 
 
     public String jmpLogin(){
@@ -99,38 +129,22 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "replacepasswordPage";
     }
     public String jmpHomepage() {
-        userDao = new UserDaoImp();
-        user = (UserEntity)session.get("user");
-        session.put("countnow",userDao.projectNumberNow(user.getId_user()));
-        session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
-        dataMap = new HashMap<String, Object>();
-        userDao = new UserDaoImp();
-        int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));
-        session.put("Mycollectcount",Mycollectcount);
         return "homePage";
     }
     public String jmpTemp() { return "tempPage";}
     public String jmpNewproject(){
         return "newprojectPage";
     }
-    public String jmpMyprofile(){ return "myprofilePage"; }
-    public String jmpLibrary(){ return "libraryPage"; }
-    public String jmpUserlibrary(){return "userlibraryPage";}
-    public String jmpCaselibrary(){return "caselibraryPage";}
-    public String jmpCommonlibrary(){return "commonlibraryPage";}
-    public String jmpPicturelibrary(){return "picturelibraryPage";}
+    public String jmpComponent(){ return "componentPage"; }
     public String jmpCasecomponent(){return "casecomponentPage";}
     public String jmpUsercomponent(){return "usercomponentPage";}
-    public String jmpCommoncomponent(){return "commoncomponentPage";}
-    public String jmpPicturecomponent(){return "picturecomponentPage";}
-    public String jmpMycollect(){return "mycollectPage";}
-
     public String jmpCurrentProjectList() {
         return "currentProjectList";
     }
     public String jmpCompletedProjectList() {
         return "completedProjectList";
     }
+    public String jmpMyprofile(){return "jmpMyprofile";}
 
     @Override
     public UserEntity getModel() {
@@ -165,5 +179,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

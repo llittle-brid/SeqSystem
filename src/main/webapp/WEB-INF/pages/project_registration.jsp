@@ -1,5 +1,7 @@
-
-
+<!
+time:2018/1/5 17:35
+author:wwc
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
@@ -22,6 +24,7 @@
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="css/z_style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -34,6 +37,9 @@
         <div class="text-center loginLogo" >
         </div>
         <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+            <input name="email" id="email" type="email" class="form-control loginLine" style="font-size:12px" placeholder="请输入邮箱" required="">
+        </div>
+        <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="name" id="name" type="text" class="form-control loginLine" style="font-size:12px" placeholder="设置用户名（注册成功后不可更改）" required="">
         </div>
         <div class="form-group col-sm-8 col-md-offset-2 loginLine">
@@ -41,6 +47,12 @@
         </div>
         <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="password2" id="password2" type="password" class="form-control loginLine" style="font-size:12px" placeholder="请再次输入密码确认" required="">
+        </div>
+        <div class="form-group col-sm-5 col-md-offset-2 loginLine">
+            <input name="verification" id="verification"  type="verification" class="form-control loginLine" style="font-size:12px" placeholder="请填写验证码" required="">
+        </div>
+        <div class="form-group">
+            <button id="registration_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px">获取邮箱验证码</button>
         </div>
         <div class="form-group col-md-offset-3">
             <table>
@@ -60,6 +72,7 @@
 <script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+
 </body>
 
 <script>
@@ -110,11 +123,11 @@
         var $toast = toastr[type](msg, title);
     }
 
-
+//注册
     $("button#registration_button").click(function () {
         $.ajax({
             url: "login-registration",
-            data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val()},
+            data: {name: $("input#name").val(),password: $("input#password1").val(),tempPassword: $("input#password2").val(),mail: $("input#email").val(),verification: $("input#verification").val()},
             dataType: "json",
             type: "Post",
             async: "false",
@@ -123,12 +136,31 @@
 //                    showtoast("success", "注册成功", "操作成功")
                     location.href = "login-jmpLogin";
                 }
-                else  showtoast("error", "注册失败", "注册失败")
-                location.href = "login-jmpLogin";
+                else  showtoast("error", "请检查输入内容","输入有误")
+
             },
             error: function (result) {
                 showtoast("error", "注册失败", "注册失败")
-                location.href = "login-jmpLogin";
+            }
+        })
+    })
+
+    //发送验证码
+    $("button#registration_email").click(function () {
+        $.ajax({
+            url: "login-postVerification",
+            data: {mail: $("input#email").val()},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                if(result.res===true)  {
+                    showtoast("success", "发送成功", "操作成功")
+                }
+                else  showtoast("error", "发送失败", "发送失败发送失败发送失败")
+            },
+            error: function (result) {
+                showtoast("error", "发送失败", "发送失败")
             }
         })
     })

@@ -1,8 +1,7 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
-
+/**
+ * 2018/1/5 17：33
+ * wwc
+ */
 package daoImp;
 
 import dao.DAO;
@@ -37,5 +36,13 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
     public void quit(String NAME) {
         String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
         update(sql,NAME);
+    }
+
+    @Override
+    public String findName(int ID_ORGANIZATION) {
+        String sql = "select NAME from ORGANIZATION where ID_ORGANIZATION = ?";
+        String name = getForValue(sql,ID_ORGANIZATION);
+        System.out.println("orgName:"+name);
+        return name;
     }
 }

@@ -1,8 +1,7 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
-
+/**
+ * 2018/1/5 17：33
+ * wwc
+ */
 package dao;
 
 import entity.OrganizationEntity;
@@ -13,5 +12,6 @@ public interface OrganizationDao {
     OrganizationEntity getOne(String name);
     List<OrganizationEntity> getAll();
     void quit(String NAME);
+    String findName(int ID_ORGANIZATION);  //获取机构ID对应的NAME
     List<OrganizationEntity> getMatched(String name);
 }

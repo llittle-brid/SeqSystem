@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class UserEntity {
     private int id_user;
+    private int verification;
     private String password;
     private String name;
     private String gender;
@@ -19,13 +20,21 @@ public class UserEntity {
     private String qq;
     private String tel;
     private int status;
-    private int rank;
     public int getId_user() {
         return id_user;
     }
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
+    }
+
+//验证码
+    public int getverification() {
+        return verification;
+    }
+
+    public void setverification(int verification) {
+        this.verification = verification;
     }
 
     public String getPassword() {
@@ -108,18 +117,7 @@ public class UserEntity {
         this.status = status;
     }
 
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
     public UserEntity() {
-    }
-
-    public UserEntity(int id_user, String password, String name, String gender, String address, String introduce, java.sql.Date dob, String mail, String qq, String tel, int status, int rank) {
         this.id_user = id_user;
         this.password = password;
         this.name = name;
@@ -131,6 +129,6 @@ public class UserEntity {
         this.qq = qq;
         this.tel = tel;
         this.status = status;
-        this.rank = rank;
+        this.verification=verification;
     }
 }

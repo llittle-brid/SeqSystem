@@ -1,7 +1,7 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
+/**
+ * 2018/1/5 17：33
+ * wwc
+ */
 
 package dao;
 
@@ -11,5 +11,6 @@ import java.util.List;
 
 public interface PersonalCenterDao {
     List<PersonalCenterEntity> getAll(int ID);
+    void quitorg(int ID, int Org);
 }
 

@@ -1,11 +1,9 @@
 package dao;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -93,37 +91,29 @@ public class DAO<T> {
 			JdbcUtils.releaseConnection(connection);
 		}
 		return null;
-
+		
+		
 	}
+	
 
 
 
-	public void update(String sql,Object ... args){
-		Connection connection=null;
-		try{
-			connection=JdbcUtils.getConnection();
+	public void update(String sql,Object ... args) {
+		System.out.println("Replace Success");
+		Connection connection = null;
+		try {
+			connection = JdbcUtils.getConnection();
 			qr.update(connection, sql, args);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			JdbcUtils.releaseConnection(connection);
 		}
 	}
 
-//	添加可以获取自增ID的insert方法
-	public int insert(String sql,Object ... args) {
-        Connection connection=null;
-        try{
-            connection=JdbcUtils.getConnection();
-            Long id0 = qr.insert(connection,sql,new ScalarHandler<Long>(),args);
-            int id = Integer.valueOf(id0.toString());
-            return id;
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            JdbcUtils.releaseConnection(connection);
-        }
-        return 0;
+	public void save(String sql,Object ... args)
+	{
+
 	}
 
 }

@@ -3,6 +3,8 @@ package daoImp;
 import dao.DAO;
 import dao.UserDao;
 import entity.UserEntity;
+import entity.postmailEntity;
+import util.MailUtil;
 
 import java.util.List;
 
@@ -12,27 +14,19 @@ import java.util.List;
  * @author MJY
  */
 public class UserDaoImp extends DAO<UserEntity> implements UserDao {
-    public boolean login(String name,String password)
-    {
-        String sql="SELECT COUNT(*) from USER WHERE NAME=? and PASSWORD=?";
-//        String sql1 = "SELECT STATUS FROM USER WHERE NAME=? and PASSWORD=?";
-//        String sql2 = "UPDATE USER SET STATUS = 1 WHERE NAME=? AND PASSWORD=?";
-        int count=Integer.valueOf(getForValue(sql,name,password).toString());
-//        int status = Integer.valueOf(getForValue(sql1,name,password).toString());
-        if(count==1) {
-//            update(sql2,name,password);
-            return true;
-        }
+    public boolean login(String name, String password) {
+        String sql = "select count(*) from USER where name=? and password=?";
+        int count = Integer.valueOf(getForValue(sql, name, password).toString());
+        if (count == 1) return true;
         else return false;
     }
 
-    public boolean registration(String name, String password1, String password2) {
+    public boolean registration(String name, String password1, String password2, String mail) {
         if (password1.length() >= 6 && password1.equals(password2)) {
-            String sql = "insert into USER (NAME,PASSWORD) values (?,?)";
-            update(sql, name, password1);
+            String sql = "insert into USER(NAME,PASSWORD,MAIL) values(?,?,?)";
+            update(sql, name, password1,mail);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public boolean replacepassword(String name, String password1, String password2, String password3) {
@@ -40,8 +34,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             String sql = "update USER set password=? where name=?";
             update(sql, password2, name);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public boolean edit(String username, String qq, String address, String mail, String tel, String introduce, String gender) {
@@ -56,11 +49,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         UserEntity user1 = get(sql, name);
         return user1;
     }
-    public UserEntity getOne1(int id) {
-        String sql = "select * from USER where ID_USER=?";
-        UserEntity user1 = get(sql, id);
-        return user1;
-    }
+
 
     public List<UserEntity> getAll() {
         String sql = "select * from USER ";
@@ -68,29 +57,23 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         return user1;
     }
 
-    public int Mycollectcount(int id_user){
-        String sql="SELECT COUNT(*) from LIB_COLLECT WHERE ID_USER=? ";
-        int count=Integer.valueOf(getForValue(sql,id_user).toString());
-        return count;
-    }
-
     public int orgManager(int id){
         String sql="select count(*) from ORGANIZATION where ID_USER=?";
         int count = Integer.valueOf(getForValue(sql,id).toString());
         return count;
     }
-
-    @Override
-    public int projectNumberNow(int id) {
-        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=1";
-        int count = Integer.valueOf(getForValue(sql,id).toString());
-        return count;
-    }
-
-    @Override
-    public int projectNumberHistory(int id) {
-        String sql="select count(*) from VIEW_projectMember where ID_USER=? and STATE=0";
-        int count = Integer.valueOf(getForValue(sql,id).toString());
-        return count;
+    //发送邮件
+    public boolean postmail( postmailEntity info, String title){
+        if (Integer.parseInt(info.getContent())>=100000 && Integer.parseInt(info.getContent())<=999999){
+            try {
+                MailUtil.sendTextMail(info);
+            } catch (Exception e) {
+                System.out.print("'" + title + "'的邮件发送失败！");
+                e.printStackTrace();
+            }
+            return true;
+        }
+        else
+            return false;
     }
 }
