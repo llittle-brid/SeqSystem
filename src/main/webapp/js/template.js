@@ -4,9 +4,12 @@
 /*
  * nowClick:最近一次点击
  * */
-var nowClick;
+var nowClick,nowCatalog;
 var documentId=$("input#documentId").val();
-
+//初始化的时候调用getUsable()函数赋值
+var usableList;
+// 加载模板3时调用getRole()函数
+var roleList;
 //评论区初始化
 function discussInit() {
     $(".discuss").code(""); 
@@ -62,29 +65,30 @@ $(document).on("click",".dic",function () {
             //模板生成
             template=result.template;
             $("div.content").html(template.content);
-            if(template.id_template=="3"){//加载角色
-                $.ajax({
-                    url: "catalog-getRoles",
-                    data: { documentId:documentId,catalogIndex:catalogIndex},
-                    dataType: "json",
-                    type: "Post",
-                    async: "false",
-                    success: function (result) {
-                    },
-                    error: function (result) {
-                        showtoast("dangerous","失败","获取失败")
-                    }
-                })
-            }
-            var catalog=result.catalogEntity,title="";
-            if (catalog.first_index!="0")title+=catalog.first_index;
-             if(catalog.second_index!="0")title+="."+catalog.second_index;
-             if(catalog.third_index!="0")title+="."+catalog.third_index;
-             if(catalog.fourth_index!="0")title+="."+catalog.fourth_index;
-            title+="  "+catalog.title;
+            nowCatalog=result.catalogEntity,title="";
+            if (nowCatalog.first_index!="0")title+=nowCatalog.first_index;
+             if(nowCatalog.second_index!="0")title+="."+nowCatalog.second_index;
+             if(nowCatalog.third_index!="0")title+="."+nowCatalog.third_index;
+             if(nowCatalog.fourth_index!="0")title+="."+nowCatalog.fourth_index;
+            title+="  "+nowCatalog.title;
             $("h2#catalog_title").text(title);
-            $("input#catalog-id").val(result.id_catalog);
             discussInit();
+            entity=result.entity;
+            if(template.id_template=="3"){//加载角色
+                UsableInit();
+            }
+            else if(template.id_template=="2"){
+                var roleName=entity.roleName;
+                var describe=entity.describe;
+                var permissions=entity.permissions;
+                $("#roleName").val(roleName);
+                $("#describe").html(describe);
+                $("#permissions").html(permissions);
+            }
+            else if (template.id_template=="1"){
+                var content=entity.content;
+                $("#describe").html(content);
+            }
         },
         error: function (result) {
             showtoast("dangerous","失败","获取失败")
@@ -314,11 +318,45 @@ $(".li_down").click(function () {
 $(".li_rename").click(function () {
     renameModelInit();
 })
+//获取可用性
+function getUsable() {
+    $.ajax({
+        url: "catalog-getUsable",
+        data: {},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            usableList=result.usableList;
+        },
+        error: function (result) {
+            showtoast("dangerous","失败","修改标题失败")
+        }
+    })
+}
+//可用性初始化
+function UsableInit() {
+    var content="";
+    for (var i=0;i<usableList.length;i++){
+        content+=" <option value='"+i+"' onclick='usableClick(this)'>"+(i+1)+"."+usableList[i].name+"</option>"
+    }
+    $("select#uaSelect").html(content);
+}
+//加载详细可用性内容
+function usableClick(obj) {
+var id=parseInt($(obj).val());
+$("#uaname").text(usableList[id].name);
+    $("#uaproblem").text(usableList[id].rang);
+    $("#uasolution").text(usableList[id].solution);
+    $("#uaexample").text(usableList[id].example);
+}
 //页面初始化
 $(document).ready(function () {
     templateInit();
-    edit()
+    getUsable()
+    edit();
 })
+
 //数字转英文的函数
 function getNextRank(nowRank) {
     if (nowRank=="first")return "second";
@@ -530,8 +568,9 @@ function temp_edit() {
         // ['table', ['table']],
         ['picture', ['picture']],
         ['fullscreen', ['fullscreen']]
-    ]})
-    if($("#describe").code().trim()=="暂无内容")$("#describe").code("")
+    ],
+        placeholder: '暂无内容',
+    })
     $("#edit").attr("style","display:none");
     $("#save").attr("style","display:show");
     $(".dis").removeAttr("disabled")
@@ -543,12 +582,88 @@ function temp_save() {
     $("#save").attr("style","display:none");
     $("#edit").attr("style","display:show");
 
-    var id_template = $("#add_id_template").val(),catalogIndex = $(nowClick).children("span.catalogIndex").text();
+    var id_template = nowCatalog.id_template,id_catalog=nowCatalog.id_catalog;
         if (id_template == "1") {//通用
-            var describe=$("#describe").code();
+        var describe=$("#describe").code();
+        $.ajax({
+            url: "catalog-saveTemplateOne",
+            data: {id_catalog: id_catalog, content: describe},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success", "保存成功", "内容保存成功")
+            },
+            error: function (result) {
+                showtoast("dangerous", "保存失败", "内容保存失败")
+            }
+        })
+    }
+    else if (id_template == "2") {//角色
+        var roleName=$("input#roleName").val();
+        var describe=$("#describe").code();
+        var permissions=$("#permissions").code();
+        $.ajax({
+            url: "catalog-saveTemplateTwo",
+            data: {id_catalog: id_catalog, content: roleName,describe:describe,permissions:permissions},
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                showtoast("success", "保存成功", "内容保存成功")
+            },
+            error: function (result) {
+                showtoast("dangerous", "保存失败", "内容保存失败")
+            }
+        })
+    }
+    else  if(id_template == "3"){
+            var funName=$("input#funName").val();
+            var priority=$("select#priority").val();
+            var describe=$("#describe").html();
+            var inDiv=$("#in").html();
+            var outDiv=$("#out").html();
+            var basic=$("#basic").html();
+            var alternative=$("#alternative").html();
+            var  funRoleList="[";
+            var roleName,roleDescribe,usableName,usablePara,last="";
+            $(".funTable tbody").find("tr").each(function () {
+             if ($(this).hasClass("funTr")){//开头
+                  if (last==""){//第一次，没有,
+                     funRoleList+="{"
+                 }
+                 else   funRoleList+="},{"
+                 roleName=$(this).children("th").eq(1).children(".roleName").find("option:selected").text();
+                  // alert($(this).children("th").eq(2).children(".roleDescribe"))
+                 roleDescribe=$(this).children("th").eq(2).children(".roleDescribe").val();
+                 funRoleList+="\"roleName\":\""+roleName+"\",\"roleDescribe\":\""+roleDescribe+"\"";
+                 last="funTr";
+             }
+            else if ($(this).hasClass("usableTr")){//开头
+                 usableName=$(this).children("th:first-child").text();
+                 usablePara=$(this).children("th").eq(1).text();
+                 funRoleList+=",\"usableName\":\""+usableName+"\",\"usablePara\":\""+usablePara+"\"";
+                 last="usableTr";
+             }
+            })
+            funRoleList+="}]";
+            var funUsableList="[",usableName,usablePara,first="yes";
+            $(".funTable tfoot").find("tr").each(function () {
+                    if (first=="yes"){//第一次，没有,
+                        funUsableList+="{"
+                    }
+                    else   funUsableList+=",{"
+                    usableName=$(this).children("th:first-child").text();
+                    usablePara=$(this).children("th").eq(1).text();
+                funUsableList+="\"usableName\":\""+usableName+"\",\"usablePara\":\""+usablePara+"\"}";
+                    first="no";
+            })
+            funUsableList+="]";
             $.ajax({
-                url: "catalog-saveTemplateOne",
-                data: {documentId: documentId, catalogIndex: catalogIndex, content: describe},
+                url: "catalog-saveTemplateThree",
+                data: {id_catalog: id_catalog,funName: funName, priority: priority,content:describe,
+                    inDiv:inDiv,outDiv:outDiv,basic:basic,alternative:alternative,
+                    funRoleList:funRoleList,funUsableList:funUsableList},
                 dataType: "json",
                 type: "Post",
                 async: "false",
