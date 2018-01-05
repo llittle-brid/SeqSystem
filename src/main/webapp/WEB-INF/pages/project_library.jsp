@@ -104,10 +104,6 @@
                         <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a">我的收藏</span></a></div>
                     </div>
                 </div>
-                <div style="float: right;height: 50px" class="col-md-2">
-                    <div style="margin:25px 0px 0px 10px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
-                    <div style="margin:25px 0px 0px 20px;float: left"><img src="/img/downward.png" height="35" width="35"/></div>
-                </div>
             </div>
 
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">

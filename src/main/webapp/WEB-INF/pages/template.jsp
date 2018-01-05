@@ -310,7 +310,7 @@
 <script src="../js/plugins/toastr/toastr.min.js"></script>
 <script src="../js/mjy.js"></script>
 <script src="../js/template.js"></script>
-<script src="../js/template3.js"></script>
+<%--<script src="../js/template3.js"></script>--%>
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
