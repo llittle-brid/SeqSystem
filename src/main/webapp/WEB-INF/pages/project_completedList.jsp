@@ -36,13 +36,12 @@
     </div>
     <div class="ibox-content">
         <div class="bootstrap-table">
-            <table id="finishingTask" data-toggle="table"
+            <table id="finishedTask" data-toggle="table"
                    data-classes="table table-no-bordered"
                    data-click-to-select="true"
                    data-search="true"
                    data-show-refresh="true"
                    data-show-toggle="true"
-                   data-show-columns="true"
                    data-toolbar="#toolbar"
                    data-query-params="quefryParams"
                    data-search-align="left"
@@ -63,14 +62,8 @@
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script>
-    $('#finishingTask').bootstrapTable({
+    $('#finishedTask').bootstrapTable({
             columns: [
-                {
-                    title: '项目ID',
-                    field: 'id_Project',
-                    align: 'center',
-                    valign: 'middle'
-                },
                 {
                     field: 'name',
                     title: '项目名称',
@@ -92,7 +85,7 @@
                     sortable: true,
                     align: 'center'
                 }, {
-                    field: 'id_Organization',
+                    field: 'orgName',
                     title: '所属机构',
                     sortable: true,
                     align: 'center'
@@ -100,17 +93,39 @@
                     field: 'operate',
                     title: '操作',
                     align: 'center',
-                    formatter: AddFunctionAlty
+                    searchable: false,
+                    events: "actionEvents",
+                    formatter: "operateFormatter"
                 }
             ]
         }
     );
-    function AddFunctionAlty(value,row,index) {
-        return[
-            '<a href="project-jmp"><button id="discuss" class="btn btn-success text-center btn-xs">讨论区<sup>&nbsp;●</sup></button></a>',
-            '<a href="project-jmpFinishedProjectInfo" style="padding-left: 20px"><button href="user-jmpHomepage" class="btn btn-info text-center btn-xs " >查看项目</button></a>'
-        ].join('');
+    function operateFormatter(value,row,index) {
+        return '<a class="mod btn btn-info">查看项目</a>';
     }
+    //表格  - 操作 - 事件
+    window.actionEvents = {
+        'click .mod':
+            function(e, value, row, index) {
+                //修改操作
+                var id_Project = parseInt(row.id_Project);
+                $.ajax({
+                    type: "GET",
+                    url: "project-getProjectInfo",
+                    data: {Id_Project:id_Project},
+                    dataType: "json",
+                    success: function () {
+                        location.href = "project-jmpProjectInfo";
+                    },
+                    error: function () {
+                        alert("错误");
+                    }
+                })
+            },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
     $.ajax(
         {
             type:"GET",
@@ -119,7 +134,7 @@
             success:function(json){
                 var proList = JSON.parse(json.res);
                 //finishingTask为table的id
-                $('#finishingTask').bootstrapTable('load',proList);
+                $('#finishedTask').bootstrapTable('load',proList);
             },
             error:function(){
                 alert("错误");

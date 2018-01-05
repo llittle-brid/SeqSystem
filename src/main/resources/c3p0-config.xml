@@ -10,8 +10,8 @@
 	 <property name="jdbcUrl">jdbc:mysql://112.74.48.57:3306/seq?useUnicode=true&amp;characterEncoding=UTF-8</property>
     <property name="acquireIncrement">5</property>
     <property name="initialPoolSize">10</property>
-    <property name="minPoolSize">10</property>
-    <property name="maxPoolSize">50</property>
+    <property name="minPoolSize">5</property>
+    <property name="maxPoolSize">10</property>
 
     <!-- intergalactoApp adopts a different approach to configuring statement caching -->
     <property name="maxStatements">20</property> 
