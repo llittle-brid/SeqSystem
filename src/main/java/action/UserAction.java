@@ -5,16 +5,18 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.util.ValueStack;
 import dao.PersonalCenterDao;
-import dao.SysManagerDao;
 import dao.UserDao;
-import daoImp.SysManagerDaoImp;
+import daoImp.PersonalCenterDaoImp;
 import daoImp.UserDaoImp;
 import entity.PersonalCenterEntity;
-import entity.SysManagerEntity;
 import entity.UserEntity;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -46,12 +48,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         dataMap.put("res", res);
         if(res==true) {
             user = userDao.getOne(user.getName());
-            int orgManager=userDao.orgManager(user.getId_user());
-            int sysManager=userDao.sysManager(user.getId_user());
             session.put("user",user);
-            session.put("sysManager",sysManager);
-            session.put("orgManager",orgManager);
-            System.out.println(user+"and"+sysManager+"and"+orgManager);
+            System.out.println(user);
         }
         return "RES";
     }
@@ -90,12 +88,9 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         return "success";
     }
 
+
     public String jmpLogin(){
-        session.put("user",null);
         return "loginPage";
-    }
-    public String jmpMyprofile(){
-        return "myprofilePage";
     }
     public String jmpRegistration() {
         return "registrationPage";
@@ -114,32 +109,22 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         session.put("Mycollectcount",Mycollectcount);
         return "homePage";
     }
-
-
-    public String jmpTemp() {
-        return "tempPage";
-    }
-    public String jmpSysManager1(){
-        return "SysManager1Page";
-    }
-    public String jmpSysManager2(){
-        return "SysManager2Page";
-    }
+    public String jmpTemp() { return "tempPage";}
     public String jmpNewproject(){
         return "newprojectPage";
     }
-
+    public String jmpMyprofile(){ return "myprofilePage"; }
     public String jmpLibrary(){ return "libraryPage"; }
     public String jmpUserlibrary(){return "userlibraryPage";}
     public String jmpCaselibrary(){return "caselibraryPage";}
     public String jmpCommonlibrary(){return "commonlibraryPage";}
     public String jmpPicturelibrary(){return "picturelibraryPage";}
+    public String jmpCasecomponent(){return "casecomponentPage";}
+    public String jmpUsercomponent(){return "usercomponentPage";}
     public String jmpCommoncomponent(){return "commoncomponentPage";}
     public String jmpPicturecomponent(){return "picturecomponentPage";}
     public String jmpMycollect(){return "mycollectPage";}
-    public String jmpComponent(){ return "componentPage"; }
-    public String jmpCasecomponent(){return "casecomponentPage";}
-    public String jmpUsercomponent(){return "usercomponentPage";}
+
     public String jmpCurrentProjectList() {
         return "currentProjectList";
     }

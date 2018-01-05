@@ -5,7 +5,6 @@ import com.opensymphony.xwork2.ActionContext;
 import dao.DAO;
 import dao.ProjectDao;
 import entity.ProjectEntity;
-import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
@@ -84,18 +83,19 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     @Override
     public boolean alterPM(int idUser, int idProject) {
         String sql = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
-        if (Integer.valueOf(getForValue(sql,idProject,idUser))<1){
+        if (Integer.valueOf(getForValue(sql,idProject,idUser).toString())<1){
             return false;
         }
         else {
-            String sql1 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
+            String sql1="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
+            update(sql1,idProject);
+
+            String sql2 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
             try {
-                update(sql1, idProject, idUser);
+                update(sql2, idProject, idUser);
             } catch (Exception e) {
                 return false;
             }
-            String sql2="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
-            update(sql2,idProject);
             return true;
         }
     }
@@ -125,7 +125,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
 
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
             return false;
         }
 
@@ -190,5 +190,4 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         List<ProjectEntity> project = getForList(sql,state,id);
         return project;
     }
-
 }
