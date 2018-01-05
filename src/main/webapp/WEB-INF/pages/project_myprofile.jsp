@@ -64,11 +64,11 @@
                     <tr >
                         <th style="width: 150px;text-align: center">QQ:</th>
                         <th>
-                            <s:if test='#session.user.address==""'>
+                            <s:if test='#session.user.qq==""'>
                                 <s:property value="" default="未填写" />
                             </s:if>
                             <s:else>
-                                <s:property value="#session.user.address"/>
+                                <s:property value="#session.user.qq"/>
                             </s:else>
                         </th>
                     </tr>
