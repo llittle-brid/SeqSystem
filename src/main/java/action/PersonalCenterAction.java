@@ -37,7 +37,6 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
         List<PersonalCenterEntity> list = new ArrayList<>();
         user = (UserEntity)session.get("user");
         list = personalcenterdao.getAll(user.getId_user());
-        System.out.println("@@@@@@@"+user.getId_user());
         Gson gson = new Gson();
         String personallist = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
@@ -51,10 +50,16 @@ public class PersonalCenterAction extends ActionSupport implements RequestAware,
 
 
     public String quitorg(){
+       // dataMap = new HashMap<String, Object>();
         personalcenterdao= new PersonalCenterDaoImp();
+       // List<PersonalCenterEntity> list = new ArrayList<>();
         user = (UserEntity)session.get("user");
         System.out.println("uSER:"+user.getId_user()+"org:"+PersonaCenter.getID_ORGANIZATION());
         personalcenterdao.quitorg(user.getId_user(),PersonaCenter.getID_ORGANIZATION());
+      //  list = personalcenterdao.getAll(user.getId_user());
+       // Gson gson = new Gson();
+        //String personallist = gson.toJson(list);
+      //  dataMap.put("listorg",personallist);
         return "quitorg";
     }
 

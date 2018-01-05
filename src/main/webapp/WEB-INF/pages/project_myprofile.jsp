@@ -23,6 +23,7 @@
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../../css/z_style.css" rel="stylesheet">
+    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -144,20 +145,24 @@
                        data-pagination="true"
                        data-halign="center"
                        data-striped="true"
-                       data-page-size="3"
-                       data-height="259"
+                       data-page-size="5"
+                       data-height="500"
+                       data-sort-order="desc"
+                       data-pagination-v-align="top"
+                       data-sort-stable="true"
                 >
                 </table>
             </div>
         </div>
     </div>
-    <div style="padding: 20px 0px 0px 0px" class="col-md-6">
+    <div style="padding: 20px" class="col-md-6 float-e-margins">
         <div class="ibox-title">
-            <h5>消息中心</h5>
+            <div style="float: left;margin-left: 5px"><div style="float: left;margin-left: 5px"><span><strong>当前消息</strong></span></div></div>
         </div>
-        <div class="bootstrap-table">
+        <div class="bootstrap-table ibox-content">
             <table id="info" data-toggle="table"
                    data-classes="table table-no-bordered"
+                   data-sort-order="desc"
                    data-url="project-showList"
                    data-click-to-select="true"
                    data-search="true"
@@ -170,11 +175,38 @@
                    data-halign="center"
                    data-striped="true"
                    data-page-size="8"
-                   data-height="259"
+                   data-height="450"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+                   data-page-list="[8]"
             >
             </table>
         </div>
-
+        <div class="ibox-title">
+            <div style="float: left;margin-left: 5px"><span><strong>历史消息</strong></span></div>
+        </div>
+        <div class="bootstrap-table ibox-content">
+            <table id="info1" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-sort-order="desc"
+                   data-url="project-showList"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="4"
+                   data-height="320"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+            >
+            </table>
+        </div>
     </div>
 
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -239,6 +271,8 @@
 <script src="../../js/mjy.js"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 </body>
 <script>
     $("button#edit-button").click(function (){
@@ -308,6 +342,12 @@
                     align: 'center',
                 },
                 {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center',
+                },
+                {
                     field: 'date',
                     title: '时间',
                     sortable: true,
@@ -326,6 +366,29 @@
                     events: "refuse",
                     formatter: "infor"
                 }
+            ]
+        }
+    );
+    $('#info1').bootstrapTable({
+            columns: [
+                {
+                    field: 'CONTENT',
+                    title: '消息',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'DATE',
+                    title: '时间',
+                    sortable: true,
+                    align: 'center'
+                },
             ]
         }
     );
@@ -348,6 +411,21 @@
             }
         }
     )
+//    $.ajax(
+//        {
+//            type:"GET",
+//            url:"personalcenter-quitorg",
+//            dataType:"json",
+//            success:function(json){
+//                var proList = JSON.parse(json.listorg);
+//                //finishingTask为table的id
+//                $('#finishingTask').bootstrapTable('load',proList);
+//            },
+//            error:function(){
+//                alert("错误");
+//            }
+//        }
+//    )
     $.ajax(
         {
             type:"GET",
@@ -363,15 +441,16 @@
             }
         }
     )
+
     $.ajax(
         {
             type:"GET",
-            url:"infomation-showInfo",
+            url:"history-showHistory",
             dataType:"json",
             success:function(json){
-                var infolist = JSON.parse(json.listinfo);
+                var History = JSON.parse(json.listHistory);
                 //finishingTask为table的id
-                $('#infor').bootstrapTable('load',infolist);
+                $('#info1').bootstrapTable('load',History);
             },
             error:function(){
                 alert("错误");
@@ -386,10 +465,20 @@
     }
     window.actionEvents = {
         'click .mod': function(e, value, row, index) {
+            swal({title:"您确定要退出这个机构吗",
+                text:"点击确定后讲退出机构，请谨慎操作！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            }, function(){
+                swal("退出成功！","您已经成功退出这个机构。","success")
+                var id = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id);
+                location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
+            })
             //修改操作
-            var id = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id);
-            location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作
@@ -412,31 +501,49 @@
     window.accRefu = {
         'click .mod': function(e, value, row, index) {
             //修改操作
-            var id_ORG = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id_ORG);
-            var ID_PROJECT = parseInt(row.ID_PROJECT);
-            if( isNaN(ID_ORGANIZATION) ){
-                location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
-            }
-            else if(isNaN(ID_PROJECT)){
-                location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
-            }
-
+            swal({title:"您确定要接受这个邀请吗",
+                text:"点击确定将接受这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("接受邀请！","您已经加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
         },
     };
     window.refuse = {
         'click .mod': function(e, value, row, index) {
             //修改操作
-            var id_ORG = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id_ORG);
-            var ID_PROJECT = parseInt(row.ID_PROJECT);
-            if( isNaN(ID_ORGANIZATION) ){
-                location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
-            }
-            else if(isNaN(ID_PROJECT)){
-                location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
-            }
-
+            swal({title:"您确定要拒绝这个邀请吗",
+                text:"点击确定将拒绝这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("拒绝邀请！","您已经拒绝加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作

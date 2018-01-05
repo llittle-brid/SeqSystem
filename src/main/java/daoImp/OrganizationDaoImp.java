@@ -38,4 +38,12 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         String sql = "delete from VIEW_MYORGANIZATION where NAME = ?";
         update(sql,NAME);
     }
+
+    @Override
+    public String findName(int ID_ORGANIZATION) {
+        String sql = "select NAME from ORGANIZATION where ID_ORGANIZATION = ?";
+        String name = getForValue(sql,ID_ORGANIZATION);
+        System.out.println("orgName:"+name);
+        return name;
+    }
 }

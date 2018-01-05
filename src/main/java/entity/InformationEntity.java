@@ -8,6 +8,7 @@ public class InformationEntity {
      */
     private String ORG_NAME;
     private  Integer ID_ORGANIZATION;
+    private String NAME;
     /**
      * 下面为公用字段
      */
@@ -16,7 +17,7 @@ public class InformationEntity {
     private int STATE;
     private String MESSAGE;
     /**
-     * 下面是项目请求的内容
+     * 下面是项目请求视图的内容
      */
     private String PRO_NAME;
     private  Integer ID_PROJECT;
@@ -27,6 +28,14 @@ public class InformationEntity {
     public void setORG_NAME(String ORG_NAME){
         this.ORG_NAME = ORG_NAME;
     }
+    //获取管理员名
+    public String getNAME() {
+        return NAME;
+    }
+    public void setNAME(String NAME){
+        this.NAME = NAME;
+    }
+
     //获取项目名
     public String getPRO_NAME() {
         return PRO_NAME;
@@ -76,7 +85,7 @@ public class InformationEntity {
     public void setMESSAGE(String MESSAGE){
         this.MESSAGE = MESSAGE;
     }
-    public InformationEntity(String ORG_NAME, int ID_USER, Date date, int STATE, String MESSAGE, String PRO_NAME, Integer ID_ORGANIZATION, Integer ID_PROJECT) {
+    public InformationEntity(String ORG_NAME,String NAME, int ID_USER, Date date, int STATE, String MESSAGE, String PRO_NAME, Integer ID_ORGANIZATION, Integer ID_PROJECT) {
         this.ORG_NAME = ORG_NAME;
         this.ID_USER = ID_USER;
         this.date = date;
@@ -85,6 +94,7 @@ public class InformationEntity {
         this.PRO_NAME = PRO_NAME;
         this.ID_ORGANIZATION = ID_ORGANIZATION;
         this.ID_PROJECT = ID_PROJECT;
+        this.NAME = NAME;
     }
 
     public InformationEntity() {   }
