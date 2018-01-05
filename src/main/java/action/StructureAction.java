@@ -93,19 +93,19 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             ActionContext.getContext().getValueStack().set("list2",usList);
         }
         else if(id_template==3) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*4+4);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*2,(page-1)*2+2);
             int count=structureDao.count(structure.getId_library());
-            int num=count/4+1;
+            int num=count/2+1;
             request.put("num",num);
             request.put("page",page);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
-            List casList=new LinkedList<>();
+            List funList=new LinkedList<>();
             for(int i=0;i<structureAll.size();i++)
-            {   CaseStructureEntity cas = gson.fromJson(structureAll.get(i).getContent(), CaseStructureEntity.class);
-                casList.add(cas);
+            {   FunStructureEntity funs = gson.fromJson(structureAll.get(i).getContent(), FunStructureEntity.class);
+                funList.add(funs);
             }
-            ActionContext.getContext().getValueStack().set("list3",casList);
+            ActionContext.getContext().getValueStack().set("list3",funList);
         }
         else if(id_template==4)
         {
