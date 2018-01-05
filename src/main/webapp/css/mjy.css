@@ -91,3 +91,6 @@ body.mini-navbar .navbar-default .nav >#allIndex> li > a {
 .table .end th{
     text-align: center;
 }
+#uaname,#uaproblem,#uasolution,#uaexample{
+    margin-top: 10px;
+}

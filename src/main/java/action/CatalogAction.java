@@ -1,17 +1,23 @@
 package action;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.CatalogDao;
 import dao.TemplateDao;
+import dao.UsableDao;
+import dao.UserDao;
 import daoImp.CatalogDaoImp;
 import daoImp.TemplateDaoImp;
-import entity.CatalogEntity;
-import entity.TemplateEntity;
+import daoImp.UsableDaoImp;
+import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +38,18 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private int place;
     private String title;
     private String content;
+    private int  id_catalog;
+    private String describe;
+    private String permissions;
+    //3
+    private String funName;
+    private int priority;
+    private String inDiv;
+    private String outDiv;
+    private String basic;
+    private String alternative;
+    private String funRoleList;
+    private String funUsableList;
 
     public String getIndex(){
         dataMap = new HashMap<String, Object>();
@@ -134,7 +152,24 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         CatalogEntity catalogEntity=catalogDao.getOne(documentId,first,second,third,fourth);
         TemplateDao templateDao=new TemplateDaoImp();
         TemplateEntity templateEntity=templateDao.getTemplate(catalogEntity.getId_template());
+        Gson gson = new Gson();
         dataMap=new HashMap<>();
+        if (catalogEntity.getId_template()==1){//通用
+            CommonStructureEntity entity=gson.fromJson(catalogEntity.getContent(),CommonStructureEntity.class);
+            dataMap.put("entity",entity);
+        }
+        else if(catalogEntity.getId_template()==2){
+            UserStructureEntity entity=gson.fromJson(catalogEntity.getContent(),UserStructureEntity.class);
+            dataMap.put("entity",entity);
+        }
+        else if(catalogEntity.getId_template()==3){
+            List<CatalogEntity> catalogEntityList=catalogDao.getAllRole(documentId);
+            List<UserStructureEntity> roleList=new ArrayList<>();
+            for (int i = 0; i < catalogEntityList.size(); i++) {
+                roleList.add(gson.fromJson(catalogEntityList.get(i).getContent(),UserStructureEntity.class));
+            }
+            dataMap.put("roleList",roleList);
+        }
         dataMap.put("template",templateEntity);
         dataMap.put("catalogEntity",catalogEntity);
         return "Re";
@@ -158,22 +193,43 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
     public String saveTemplateOne(){
         CatalogDao catalogDao=new CatalogDaoImp();
-        String[] tempList=catalogIndex.split(" ");
-        int first=Integer.valueOf(tempList[0]);
-        int second=Integer.valueOf(tempList[1]);
-        int third=Integer.valueOf(tempList[2]);
-        int fourth=Integer.valueOf(tempList[3]);
-        catalogDao.saveTemplateOne(documentId,first,second,third,fourth,content);
+        CommonStructureEntity structureEntity=new CommonStructureEntity(content);
+        Gson gson = new Gson();
+        catalogDao.saveContent(id_catalog,gson.toJson(structureEntity));
         return "Re";
     }
 
-    public String getRoles(){
+    public  String saveTemplateTwo(){
         CatalogDao catalogDao=new CatalogDaoImp();
-        String[] tempList=catalogIndex.split(" ");
-        int first=Integer.valueOf(tempList[0]);
-        int second=Integer.valueOf(tempList[1]);
-        int third=Integer.valueOf(tempList[2]);
-        int fourth=Integer.valueOf(tempList[3]);
+        UserStructureEntity structureEntity=new UserStructureEntity(content,describe,permissions);
+        Gson gson = new Gson();
+        catalogDao.saveContent(id_catalog,gson.toJson(structureEntity));
+        return "Re";
+    }
+    public String saveTemplateThree(){
+        Gson gson=new Gson();
+        CatalogDao catalogDao=new CatalogDaoImp();
+        Type type = new TypeToken<ArrayList<FunUsable>>() {}.getType();
+        List<FunUsable> funUsables;
+//        System.out.println(funUsableList);
+        funUsables=gson.fromJson(funUsableList,type);
+//        System.out.println(funUsables);
+        type= new TypeToken<ArrayList<FunRole>>() {}.getType();
+        List<FunRole> funRoles;
+//        System.out.println(funRoleList);
+        funRoles=gson.fromJson(funRoleList,type);
+//        System.out.println(funRoles);
+        FunStructureEntity funStructureEntity=new FunStructureEntity(funName,priority,describe,funRoles,funUsables,inDiv,outDiv,basic,alternative);
+        System.out.println(funStructureEntity.toString());
+        catalogDao.saveContent(id_catalog,gson.toJson(funStructureEntity));
+        return "Re";
+    }
+
+    public String getUsable(){
+        UsableDao usableDao=new UsableDaoImp();
+        List<UsableEntity> usableEntityList=usableDao.getUsable();
+        dataMap=new HashMap<>();
+        dataMap.put("usableList",usableEntityList);
         return "Re";
     }
 
@@ -234,5 +290,50 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setId_catalog(int id_catalog) {
+        this.id_catalog = id_catalog;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
+
+    public void setFunName(String funName) {
+        this.funName = funName;
+    }
+
+
+    public void setInDiv(String inDiv) {
+        this.inDiv = inDiv;
+    }
+
+    public void setOutDiv(String outDiv) {
+        this.outDiv = outDiv;
+    }
+
+    public void setBasic(String basic) {
+        this.basic = basic;
+    }
+
+    public void setAlternative(String alternative) {
+        this.alternative = alternative;
+    }
+
+    public void setFunRoleList(String funRoleList) {
+        this.funRoleList = funRoleList;
+    }
+
+    public void setFunUsableList(String funUsableList) {
+        this.funUsableList = funUsableList;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
