@@ -1,12 +1,12 @@
 package entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ApplyOrganizationEntity {
     private int id_org_apply;
     private int id_user;
     private String org_name;
-    private Timestamp date;
+    private Date date;
     private String message;
     private String tel;
 
@@ -34,11 +34,11 @@ public class ApplyOrganizationEntity {
         this.org_name = org_name;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -58,15 +58,12 @@ public class ApplyOrganizationEntity {
         this.tel = tel;
     }
 
-    public ApplyOrganizationEntity(int id_org_apply, int id_user, String org_name, Timestamp date, String message, String tel) {
+    public ApplyOrganizationEntity() {
         this.id_org_apply = id_org_apply;
         this.id_user = id_user;
         this.org_name = org_name;
         this.date = date;
         this.message = message;
         this.tel = tel;
-    }
-
-    public ApplyOrganizationEntity() {
     }
 }
