@@ -115,44 +115,40 @@
                 </div>
             </s:if>
             <s:if test="#request.id_template==3">
-            <div id="mid" style="clear: both;height:450px;width:1300px;margin-left:150px;padding: 20px 75px 20px 75px;overflow: hidden">
+            <div id="mid" style="clear: both;width:1500px;margin-left:90px;padding: 20px 75px 20px 75px;overflow: hidden">
                 <s:iterator value="list3">
-                <div id="div1" style="background-color: white;height: 400px;width:505px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
-                    <div style="height:20px;margin: 10px 0px 0px 10px;overflow: hidden">
+                <div id="div1" style="background-color: white;width:600px;float:left;margin: 0px 37.5px 30px 0px;padding: 5px" class="col-md-4 contact-box">
+                    <div style="margin: 10px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点名称 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property value="funName"/></span>
                     </div>
-                    <div style="height:20px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">优先级 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:if test="#request.priority==1">高</s:if><s:if test="#request.priority==2">中</s:if><s:if test="#request.priority==3">低</s:if></span>
                     </div>
-                    <div style="height:40px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">功能点描述 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property value="describe"/></span>
                     </div>
-                    <div style="height:40px;margin: 5px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用例过程 ：</span>
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">用例过程 ：</span><br/>
                         <s:iterator value="funRoleList">
-                                <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;">角色：<s:property value="roleName"/></span>
-                                <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;">描述：<s:property value="roleDescribe"/></span>
-                                <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;"><s:property value="usableName"/></span>
-                            <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;"><s:property value="usablePara"/></span>
+                            <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;">角色：<s:property value="roleName"/>　描述：<s:property value="roleDescribe"/>　<s:property value="usableName"/>　<s:property value="usablePara"/><br/></span>
                         </s:iterator>
                     </div>
-                    <div style="height:40px;margin: 5px 0px 0px 10px;overflow: hidden">
-                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">总体可用性 ：</span>
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
+                        <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">总体可用性 ：</span><br/>
                         <s:iterator value="funUsableList">
-                            <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;"><s:property value="usableName"/></span>
-                            <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;"><s:property value="usablePara"/></span>
+                            <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:500;"><s:property value="usableName"/>　<s:property value="usablePara"/><br/></span>
                         </s:iterator>
                     </div>
-                    <div style="height:30px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">输入：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property escapeHtml="false" value="input"/></span>
                     </div>
-                    <div style="height:30px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">输出：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property escapeHtml="false" value="output"/></span>
                     </div>
-                    <div style="height:40px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 0px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">基本操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property escapeHtml="false" value="basic"/></span>
                     </div>
-                    <div style="height:40px;margin: 5px 0px 0px 10px;overflow: hidden">
+                    <div style="margin: 5px 0px 20px 10px;overflow: hidden">
                         <span style="font-family:'Arial Negreta', 'Arial Normal', 'Arial';font-weight:700;">备选操作流程 ：</span><span style="font-family:'Arial Normal', 'Arial';font-weight:400;"><s:property escapeHtml="false" value="alternative"/></span>
                     </div>
                 </div>
