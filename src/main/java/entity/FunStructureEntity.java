@@ -13,10 +13,25 @@ public class FunStructureEntity {
     private String describe;
     private List<FunRole> funRoleList;
     private List<FunUsable> funUsableList;
-    private String in;
-    private String out;
+    private String input;
+    private String output;
     private String basic;
     private String alternative;
+
+    public FunStructureEntity() {
+    }
+
+    public FunStructureEntity(String funName, int priority, String describe, List<FunRole> funRoleList, List<FunUsable> funUsableList, String input, String output, String basic, String alternative) {
+        this.funName = funName;
+        this.priority = priority;
+        this.describe = describe;
+        this.funRoleList = funRoleList;
+        this.funUsableList = funUsableList;
+        this.input = input;
+        this.output = output;
+        this.basic = basic;
+        this.alternative = alternative;
+    }
 
     public String getFunName() {
         return funName;
@@ -58,20 +73,20 @@ public class FunStructureEntity {
         this.funUsableList = funUsableList;
     }
 
-    public String getIn() {
-        return in;
+    public String getInput() {
+        return input;
     }
 
-    public void setIn(String in) {
-        this.in = in;
+    public void setInput(String input) {
+        this.input = input;
     }
 
-    public String getOut() {
-        return out;
+    public String getOutput() {
+        return output;
     }
 
-    public void setOut(String out) {
-        this.out = out;
+    public void setOutput(String output) {
+        this.output = output;
     }
 
     public String getBasic() {
@@ -88,20 +103,5 @@ public class FunStructureEntity {
 
     public void setAlternative(String alternative) {
         this.alternative = alternative;
-    }
-
-    public FunStructureEntity(String funName, int priority, String describe, List<FunRole> funRoleList, List<FunUsable> funUsableList, String in, String out, String basic, String alternative) {
-        this.funName = funName;
-        this.priority = priority;
-        this.describe = describe;
-        this.funRoleList = funRoleList;
-        this.funUsableList = funUsableList;
-        this.in = in;
-        this.out = out;
-        this.basic = basic;
-        this.alternative = alternative;
-    }
-
-    public FunStructureEntity() {
     }
 }
