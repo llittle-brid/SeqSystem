@@ -292,7 +292,7 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名" class="form-control" required="required"></div>
+                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名(必填)" class="form-control" required="required"></div>
                     <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
@@ -437,37 +437,44 @@
             })
     })
     $("button#newOrg-button").click(function (){
-        swal(
-            {
-                title: "您确认申请该机构吗？",
-                text: "确认请点击申请",
-                type: "",
-                showCancelButton: true,
-                confirmButtonColor: "#18a689",
-                confirmButtonText: "申请",
-                cancelButtonText: "取消",
-                closeOnConfirm: false
-            },function () {
-                $.ajax({
-                    url: "applyOrganization-applyOrg",
-                    data: {
-                        org_name: $("input#org_name").val(),
-                        message: $("input#message").val(),
-                    },
-                    dataType: "json",
-                    type: "Post",
-                    async: "false",
-                    success: function () {
+        var org_name=$("input#org_name").val();
+        console.log(org_name);
+        if(org_name === "" || org_name === null){
+            swal("申请失败！", "请填写机构名", "error");
+        }
+        else {
+            swal(
+                {
+                    title: "您确认申请该机构吗？",
+                    text: "确认请点击申请",
+                    type: "",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "申请",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        url: "applyOrganization-applyOrg",
+                        data: {
+                            org_name: $("input#org_name").val(),
+                            message: $("input#message").val(),
+                        },
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function () {
                             swal("申请成功！", "机构申请已受理", "success");
                             $('button#cancel-apply').click();
-                    },
-                    error: function () {
-                        swal({
-                            icon: "error"
-                        });
-                    }
+                        },
+                        error: function () {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+                    })
                 })
-            })
+        }
     })
 </script>
 </html>

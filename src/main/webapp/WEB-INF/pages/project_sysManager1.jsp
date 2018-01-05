@@ -222,7 +222,7 @@
                         data: {id_org_apply: id_org_apply},
                         dataType: "json",
                         success: function (json) {
-                            swal("同意成功！", "您已同意该机构申请。", "success");
+                            swal("同意成功！", "该用户下次登陆时成为该机构管理员。", "success");
                             var orgList = JSON.parse(json.res);
                             $('#showOrgApply').bootstrapTable('load', orgList);
                             var otherList = JSON.parse(json.res2);
@@ -349,7 +349,7 @@
                         data: {id_org_apply: id_org_apply},
                         dataType: "json",
                         success: function (json) {
-                            swal("重新同意成功！", "您已同意该机构申请。", "success");
+                            swal("重新同意成功！", "该用户下次登陆时成为该机构管理员。", "success");
                             var orgList = JSON.parse(json.res);
                             $('#showOrgApply').bootstrapTable('load', orgList);
                             var otherList = JSON.parse(json.res2);

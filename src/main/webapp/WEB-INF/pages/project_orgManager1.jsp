@@ -397,9 +397,12 @@
 <script>
     $("button#invite-button").click(function () {
         var currentOrg = $("#gender").val();
-        console.log(currentOrg)
-        if(currentOrg == null){
-            alert("请先选择机构")
+        var user_name = $("input#user_name").val();
+        if(user_name === "" || user_name===null){
+            swal("邀请失败！", "请先填写用户名", "error");
+        }
+        else if(currentOrg === null){
+            swal("邀请失败！", "请先选择机构", "error");
         }
         else {
             swal(
