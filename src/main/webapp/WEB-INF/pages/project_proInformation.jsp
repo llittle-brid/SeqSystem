@@ -36,9 +36,9 @@
     <link href="../../css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="../../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
-    <%--jQueryFileUpload--%>
-    <link href="../../css/plugins/jQueryFileUpload/jquery.fileupload.css" rel="stylesheet">
-    <link href="../../css/plugins/jQueryFileUpload/jquery.fileupload-ui.css" rel="stylesheet">
+    <link href="../../css/xzw.css" rel="stylesheet">
+
+    <link href="../../css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -192,49 +192,15 @@
                                         <div class="ibox float-e-margins">
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
-                                                <%--<div class="ibox-tools">--%>
-                                                        <%--<span class="btn btn-primary btn-xs fileinput-button">--%>
-                                                            <%--<i class="glyphicon glyphicon-plus"></i>--%>
-                                                            <%--&lt;%&ndash;<span>上传附件</span>&ndash;%&gt;--%>
-                                                            <%--<!-- The file input field used as target for the file upload widget -->--%>
-                                                            <%--<input id="fileupload" type="file" name="files[]" multiple>--%>
-                                                        <%--</span>--%>
-                                                    <%--<button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDiscuss()" type="submit" style="margin-right: 10px">发布</button>--%>
-                                                <%--</div>--%>
+                                                <div class="file-loading">
+                                                    <!-- The file input field used as target for the file upload widget -->
+                                                    <input id="fileupload" name="MyFile" type="file" class="file" multiple data-msg-placeholder="选择要上传的文件">
+                                                </div>
                                                 <!-- The file upload form used as target for the file upload widget -->
-                                                <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data" data-ng-app="demo" data-ng-controller="DemoFileUploadController" data-file-upload="options" data-ng-class="{'fileupload-processing': processing() || loadingFiles}">
-                                                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                                                    <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-                                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                                    <div class="row fileupload-buttonbar">
-                                                        <div class="col-lg-7">
-                                                            <!-- The fileinput-button span is used to style the file input field as button -->
-                                                            <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
-                                                                <i class="glyphicon glyphicon-plus"></i>
-                                                                <span>Add files...</span>
-                                                                <input type="file" name="files[]" multiple ng-disabled="disabled">
-                                                            </span>
-                                                            <button type="button" class="btn btn-primary start" data-ng-click="submit()">
-                                                                <i class="glyphicon glyphicon-upload"></i>
-                                                                <span>Start upload</span>
-                                                            </button>
-                                                            <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
-                                                                <i class="glyphicon glyphicon-ban-circle"></i>
-                                                                <span>Cancel upload</span>
-                                                            </button>
-                                                            <!-- The global file processing state -->
-                                                            <span class="fileupload-process"></span>
-                                                        </div>
-                                                        <!-- The global progress state -->
-                                                        <div class="col-lg-5 fade" data-ng-class="{in: active()}">
-                                                            <!-- The global progress bar -->
-                                                            <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
-                                                            <!-- The extended global progress state -->
-                                                            <div class="progress-extended">&nbsp;</div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-
+                                                <div id="alterable" style="visibility: visible">
+                                                    <button class="btn btn-success  btn-xs pull-right" onclick="commitDiscuss()" type="submit">发布评论</button>
+                                                    <label class="pull-right">没有附件？直接点这里--></label>
+                                                </div>
                                             </div>
                                             <div class="ibox-content">
                                                 <div class="click2edit wrapper discuss">
@@ -339,35 +305,10 @@
 <script src="../../js/plugins/summernote/summernote.min.js"></script>
 <script src="../../js/plugins/summernote/summernote-zh-CN.js"></script>
 
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="../../js/plugins/jQueryFileUpload/blueimp/tmpl.min.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/blueimp/jquery.blueimp-gallery.min.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/blueimp/load-image.all.min.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/blueimp/canvas-to-blob.min.js"></script>
+<script src="../../js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="../../js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+<script src="../../js/plugins/bootstrap-fileinput/locales/zh.js"></script>
 
-<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-process.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/jquery.iframe-transport.js"></script>
-
-<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-ui.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-jquery-ui.js"></script>
-
-<script src="../../js/plugins/jQueryFileUpload/jquery.fileupload-angular.js"></script>
-<script src="../../js/plugins/jQueryFileUpload/app.js"></script>
-
-<script>
-    $(function () {
-        $('#fileupload').fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo(document.body);
-                });
-            }
-        });
-    });
-</script>
 
 <script>
     $('#projectMember').bootstrapTable({
@@ -416,7 +357,8 @@
                 //finishingTask为table的id
                 $('#projectMember').bootstrapTable('load',proList);
                 discussInit();
-                discussReload();
+                // discussReload();
+                discussReload2();
             },
             error:function(){
                 swal({
@@ -642,36 +584,6 @@
         );
     });
 
-    function inputSuggest() {
-        var memberName=$("input#MemberName");
-        $.ajax({
-            url: "project-chooseMember",
-            data: {
-                Id_Project:id_Project,
-                Username: memberName.val()
-            },
-            dataType: "json",
-            type: "post",
-            async: "false",
-            success: function (result) {
-                var memberList = result.res;
-                var suggest = JSON.parse('{"value": ' + memberList + ', "defaults": "10000000000"}');
-
-//                $("input#MemberName").bsSuggest("destroy");
-                $("input#MemberName").bsSuggest({
-                    idField:"id_user",
-                    keyField:"name",
-                    data:suggest
-                }).on('onDataRequestSuccess', function (e, result) {
-                    console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
-                });
-            },
-            error: function (result) {
-                alert('error');
-            }
-        })
-    }
-
 
     $("button#endProject").click(function() {
             swal(
@@ -691,22 +603,18 @@
         });
 </script>
 
-
-<script>window.addEventListener('load',function(){window.cookieconsent.initialise({palette:{popup:{background:'#428bca'},button:{background:'#fff'}}})})</script>
 <%--评论区--%>
 <script>
-    var id_Project = "<s:property value="#session.project.id_Project"/>";
-    var id_User = "<s:property value="#session.user.id_user"/>";
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
     }
     //评论加载
-    function discussReload() {
+    function discussReload2() {
         $.ajax({
             url: "discuss-getProjectDis",
             data: {id_Project: id_Project,
-            id_user: id_User},
+                id_user: id_User},
             dataType: "json",
             type: "Post",
             async: "false",
@@ -726,13 +634,16 @@
                     if (state=="2")
                         content+=" btn-danger ";
                     else content+=" btn-default ";
-                    var accessory = "accessories/"+tempDis.accessory;
 
                     content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
                     content+="<div class='ibox-tools'>";
-                    content+='<a class="fa fa-file" href="'+accessory+'">附件';
-                    content+=i+1;
-                    content+='</a>';
+
+                    for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
+                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].filename + '">附件';
+                        content += j + 1;
+                        content += '</a>';
+                    }
+
                     content+="</div> </div> <div class='ibox-content'> <div class=' wrapper'>";
                     content+=tempDis.content+"  </div> </div> </div> </div>";
                     title="";
@@ -749,10 +660,11 @@
     function commitDiscuss() {
         var discuss=$(".discuss").code();
         var formData = new FormData();
+        // var files = document.getElementById("fileUpload").files;
         formData.append('disContent',discuss);
         formData.append('id_Project',id_Project);
         formData.append('id_user',id_User);
-        formData.append('MyFile', $('#fileupload')[0].files[0]);
+        // formData.append('MyFile', files);
         $.ajax({
             url: "discuss-commit2Project",
             data: formData,
@@ -760,7 +672,7 @@
             cache: false,
             processData: false,
             contentType:false,
-            async: "false",
+            async: false,
             success: function (result) {
                 showtoast("success","成功","评论提交成功");
                 discussInit();
@@ -771,6 +683,30 @@
             }
         })
     }
+
+    $('#fileupload').fileinput(
+        {
+            language: 'zh',
+            uploadAsync: false,
+            uploadUrl: "discuss-commit2Project", //上传的地址
+            uploadExtraData:{'disContent':$(".discuss").code(), 'id_Project':id_Project,'id_user':id_User}
+        }
+    );
+    $('#fileupload').on('fileselectnone', function(event) {
+        $('#alterable').css('visibility','visible');
+    });
+    $('#fileupload').on('fileloaded', function(event) {
+        $('#alterable').css('visibility','hidden');
+    });
+    $('#fileupload').on('fileclear', function(event) {
+        $('#alterable').css('visibility','visible');
+    });
+
+    $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
+        var form = data.form, files = data.files, extra = data.extra,
+            response = data.response, reader = data.reader;
+        discussReload2();
+    });
 
     //评论删除按钮
     $(document).on("click",".deleteDis",function () {
@@ -795,7 +731,7 @@
                     success: function (result) {
                         $("button.cancel").click();
                         showtoast("success","成功","删除评论成功");
-                        discussReload()
+                        discussReload2()
                     },
                     error: function (result) {
                         showtoast("dangerous","失败","删除评论失败")
@@ -818,7 +754,7 @@
 
     //页面初始化
     $(document).ready(function () {
-        edit()
+        edit();
     })
 
 

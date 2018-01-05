@@ -18,14 +18,16 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME = ?";
         String sql3 = "insert into PROJECT_MEMBER(ID_PROJECT,ID_USER,RANK) values(?,?,?)";
 
-        //use getTime() instead of getDate() to get current date.
+//      use getTime() instead of getDate() to get current date.
         Date createDate = new Date(new java.util.Date().getTime());
         int ID_Org = 0;
 
+//      project Name and Document Name cannot be null
         if (p.getName().length()==0||p.getDocument_Name().length()==0){
             return false;
         }
 
+//      if org is not provided
         if (p.getOrgName().length()==0){
             ID_Org = 0;
         }
@@ -37,16 +39,14 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             }
         }
 
-
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
-        int ID_user = user.getId_user();
+        int ID_User = user.getId_user();
 
         try{
-            update(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
-
-//        set PM of one Project
-            int Id_Project = getForValue("select ID_PROJECT from PROJECT where NAME = ?",p.getName());
-            update(sql3,Id_Project,ID_user,3);
+//          新增项目，同时获取自增项目ID
+            int Id_Project = insert(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
+//          set PM of one Project
+            update(sql3,Id_Project,ID_User,3);
 
             return true;
         }catch (Exception e){
