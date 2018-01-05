@@ -144,7 +144,7 @@
                 <h4 class="modal-title">邀请用户</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" class="form-control" required="required"></div>
+                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" maxlength="30" class="form-control" required="required"></div>
             </div>
             <div class="modal-footer">
                 <button id="cancel-invite"type="button" class="btn btn-white" data-dismiss="modal">取消</button>
