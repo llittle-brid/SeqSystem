@@ -102,7 +102,7 @@
             <result name="RES" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>commit</allowed-methods>
+            <allowed-methods>commit,delete,image</allowed-methods>
         </action>
 
         <action name="structure-*" class="action.StructureAction" method="{1}">
