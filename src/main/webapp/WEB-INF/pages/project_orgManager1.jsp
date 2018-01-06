@@ -317,7 +317,7 @@
                         data: {ID_USER: id_user, ORG_NAME: currentOrg},
                         dataType: "json",
                         success: function () {
-                            swal("转让成功！", "您已将机构抓让该用户。", "success");
+                            swal("转让成功！", "您即将跳转至首页(未跳转请点击下方按钮)。", "success");
                             location.href = "user-jmpTemp";
                         },
                         error: function (result) {

@@ -62,17 +62,6 @@
                         </th>
                     </tr>
                     <tr >
-                        <th style="width: 150px;text-align: center">QQ:</th>
-                        <th>
-                            <s:if test='#session.user.qq==""'>
-                                <s:property value="" default="未填写" />
-                            </s:if>
-                            <s:else>
-                                <s:property value="#session.user.address"/>
-                            </s:else>
-                        </th>
-                    </tr>
-                    <tr >
                         <th style="width: 150px;text-align: center">邮箱:</th>
                         <th>
                             <s:if test='#session.user.mail==""'>
@@ -80,6 +69,17 @@
                             </s:if>
                             <s:else>
                                 <s:property value="#session.user.mail"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">QQ:</th>
+                        <th>
+                            <s:if test='#session.user.qq==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.address"/>
                             </s:else>
                         </th>
                     </tr>
@@ -231,16 +231,6 @@
                     <h4 class="modal-title">修改资料</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>邮箱</label>
-                        <input id="mail" type="text" maxlength="20"
-                        <s:if test='#session.user.mail==""'>
-                               placeholder="请输入邮箱(不超过20个字符)"
-                        </s:if>
-                        <s:else>
-                               value="<s:property value="#session.user.mail"/>"
-                        </s:else>
-                               class="form-control" required="required">
-                    </div>
                     <div class="form-group"><label>QQ</label>
                         <input id="qq" type="text" maxlength="20"
                         <s:if test='#session.user.qq==""'>
@@ -331,7 +321,6 @@
                 $.ajax({
                     url: "user-editProfile",
                     data: {
-                        mail: $("input#mail").val(),
                         qq: $("input#qq").val(),
                         address: $("input#address").val(),
                         tel: $("input#mytel").val(),

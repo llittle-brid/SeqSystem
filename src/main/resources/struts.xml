@@ -25,10 +25,11 @@
         </action>
         <action name="login-*" class="action.UserAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <result name="success" type="json"><param name="root">dataMap</param></result>
             <result name="loginPage">/login.jsp</result>
             <result name="registrationPage">/WEB-INF/pages/project_registration.jsp</result>
             <result name="replacepasswordPage">/WEB-INF/pages/project_replacepassword.jsp</result>
-            <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword,postVerification</allowed-methods>
+            <allowed-methods>login,registration,replacepassword,,jmpLogin,jmpRegistration,jmpReplacepassword,postVerification,postReplacepassword</allowed-methods>
         </action>
 
         <action name="user-*" class="action.UserAction" method="{1}">

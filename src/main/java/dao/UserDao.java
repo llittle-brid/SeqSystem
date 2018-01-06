@@ -10,9 +10,9 @@ public interface UserDao {
 
 	boolean registration(String name,String password1,String password2, String mail);
 	boolean postmail(postmailEntity info, String title);
-	boolean replacepassword(String name,String password1,String password2,String password3);
+	boolean replacepassword(String name,String password2,String password3);
 
-	boolean edit(String username,String qq,String address,String mail,String tel,String introduce,String gender);
+	boolean edit(String username,String qq,String address,String tel,String introduce,String gender);
 
 	UserEntity getOne(String name);
 
@@ -24,4 +24,6 @@ public interface UserDao {
     int projectNumberNow(int id);
 	int projectNumberHistory(int id);
 	List<UserEntity> getOrgAllMem(int user_id,String name);
+	boolean nameAndMail(String name, String email);
+
 }

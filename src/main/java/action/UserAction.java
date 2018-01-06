@@ -1,12 +1,8 @@
 package action;
-
-import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.PersonalCenterDao;
-import dao.SysManagerDao;
 import dao.UserDao;
 import daoImp.SysManagerDaoImp;
 import daoImp.UserDaoImp;
@@ -61,22 +57,39 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String registration() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
+        int temp=(int)session.get("verification");
+        String sessionVerification=Integer.toString(temp);
         System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword+" "+user.getMail()+" "+verification+" "+"session注册码:"+session.get("verification"));
-        if(Integer.parseInt(verification) == (int) session.get("verification")) {
-            System.out.println("verificationSUCCESE");
+        if(sessionVerification.equals(verification) && verification!="") {
             boolean res = userDao.registration(user.getName(), user.getPassword(), tempPassword, user.getMail());
             dataMap.put("res", res);
+            System.out.println(res);
         }
-        return "RES";
+        else{
+            String res="error";
+            dataMap.put("consequence",res);
+            System.out.println(res);
+        }
+        return SUCCESS;
     }
 
     public String replacepassword() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        System.out.println(user.getName() + " " + user.getPassword()+" "+newPassword);
-        boolean res = userDao.replacepassword(user.getName(), user.getPassword(),tempPassword,newPassword);
-        dataMap.put("res", res);
-        return "RES";
+        int temp=(int)session.get("replaceverification");
+        String sessionReplaceVerification=Integer.toString(temp);
+        System.out.println(user.getName() + " " + " "+newPassword+"  "+"session注册码:"+session.get("replaceverification")+" "+user.getMail());
+        if(sessionReplaceVerification.equals(verification) && verification!="") {
+            System.out.println("verificationSuccess");
+            boolean res = userDao.replacepassword(user.getName(),tempPassword, newPassword);
+            dataMap.put("res", res);
+        }
+        else{
+            String res="error";
+            dataMap.put("consequence",res);
+            System.out.println(res);
+        }
+        return SUCCESS;
     }
 
     public String editProfile() {
@@ -84,7 +97,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         UserEntity seesionUser=(UserEntity)session.get("user");
-        boolean res=userDao.edit(seesionUser.getName(),user.getQq(),user.getAddress(),user.getMail(),user.getTel(),user.getIntroduce(),user.getGender());
+        boolean res=userDao.edit(seesionUser.getName(),user.getQq(),user.getAddress(),user.getTel(),user.getIntroduce(),user.getGender());
         System.out.println(user.getGender()+"location:UserAction");
         dataMap.put("res", res);
         if(res==true) {
@@ -111,6 +124,33 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         info.setContent(content);
         boolean res= userDao.postmail(info,title);
         dataMap.put("res",res);
+        return "RES";
+    }
+
+    public String postReplacepassword(){
+        userDao = new UserDaoImp();
+        System.out.println(user.getName()+"mail:"+user.getMail());
+        boolean confirm = userDao.nameAndMail(user.getName(), user.getMail());
+        System.out.println(confirm);
+        if(confirm) {
+            userDao = new UserDaoImp();
+            dataMap = new HashMap<String, Object>();
+            System.out.println("helloverficication");
+            int temp = (int) ((Math.random() * 9 + 1) * 100000);
+            String email = user.getMail();
+            session.put("replaceverification", temp);
+            System.out.println("email:" + email + "  verification:" + session.get("replaceverification"));
+            String mail = user.getMail(); //发送对象的邮箱
+            String title = "快易需求助手修改密码验证码";
+            String content = String.valueOf(temp);
+            postmailEntity info = new postmailEntity();
+            postmailEntity infomyself = new postmailEntity();
+            info.setToAddress(mail);
+            info.setSubject(title);
+            info.setContent(content);
+            boolean res = userDao.postmail(info, title);
+            dataMap.put("res", res);
+        }
         return "RES";
     }
 
@@ -206,5 +246,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     }
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

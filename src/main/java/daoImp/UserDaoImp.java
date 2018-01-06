@@ -6,6 +6,7 @@ import entity.UserEntity;
 import entity.postmailEntity;
 import util.MailUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -29,11 +30,14 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     }
 
     public boolean registration(String name, String password1, String password2, String mail) {
-        if (password1.length() >= 6 && password1.equals(password2)) {
             String sql = "insert into USER(NAME,PASSWORD,MAIL) values(?,?,?)";
-            update(sql, name, password1,mail);
-            return true;
-        } else return false;
+            try {
+                updateThrowException(sql, name, password1,mail);
+            }catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+           return true;
     }
 
     public boolean postmail(postmailEntity info, String title){
@@ -43,6 +47,7 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             } catch (Exception e) {
                 System.out.print("'" + title + "'的邮件发送失败！");
                 e.printStackTrace();
+                return false;
             }
             return true;
         }
@@ -50,19 +55,27 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
             return false;
     }
 
-    public boolean replacepassword(String name, String password1, String password2, String password3) {
+    public boolean replacepassword(String name, String password2, String password3) {
         if (password2.equals(password3)) {
             String sql = "update USER set password=? where name=?";
             update(sql, password2, name);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
-    public boolean edit(String username, String qq, String address, String mail, String tel, String introduce, String gender) {
-        String sql = "update USER set qq=?,address=?,mail=?,tel=?,introduce=?,gender=? where name=?";
-        System.out.println(username + qq + address + mail + tel + introduce + gender);
-        update(sql, qq, address, mail, tel, introduce, gender, username);
+    public boolean nameAndMail(String name, String email) {
+        String sql = "select count(*) from USER where name=? and MAIL=?";
+        int count = Integer.valueOf(getForValue(sql, name, email).toString());
+        if (count == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean edit(String username, String qq, String address, String tel, String introduce, String gender) {
+        String sql = "update USER set qq=?,address=?,tel=?,introduce=?,gender=? where name=?";
+        System.out.println(username + qq + address  + tel + introduce + gender);
+        update(sql, qq, address, tel, introduce, gender, username);
         return true;
     }
 
