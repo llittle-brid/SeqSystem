@@ -83,6 +83,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public boolean alterPM(int idUser, int idProject) {
+//        判断被转移人是否在组内
         String sql = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
         if (Integer.valueOf(getForValue(sql,idProject,idUser).toString())<1){
             return false;
