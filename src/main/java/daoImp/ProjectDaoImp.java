@@ -191,4 +191,11 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         return project;
     }
 
+    @Override
+    public String findName(int id_Project) {
+        String sql = "select NAME from PROJECT where ID_PROJECT = ?";
+        String name = getForValue(sql,id_Project);
+        System.out.println("orgName:"+name);
+        return name;
+    }
 }

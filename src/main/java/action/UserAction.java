@@ -13,6 +13,7 @@ import daoImp.UserDaoImp;
 import entity.PersonalCenterEntity;
 import entity.SysManagerEntity;
 import entity.UserEntity;
+import entity.postmailEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     private String tempPassword;
     private String newPassword;
     private Map<String, Object> dataMap;
+    private String verification;
 
     public String login() {
         dataMap = new HashMap<String, Object>();
@@ -59,9 +61,12 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
     public String registration() {
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
-        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword);
-        boolean res = userDao.registration(user.getName(), user.getPassword(),tempPassword);
-        dataMap.put("res", res);
+        System.out.println(user.getName() + " " + user.getPassword()+" "+tempPassword+" "+user.getMail()+" "+verification+" "+"session注册码:"+session.get("verification"));
+        if(Integer.parseInt(verification) == (int) session.get("verification")) {
+            System.out.println("verificationSUCCESE");
+            boolean res = userDao.registration(user.getName(), user.getPassword(), tempPassword, user.getMail());
+            dataMap.put("res", res);
+        }
         return "RES";
     }
 
@@ -88,6 +93,25 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
             System.out.println("put newuser in session");
         }
         return "success";
+    }
+    public String postVerification(){
+        userDao = new UserDaoImp();
+        dataMap = new HashMap<String, Object>();
+        System.out.println("helloverficication");
+        int temp = (int) ((Math.random()*9+1)*100000);
+        String email = user.getMail();
+        session.put("verification",temp);
+        System.out.println("email:"+email+"  verification:"+session.get("verification"));
+        String mail = user.getMail(); //发送对象的邮箱
+        String title = "快易需求助手注册验证码";
+        String content = String.valueOf(temp);
+        postmailEntity info = new postmailEntity();
+        info.setToAddress(mail);
+        info.setSubject(title);
+        info.setContent(content);
+        boolean res= userDao.postmail(info,title);
+        dataMap.put("res",res);
+        return "RES";
     }
 
     public String jmpLogin(){

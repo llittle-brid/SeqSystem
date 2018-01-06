@@ -125,162 +125,82 @@
                 <div style="float: left;margin-left: 5px"><span><strong>我的机构</strong></span></div>
                 <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newOrg">申请机构</button></div>
             </div>
-            <div class="ibox-content">
-
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>机构名</th>
-                        <th>机构管理员</th>
-                        <th>机构编码</th>
-                        <th>机构人数</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>需求编辑组一</td>
-                        <td>赖菜一号</td>
-                        <td>001</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>需求编辑组一</td>
-                        <td>赖菜一号</td>
-                        <td>001</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>需求编辑组一</td>
-                        <td>赖菜一号</td>
-                        <td>001</td>
-                        <td>23</td>
-                    </tr>
-                    </tbody>
+            <div class="bootstrap-table  ibox-content">
+                <table id="finishingTask" data-toggle="table"
+                       data-classes="table table-no-bordered"
+                       data-url="project-showList"
+                       data-click-to-select="true"
+                       data-search="true"
+                       data-show-refresh="true"
+                       data-show-toggle="true"
+                       data-show-columns="true"
+                       data-toolbar="#toolbar"
+                       data-query-params="quefryParams"
+                       data-pagination="true"
+                       data-halign="center"
+                       data-striped="true"
+                       data-page-size="5"
+                       data-height="400"
+                       data-sort-order="desc"
+                       data-pagination-v-align="top"
+                       data-sort-stable="true"
+                >
                 </table>
-                <div style="height: 50px;margin-left: 40%" class="btn-group">
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                    </button>
-                    <button class="btn btn-white">1</button>
-                    <button class="btn btn-white  active">2</button>
-                    <button class="btn btn-white">3</button>
-                    <button class="btn btn-white">4</button>
-                    <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
-    <div style="padding: 20px 0px 0px 0px" class="col-md-6">
+    <div style="padding: 20px" class="col-md-6 float-e-margins">
         <div class="ibox-title">
-            <h5>消息中心</h5>
+            <div style="float: left;margin-left: 5px"><div style="float: left;margin-left: 5px"><span><strong>当前消息</strong></span></div></div>
         </div>
-        <div class="ibox float-e-margins">
-            <div class="ibox-content">
-                <div class="row">
-                    <div class="col-sm-8 m-b-xs">
-                        <select class="input-sm form-control input-s-sm inline">
-                            <option value="0">请选择查找类型</option>
-                            <option value="1">用户筛选</option>
-                            <option value="2">时间筛选</option>
-                            <option value="3">备注筛选</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="input-group">
-                            <input placeholder="请输入关键词" class="input-sm form-control" type="text"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-
-                            <th>邮件概述</th>
-                            <th>发件时间</th>
-                            <th>主题</th>
-                            <th>状态</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>系统通知</td>
-                            <td>2017-10-20</td>
-                            <td>你创建了【快易需求】机构</td>
-                            <td>未读/<a href="" style="color: orangered">删除</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div style="height: 50px;margin-left: 40%" class="btn-group">
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
-                        </button>
-                        <button class="btn btn-white">1</button>
-                        <button class="btn btn-white  active">2</button>
-                        <button class="btn btn-white">3</button>
-                        <button class="btn btn-white">4</button>
-                        <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
+        <div class="bootstrap-table ibox-content">
+            <table id="info" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-sort-order="desc"
+                   data-url="project-showList"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="5"
+                   data-height="400"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+                   data-page-list="[8]"
+            >
+            </table>
+        </div>
+        <br>
+        <div class="ibox-title">
+            <div style="float: left;margin-left: 5px"><span><strong>历史消息</strong></span></div>
+        </div>
+        <div class="bootstrap-table ibox-content">
+            <table id="info1" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-sort-order="desc"
+                   data-url="project-showList"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="3"
+                   data-height="320"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+            >
+            </table>
         </div>
     </div>
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -476,5 +396,260 @@
                 })
         }
     })
+</script>
+<script>
+    $('#finishingTask').bootstrapTable({
+            columns: [
+                {
+                    title: '机构编码',
+                    field: 'ID_ORGANIZATION',
+                    align: 'center',
+                    sortable: true,
+                    valign: 'middle'
+                },
+                {
+                    field: 'ORGANIZATIONNAME',
+                    title: '机构名称',
+                    sortable: true,
+                    align: 'center'
+                }, {
+                    field: 'ADMIN_NME',
+                    title: '管理员',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'NUM_USER',
+                    title: '机构人数',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'operate',
+                    title: '操作',
+                    align: 'center',
+                    events: "actionEvents",
+                    formatter: "AddFunctionAlty"
+                }
+            ]
+        }
+    );
+    $('#info').bootstrapTable({
+            columns: [
+                {
+                    field: 'MESSAGE',
+                    title: '消息',
+                    sortable: true,
+                    align: 'center',
+                },
+                {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center',
+                },
+                {
+                    field: 'date',
+                    title: '时间',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'operate',
+                    title: '操作',
+                    align: 'right',
+                    events: "accRefu",
+                    formatter: "info"
+                },
+                {
+                    field: 'operator',
+                    align: 'left',
+                    events: "refuse",
+                    formatter: "infor"
+                }
+            ]
+        }
+    );
+    $('#info1').bootstrapTable({
+            columns: [
+                {
+                    field: 'CONTENT',
+                    title: '消息',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'DATE',
+                    title: '时间',
+                    sortable: true,
+                    align: 'center'
+                },
+            ]
+        }
+    );
+    /**
+     * @return {string}
+     */
+
+    $.ajax(
+        {
+            type:"GET",
+            url:"personalcenter-showList",
+            dataType:"json",
+            success:function(json){
+                var proList = JSON.parse(json.listorg);
+                //finishingTask为table的id
+                $('#finishingTask').bootstrapTable('load',proList);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+    //    $.ajax(
+    //        {
+    //            type:"GET",
+    //            url:"personalcenter-quitorg",
+    //            dataType:"json",
+    //            success:function(json){
+    //                var proList = JSON.parse(json.listorg);
+    //                //finishingTask为table的id
+    //                $('#finishingTask').bootstrapTable('load',proList);
+    //            },
+    //            error:function(){
+    //                alert("错误");
+    //            }
+    //        }
+    //    )
+    $.ajax(
+        {
+            type:"GET",
+            url:"infomation-showInfo",
+            dataType:"json",
+            success:function(json){
+                var infolist = JSON.parse(json.listinfo);
+                //finishingTask为table的id
+                $('#info').bootstrapTable('load',infolist);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+
+    $.ajax(
+        {
+            type:"GET",
+            url:"history-showHistory",
+            dataType:"json",
+            success:function(json){
+                var History = JSON.parse(json.listHistory);
+                //finishingTask为table的id
+                $('#info1').bootstrapTable('load',History);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
+    /**
+     *个人机构
+     * */
+    function AddFunctionAlty(value,row,index) {
+        return '<a class="mod zfont3">退出</a>'
+    }
+    window.actionEvents = {
+        'click .mod': function(e, value, row, index) {
+            swal({title:"您确定要退出这个机构吗",
+                text:"点击确定后讲退出机构，请谨慎操作！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            }, function(){
+                swal("退出成功！","您已经成功退出这个机构。","success")
+                var id = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id);
+                location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
+            })
+            //修改操作
+        },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
+
+    /**
+     * 消息中心
+     * @param value
+     * @param row
+     * @param index
+     * @returns {string}
+     */
+    function info(value,row,index) {
+        return '<a class="mod zfont3">接受</a>'
+    }
+    function infor(value,row,index) {
+        return '<a class="mod zfont3">拒绝</a>'
+    }
+    window.accRefu = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            swal({title:"您确定要接受这个邀请吗",
+                text:"点击确定将接受这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("接受邀请！","您已经加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
+        },
+    };
+    window.refuse = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            swal({title:"您确定要拒绝这个邀请吗",
+                text:"点击确定将拒绝这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("拒绝邀请！","您已经拒绝加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
+        },
+        'click .delete' : function(e, value, row, index) {
+            //删除操作
+        }
+    };
+
 </script>
 </html>

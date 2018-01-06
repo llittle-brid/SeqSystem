@@ -3,6 +3,8 @@ package daoImp;
 import dao.DAO;
 import dao.UserDao;
 import entity.UserEntity;
+import entity.postmailEntity;
+import util.MailUtil;
 
 import java.util.List;
 
@@ -26,13 +28,26 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
         else return false;
     }
 
-    public boolean registration(String name, String password1, String password2) {
+    public boolean registration(String name, String password1, String password2, String mail) {
         if (password1.length() >= 6 && password1.equals(password2)) {
-            String sql = "insert into USER (NAME,PASSWORD) values (?,?)";
-            update(sql, name, password1);
+            String sql = "insert into USER(NAME,PASSWORD,MAIL) values(?,?,?)";
+            update(sql, name, password1,mail);
+            return true;
+        } else return false;
+    }
+
+    public boolean postmail(postmailEntity info, String title){
+        if (Integer.parseInt(info.getContent())>=100000 && Integer.parseInt(info.getContent())<=999999){
+            try {
+                MailUtil.sendTextMail(info);
+            } catch (Exception e) {
+                System.out.print("'" + title + "'的邮件发送失败！");
+                e.printStackTrace();
+            }
             return true;
         }
-        else return false;
+        else
+            return false;
     }
 
     public boolean replacepassword(String name, String password1, String password2, String password3) {

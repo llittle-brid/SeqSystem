@@ -3,27 +3,35 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+import dao.HistoryInfoDao;
 import dao.InformationDao;
 
+import dao.OrganizationDao;
+import dao.ProjectDao;
+import daoImp.HistoryInfoDaoImp;
 import daoImp.InformationDaoImp;
+import daoImp.OrganizationDaoImp;
+import daoImp.ProjectDaoImp;
 import entity.InformationEntity;
 
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import static java.sql.Types.NULL;
+
 public class InfomationAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<InformationEntity>, Preparable {
     private InformationDao infodao;
+    private OrganizationDao org;
+    private ProjectDao pro;
     private InformationEntity information;
+    private HistoryInfoDao history;
     private UserEntity user;
     private Map<String, Object> session;
     private Map<String, Object> dataMap;
-    private int ID_PROJECT;
-    private int ID_ORGANIZATION;
 
     public String showInfo(){
         System.out.println("helloshowinfo");
@@ -32,23 +40,68 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         List<InformationEntity> list = new ArrayList<>();
         user = (UserEntity)session.get("user");
         list = infodao.getAll(user.getId_user());
-        System.out.println("#########"+user.getId_user());
         Gson gson = new Gson();
         String infoList = gson.toJson(list);
         dataMap.put("listinfo",infoList);
         return "showinfo";
     }
-    public String accept(){
+    public String Accept(){
         System.out.println("helloaccept");
         infodao = new InformationDaoImp();
+        org = new OrganizationDaoImp();
+        pro = new ProjectDaoImp();
+        history = new HistoryInfoDaoImp();
         user = (UserEntity)session.get("user");
         Integer id_user = user.getId_user();
-        infodao.accept(information.getID_ORGANIZATION(),information.getID_PROJECT(),id_user);
-        System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
+        if(information.getID_PROJECT()== null) {
+            infodao.acceptOrg(information.getID_ORGANIZATION(),id_user);
+            infodao.joinOrg(information.getID_ORGANIZATION(),id_user);
+            String Name = org.findName(information.getID_ORGANIZATION());
+            String content = "已接受邀请加入"+Name+"机构";
+            System.out.println(content);
+            Date dt=new Date();
+//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            String nowTime="";
+//            nowTime= df.format(dt);
+//            System.out.println(nowTime);
+            history.hasAcceptorRefuseORG(id_user, content, dt,information.getID_ORGANIZATION());
+        }
+        else if(information.getID_ORGANIZATION()== null) {
+            infodao.acceptPro(information.getID_PROJECT(),id_user);
+            infodao.joinPro(information.getID_PROJECT(),id_user);
+            String Name = pro.findName(information.getID_PROJECT());
+            String content = "已接受邀请加入"+Name+"项目";
+            System.out.println(content);
+            Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
+            history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
+        }
         return "acc";
     }
 
     public String Refuse() {
+        infodao = new InformationDaoImp();
+        org = new OrganizationDaoImp();
+        pro = new ProjectDaoImp();
+        history = new HistoryInfoDaoImp();
+        user = (UserEntity)session.get("user");
+        Integer id_user = user.getId_user();
+        if(information.getID_PROJECT()== null) {
+            infodao.refuseOrg(information.getID_ORGANIZATION(),id_user);
+            String Name = org.findName(information.getID_ORGANIZATION());
+            String content = "已拒绝邀请加入"+Name+"机构";
+            System.out.println(content);
+            Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
+            history.hasAcceptorRefuseORG(id_user, content, dt,information.getID_ORGANIZATION());
+        }
+        else if(information.getID_ORGANIZATION()== null) {
+            infodao.refusePro(information.getID_PROJECT(),id_user);
+            String Name = pro.findName(information.getID_PROJECT());
+            String content = "已拒绝邀请加入"+Name+"项目";
+            System.out.println(content);
+            Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
+            history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
+        }
+        System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
         return "refuse";
     }
 
@@ -83,11 +136,5 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         return information;
     }
 
-    public void setID_PROJECT(int ID_PROJECT) {
-        this.ID_PROJECT = ID_PROJECT;
-    }
-    public void setID_ORGANIZATION(int ID_ORGANIZATION) {
-        this.ID_ORGANIZATION = ID_ORGANIZATION;
-    }
 }
 

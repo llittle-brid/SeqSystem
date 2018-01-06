@@ -10,7 +10,7 @@ public class PersonalCenterEntity {
     private String ORGANIZATIONNAME;
     private String ADMIN_NME;
     private int NUM_USER;
-    private  int ID_USER;
+    private int ID_USER;
 
 //获取机构ID
     public int getID_ORGANIZATION() {

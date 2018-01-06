@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class UserEntity {
     private int id_user;
+    private int verification;
     private String password;
     private String name;
     private String gender;
@@ -24,6 +25,15 @@ public class UserEntity {
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
+    }
+
+    //验证码
+    public int getverification() {
+        return verification;
+    }
+
+    public void setverification(int verification) {
+        this.verification = verification;
     }
 
     public String getPassword() {
@@ -109,5 +119,6 @@ public class UserEntity {
         this.mail = mail;
         this.qq = qq;
         this.tel = tel;
+        this.verification=verification;
     }
 }
