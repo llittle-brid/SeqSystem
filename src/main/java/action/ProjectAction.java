@@ -136,12 +136,16 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         dataMap = new HashMap<String, Object>();
         DocumentDao documentDao = new DocumentDaoImp();
 
-        List<DocumentEntity> list = documentDao.getAll(project.getId_Project());
+        try {
+            List<DocumentEntity> list = documentDao.getAll(project.getId_Project());
 
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(list);
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(list);
 
-        dataMap.put("res",jsonString);
+            dataMap.put("res", jsonString);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 

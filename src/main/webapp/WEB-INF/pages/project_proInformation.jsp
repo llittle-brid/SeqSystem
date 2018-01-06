@@ -192,6 +192,10 @@
                                         <div class="ibox float-e-margins">
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
+                                                <div class="ibox-content">
+                                                    <div class="click2edit wrapper discuss">
+                                                    </div>
+                                                </div>
                                                 <div class="file-loading">
                                                     <!-- The file input field used as target for the file upload widget -->
                                                     <input id="fileupload" name="MyFile" type="file" class="file" multiple data-msg-placeholder="选择要上传的文件">
@@ -200,10 +204,6 @@
                                                 <div id="alterable" style="visibility: visible">
                                                     <button class="btn btn-success  btn-xs pull-right" onclick="commitDiscuss()" type="submit">发布评论</button>
                                                     <label class="pull-right">没有附件？直接点这里--></label>
-                                                </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                                <div class="click2edit wrapper discuss">
                                                 </div>
                                             </div>
                                         </div>
@@ -639,8 +639,8 @@
                     content+="<div class='ibox-tools'>";
 
                     for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
-                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].filename + '">附件';
-                        content += j + 1;
+                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].path+ '">';
+                        content += tempDis.accessoryEntityList[j].filename;
                         content += '</a>';
                     }
 
@@ -742,7 +742,8 @@
 
     //评论编辑按钮
     function edit() {
-        $("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
+        $("#eg").addClass("no-padding");
+        $(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
