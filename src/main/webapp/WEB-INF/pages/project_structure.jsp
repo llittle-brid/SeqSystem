@@ -397,7 +397,8 @@
                 ['table', ['table']],
                 ['picture', ['picture']],
                 ['fullscreen', ['fullscreen']]
-            ]
+            ],
+            placeholder: '暂无内容',
         })
 
 </script>
