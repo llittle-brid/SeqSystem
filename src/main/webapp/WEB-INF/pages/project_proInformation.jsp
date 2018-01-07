@@ -215,15 +215,15 @@
                                         </div>
                                     </div>
                                     <!--自己的留言结束-->
-                                    <p>共<s:property value="#session.disNum"/>条留言</p>
+                                    <p>共<var id="num"></var>条留言</p>
                                     <div class="allDiscuss">
                                         <!--一行留言-->
                                         <!--一行留言结束-->
                                     </div>
                                     <div class="pull-right">
                                         <a onclick="previous()">上一页</a>
-                                        <strong>第<var id="page"></var>页</strong>
-                                        共<s:property value="#session.disPage"/>页
+                                        <strong>第<var id="index"></var>页</strong>
+                                        共<var id="pages"></var>页
                                         <a onclick="next()">下一页</a>
                                     </div>
 
@@ -311,8 +311,8 @@
 <script src="<%=basePath %>js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath %>js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath %>js/plugins/sweetalert/sweetalert.min.js"></script>
-
 <script src="<%=basePath %>js/xzw.js"></script>
+
 <script src="<%=basePath %>js/plugins/summernote/summernote.min.js"></script>
 <script src="<%=basePath %>js/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<%=basePath %>js/plugins/summernote/summernote-lite.js"></script>
@@ -630,8 +630,10 @@
 
 <%--评论区--%>
 <script>
+    var num = 1;
     var page = 1;
-    $("#page").text(page);
+    var max = 1;
+    $("#index").text(page);
     function previous() {
         page--;
         if (page<=0){
@@ -642,7 +644,6 @@
     }
     function next() {
         page++;
-        var max = parseInt("<s:property value="#session.disPage"/>");
         if (page > max){
             page = max;
         }
@@ -652,7 +653,6 @@
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
-        page = 0;
     }
     //评论加载
     function discussReload2() {
@@ -667,6 +667,11 @@
             type: "Post",
             async: "false",
             success: function (result) {
+                max = result.disPage;
+                num = result.disNum;
+
+                $("#pages").text(page);
+                $("#num").text(num);
                 var content="",tempDis,date,state;
                 var title = "";
                 for (var i=0;i<result.wrapperList.length;i++){

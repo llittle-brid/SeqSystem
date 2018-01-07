@@ -6,6 +6,7 @@ import dao.ProDiscussDao;
 import entity.ProDiscussEntity;
 
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,8 +27,12 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     public void commit1(int id_user, int id_project, Timestamp time, String content, List<String> MyFileFileName, List<String> Path) {
         String sql="insert into PRO_DISCUSS (id_user,id_project,time,content) values (?,?,?,?)";
 
-        int id_pro_discuss = insert(sql,id_user,id_project,time,content);
-
+        int id_pro_discuss = 0;
+        try {
+            id_pro_discuss = insert(sql,id_user,id_project,time,content);
+        }catch (SQLException s){
+            id_pro_discuss = 0;
+        }
 //        存在问题：高并发情况下，可能会获取到错误的ID
 //        String sql0 = "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'seq' AND TABLE_NAME = 'PRO_DISCUSS'";
 //
