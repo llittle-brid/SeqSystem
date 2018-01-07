@@ -97,15 +97,15 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             return false;
         }
         else {
-            String sql1 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
             try {
-                updateThrowException(sql1, idProject, idUser);
+                String sql1="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
+                update(sql1,idProject);
+                String sql2 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
+                updateThrowException(sql2, idProject, idUser);
+                return true;
             } catch (Exception e) {
                 return false;
             }
-            String sql2="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
-            update(sql2,idProject);
-            return true;
         }
     }
 
