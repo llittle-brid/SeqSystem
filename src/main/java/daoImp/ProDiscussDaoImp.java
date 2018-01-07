@@ -51,7 +51,7 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
 
     @Override
     public List<ProDiscussEntity> getProjectDis(int id_project,int page) {
-        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT = ? limit ?,3;";
+        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT = ? LIMIT ?,3;";
 
         List<ProDiscussEntity> proDiscussEntityList = getForList(sql,id_project,page);
 
