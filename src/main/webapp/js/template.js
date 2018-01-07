@@ -63,7 +63,7 @@ $(document).on("click",".dic",function () {
             $("div.catalogNoneContent").hide();
             $("div.catalogNotNoneContent").show();
             //模板生成
-            template=result.template;
+          var   template=result.template;
             $("div.content").html(template.content);
             nowCatalog=result.catalogEntity,title="";
             if (nowCatalog.first_index!="0")title+=nowCatalog.first_index;
@@ -76,25 +76,13 @@ $(document).on("click",".dic",function () {
             entity=result.entity;
             if(template.id_template=="3"){//加载角色+内容
                 roleList=result.roleList;
-               $("input#funName").val(entity.funName);
-               $("select#priority").val(entity.priority);
-                $("#describe").html(entity.describe);
-                $("#in").html(entity.in);
-                $("#out").html(entity.out);
-                $("#basic").html(entity.basic);
-                $("#alternative").html(entity.alternative);
+                loadTemplateThree(entity);
             }
             else if(template.id_template=="2"){
-                var roleName=entity.roleName;
-                var describe=entity.describe;
-                var permissions=entity.permissions;
-                $("#roleName").val(roleName);
-                $("#describe").html(describe);
-                $("#permissions").html(permissions);
+                loadTemplateTwo(entity);
             }
             else if (template.id_template=="1"){
-                var content=entity.content;
-                $("#describe").html(content);
+                loadTemplateOne(entity)
             }
         },
         error: function (result) {
@@ -102,6 +90,61 @@ $(document).on("click",".dic",function () {
         }
     })
 })
+
+//加载模板1的内容
+function loadTemplateOne(entity) {
+    var content=entity.content;
+    $("#describe").html(content);
+}
+//加载模板2的内容
+function loadTemplateTwo(entity) {
+    var roleName=entity.roleName;
+    var describe=entity.describe;
+    var permissions=entity.permissions;
+    $("#roleName").val(roleName);
+    $("#describe").html(describe);
+    $("#permissions").html(permissions);
+}
+//加载模板3的内容
+function loadTemplateThree(entity) {
+    UsableInit()
+
+    $("input#funName").val(entity.funName);
+    $("select#priority").val(entity.priority);
+    $("#describe").html(entity.describe);
+    $("#in").html(entity.input);
+    $("#out").html(entity.output);
+    $("#basic").html(entity.basic);
+    $("#alternative").html(entity.alternative);
+    //生成表格
+    var funRoleList=entity.funRoleList;
+    var funUsableList=entity.funUsableList;
+    var funRoleContent="";
+    for (var i=0;i<funRoleList.length;i++){
+        funRoleContent+=" <tr class='funTr'> <th > <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
+
+        for (var j=0;j<roleList.length;j++){
+            funRoleContent+="<option";
+            if(funRoleList[i].roleName==roleList[j].roleName)funRoleContent+=" selected";
+            funRoleContent+=" >"+roleList[j].roleName+"</option>";
+        }
+        funRoleContent+="</select> </th> <th> <textarea   class='form-control roleDescribe dis'  name='roleDescribe'   style='max-width: 100%' disabled>";
+        funRoleContent+=funRoleList[i].roleDescribe+"</textarea> </th>";
+        if(funRoleList[i].usableName==null){//新增按钮
+            funRoleContent+=" <th> <button  class='btn btn-primary  btn-xs col-lg-push-1 dis'  id='addUsable'  data-toggle='modal' data-target='#addUsableModel' onclick='addUsable(this)' type='button' style='margin-right: 10px' disabled>新增可用性</button> </th></tr>";
+        }else {
+            funRoleContent+="</tr>";
+            funRoleContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funRoleList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funRoleList[i].usablePara+"</th> <th style='text-align: center' > <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
+        }
+    }
+    $(".funTable tbody").prepend(funRoleContent);
+    var funUsableContent="";
+    for (var i=0;i<funUsableList.length;i++){
+        funUsableContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funUsableList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funUsableList[i].usablePara+"</th> <th style='text-align: center' >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
+    }
+    $(".funTable tfoot").append(funUsableContent);
+}
+
 //新增弹框初始化
 function addModelInit() {
 $("input#add_title").val("");
@@ -666,7 +709,7 @@ function temp_save() {
                     first="no";
             })
             funUsableList+="]";
-            alert(describe)
+            // alert(describe)
             $.ajax({
                 url: "catalog-saveTemplateThree",
                 data: {id_catalog: id_catalog,funName: funName, priority: priority,content:describe,
@@ -821,3 +864,93 @@ $(document).on("click",".fun_delete",function () {
     thisLine.remove();
 })
 
+//构件JS开始了
+//点击构件类型事件
+var nowTemplate,structureList;
+$("#structType").change(function () {
+    $("#libraryList").html("")
+    nowTemplate=$(this).val();
+    $.ajax({
+        url: "templateLib-getTypeOfLib",
+        data: {id_template:nowTemplate},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+           var list=result.libraryList,content="";
+           if(list.length!=0){
+               content+=" <option value='0' selected disabled>请选择构件库</option>"
+               for(var i=0;i<list.length;i++){
+               content+=" <option value='"+list[i].id_library+"'>"+list[i].name+"</option>"
+           }
+               $("#libraryList").append(content);
+               // alert(content)
+               $(".libraryDiv").show();
+               $("#noneLibrary").hide();
+               $(".structTable").hide();
+           }
+           else {
+               $("#libraryDiv").hide();
+               $("#noneLibrary").show();
+           }
+
+        },
+        error: function (result) {
+            showtoast("dangerous", "保存失败", "内容保存失败")
+        }
+    })
+})
+
+$("#libraryList").change(function () {
+    var id_library=$(this).val();
+    $(".structTable").show();
+    $.ajax({
+        url: "templateLib-getStructure",
+        data: {id_library:id_library,id_template:nowTemplate},
+        dataType: "json",
+        type: "Post",
+        async: "false",
+        success: function (result) {
+            $(".addTbody").remove();
+            structureList=result.structureList;
+            var content="<tbody class='addTbody'>";
+          if(nowTemplate=="1"){
+              for (var i=0;i<structureList.length;i++){
+                  content+=" <tr><th >通用模板"+(i+1)+"</th><th ><button class='btn btn-info   btn-xs' onclick='useStructure(1,this,"+i+")'>引用</button></th></tr>";
+              }
+          }
+           else if(nowTemplate=="2"){
+              for (var i=0;i<structureList.length;i++){
+                  content+=" <tr><th >"+structureList[i].roleName+"</th><th ><button class='btn btn-info   btn-xs' onclick='useStructure(2,this,"+i+")'>引用</button></th></tr>";
+              }
+          }
+          else if(nowTemplate=="3"){
+              for (var i=0;i<structureList.length;i++){
+                  content+=" <tr><th >"+structureList[i].funName+"</th><th > <button class='btn btn-info   btn-xs' onclick='useStructure(3,this,"+i+")'>引用</button></th></tr>";
+              }
+          }
+             content+="</tbody>";
+          $(".structTable").append(content);
+        },
+        error: function (result) {
+            showtoast("dangerous", "保存失败", "内容保存失败")
+        }
+    })
+    
+})
+
+function useStructure(id_template,obj,index) {
+if(typeof (nowCatalog)=="undefined"||nowCatalog.id_template!=id_template){
+    showtoast("warning", "加载失败", "与模板类型不匹配");return;
+}
+var id=parseInt(index)
+if(id_template=="1"){
+    loadTemplateOne(structureList[id])
+}
+   else if(id_template=="2"){
+        loadTemplateTwo(structureList[id])
+    }
+  else  if(id_template=="3"){
+        loadTemplateThree(structureList[id])
+    }
+}
