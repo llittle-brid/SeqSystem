@@ -335,7 +335,7 @@
 </body>
 <script>
     function commitSend() {
-        var content=$(".discuss").code();
+        var content=$(".discuss").summernote('code');
         alert(content);
         $.ajax({
             url: "librarydiscuss-commit",
