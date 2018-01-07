@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage=""
+         import="java.util.*"%>
+
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%
     String path = request.getContextPath();
@@ -8,6 +10,7 @@
 <html>
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
@@ -63,6 +66,7 @@
 
 
 </head>
+
 <body class="fixed-sidebar  gray-bg animated fadeInDown" style="overflow:hidden">
 <div id="wrapper" style="padding: 0px" class="wrapper wrapper-content ">
     <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">

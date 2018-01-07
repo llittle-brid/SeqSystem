@@ -9,10 +9,12 @@ import entity.LibrarydiscussEntity;
 import entity.LibrarydiscussEntity;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.StrutsStatics;
 import org.apache.struts2.components.If;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -55,7 +57,8 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
 
     public String image()
     {
-        System.out.println(1111112246);
+        HttpServletRequest request2 = (HttpServletRequest)ActionContext.getContext().get(StrutsStatics.HTTP_REQUEST);
+
         dataMap = new HashMap<String, Object>();
         if (file!=null) {
             String savePath = ServletActionContext.getServletContext().getRealPath("disImage");
@@ -81,7 +84,7 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String path="/aaa"+"/"+"disImage/"+ymd+"/"+newName;
+                String path=request2.getContextPath()+"/"+"disImage/"+ymd+"/"+newName;
                 dataMap.put("path",path);
             System.out.println(path);
         }
