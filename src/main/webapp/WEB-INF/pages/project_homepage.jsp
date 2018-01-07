@@ -57,7 +57,7 @@
             <a href="user-jmpMyprofile"><img src="../../img/Home4.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">个人中心</span><br/>
             <span style="color:black">收到了</span>
-            <span style="color: #ff0000">0</span>
+            <span style="color: #ff0000"><%=session.getAttribute("nowNews") %></span>
             <span style="color:black">条邀请</span>
         </div>
     </div>

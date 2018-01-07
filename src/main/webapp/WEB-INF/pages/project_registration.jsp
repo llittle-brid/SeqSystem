@@ -31,34 +31,30 @@
     <div class="loginForm">
         <div class="text-center loginLogo" >
         </div>
-        <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+        <form class="cmxform" id="signupForm">
+            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="email" id="email" type="email" class="form-control loginLine" style="font-size:12px" placeholder="请输入邮箱" required="">
         </div>
-        <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-            <input name="name" id="name" type="text" class="form-control loginLine" style="font-size:12px" placeholder="设置用户名（注册成功后不可更改）" required="">
+            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+            <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine" style="font-size:12px" placeholder="设置用户名（注册成功后不可更改）" required="">
         </div>
-        <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="password1" id="password1" type="password" class="form-control loginLine" style="font-size:12px" maxlength="22" placeholder="请设置密码（长度为6-22个字符）" required="">
         </div>
-        <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+            <div class="form-group col-sm-8 col-md-offset-2 loginLine">
             <input name="password2" id="password2" type="password" class="form-control loginLine" style="font-size:12px" maxlength="22" placeholder="请再次输入密码确认" required="">
         </div>
-        <div class="form-group col-sm-5 col-md-offset-2 loginLine">
+            <div class="form-group col-sm-5 col-md-offset-2 loginLine">
             <input name="verification" id="verification"  type="verification" class="form-control loginLine" style="font-size:12px" placeholder="请填写验证码" required="">
         </div>
-        <div class="form-group">
-            <button id="registration_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px">获取邮箱验证码</button>
+            <div class="form-group">
+            <input id="registration_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px"  onclick="sendCode(this)" value="获取邮箱验证码"/>
         </div>
-        <div class="form-group col-md-offset-3">
-            <table>
-                <tr>
-                    <td>
-                        <button id="registration_button" class="btn btn-w-m btn-Bblack btn-sm">注 册</button>
-                        <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+            <div style="width: 300px" class="form-group col-sm-8  col-md-offset-2 loginLine">
+                <button id="registration_button" class="btn btn-w-m btn-Bblack btn-sm">注 册</button>
+                <a href="login-jmpLogin"><small>已有账号？点我登录</small></a>
+            </div>
+        </form>
     </div>
 
 </div>
@@ -77,9 +73,68 @@
 <script src="../../js/mjy.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
 
 <script>
+    //表单验证
+    $.validator.setDefaults({
+        submitHandler: function() {
+        }
+    });
+    $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+        $("#signupForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                password1: {
+                    required: true,
+                    minlength: 6
+                },
+                password2: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#password1"
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                verification: {
+                    required: true,
+                    minlength: 6,
+                    maxlength:6
+                }
+            },messages: {
+                name: {
+                    required: "请输入用户名",
+                    minlength: "用户名长度不能小于 3 位"
+                },
+                password1: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 6 位"
+                },
+                password2: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 6 位",
+                    equalTo: "两次密码输入不一致"
+                },
+                verification: {
+                    required: "请输入验证码",
+                    minlength: "验证码为6位",
+                    maxlength: "验证码为6位"
+                },
+                email: "请输入一个正确的邮箱",
+            }
+        });
+    });
+    //以上为表单验证
+
 //注册
     $("button#registration_button").click(function () {
         var password1=$("#password1").val();
@@ -110,8 +165,15 @@
                         swal("验证码错误！", "请检查您的验证码输入是否正确", "error");
                     }
                     else if (result.res === true) {
-                        swal("注册成功！", "即将跳转到登陆页面(未跳转请点击下方按钮)", "success");
-                        location.href="login-jmpLogin"
+                        swal({
+                            title: "修改成功!",
+                            text: "点击下方按钮回登陆页面",
+                            type:"success",
+                            confirmButtonColor: "#18a689",
+                            confirmButtonText: "OK"
+                        },function(){
+                            location.href="login-jmpLogin"
+                        })
                     }
                     else if(result.res === false)
                         swal("注册失败！", "用户名被占用。", "error");
@@ -122,9 +184,30 @@
             })
         }
     })
-    //发送验证码
-    $("button#registration_email").click(function (){
-            $.ajax({
+    var clock = '';
+    var nums = 60;
+    var btn;
+    function sendCode(thisBtn)
+    {
+        btn = thisBtn;
+        btn.disabled = true; //将按钮置为不可点击
+        btn.value = nums+'秒后可重新获取';
+        clock = setInterval(doLoop, 1000); //一秒执行一次
+    }
+    function doLoop()
+    {
+        nums--;
+        if(nums > 0){
+            btn.value = nums+'秒后可重新获取';
+        }else{
+            clearInterval(clock); //清除js定时器
+            btn.disabled = false;
+            btn.value = '点击发送验证码';
+            nums = 60; //重置时间
+        }
+    }
+    $("input#registration_email").click(function (){
+        $.ajax({
                 url: "login-postVerification",
                 data: {mail: $("input#email").val()},
                 dataType: "json",
@@ -134,10 +217,10 @@
                     if (result.res === true) {
                         showtoast("success", "发送成功", "操作成功")
                     }
-                    else showtoast("error", "发送失败", "请检查当前网络或者使用其他网络发送邮件")
+                    else showtoast("error", "发送失败", "请检查输入的邮箱是否有效")
                 },
                 error: function (result) {
-                    showtoast("error", "发送失败", "发送失败")
+                    showtoast("error", "发送失败", "请检查网络")
                 }
             })
     })

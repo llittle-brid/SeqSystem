@@ -35,6 +35,7 @@
     <div class="loginForm" >
         <div class="text-center loginLogo m-t" >
         </div>
+        <form class="cmxform" id="signupForm">
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
                 <input name="name" id="name" type="username" class="form-control loginLine" style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" required="">
             </div>
@@ -48,7 +49,7 @@
             <div class="form-group" >
                 <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a>
                 </p></div>
-
+        </form>
     </div>
 
 </div>
@@ -57,8 +58,42 @@
 <script src="js/content.min.js?v=1.0.0"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
-<script>function verification() {
+<script>
+    //表单验证
+    $.validator.setDefaults({
+        submitHandler: function() {
+        }
+    });
+    $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+        $("#signupForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                }
+            },messages: {
+                name: {
+                    required: "请输入用户名",
+                    minlength: "用户名长度不能小于 3 位"
+                },
+                password: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 6 位"
+                }
+            }
+        });
+    });
+    //以上为表单验证
+    function verification() {
     $.ajax({
         url: "login-login",
         data: {name: $("input#name").val(),password: $("input#password").val()},
@@ -70,10 +105,10 @@
                     showtoast("success", "登录成功", "操作成功")
                 location.href = "user-jmpTemp";
             }
-            else  showtoast("error", "登录失败", "登录失败")
+            else  showtoast("error", "登录失败", "用户名或密码错误")
         },
         error: function (result) {
-            showtoast("error", "登录失败", "登录失败")
+            showtoast("error", "登录失败", "请检查你的网络")
         }
     })
 }

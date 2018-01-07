@@ -11,7 +11,7 @@ import java.util.List;
 public class OrgInviteDaoImp extends DAO<OrgInviteEntity> implements OrgInviteDao {
     @Override
     public boolean inviteUser(OrgInviteEntity a,UserEntity b) {
-        String content = b.getName()+"invite you to join "+a.getORG_NAME();
+        String content = b.getName()+" invite you to join organization:"+a.getORG_NAME();
         String sql1 = "select ID_USER from USER where NAME = ?";
         int id_user = getForValue(sql1,a.getUSER_NAME());
         String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";

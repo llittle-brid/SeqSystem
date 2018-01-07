@@ -50,10 +50,10 @@
             <div class="panel-heading">
                 <div class="panel-options col-md-4">
                     <ul class="nav nav-tabs">
-                        <li>
+                        <li class="active">
                             <a href="project_detail.html#tab-1" data-toggle="tab">当前成员</a>
                         </li>
-                        <li class="">
+                        <li >
                             <a href="project_detail.html#tab-2" data-toggle="tab">发出的邀请</a>
                         </li>
                     </ul>
@@ -398,8 +398,13 @@
     $("button#invite-button").click(function () {
         var currentOrg = $("#gender").val();
         var user_name = $("input#user_name").val();
+        var now_name ="<s:property value="#session.user.name"/>";
+        console.log(now_name)
         if(user_name === "" || user_name===null){
             swal("邀请失败！", "请先填写用户名", "error");
+        }
+        else if(user_name === now_name){
+            swal("邀请失败！", "您已是机构管理员", "error");
         }
         else if(currentOrg === null){
             swal("邀请失败！", "请先选择机构", "error");

@@ -49,7 +49,7 @@
             <div class="panel-heading">
                 <div class="panel-options col-md-4">
                     <ul class="nav nav-tabs">
-                        <li>
+                        <li class="active">
                             <a href="project_detail.html#tab-1" data-toggle="tab">当前项目</a>
                         </li>
                         <li class="">

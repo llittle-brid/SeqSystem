@@ -23,6 +23,7 @@ public interface UserDao {
 	int sysManager(int id);
     int projectNumberNow(int id);
 	int projectNumberHistory(int id);
+	int nowNews(int id);
 	List<UserEntity> getOrgAllMem(int user_id,String name);
 	boolean nameAndMail(String name, String email);
 

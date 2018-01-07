@@ -129,6 +129,16 @@ public class UserDaoImp extends DAO<UserEntity> implements UserDao {
     }
 
     @Override
+    public int nowNews(int id) {
+        String sql1="select count(*) from VIEW_PROJECT_APPLY where ID_USER=? and STATE=0";
+        int count1 = Integer.valueOf(getForValue(sql1,id).toString());
+        String sql2="select count(*) from VIEW_ORG_USER_APPLY where ID_USER=? and STATE=0";
+        int count2 = Integer.valueOf(getForValue(sql2,id).toString());
+        int count=count1+count2;
+        return count;
+    }
+
+    @Override
     public List<UserEntity> getOrgAllMem(int user_id,String name){
         String sql1 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";
         int id_org=getForValue(sql1,name);

@@ -151,6 +151,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
             boolean res = userDao.postmail(info, title);
             dataMap.put("res", res);
         }
+        dataMap.put("consequence",confirm);
         return "RES";
     }
 
@@ -174,6 +175,7 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         user = (UserEntity)session.get("user");
         session.put("countnow",userDao.projectNumberNow(user.getId_user()));
         session.put("counthistory",userDao.projectNumberHistory(user.getId_user()));
+        session.put("nowNews",userDao.nowNews(user.getId_user()));
         dataMap = new HashMap<String, Object>();
         userDao = new UserDaoImp();
         int Mycollectcount = userDao.Mycollectcount((((UserEntity)session.get("user")).getId_user()));

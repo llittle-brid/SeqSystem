@@ -11,9 +11,9 @@ import java.util.List;
 public class InformationDaoImp extends DAO<InformationEntity> implements InformationDao{
     @Override
     public List<InformationEntity> getAll(int ID) {
-        String sql1 = "select * from VIEW_ORG_USER_APPLY where STATE = 1 and ID_USER = ?";
+        String sql1 = "select * from VIEW_ORG_USER_APPLY where STATE = 0 and ID_USER = ?";
         List list1 = getForList(sql1,ID);
-        String sql2 = "select * from VIEW_PROJECT_APPLY where STATE = 1 and ID_USER = ?";
+        String sql2 = "select * from VIEW_PROJECT_APPLY where STATE = 0 and ID_USER = ?";
         List list2 = getForList(sql2,ID);
         List list = new ArrayList();
         list.addAll(list1);
@@ -48,12 +48,12 @@ public class InformationDaoImp extends DAO<InformationEntity> implements Informa
 
     @Override
     public void acceptOrg(Integer ID_ORGANIZATION, int ID_USER) {
-            String sql = "update ORG_USER_APPLY set STATE=0 where ID_ORGANIZATION=? and ID_USER=?";
+            String sql = "update ORG_USER_APPLY set STATE=1 where ID_ORGANIZATION=? and ID_USER=?";
             update(sql,ID_ORGANIZATION,ID_USER);
     }
     @Override
     public void acceptPro(Integer ID_ORGANIZATION, int ID_USER) {
-        String sql = "update PROJECT_APPLY set STATE=0 where ID_PROJECT=? and ID_USER=?";
+        String sql = "update PROJECT_APPLY set STATE=1 where ID_PROJECT=? and ID_USER=?";
         update(sql,ID_ORGANIZATION,ID_USER);
     }
     @Override

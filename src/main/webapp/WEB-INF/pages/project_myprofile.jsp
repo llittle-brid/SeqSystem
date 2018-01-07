@@ -57,7 +57,7 @@
                                     <img style="height: 30px;width: 30px" src="/img/famale.png">
                                 </s:elseif>
                                 <s:else>
-                                    <img style="height: 30px;width: 30px" src="/img/gender.png">
+                                    <img style="height: 30px;width: 30px" src="/img/doublesex.png">
                                 </s:else>
                         </th>
                     </tr>
@@ -275,9 +275,9 @@
                         <label>性别</label>
                         <div class="form-group">
                             <select id="gender" class="form-control" name="gender">
+                                <option>保密</option>
                                 <option>男</option>
                                 <option>女</option>
-                                <option>保密</option>
                             </select>
                         </div>
                     </div>
@@ -331,16 +331,20 @@
                     type: "Post",
                     async: "false",
                     success: function (result) {
-                        if (result.res == true) {
-                            swal("修改成功！", "您已成功修改个人资料。", "success");
-                            location.href = "user-jmpMyprofile";
-                        }
+                        if (result.res == true){
+                            swal({
+                                title: "修改成功",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpMyprofile";
+                            })
+                    }
                         else swal("修改失败！", "操作失败", "success");
                     },
                     error: function () {
-                        swal({
-                            icon: "error"
-                        });
+                            swal("修改失败！", "请检查你的网络", "success");
                     }
                 })
             })

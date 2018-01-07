@@ -32,23 +32,22 @@
                 <div class="navbar-header"><a  href="user-jmpTemp"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a></div>
                 <ul class="nav navbar-top-links navbar-right">
                     <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
-
                     </a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right">
                         <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
                         <s:if test='#session.sysManager!="0"'>
-                            <li class="J_tabShowActive"><a href="user-jmpSysManager1">系统管理</a>
+                            <li class="J_tabShowActive"><a  class="J_menuItem" href="user-jmpSysManager1">系统管理</a>
                             </li>
                             <li class="divider"></li>
                         </s:if>
                         <s:if test='#session.orgManager!="0"'>
-                        <li class="J_tabShowActive"><a href="Organization-jmpOrgManager1">机构管理</a>
+                        <li class="J_tabShowActive"><a  class="J_menuItem" href="Organization-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
                         </s:if>
-                        <li class="J_tabCloseAll"><a href="login-jmpLogin">安全退出</a>
+                        <li class="J_tabCloseAll"><a class="J_menuItem" href="login-jmpLogin">安全退出</a>
                         </li>
                     </ul>
 
@@ -60,7 +59,7 @@
                 </ul>
             </nav>
         </div>
-        <div style="height: 1800px" class="row J_mainContent" id="content-main">
+        <div style="height: 1000px" class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="user-jmpHomepage" frameborder="0" data-id="" seamless></iframe>
         </div>
 
@@ -69,9 +68,15 @@
 </div>
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="js/contabs.min.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script src="js/mjy.js"></script>
+
 </body>
 
 

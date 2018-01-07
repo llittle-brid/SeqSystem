@@ -49,12 +49,12 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-10" style="padding: 15px 30px 0px 0px">
+    <div style="padding: 15px 30px 0px 0px;margin-left: -50px" class="col-md-10" >
         <div class="panel">
             <div class="panel-heading">
                 <div class="panel-options">
                     <ul class="nav nav-tabs">
-                        <li>
+                        <li class="active">
                             <a href="project_detail.html#tab-1" data-toggle="tab">待处理申请</a>
                         </li>
                         <li class="">
