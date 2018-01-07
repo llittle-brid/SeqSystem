@@ -40,7 +40,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         librarydiscussDao = new LibrarydiscussDaoImp();
         libraryDao=new LibraryDaoImp();
 
-        List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*4+4);
+        List<LibrarydiscussEntity> discussAll=librarydiscussDao.getAll(structure.getId_library(),(pagedis-1)*4,(pagedis-1)*0+4);
         List<LiDicussE> ldList=new LinkedList<>();
         for (int i = 0; i < discussAll.size(); i++) {
             Date a=new Date();
