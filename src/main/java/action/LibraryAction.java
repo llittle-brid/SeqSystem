@@ -39,8 +39,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryAll=libraryDao.getAll((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("list",libraryAll);
         int count=libraryDao.getAllcount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getall";
     }
@@ -52,8 +59,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryAllagain=libraryDao.getAll((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("list",libraryAllagain);
         int count=libraryDao.getAllcount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getall";
     }
@@ -64,8 +78,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryCommon;
         int page=1;
         int count=libraryDao.getCommoncount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         libraryCommon=libraryDao.getCommon((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listcommon",libraryCommon);
@@ -80,8 +101,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryCommonagain=libraryDao.getCommon((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listcommon",libraryCommonagain);
         int count=libraryDao.getCommoncount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getcommon";
     }
@@ -92,8 +120,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryUser;
         int page=1;
         int count=libraryDao.getUsercount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         libraryUser=libraryDao.getUser((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listuser",libraryUser);
@@ -108,8 +143,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryUseragain=libraryDao.getUser((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listuser",libraryUseragain);
         int count=libraryDao.getUsercount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getuser";
     }
@@ -122,8 +164,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryCase=libraryDao.getCase((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listcase",libraryCase);
         int count=libraryDao.getCasecount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getcase";
     }
@@ -135,8 +184,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryCaseagain=libraryDao.getCase((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listcase",libraryCaseagain);
         int count=libraryDao.getCasecount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getcase";
     }
@@ -147,8 +203,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         List<LibraryEntity> libraryPicture;
         int page=1;
         int count=libraryDao.getPicturecount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         libraryPicture=libraryDao.getPicture((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listpicture",libraryPicture);
@@ -163,8 +226,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         libraryPictureagain=libraryDao.getPicture((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listpicture",libraryPictureagain);
         int count=libraryDao.getPicturecount();
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getpicture";
     }
@@ -178,8 +248,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         System.out.println(librarycollectAll);
         ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAll);
         int count=libraryDao.getMycollectcount((((UserEntity)session.get("user")).getId_user()));
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getMycollect";
     }
@@ -191,8 +268,15 @@ public class LibraryAction extends ActionSupport implements RequestAware, Sessio
         librarycollectAllagain=libraryDao.getMycollect((((UserEntity)session.get("user")).getId_user()),(page-1)*6,(page-1)*0+6);
         ActionContext.getContext().getValueStack().set("listmycollect",librarycollectAllagain);
         int count=libraryDao.getMycollectcount((((UserEntity)session.get("user")).getId_user()));
-        int num=count/6+1;
-        request.put("num",num);
+        if(count%6==0) {
+            int num = count / 6;
+            request.put("num", num);
+        }
+        else if(count%6!=0)
+        {
+            int num = count / 6 +1;
+            request.put("num", num);
+        }
         request.put("page",page);
         return "getMycollect";
     }

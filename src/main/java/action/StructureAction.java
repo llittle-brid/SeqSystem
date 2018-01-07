@@ -49,10 +49,20 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         ActionContext.getContext().getValueStack().set("listdis",ldList);
 
         int discussnum=librarydiscussDao.getcount(structure.getId_library());
-        int numdis=discussnum/4+1;
+
+        if(discussnum%4==0) {
+            int numdis = discussnum / 4;
+            request.put("numdis", numdis);
+        }
+        else if(discussnum%4!=0)
+        {
+            int numdis = discussnum / 4 +1;
+            request.put("numdis",numdis);
+        }
+
         request.put("pagedis",pagedis);
         request.put("dn",discussnum);
-        request.put("numdis",numdis);
+
 
         library=libraryDao.getOne(structure.getId_library());
         request.put("library",library);
@@ -63,8 +73,15 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         if(id_template==1){
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*9,(page-1)*0+9);
             int count=structureDao.count(structure.getId_library());
-            int num=count/9+1;
-            request.put("num",num);
+            if(count%9==0) {
+                int num = count / 9;
+                request.put("num", num);
+            }
+            else if(count%9!=0)
+            {
+                int num = count / 9 +1;
+                request.put("num", num);
+            }
             request.put("page",page);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
@@ -78,8 +95,15 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         else if(id_template==2) {
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*0+4);
             int count=structureDao.count(structure.getId_library());
-            int num=count/4+1;
-            request.put("num",num);
+            if(count%4==0) {
+                int num = count / 4;
+                request.put("num", num);
+            }
+            else if(count%4!=0)
+            {
+                int num = count / 4 +1;
+                request.put("num", num);
+            }
             request.put("page",page);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
@@ -95,8 +119,15 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         else if(id_template==3) {
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*2,(page-1)*0+2);
             int count=structureDao.count(structure.getId_library());
-            int num=count/2+1;
-            request.put("num",num);
+            if(count%2==0) {
+                int num = count / 2;
+                request.put("num", num);
+            }
+            else if(count%2!=0)
+            {
+                int num = count / 2 +1;
+                request.put("num", num);
+            }
             request.put("page",page);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
@@ -111,8 +142,15 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
         {
             structureAll=structureDao.getAll(structure.getId_library(),(page-1)*4,(page-1)*0+4);
             int count=structureDao.count(structure.getId_library());
-            int num=count/4+1;
-            request.put("num",num);
+            if(count%4==0) {
+                int num = count / 4;
+                request.put("num", num);
+            }
+            else if(count%4!=0)
+            {
+                int num = count / 4 +1;
+                request.put("num", num);
+            }
             request.put("page",page);
             request.put("id_library",structure.getId_library());
             request.put("id_template",id_template);
