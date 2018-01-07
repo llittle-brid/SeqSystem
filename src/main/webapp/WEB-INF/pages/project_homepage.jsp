@@ -36,14 +36,28 @@
             <a href="user-jmpCurrentProjectList"><img src="../../img/Home1.png" height="160px"><br/></a>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
-            <span style="color: #ff0000"> <%=session.getAttribute("countnow") %></span>
+            <span style="color: #ff0000">
+                <s:if test='#session.countnow==null'>
+                    <s:property value="0"/>
+                </s:if>
+                <s:else>
+                    <s:property value="#session.countnow"/>
+                </s:else>
+            </span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
             <a href="user-jmpCompletedProjectList"><img src="../../img/Home2.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
-            <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
+            <span style="color: #ff0000">
+                <s:if test='#session.counthistory==null'>
+                    <s:property value="0"/>
+                </s:if>
+                <s:else>
+                   <s:property value="#session.counthistory"/>
+                </s:else>
+            </span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
@@ -57,7 +71,14 @@
             <a href="user-jmpMyprofile"><img src="../../img/Home4.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">个人中心</span><br/>
             <span style="color:black">收到了</span>
-            <span style="color: #ff0000"><%=session.getAttribute("nowNews") %></span>
+            <span style="color: #ff0000">
+                <s:if test='#session.nowNews==null'>
+                    <s:property value="0"/>
+                </s:if>
+                <s:else>
+                    <s:property value="#session.nowNews"/>
+                </s:else>
+            </span>
             <span style="color:black">条邀请</span>
         </div>
     </div>
