@@ -39,6 +39,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             }
         }
 
+
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
         int ID_User = user.getId_user();
 
@@ -82,8 +83,9 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public boolean alterPM(int idUser, int idProject) {
+//        判断被转移人是否在组内
         String sql = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
-        if (Integer.valueOf(getForValue(sql,idProject,idUser))<1){
+        if (Integer.valueOf(getForValue(sql,idProject,idUser).toString())<1){
             return false;
         }
         else {
@@ -124,7 +126,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
 
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
             return false;
         }
 
@@ -145,7 +147,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     public boolean addMember(int idProject, int idUser){
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser))==1) {
+        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
             return false;
         }
 

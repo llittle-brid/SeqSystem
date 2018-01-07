@@ -58,7 +58,7 @@
 
 </head>
 <body class="fixed-sidebar  gray-bg" style="overflow:hidden">
-<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
+<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content ">
     <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">
     <div class=" row wrapper white-bg">
         <ol class="breadcrumb" style="margin-left: 50px">
@@ -397,7 +397,8 @@
                 ['table', ['table']],
                 ['picture', ['picture']],
                 ['fullscreen', ['fullscreen']]
-            ]
+            ],
+            placeholder: '暂无内容',
         })
 
 </script>
