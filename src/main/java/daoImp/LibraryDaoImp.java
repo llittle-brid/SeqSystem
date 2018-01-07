@@ -60,9 +60,6 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         int count=Integer.valueOf(getForValue(sql).toString());
         return count;
     }
-
-
-
     public int getUsercount()
     {
         String sql="select count(*) from LIBRARY where ID_TEMPLATE=2";
@@ -94,12 +91,6 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         String sql="select count(*) from LIB_COLLECT where ID_USER=?";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());
         return count;
-    }
-
-    @Override
-    public List<LibraryEntity> getTypeOfLib(int id_user, int id_type) {
-       String sql="select * from VIEW_LIB_COLLECT_JOIN_LIBRARY where id_user=? and id_template=?";
-       return getForList(sql,id_user,id_type);
     }
 
 }

@@ -126,11 +126,7 @@
             <allowed-methods>commit,getCatalogDis,delete,commit2Project,getProjectDis</allowed-methods>
         </action>
 
-        <action name="templateLib-*" class="action.TemplateLibAction" method="{1}">
-            <result name="Re" type="json"><param name="root">dataMap</param>
-            </result>
-            <allowed-methods>getTypeOfLib,getStructure</allowed-methods>
-        </action>
+
 
     </package>
 </struts>

@@ -14,14 +14,14 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="<%=request.getContextPath() %>/example/favicon.ico">
-    <link href="<%=request.getContextPath() %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/animate.min.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/lzf.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/z_style.css" rel="stylesheet">
-    <link href="<%=request.getContextPath() %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/example/favicon.ico">
+    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.min.css" rel="stylesheet">
+    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/lzf.css" rel="stylesheet">
+    <link href="css/z_style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -113,10 +113,10 @@
                                     <div style="cursor:pointer" class="structure">
                                         <input style="display:none" type="text" value="<s:property value="id_template"/>">
                                         <div style="margin: 10px 10px 10px 15px;float: left">
-                                            <s:if test="#request.id_template==1"><img src="<%=request.getContextPath() %>/img/div11.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==2"><img src="<%=request.getContextPath() %>/img/div2.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==3"><img src="<%=request.getContextPath() %>/img/div3.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==4"><img src="<%=request.getContextPath() %>/img/div4.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==1"><img src="/img/div11.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==2"><img src="/img/div2.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==3"><img src="/img/div3.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==4"><img src="/img/div4.png" height="80px" width="80px"/></s:if>
                                         </div>
                                         <div style="margin: 10px;float: left">
                                             <h3><s:property value="name"/></h3>
@@ -166,17 +166,17 @@
         </div>
     </div>
 </div>
-<script src="<%=request.getContextPath() %>/js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=request.getContextPath() %>/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="<%=request.getContextPath() %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<%=request.getContextPath() %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/contabs.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/plugins/pace/pace.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/content.min.js?v=1.0.0"></script>
-<script src="<%=request.getContextPath() %>/js/plugins/toastr/toastr.min.js"></script>
-<script src="<%=request.getContextPath() %>/js/mjy.js"></script>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="/js/contabs.min.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+<script src="/js/content.min.js?v=1.0.0"></script>
+<script src="js/plugins/toastr/toastr.min.js"></script>
+<script src="js/mjy.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
