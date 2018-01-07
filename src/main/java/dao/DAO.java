@@ -109,6 +109,13 @@ public class DAO<T> {
 			JdbcUtils.releaseConnection(connection);
 		}
 	}
+	public void updateThrowException(String sql, Object ... args) throws SQLException {
+		Connection connection=null;
+			connection=JdbcUtils.getConnection();
+			qr.update(connection, sql, args);
+			JdbcUtils.releaseConnection(connection);
+
+	}
 
 //	添加可以获取自增ID的insert方法
 	public int insert(String sql,Object ... args) {

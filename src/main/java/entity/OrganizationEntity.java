@@ -1,17 +1,12 @@
-//        Created by IntelliJ IDEA.
-//        User: wwc
-//        Date: 22/12/2017
-//        Time: 15:55
-
 package entity;
 
 import java.sql.Date;
 
 public class OrganizationEntity {
-    int ID_ORGANIZATION;
-    String NAME;
-    int ID_USER;
-    Date TIME;
+    private int ID_ORGANIZATION;
+    private String NAME;
+    private int ID_USER;
+    private Date TIME;
 
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;

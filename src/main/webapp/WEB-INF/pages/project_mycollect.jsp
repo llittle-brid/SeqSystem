@@ -188,7 +188,7 @@
 <script>
     $(document).ready(function(){
         $("button.pagenum").click(function(){
-            location.href="library-Mycollectagain?page="+$(this).html();
+            location.href="library-getagain?page="+$(this).html();
         });
     });
 </script>
@@ -197,10 +197,10 @@
         $("button.turnpage").click(function(){
             if($(this).hasClass("lastPage"))
             {   var p=parseInt($("button.nowpage").html())-1;
-                location.href="library-Mycollectagain?page="+p;}
+                location.href="library-getagain?page="+p;}
             else
             {   var p=parseInt($("button.nowpage").html())+1;
-                location.href="library-Mycollectagain?page="+p;}
+                location.href="library-getagain?page="+p;}
         });
     });
 </script>

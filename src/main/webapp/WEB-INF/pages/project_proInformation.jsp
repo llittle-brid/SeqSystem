@@ -170,7 +170,7 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li>
+                                    <li class="active">
                                         <a href="#tab-1" data-toggle="tab">讨论区</a>
                                     </li>
                                     <li>
@@ -210,9 +210,16 @@
                                         </div>
                                     </div>
                                     <!--自己的留言结束-->
+                                    <p>共<s:property value="#session.disNum"/>条留言</p>
                                     <div class="allDiscuss">
                                         <!--一行留言-->
                                         <!--一行留言结束-->
+                                    </div>
+                                    <div class="pull-right">
+                                        <a onclick="previous()">上一页</a>
+                                        <strong>第<var id="page"></var>页</strong>
+                                        共<s:property value="#session.disPage"/>页
+                                        <a onclick="next()">下一页</a>
                                     </div>
 
                                 </div>
@@ -300,7 +307,7 @@
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="../../js/mjy.js"></script>
+<script src="../../js/xzw.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 
 <script src="../../js/plugins/summernote/summernote.min.js"></script>
@@ -346,7 +353,7 @@
 
     var id_Project = "<s:property value="#session.project.id_Project"/>";
     var id_User = "<s:property value="#session.user.id_user"/>";
-    var discuss="123";
+    var discuss="";
 
     $.ajax(
         {
@@ -497,6 +504,7 @@
                     field: 'view',
                     title: '操作',
                     align: 'center',
+                    events: "viewEvents",
                     formatter: "viewFormatter"
                 }
             ]
@@ -523,6 +531,17 @@
     function viewFormatter(value,row,index) {
         return '<a class="view btn-xs btn-info">查看文档</a>';
     }
+
+    //表格  - 操作 - 事件
+    window.viewEvents = {
+        'click .view':
+            function(e, value, row, index) {
+                //修改操作
+                var id = row.id_document;
+                location.href = "project-jmpDocument";
+            }
+    };
+
 
 
     $("button#button_invite").click(function () {
@@ -607,16 +626,39 @@
 
 <%--评论区--%>
 <script>
+    var page = 1;
+    $("#page").text(page);
+    function previous() {
+        page--;
+        if (page<=0){
+            page = 1;
+        }
+        discussReload2();
+        $("#page").text(page);
+    }
+    function next() {
+        page++;
+        var max = parseInt("<s:property value="#session.disPage"/>");
+        if (page > max){
+            page = max;
+        }
+        discussReload2();
+        $("#page").text(page);
+    }
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
+        page = 0;
     }
     //评论加载
     function discussReload2() {
         $.ajax({
             url: "discuss-getProjectDis",
-            data: {id_Project: id_Project,
-                id_user: id_User},
+            data: {
+                id_Project: id_Project,
+                id_user: id_User,
+                page : page
+            },
             dataType: "json",
             type: "Post",
             async: "false",
@@ -627,6 +669,9 @@
                     tempDis=result.wrapperList[i].proDiscussEntity;
                     if (tempDis.name === "<s:property value="#session.PM.name"/>"){
                         title += "<span class=\"label label-warning\">组长</span>&nbsp;";
+                    }
+                    else if (tempDis.name === "<s:property value="#session.user.name"/>"){
+                        title += "<span class=\"label label-success\">我</span>&nbsp;";
                     }
                     state=result.wrapperList[i].state;
                     date=tempDis.time.toString().split("T");
@@ -678,32 +723,35 @@
                 }
             })
         }
+
         else {
-            // alert(discuss)
-            upload()
+            $('#input-id').on('filepreajax', function(event, previewId, index) {
+
+            });
             $('#fileupload').fileinput('upload');
         }
     }
 
-    function upload() {
-        alert(discuss)
-        $('#fileupload').fileinput(
-            {
-                language: 'zh',
-                showUpload: false,
-                removeClass: "btn btn-danger",
-                removeLabel: "清除",
-                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-                uploadClass: "btn btn-info",
-                uploadLabel: "发布",
-                uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
-                uploadAsync: false,
-                uploadUrl: "discuss-commit2Project",
-                uploadExtraData: {disContent: discuss, id_Project: id_Project, id_user: id_User}
-            }
 
-        );
-    }
+    $('#fileupload').fileinput(
+        {
+            language: 'zh',
+            showUpload: false,
+            removeClass: "btn btn-danger",
+            removeLabel: "清除",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+            uploadClass: "btn btn-info",
+            uploadLabel: "发布",
+            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
+            uploadAsync: false,
+            uploadUrl: "discuss-commit2Project",
+            uploadExtraData: function (previewId, index) {
+                var info = {disContent: $(".discuss").code(), id_Project: id_Project, id_user: id_User};
+                return info;
+            }
+        }
+
+    );
 
 
     $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
