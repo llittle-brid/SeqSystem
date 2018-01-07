@@ -3,10 +3,10 @@ package entity;
 import java.sql.Date;
 
 public class OrganizationEntity {
-    private int ID_ORGANIZATION;
-    private String NAME;
-    private int ID_USER;
-    private Date TIME;
+    int ID_ORGANIZATION;
+    String NAME;
+    int ID_USER;
+    Date TIME;
 
     public int getID_ORGANIZATION() {
         return ID_ORGANIZATION;

@@ -1,7 +1,5 @@
 package action;
 
-
-import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -12,6 +10,7 @@ import daoImp.ProDiscussDaoImp;
 import entity.ProDIscussWrapper;
 import entity.ProDiscussEntity;
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,9 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by DELL on 2017/12/25.
@@ -59,16 +57,29 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         List<File> MyFile = proDiscussEntity.getMyFile();
         List<String> MyFileFileName = proDiscussEntity.getMyFileFileName();
 
-        /* Copy file to a safe location */
-        String DestPath = "/Users/zhiweixu/Documents/GitHub/SeqSystem/src/main/webapp/accessories";
+        List<String> Path = new LinkedList<>();
+
         if (MyFile!=null) {
+            String savePath = ServletActionContext.getServletContext().getRealPath("accessories");
+
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+            String ymd=sdf.format(new Date());
+            savePath+="/"+ymd+"/";
+            File dirFile=new File(savePath);
+            if(!dirFile.exists()){
+                dirFile.mkdir();
+            }
             for (int i = 0; i < MyFile.size(); i++) {
+                String fileExt=MyFileFileName.get(i).substring(MyFileFileName.get(i).lastIndexOf(".")+1).trim().toLowerCase();
+                SimpleDateFormat sdfForFileName=new SimpleDateFormat("yyyyMMddHHmmss");
+                String newName=sdfForFileName.format(new Date())+"_"+new Random().nextInt(1000)+"."+fileExt;
+                File destFile=new File(dirFile,newName);
+                Path.add("/"+ymd+"/"+newName);
                 try {
                     System.out.println("Src File name: " + MyFile.get(i));
                     System.out.println("Dst File name: " + MyFileFileName.get(i));
-                    File destFile = new File(DestPath, MyFileFileName.get(i));
+//                    File destFile = new File(savePath, MyFileFileName.get(i));
                     FileUtils.copyFile(MyFile.get(i), destFile);
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -77,7 +88,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         }
 
         proDiscussDao = new ProDiscussDaoImp();
-        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,MyFileFileName);
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,MyFileFileName,Path);
         return "Re";
     }
 
