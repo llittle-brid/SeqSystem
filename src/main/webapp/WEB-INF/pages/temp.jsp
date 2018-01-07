@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -15,11 +19,11 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=basePath %>/example/favicon.ico">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -29,7 +33,7 @@
     <div id="page-wrapper" class="white-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header"><a  href="user-jmpTemp"><img src="/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a></div>
+                <div class="navbar-header"><a  href="user-jmpTemp"><img src="<%=basePath %>/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a></div>
                 <ul class="nav navbar-top-links navbar-right">
                     <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
 
@@ -54,7 +58,7 @@
 
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false" href="login-jmpLogin"">
-                            <img src="/img/exit.png">
+                            <img src="<%=basePath %>/img/exit.png">
                         </a>
                     </li>
                 </ul>
@@ -67,16 +71,16 @@
     </div>
     <!--右侧部分结束-->
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="js/contabs.min.js"></script>
-<script src="js/plugins/pace/pace.min.js"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/mjy.js"></script>
 
 </body>
 
