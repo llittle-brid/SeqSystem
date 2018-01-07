@@ -19,6 +19,8 @@ public class UserEntity {
     private String mail;
     private String qq;
     private String tel;
+    private int status;
+    private int rank;
     public int getId_user() {
         return id_user;
     }
@@ -108,8 +110,28 @@ public class UserEntity {
         this.tel = tel;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     public UserEntity() {
+    }
+
+    public UserEntity(int id_user, int verification, String password, String name, String gender, String address, String introduce, java.sql.Date dob, String mail, String qq, String tel, int status, int rank) {
         this.id_user = id_user;
+        this.verification = verification;
         this.password = password;
         this.name = name;
         this.gender = gender;
@@ -119,6 +141,7 @@ public class UserEntity {
         this.mail = mail;
         this.qq = qq;
         this.tel = tel;
-        this.verification=verification;
+        this.status = status;
+        this.rank = rank;
     }
 }
