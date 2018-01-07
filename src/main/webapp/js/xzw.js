@@ -1,4 +1,4 @@
-function showtoast(type, title, msg) {
+function showtoast2(type, title, msg) {
     var $showDuration = "3000";
     var $hideDuration = "1000";
     var $timeOut = "5000";

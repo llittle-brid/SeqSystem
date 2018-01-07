@@ -371,7 +371,6 @@
                 //finishingTask为table的id
                 $('#projectMember').bootstrapTable('load',proList);
                 discussInit();
-                // discussReload();
                 discussReload2();
             },
             error:function(){
@@ -418,7 +417,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                                showtoast("success", "设置成功", "成功设为副组长");
+                                showtoast2("success", "设置成功", "成功设为副组长");
                                 elem.text("撤销副组长");
                                 elem.removeClass("btn-info");
                                 elem.addClass("btn-warning");
@@ -437,7 +436,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                            showtoast("success", "撤销成功", "成功撤销该副组长");
+                            showtoast2("success", "撤销成功", "成功撤销该副组长");
                             elem.text("设为副组长");
                             elem.removeClass("btn-warning");
                             elem.addClass("btn-info");
@@ -528,7 +527,7 @@
                 $('#projectDocs').bootstrapTable('load',docList);
             },
             error:function(){
-                showtoast("error", "没有文档", "获取文档记录失败！");
+                showtoast2("error", "没有文档", "获取文档记录失败！");
             }
         }
     );
@@ -562,13 +561,13 @@
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast("success", "邀请成功", "成功发送邀请");
+                    showtoast2("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast("error", "邀请失败", "用户名不存在!")
+                else  showtoast2("error", "邀请失败", "用户名不存在!")
             },
             error: function (result) {
-                showtoast("error", "邀请失败", "用户名不存在!")
+                showtoast2("error", "邀请失败", "用户名不存在!")
             }
         })
     });
@@ -597,13 +596,13 @@
                     async: "false",
                     success: function (result) {
                         if (result.res===true) {
-                            showtoast("success", "转移成功", "成功转移组长给该成员");
+                            showtoast2("success", "转移成功", "成功转移组长给该成员");
                             location.href = "user-jmpCurrentProjectList";
                         }
-                        else showtoast("error", "转移失败", "用户名不存在!");
+                        else showtoast2("error", "转移失败", "用户名不存在!");
                     },
                     error: function (result) {
-                        showtoast("error", "转移失败", "用户名不存在!")
+                        showtoast2("error", "转移失败", "用户名不存在!")
                     }
                 })
             }
@@ -703,7 +702,7 @@
                 $("div.allDiscuss").html(content);
             },
             error: function (result) {
-                showtoast("dangerous","加载失败","加载目录失败")
+                showtoast2("dangerous","加载失败","加载目录失败")
             }
         })
     }
@@ -719,12 +718,12 @@
                 type: "Post",
                 async: false,
                 success: function (result) {
-                    showtoast("success","成功","评论提交成功");
+                    showtoast2("success","成功","评论提交成功");
                     discussInit();
                     discussReload2();
                 },
                 error: function (result) {
-                    showtoast("dangerous","加载失败","加载目录失败");
+                    showtoast2("dangerous","加载失败","加载目录失败");
                 }
             })
         }
@@ -760,7 +759,7 @@
 
 
     $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
-        showtoast("success","成功","评论提交成功");
+        showtoast22("success","成功","评论提交成功");
         discussInit();
         discussReload2();
     });
@@ -787,11 +786,11 @@
                     async: "false",
                     success: function (result) {
                         $("button.cancel").click();
-                        showtoast("success","成功","删除评论成功");
+                        showtoast2("success","成功","删除评论成功");
                         discussReload2()
                     },
                     error: function (result) {
-                        showtoast("dangerous","失败","删除评论失败")
+                        showtoast2("dangerous","失败","删除评论失败")
                     }
                 })
             });}

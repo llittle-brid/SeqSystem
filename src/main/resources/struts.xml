@@ -187,12 +187,12 @@
             <allowed-methods>commit,getCatalogDis,delete,commit2Project,getProjectDis</allowed-methods>
         </action>
 
-        <action name="templateLib-*" class="action.TemplateLibAction" method="{1}">
-            <result name="Re" type="json"><param name="root">dataMap</param>
-            </result>
-            <interceptor-ref name="myStack"/>
-            <allowed-methods>getTypeOfLib,getStructure</allowed-methods>
-        </action>
+        <!--<action name="templateLib-*" class="action.TemplateLibAction" method="{1}">-->
+            <!--<result name="Re" type="json"><param name="root">dataMap</param>-->
+            <!--</result>-->
+            <!--<interceptor-ref name="myStack"/>-->
+            <!--<allowed-methods>getTypeOfLib,getStructure</allowed-methods>-->
+        <!--</action>-->
 
         <action name="history-*" class="action.HistoryAction" method="{1}">
             <result name="showHistory" type="json">
