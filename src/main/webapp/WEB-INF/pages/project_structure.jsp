@@ -22,18 +22,19 @@
 
     <link rel="shortcut icon" href="<%=basePath %>/example/favicon.ico">
 
-    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="<%=basePath %>/css/lzf.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/z_style.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/mjy.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="<%=basePath %>css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>css/lzf.css" rel="stylesheet">
+    <link href="<%=basePath %>css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/summernote/summernote-lite.css" rel="stylesheet">
+    <link href="<%=basePath %>css/mjy.css" rel="stylesheet">
+    <link href="<%=basePath %>css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
     <style>
         a   {color: black}
@@ -273,25 +274,25 @@
         </div>
     </div>
 </div>
-<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>js/jquery.min.js?v=2.1.4"></script>
 
-<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
-<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
-<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
-<script src="<%=basePath %>/js/mjy.js"></script>
-<script src="<%=basePath %>/js/lzf.js"></script>
-<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
+<script src="<%=basePath %>js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>js/contabs.min.js"></script>
+<script src="<%=basePath %>js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath %>js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>js/mjy.js"></script>
+<script src="<%=basePath %>js/lzf.js"></script>
+<script src="<%=basePath %>js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote-bs4.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<%=basePath %>js/plugins/summernote/summernote-lite.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -345,7 +346,6 @@
 <script>
     function commitSend() {
         var content=$(".discuss").summernote('code');
-        alert(content);
         $.ajax({
             url: "librarydiscuss-commit",
             data: {content:content,id_library:${requestScope.id_library}, id_user:${sessionScope.user.id_user}},
@@ -404,7 +404,9 @@
             height: 100,
             minHeight: 50,
             maxHeight: 200,
-            lang: "zh-CN", focus: true, toolbar: [
+            lang: "zh-CN",
+            focus: true,
+            toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],

@@ -92,11 +92,13 @@
             rules: {
                 name: {
                     required: true,
-                    minlength: 2
+                    minlength: 2,
+                    maxlength: 15
                 },
                 password1: {
                     required: true,
-                    minlength: 6
+                    minlength: 6,
+                    maxlength: 22
                 },
                 password2: {
                     required: true,
@@ -116,10 +118,12 @@
                 name: {
                     required: "请输入用户名",
                     minlength: "用户名长度不能小于 2 位"
+                    maxlength: "用户名长度不能大于 15 位"
                 },
                 password1: {
                     required: "请输入密码",
                     minlength: "密码长度不能小于 6 位"
+                    minlength: "用户名长度不能小于 2 位"
                 },
                 password2: {
                     required: "请输入密码",
@@ -140,7 +144,7 @@
 //注册
     $("button#registration_button").click(function () {
         $(".valiadate").each(function(){
-            if(($(this).attr("aria-invalid")==="undefined")||$(this).attr("aria-invalid")==="true"){
+            if(($(this).attr("aria-invalid")==="undefined")||$(this).attr("aria-invalid")==="true") {
                 state="false";
                 return;
             }
