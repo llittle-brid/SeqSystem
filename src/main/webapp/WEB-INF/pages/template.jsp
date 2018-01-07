@@ -277,17 +277,36 @@
                             </a>
                         </div>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content form-horizontal">
                         <!--构件库中间部分开始-->
                         <div class="form-group">
-                            <select class="form-control" name="">
-                                <option>通用模板构件库</option>
-                                <option>用例模板构件库</option>
-                                <option>用户模板构件库</option>
-                                <option>图片模板构件库</option>
+                            <label style="padding-left: 15px">选择构建类型</label>
+                            <select class="form-control" name="structType" id="structType">
+                                <option  selected disabled>请选择构建库类型</option>
+                                <option value="1">通用模板构件库</option>
+                                <option value="2">用户模板构件库</option>
+                                <option value="3">用例模板构件库</option>
                             </select>
+                            <br>
+                            <div class="alert alert-info" id="noneLibrary" style="display: none;">
+                                暂无该类型的收藏
+                            </div>
+                            <div class="libraryDiv" style="display: none;">
+                                <label style="padding-left: 15px">选择构建库</label>
+                                <select class="form-control" name="libraryList" id="libraryList" >
+                                    <option selected disabled>请选择构件库</option>
+                                </select>
+                            </div>
                         </div>
-                        <!--构件库中间部分结束-->
+                        <table  class=" col-sm-12 structTable" style="display: none;">
+                            <thead>
+                            <tr><th class="col-sm-6 text-muted">构件名</th><th class="col-sm-6 text-muted"> 操作</th></tr>
+                            </thead>
+
+                        </table>
+                        <h6>
+                            <small>.</small>
+                        </h6>
                     </div>
                 </div>
             </div>
