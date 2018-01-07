@@ -81,7 +81,7 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                String path=savePath+newName;
+                String path="/aaa"+"/"+"disImage/"+ymd+"/"+newName;
                 dataMap.put("path",path);
             System.out.println(path);
         }
