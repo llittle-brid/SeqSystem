@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
@@ -14,14 +17,14 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="/css/lzf.css" rel="stylesheet">
-    <link href="css/z_style.css" rel="stylesheet">
-    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=basePath %>/example/favicon.ico">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/lzf.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         a   {color: black}
         a:link {color:grey;} /*未访问颜色*/
@@ -104,10 +107,6 @@
                         <div style="float: left;font-size:18px;text-align: left;color: black"><a href="library-Mycollect"><span class="lzf_a"><u>我的收藏</u></span></a></div>
                     </div>
                 </div>
-                <div style="float: right;height: 50px" class="col-md-2">
-                    <div style="margin:25px 0px 0px 10px;float: left"><img src="/img/magnifier.png" height="35px" width="35px"/></div>
-                    <div style="margin:25px 0px 0px 20px;float: left"><img src="/img/downward.png" height="35" width="35"/></div>
-                </div>
             </div>
 
             <div id="view" style="padding: 0px 70px 0px 70px;margin-top:30px;height: 450px">
@@ -119,10 +118,10 @@
                                     <div style="cursor:pointer" class="structure">
                                         <input style="display:none" type="text" value="<s:property value="id_template"/>">
                                         <div style="margin: 10px 10px 10px 15px;float: left">
-                                            <s:if test="#request.id_template==1"><img src="/img/div11.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==2"><img src="/img/div2.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==3"><img src="/img/div3.png" height="80px" width="80px"/></s:if>
-                                            <s:if test="#request.id_template==4"><img src="/img/div4.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==1"><img src="<%=basePath %>/img/div11.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==2"><img src="<%=basePath %>/img/div2.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==3"><img src="<%=basePath %>/img/div3.png" height="80px" width="80px"/></s:if>
+                                            <s:if test="#request.id_template==4"><img src="<%=basePath %>/img/div4.png" height="80px" width="80px"/></s:if>
                                         </div>
                                         <div style="margin: 10px;float: left">
                                             <h3><s:property value="name"/></h3>
@@ -172,17 +171,17 @@
         </div>
     </div>
 </div>
-<script src="/js/jquery.min.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/js/plugins/layer/layer.min.js"></script>
-<script src="/js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="/js/contabs.min.js"></script>
-<script src="/js/plugins/pace/pace.min.js"></script>
-<script src="/js/content.min.js?v=1.0.0"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/mjy.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>

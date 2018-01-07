@@ -170,7 +170,7 @@
                 <s:iterator value="list4">
                     <div  style="background-color: white;height: 200px;width:480px;float:left;margin: 0px 37.5px 30px 48px;padding: 5px;" class="col-md-4 contact-box">
                     <div style="margin: 10px 10px 10px 15px;float: left">
-                        <div style="float: left"><img src="<s:property value="src"/>" height="170" width="160"/> </div>
+                        <div style="float: left"><img src="<%=basePath %>/<s:property value="src"/>" height="170" width="160"/> </div>
                     </div>
                     <div style="margin-top: 10px;margin-left:20px;float: left">
                         <div style="width: 260px;height:185px;word-wrap: break-word;font-size: 14px;overflow: hidden;">
