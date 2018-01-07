@@ -279,7 +279,7 @@
 <script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
 <script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
-<script type=<%=basePath %>"text/javascript" src="/js/contabs.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
 <script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
 <script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
