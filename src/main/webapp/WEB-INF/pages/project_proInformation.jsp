@@ -7,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -20,25 +24,25 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="../example/favicon.ico">
-    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=basePath %>/example/favicon.ico">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
     <!-- bootstrap-table -->
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 
-    <link href="../../css/z_style.css" rel="stylesheet">
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
-    <link href="../../css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
 
-    <link href="../../css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -292,30 +296,30 @@
 
 </div>
 </body>
-<script src="../../js/jquery.min.js?v=2.1.4"></script>
-<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
 <%--bootstrap-table--%>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
-<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../js/plugins/layer/layer.min.js"></script>
-<script src="../../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../../js/contabs.min.js"></script>
-<script src="../../js/plugins/pace/pace.min.js"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="../../js/xzw.js"></script>
-<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath %>/js/xzw.js"></script>
+<script src="<%=basePath %>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 
-<script src="../../js/plugins/summernote/summernote.min.js"></script>
-<script src="../../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
 
-<script src="../../js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
-<script src="../../js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
-<script src="../../js/plugins/bootstrap-fileinput/locales/zh.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
 
 
 <script>

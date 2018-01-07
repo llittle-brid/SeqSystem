@@ -7,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:16:41 GMT -->
 <head>
@@ -15,16 +19,16 @@
     <meta name="viewport" content="width=devicewidth, initialscale=1.0">
     <meta name="renderer" content="webkit">
     <meta httpequiv="refresh" content="0;ie.html" />
-    <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css" rel="stylesheet">
     <!-- bootstrap-table -->
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/xzw.css" rel="stylesheet">
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-table/bootstrap-table.min.css">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg animated fadeInDown">
@@ -194,17 +198,17 @@
 </div>
 </body>
 
-<script src="../../js/jquery.min.js?v=2.1.4"></script>
-<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../js/plugins/layer/layer.min.js"></script>
-<script src="../../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../../js/contabs.min.js"></script>
-<script src="../../js/plugins/pace/pace.min.js"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script>
     function showtoast(type, title, msg) {
         var $showDuration = "3000";

@@ -16,7 +16,7 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="../example/favicon.ico">
+    <link rel="shortcut icon" href="<%=basePath%>/example/favicon.ico">
     <link href="<%=basePath%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="<%=basePath%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">

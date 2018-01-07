@@ -14,6 +14,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -26,18 +30,18 @@
 
 
     <title>模板页面</title>
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 
     <!-- Sweet Alert -->
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="../css/animate.min.css" rel="stylesheet">
-    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs3s.css" rel="stylesheet">
-    <link href="../css/mjy.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs3s.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/mjy.css" rel="stylesheet">
 
 </head>
 
@@ -193,7 +197,7 @@
                 <div class="row">
                     <div class="ibox float-e-margins">
                         <div class="catalogNoneContent" style="text-align: center">
-                        <img src="/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
+                        <img src="<%=basePath %>/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
                         <div class="ibox-title catalogNotNoneContent" style="display:none;">
                             <div class="ibox-tools ">
                                 <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389" onclick="disReload()"  data-toggle="modal" data-target="#myModal1" > </i>
@@ -298,22 +302,22 @@
 </div>
 </div>
 </body>
-<script src="../js/jquery.min.js?v=2.1.4"></script>
-<script src="../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../js/content.min.js?v=1.0.0"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../js/plugins/layer/layer.min.js"></script>
-<script src="../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../js/contabs.min.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
-<script src="../js/plugins/toastr/toastr.min.js"></script>
-<script src="../js/mjy.js"></script>
-<script src="../js/template.js"></script>
-<%--<script src="../js/template3.js"></script>--%>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/mjy.js"></script>
+<script src="<%=basePath %>/js/template.js"></script>
+<%--<script src="<%=basePath %>/js/template3.js"></script>--%>
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../js/plugins/summernote/summernote.min.js"></script>
-<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
 
 
 </html>
