@@ -85,9 +85,6 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
                 File destFile=new File(dirFile,newName);
                 Path.add("/"+ymd+"/"+newName);
                 try {
-                    System.out.println("Src File name: " + MyFile.get(i));
-                    System.out.println("Dst File name: " + MyFileFileName.get(i));
-//                    File destFile = new File(savePath, MyFileFileName.get(i));
                     FileUtils.copyFile(MyFile.get(i), destFile);
 
                 } catch (IOException e) {
