@@ -6,6 +6,7 @@ import dao.DAO;
 import dao.DocumentDao;
 import dao.ProjectDao;
 import entity.ProjectEntity;
+import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
@@ -177,5 +178,13 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String sql="select * from VIEW_projectINFO where STATE = ? and ID_USER = ?";
         List<ProjectEntity> project = getForList(sql,state,id);
         return project;
+    }
+
+    @Override
+    public String findName(int id_Project) {
+        String sql = "select NAME from PROJECT where ID_PROJECT = ?";
+        String name = getForValue(sql,id_Project);
+        System.out.println("orgName:"+name);
+        return name;
     }
 }

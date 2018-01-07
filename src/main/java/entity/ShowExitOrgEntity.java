@@ -1,11 +1,11 @@
 package entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ShowExitOrgEntity {
     private String name;
     private int id_organization;
-    private Date time;
+    private Timestamp time;
     private String user_name;
     private int num_user;
     private int num_project;
@@ -26,11 +26,11 @@ public class ShowExitOrgEntity {
         this.id_organization = id_organization;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
@@ -58,12 +58,15 @@ public class ShowExitOrgEntity {
         this.num_project = num_project;
     }
 
-    public ShowExitOrgEntity() {
+    public ShowExitOrgEntity(String name, int id_organization, Timestamp time, String user_name, int num_user, int num_project) {
         this.name = name;
         this.id_organization = id_organization;
         this.time = time;
         this.user_name = user_name;
         this.num_user = num_user;
         this.num_project = num_project;
+    }
+
+    public ShowExitOrgEntity() {
     }
 }

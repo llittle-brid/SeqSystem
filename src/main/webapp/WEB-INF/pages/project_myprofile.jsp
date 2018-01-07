@@ -1,12 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wwc
-  Date: 2017/12/26
-  Time: 0:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,18 +15,17 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
-
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
+    <link rel="shortcut icon" href="../example/favicon.ico">
+    <link href="<%=basePath%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <!-- bootstrap-table -->
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../../css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="<%=basePath%>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 </head>
 
@@ -58,27 +54,15 @@
                         <th style="width: 150px;text-align: center">用户名:</th>
                         <th>
                             ${sessionScope.user.name}
-                            <s:if test='#session.user.gender=="男"'>
-                                <img src="/img/u413.png">
-                            </s:if>
-                            <s:elseif test='#session.user.gender=="女"'>
-                                <img style="height: 30px;width: 30px" src="/img/famale.png">
-                            </s:elseif>
-                            <s:else>
-                                <img style="height: 30px;width: 30px" src="/img/gender.png">
-                            </s:else>
-
-                        </th>
-                    </tr>
-                    <tr >
-                        <th style="width: 150px;text-align: center">QQ:</th>
-                        <th>
-                            <s:if test='#session.user.address==""'>
-                                <s:property value="" default="未填写" />
-                            </s:if>
-                            <s:else>
-                                <s:property value="#session.user.address"/>
-                            </s:else>
+                                <s:if test='#session.user.gender=="男"'>
+                                    <img src="<%=basePath%>/img/u413.png">
+                                </s:if>
+                                <s:elseif test='#session.user.gender=="女"'>
+                                    <img style="height: 30px;width: 30px" src="<%=basePath%>/img/famale.png">
+                                </s:elseif>
+                                <s:else>
+                                    <img style="height: 30px;width: 30px" src="<%=basePath%>/img/doublesex.png">
+                                </s:else>
                         </th>
                     </tr>
                     <tr >
@@ -89,6 +73,17 @@
                             </s:if>
                             <s:else>
                                 <s:property value="#session.user.mail"/>
+                            </s:else>
+                        </th>
+                    </tr>
+                    <tr >
+                        <th style="width: 150px;text-align: center">QQ:</th>
+                        <th>
+                            <s:if test='#session.user.qq==""'>
+                                <s:property value="" default="未填写" />
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.user.address"/>
                             </s:else>
                         </th>
                     </tr>
@@ -129,16 +124,14 @@
                 </table>
             </div>
         </div>
-
-
-
-        <div class="ibox-content">
+        <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>我的机构</strong></span></div>
                 <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#newOrg">申请机构</button></div>
             </div>
-            <div class="bootstrap-table">
+            <div class="bootstrap-table  ibox-content">
                 <table id="finishingTask" data-toggle="table"
+                       data-classes="table table-no-bordered"
                        data-url="project-showList"
                        data-click-to-select="true"
                        data-search="true"
@@ -150,19 +143,24 @@
                        data-pagination="true"
                        data-halign="center"
                        data-striped="true"
-                       data-page-size="3"
-                       data-height="259"
+                       data-page-size="5"
+                       data-height="400"
+                       data-sort-order="desc"
+                       data-pagination-v-align="top"
+                       data-sort-stable="true"
                 >
                 </table>
             </div>
         </div>
     </div>
-    <div style="padding: 20px 0px 0px 0px" class="col-md-6">
+    <div style="padding: 20px" class="col-md-6 float-e-margins">
         <div class="ibox-title">
-            <h5>消息中心</h5>
+            <div style="float: left;margin-left: 5px"><div style="float: left;margin-left: 5px"><span><strong>当前消息</strong></span></div></div>
         </div>
-        <div class="bootstrap-table">
+        <div class="bootstrap-table ibox-content">
             <table id="info" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-sort-order="desc"
                    data-url="project-showList"
                    data-click-to-select="true"
                    data-search="true"
@@ -174,14 +172,41 @@
                    data-pagination="true"
                    data-halign="center"
                    data-striped="true"
-                   data-page-size="8"
-                   data-height="259"
+                   data-page-size="5"
+                   data-height="400"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+                   data-page-list="[8]"
             >
             </table>
         </div>
-
+        <br>
+        <div class="ibox-title">
+            <div style="float: left;margin-left: 5px"><span><strong>历史消息</strong></span></div>
+        </div>
+        <div class="bootstrap-table ibox-content">
+            <table id="info1" data-toggle="table"
+                   data-classes="table table-no-bordered"
+                   data-sort-order="desc"
+                   data-url="project-showList"
+                   data-click-to-select="true"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                   data-toolbar="#toolbar"
+                   data-query-params="quefryParams"
+                   data-pagination="true"
+                   data-halign="center"
+                   data-striped="true"
+                   data-page-size="3"
+                   data-height="320"
+                   data-pagination-v-align="top"
+                   data-sort-stable="true"
+            >
+            </table>
+        </div>
     </div>
-
     <div  class="modal inmodal" id="newOrg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -191,13 +216,12 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input id="OrgName" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                    <div class="form-group"><label>联系方式</label> <input id="mytel" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
-                    <div class="form-group"><label>备注</label> <input id="others" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
+                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名(必填)" class="form-control" required="required"></div>
+                    <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
-                    <button id="newOrg-button" type="button" class="btn btn-primary">申请</button>
+                    <button id="cancel-apply" type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button id="newOrg-button" type="submit" class="btn btn-primary">申请</button>
                 </div>
             </div>
         </div>
@@ -211,18 +235,53 @@
                     <h4 class="modal-title">修改资料</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>邮箱</label> <input id="mail" type="text" placeholder="请输入邮箱" class="form-control" required="required"></div>
-                    <div class="form-group"><label>QQ</label> <input id="qq" type="text" placeholder="请输入QQ" class="form-control" required=""></div>
-                    <div class="form-group"><label>所在地</label> <input id="address" type="text" placeholder="请输入所在地" class="form-control" required=""></div>
-                    <div class="form-group"><label>联系电话</label> <input id="tel" type="text" placeholder="请输入联系电话" class="form-control" required=""></div>
-                    <div class="form-group"><label>个性签名</label> <input id="introduce" type="text" placeholder="请输入个人简介" class="form-control" required=""></div>
+                    <div class="form-group"><label>QQ</label>
+                        <input id="qq" type="text" maxlength="20"
+                        <s:if test='#session.user.qq==""'>
+                               placeholder="请输入QQ(不超过20个字符)"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.qq"/>"
+                        </s:else>
+                               class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>所在地</label>
+                        <input id="address" type="text" maxlength="40"
+                        <s:if test='#session.user.address==""'>
+                               placeholder="请输入所在地(不超过40个字符)"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.address"/>"
+                        </s:else>
+                               class="form-control" required="">
+                    </div>
+                    <div class="form-group"><label>联系电话</label>
+                        <input id="mytel" type="text" maxlength="20"
+                        <s:if test='#session.user.tel==""'>
+                               placeholder="请输入联系电话(不超过20个字符)"
+                        </s:if>
+                        <s:else>
+                               value="<s:property value="#session.user.tel"/>"
+                        </s:else>
+                               class="form-control" required="">
+                        </div>
+                    <div class="form-group"><label>个性签名</label>
+                        <input id="introduce" type="text" maxlength="40"
+                            <s:if test='#session.user.introduce==""'>
+                               placeholder="请输入个人简介(不超过40个字符)"
+                            </s:if>
+                            <s:else>
+                                value="<s:property value="#session.user.introduce"/>"
+                            </s:else>
+                               class="form-control" required="">
+                    </div>
                     <div class="form-group">
                         <label>性别</label>
                         <div class="form-group">
                             <select id="gender" class="form-control" name="gender">
+                                <option>保密</option>
                                 <option>男</option>
                                 <option>女</option>
-                                <option>保密</option>
                             </select>
                         </div>
                     </div>
@@ -235,46 +294,110 @@
         </div>
     </div>
 </div>
-
-
-<script src="../../js/jquery.min.js?v=2.1.4"></script>
-<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../../js/content.min.js?v=1.0.0"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/mjy.js"></script>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
+<script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="<%=basePath%>/js/mjy.js"></script>
+<script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </body>
 <script>
     $("button#edit-button").click(function (){
-        $.ajax({
-            url: "user-editProfile",
-            data: {mail: $("input#mail").val(),qq: $("input#qq").val(),address: $("input#address").val(),tel: $("input#tel").val(),introduce: $("input#introduce").val(),gender:$("select#gender").val()},
-            dataType: "json",
-            type: "Post",
-            async: "false",
-            success: function (result) {
-                if(result.res===true)  {
-                    showtoast("success", "修改成功", "操作成功")
-                    location.href = "user-jmpMyprofile";
-                }
-                else  showtoast("error", "修改失败", "操作失败")
-            },
-            error: function (result) {
-                showtoast("error", "修改失败", "修改失败")
-            }
-        })
+        swal(
+            {
+                title: "您确认保存本次修改吗？",
+                text: "确认请点击保存",
+                type: "",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "保存",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            },function () {
+                $.ajax({
+                    url: "user-editProfile",
+                    data: {
+                        qq: $("input#qq").val(),
+                        address: $("input#address").val(),
+                        tel: $("input#mytel").val(),
+                        introduce: $("input#introduce").val(),
+                        gender: $("select#gender").val()
+                    },
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        if (result.res == true){
+                            swal({
+                                title: "修改成功",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpMyprofile";
+                            })
+                    }
+                        else swal("修改失败！", "操作失败", "success");
+                    },
+                    error: function () {
+                            swal("修改失败！", "请检查你的网络", "success");
+                    }
+                })
+            })
     })
-
+    $("button#newOrg-button").click(function (){
+        var org_name=$("input#org_name").val();
+        console.log(org_name);
+        if(org_name === "" || org_name === null){
+            swal("申请失败！", "请填写机构名", "error");
+        }
+        else {
+            swal(
+                {
+                    title: "您确认申请该机构吗？",
+                    text: "确认请点击申请",
+                    type: "",
+                    showCancelButton: true,
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "申请",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        url: "applyOrganization-applyOrg",
+                        data: {
+                            org_name: $("input#org_name").val(),
+                            message: $("input#message").val(),
+                        },
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function () {
+                            swal("申请成功！", "机构申请已受理", "success");
+                            $('button#cancel-apply').click();
+                        },
+                        error: function () {
+                            swal({
+                                icon: "error"
+                            });
+                        }
+                    })
+                })
+        }
+    })
 </script>
 <script>
     $('#finishingTask').bootstrapTable({
             columns: [
                 {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                }, {
                     title: '机构编码',
                     field: 'ID_ORGANIZATION',
                     align: 'center',
@@ -311,39 +434,16 @@
     $('#info').bootstrapTable({
             columns: [
                 {
-                    checkbox: true,
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '机构ID',
-                    field: 'ID_ORGANIZATION',
-                    align: 'center',
-                    valign: 'middle'
-                },{
-                    title: '机构',
-                    field: 'ORG_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目ID',
-                    field: 'ID_PROJECT',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
-                    title: '项目',
-                    field: 'PRO_NAME',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                {
                     field: 'MESSAGE',
-                    title: '操作',
+                    title: '消息',
                     sortable: true,
                     align: 'center',
-                    valign: 'middle'
+                },
+                {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center',
                 },
                 {
                     field: 'date',
@@ -354,16 +454,45 @@
                 {
                     field: 'operate',
                     title: '操作',
-                    align: 'center',
-                    events: "acceptRefuse",
-                    formatter: "accRefu"
+                    align: 'right',
+                    events: "accRefu",
+                    formatter: "info"
+                },
+                {
+                    field: 'operator',
+                    align: 'left',
+                    events: "refuse",
+                    formatter: "infor"
                 }
             ]
         }
     );
+    $('#info1').bootstrapTable({
+            columns: [
+                {
+                    field: 'CONTENT',
+                    title: '消息',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'NAME',
+                    title: '操作人',
+                    sortable: true,
+                    align: 'center'
+                },
+                {
+                    field: 'DATE',
+                    title: '时间',
+                    sortable: true,
+                    align: 'center'
+                },
+            ]
+        }
+    );
     /**
- * @return {string}
- */
+     * @return {string}
+     */
 
     $.ajax(
         {
@@ -380,6 +509,21 @@
             }
         }
     )
+    //    $.ajax(
+    //        {
+    //            type:"GET",
+    //            url:"personalcenter-quitorg",
+    //            dataType:"json",
+    //            success:function(json){
+    //                var proList = JSON.parse(json.listorg);
+    //                //finishingTask为table的id
+    //                $('#finishingTask').bootstrapTable('load',proList);
+    //            },
+    //            error:function(){
+    //                alert("错误");
+    //            }
+    //        }
+    //    )
     $.ajax(
         {
             type:"GET",
@@ -395,18 +539,44 @@
             }
         }
     )
+
+    $.ajax(
+        {
+            type:"GET",
+            url:"history-showHistory",
+            dataType:"json",
+            success:function(json){
+                var History = JSON.parse(json.listHistory);
+                //finishingTask为table的id
+                $('#info1').bootstrapTable('load',History);
+            },
+            error:function(){
+                alert("错误");
+            }
+        }
+    )
     /**
-    *个人机构
+     *个人机构
      * */
     function AddFunctionAlty(value,row,index) {
         return '<a class="mod zfont3">退出</a>'
     }
     window.actionEvents = {
         'click .mod': function(e, value, row, index) {
+            swal({title:"您确定要退出这个机构吗",
+                text:"点击确定后讲退出机构，请谨慎操作！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            }, function(){
+                swal("退出成功！","您已经成功退出这个机构。","success")
+                var id = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id);
+                location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
+            })
             //修改操作
-            var id = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id);
-            location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作
@@ -420,16 +590,58 @@
      * @param index
      * @returns {string}
      */
-    function accRefu(value,row,index) {
+    function info(value,row,index) {
         return '<a class="mod zfont3">接受</a>'
     }
-    window.acceptRefuse = {
+    function infor(value,row,index) {
+        return '<a class="mod zfont3">拒绝</a>'
+    }
+    window.accRefu = {
         'click .mod': function(e, value, row, index) {
             //修改操作
-            var id_ORG = row.ID_ORGANIZATION;
-            var ID_ORGANIZATION = parseInt(id_ORG);
-            var ID_PROJECT = parseInt(row.ID_PROJECT);
-            location.href="infomation-Accept?id_org="+ID_ORGANIZATION+"&id_pro="+ID_PROJECT;
+            swal({title:"您确定要接受这个邀请吗",
+                text:"点击确定将接受这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("接受邀请！","您已经加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
+        },
+    };
+    window.refuse = {
+        'click .mod': function(e, value, row, index) {
+            //修改操作
+            swal({title:"您确定要拒绝这个邀请吗",
+                text:"点击确定将拒绝这个邀请！",
+                type:"warning",
+                showCancelButton:true,
+                confirmButtonColor:"#DD6B55",
+                confirmButtonText:"确定",
+                closeOnConfirm:false
+            },function(){
+                swal("拒绝邀请！","您已经拒绝加入这个机构。","success")
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if( isNaN(ID_ORGANIZATION) ){
+                    location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
+                }
+                else if(isNaN(ID_PROJECT)){
+                    location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
+                }
+            })
         },
         'click .delete' : function(e, value, row, index) {
             //删除操作
@@ -437,5 +649,4 @@
     };
 
 </script>
-
 </html>
