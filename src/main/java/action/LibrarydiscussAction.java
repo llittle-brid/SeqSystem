@@ -86,7 +86,6 @@ public class LibrarydiscussAction extends ActionSupport implements RequestAware,
                 }
                 String path=request2.getContextPath()+"/"+"disImage/"+ymd+"/"+newName;
                 dataMap.put("path",path);
-            System.out.println(path);
         }
         return "RES";
     }
