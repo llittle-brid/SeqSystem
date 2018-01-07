@@ -22,39 +22,39 @@
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="/example/favicon.ico">
-    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=request.getContextPath() %>/example/favicon.ico">
+    <link href="<%=request.getContextPath() %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath() %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div class="animated fadeInDown">
     <div class="col-md-9 form-group" style="margin-top: 20px">
         <div class="col-md-2 col-md-offset-4">
-            <a href="user-jmpCurrentProjectList"><img src="../../img/Home1.png" height="160px"><br/></a>
+            <a href="user-jmpCurrentProjectList"><img src="<%=request.getContextPath() %>/img/Home1.png" height="160px"><br/></a>
             <span style="color:#365063 ">当前项目</span><br/>
             <span style="color:black">目前有</span>
             <span style="color: #ff0000"> <s:property value="#session.countnow"/></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2">
-            <a href="user-jmpCompletedProjectList"><img src="../../img/Home2.jpg" height="160px"><br/></a>
+            <a href="user-jmpCompletedProjectList"><img src="<%=request.getContextPath() %>/img/Home2.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">历史项目</span><br/>
             <span style="color:black">完成了</span>
             <span style="color: #ff0000"><%=session.getAttribute("counthistory") %></span>
             <span style="color:black">个项目</span>
         </div>
         <div class="col-md-2 ">
-            <a href="library-get"><img src="/img/Home3.jpg" height="160px"></a><br/>
+            <a href="library-get"><img src="<%=request.getContextPath() %>/img/Home3.jpg" height="160px"></a><br/>
             <span style="color:#365063 ">共享知识</span><br/>
             <span style="color:black">收藏了</span>
             <a href="library-Mycollect"><span style="color: #ff0000" class="lzf_a">${sessionScope.Mycollectcount}</span></a>
             <span style="color:black">个构件库</span>
         </div>
         <div class="col-md-2 ">
-            <a href="personalcenter-jmpMyprofile"><img src="../../img/Home4.jpg" height="160px"><br/></a>
+            <a href="personalcenter-jmpMyprofile"><img src="<%=request.getContextPath() %>/img/Home4.jpg" height="160px"><br/></a>
             <span style="color:#365063 ">个人中心</span><br/>
             <span style="color:black">收到了</span>
             <span style="color: #ff0000">0</span>
@@ -63,15 +63,15 @@
     </div>
     <div class="col-md-9 form-group" style="margin-top:80px">
         <span class="col-md-6 col-md-offset-4" style="font-size:15px">创建一个项目成为组长，或者接受别人的项目邀请成为组员就可以参与项目需求文档的编写啦！</span>
-        <a href="user-jmpNewproject"><img class="col-md-offset-1" src="/img/u7.png"></a>
+        <a href="user-jmpNewproject"><img class="col-md-offset-1" src="<%=request.getContextPath() %>/img/u7.png"></a>
     </div>
 </div>
 
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
+<script src="<%=request.getContextPath() %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=request.getContextPath() %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=request.getContextPath() %>/js/content.min.js?v=1.0.0"></script>
+<script src="<%=request.getContextPath() %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/mjy.js"></script>
 </body>
 <script>
     $(document).ready(function () {
