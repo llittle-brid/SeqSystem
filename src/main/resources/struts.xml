@@ -6,12 +6,16 @@
 
 <struts>
 
-    <constant name="struts.action.extension" value="action,do,"></constant>
+    <constant name="struts.action.extension" value="action,do,">
+
+    </constant>
 
     <package name="default" namespace="/" extends="struts-default,json-default">
 
         <interceptors>
-            <interceptor name="interceptor" class="interceptor.AuthorityInterceptor"></interceptor>
+            <interceptor name="interceptor" class="interceptor.AuthorityInterceptor">
+
+            </interceptor>
             <interceptor-stack name="myStack">
                 <interceptor-ref name="defaultStack"/>
                 <interceptor-ref name="interceptor"/>
@@ -23,6 +27,8 @@
         <action name="404">
             <result>/404.jsp</result>
         </action>
+
+
         <action name="login-*" class="action.UserAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="success" type="json"><param name="root">dataMap</param></result>
@@ -39,20 +45,17 @@
             <result name="newprojectPage">/WEB-INF/pages/project_newproject.jsp</result>
             <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
             <result name="SysManager2Page">/WEB-INF/pages/project_sysManager2.jsp</result>
-            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="componentPage">/WEB-INF/pages/project_case_library.jsp</result>
+            <result name="casecomponentPage">/WEB-INF/pages/project_case_component.jsp</result>
+            <result name="usercomponentPage">/WEB-INF/pages/project_user_component.jsp</result>
             <result name="currentProjectList">/WEB-INF/pages/project_currentList.jsp</result>
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
+            <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="temp">/WEB-INF/pages/temp.jsp</result>
             <interceptor-ref name="myStack"/>
-        <allowed-methods>jmpCompletedProjectList,jmpCurrentProjectList,jmpSysManager1,jmpSysManager2,editProfile,jmpTemp,jmpHomepage,jmpNewproject,jmpMyprofile</allowed-methods>
-        </action>
-
-        <action name="project-*" class="action.ProjectAction" method="{1}">
-            <result name="success" type="json">
-                <param name="root">dataMap</param>
-            </result>
-            <result name="projectMember">/WEB-INF/pages/project_proMember.jsp</result>
-            <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList,showCompletedList,getProjectInfo</allowed-methods>
+            <allowed-methods>
+                jmpMyprofile,jmpMycollect,jmpHomepage,editProfile,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
+            </allowed-methods>
         </action>
 
         <action name="applyOrganization-*" class="action.ApplyOrganizationAction" method="{1}">
@@ -74,6 +77,17 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember,showAllProject,showHistoryProject</allowed-methods>
         </action>
+
+        <action name="infomation-*" class="action.InfomationAction" method="{1}">
+            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="showinfo" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>showInfo,Accept,Refuse</allowed-methods>
+        </action>
+
         <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
             <result name="success" type="json">
                 <param name="root">dataMap</param>
@@ -82,6 +96,7 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>showList,showOthers,agreeOrg,refuseOrg</allowed-methods>
         </action>
+
         <action name="orgInvite-*" class="action.OrgInviteAction" method="{1}">
             <result name="res" type="json">
                 <param name="root">dataMap</param>
@@ -92,6 +107,7 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>InviteUser,showList,grantOrg,deleteUser,reInviteUser</allowed-methods>
         </action>
+
         <action name="showExitOrg-*" class="action.ShowExitOrgAction" method="{1}">
             <result name="exitOrgList" type="json">
                 <param name="root">dataMap</param>
@@ -99,18 +115,25 @@
             <interceptor-ref name="myStack"/>
             <allowed-methods>showList</allowed-methods>
         </action>
-        <action name="structure-*" class="action.StructureAction" method="{1}">
-            <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <result name="get">/WEB-INF/pages/project_structure.jsp</result>
-            <result name="insert">/WEB-INF/pages/project_homepage.jsp</result>
-            <allowed-methods>get</allowed-methods>
-        </action>
 
-        <action name="discuss-*" class="action.DiscussAction" method="{1}">
+        <action name="catalog-*" class="action.CatalogAction" method="{1}">
+            <result name="document">/WEB-INF/pages/template.jsp</result>
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>commit,getCatalogDis,delete</allowed-methods>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,saveTemplateThree,saveTemplateTwo,getUsable</allowed-methods>
+        </action>
+
+        <action name="project-*" class="action.ProjectAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="end">/WEB-INF/pages/project_completedList.jsp</result>
+            <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
+            <result name="projectDocument">/mjy_index.jsp</result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpDocument,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">
@@ -121,6 +144,7 @@
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
             <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
+            <interceptor-ref name="myStack"/>
             <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain,Mycollect,Mycollectagain</allowed-methods>
         </action>
 
@@ -130,36 +154,52 @@
             <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
-        <action name="catalog-*" class="action.CatalogAction" method="{1}">
-            <result name="document">/WEB-INF/pages/template.jsp</result>
-            <result name="Re" type="json">
+        <action name="librarydiscuss-*" class="action.LibrarydiscussAction" method="{1}">
+            <result name="RES" type="json">
                 <param name="root">dataMap</param>
             </result>
             <interceptor-ref name="myStack"/>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename</allowed-methods>
+            <allowed-methods>commit,delete,image</allowed-methods>
         </action>
+
+        <action name="structure-*" class="action.StructureAction" method="{1}">
+            <result name="RES" type="json"><param name="root">dataMap</param></result>
+            <result name="get">/WEB-INF/pages/project_structure.jsp</result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>get</allowed-methods>
+        </action>
+
         <action name="personalcenter-*" class="action.PersonalCenterAction" method="{1}">
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="quitorg" >/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="orgList" type="json">
                 <param name="root">dataMap</param>
             </result>
+            <interceptor-ref name="myStack"/>
             <allowed-methods>jmpMyprofile,showList,quitorg</allowed-methods>
         </action>
 
-        <action name="infomation-*" class="action.InfomationAction" method="{1}">
-            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="showinfo" type="json">
+        <action name="discuss-*" class="action.DiscussAction" method="{1}">
+            <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <allowed-methods>showInfo,Accept,Refuse</allowed-methods>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>commit,getCatalogDis,delete,commit2Project,getProjectDis</allowed-methods>
+        </action>
+
+        <action name="templateLib-*" class="action.TemplateLibAction" method="{1}">
+            <result name="Re" type="json"><param name="root">dataMap</param>
+            </result>
+            <interceptor-ref name="myStack"/>
+            <allowed-methods>getTypeOfLib,getStructure</allowed-methods>
         </action>
 
         <action name="history-*" class="action.HistoryAction" method="{1}">
             <result name="showHistory" type="json">
                 <param name="root">dataMap</param>
             </result>
+            <interceptor-ref name="myStack"/>
             <allowed-methods>showHistory</allowed-methods>
-        </action>    </package>
+        </action>
+    </package>
 </struts>

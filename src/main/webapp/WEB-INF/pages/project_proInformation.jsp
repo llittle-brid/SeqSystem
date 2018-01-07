@@ -170,7 +170,7 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li>
+                                    <li class="active">
                                         <a href="#tab-1" data-toggle="tab">讨论区</a>
                                     </li>
                                     <li>
@@ -192,26 +192,34 @@
                                         <div class="ibox float-e-margins">
                                             <div class="ibox-title">
                                                 <h5>我的留言</h5>
+                                                <div id="alterable" style="visibility: visible">
+                                                    <button class="btn btn-success  btn-xs pull-right" onclick="commitDiscuss()" type="submit">发布评论</button>
+                                                    <%--<label class="pull-right">没有附件？直接点这里--></label>--%>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <div class="click2edit wrapper discuss">
+                                                    </div>
+                                                </div>
+
                                                 <div class="file-loading">
                                                     <!-- The file input field used as target for the file upload widget -->
                                                     <input id="fileupload" name="MyFile" type="file" class="file" multiple data-msg-placeholder="选择要上传的文件">
                                                 </div>
                                                 <!-- The file upload form used as target for the file upload widget -->
-                                                <div id="alterable" style="visibility: visible">
-                                                    <button class="btn btn-success  btn-xs pull-right" onclick="commitDiscuss()" type="submit">发布评论</button>
-                                                    <label class="pull-right">没有附件？直接点这里--></label>
-                                                </div>
-                                            </div>
-                                            <div class="ibox-content">
-                                                <div class="click2edit wrapper discuss">
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!--自己的留言结束-->
+                                    <p>共<s:property value="#session.disNum"/>条留言</p>
                                     <div class="allDiscuss">
                                         <!--一行留言-->
                                         <!--一行留言结束-->
+                                    </div>
+                                    <div class="pull-right">
+                                        <a onclick="previous()">上一页</a>
+                                        <strong>第<var id="page"></var>页</strong>
+                                        共<s:property value="#session.disPage"/>页
+                                        <a onclick="next()">下一页</a>
                                     </div>
 
                                 </div>
@@ -299,7 +307,7 @@
 <script src="../../js/plugins/toastr/toastr.min.js"></script>
 <script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="../../js/mjy.js"></script>
+<script src="../../js/xzw.js"></script>
 <script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
 
 <script src="../../js/plugins/summernote/summernote.min.js"></script>
@@ -345,6 +353,7 @@
 
     var id_Project = "<s:property value="#session.project.id_Project"/>";
     var id_User = "<s:property value="#session.user.id_user"/>";
+    var discuss="";
 
     $.ajax(
         {
@@ -495,6 +504,7 @@
                     field: 'view',
                     title: '操作',
                     align: 'center',
+                    events: "viewEvents",
                     formatter: "viewFormatter"
                 }
             ]
@@ -521,6 +531,17 @@
     function viewFormatter(value,row,index) {
         return '<a class="view btn-xs btn-info">查看文档</a>';
     }
+
+    //表格  - 操作 - 事件
+    window.viewEvents = {
+        'click .view':
+            function(e, value, row, index) {
+                //修改操作
+                var id = row.id_document;
+                location.href = "project-jmpDocument";
+            }
+    };
+
 
 
     $("button#button_invite").click(function () {
@@ -605,16 +626,39 @@
 
 <%--评论区--%>
 <script>
+    var page = 1;
+    $("#page").text(page);
+    function previous() {
+        page--;
+        if (page<=0){
+            page = 1;
+        }
+        discussReload2();
+        $("#page").text(page);
+    }
+    function next() {
+        page++;
+        var max = parseInt("<s:property value="#session.disPage"/>");
+        if (page > max){
+            page = max;
+        }
+        discussReload2();
+        $("#page").text(page);
+    }
     //评论区初始化
     function discussInit() {
         $(".discuss").code("");
+        page = 0;
     }
     //评论加载
     function discussReload2() {
         $.ajax({
             url: "discuss-getProjectDis",
-            data: {id_Project: id_Project,
-                id_user: id_User},
+            data: {
+                id_Project: id_Project,
+                id_user: id_User,
+                page : page
+            },
             dataType: "json",
             type: "Post",
             async: "false",
@@ -625,6 +669,9 @@
                     tempDis=result.wrapperList[i].proDiscussEntity;
                     if (tempDis.name === "<s:property value="#session.PM.name"/>"){
                         title += "<span class=\"label label-warning\">组长</span>&nbsp;";
+                    }
+                    else if (tempDis.name === "<s:property value="#session.user.name"/>"){
+                        title += "<span class=\"label label-success\">我</span>&nbsp;";
                     }
                     state=result.wrapperList[i].state;
                     date=tempDis.time.toString().split("T");
@@ -639,8 +686,8 @@
                     content+="<div class='ibox-tools'>";
 
                     for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
-                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].filename + '">附件';
-                        content += j + 1;
+                        content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].path+ '">';
+                        content += tempDis.accessoryEntityList[j].filename;
                         content += '</a>';
                     }
 
@@ -656,55 +703,60 @@
         })
     }
 
+
     //评论提交
     function commitDiscuss() {
-        var discuss=$(".discuss").code();
-        var formData = new FormData();
-        // var files = document.getElementById("fileUpload").files;
-        formData.append('disContent',discuss);
-        formData.append('id_Project',id_Project);
-        formData.append('id_user',id_User);
-        // formData.append('MyFile', files);
-        $.ajax({
-            url: "discuss-commit2Project",
-            data: formData,
-            type: "Post",
-            cache: false,
-            processData: false,
-            contentType:false,
-            async: false,
-            success: function (result) {
-                showtoast("success","成功","评论提交成功");
-                discussInit();
-                discussReload();
-            },
-            error: function (result) {
-                showtoast("dangerous","加载失败","加载目录失败");
-            }
-        })
+         discuss = $(".discuss").code();
+        if($('#fileupload').val()=="") {
+            $.ajax({
+                url: "discuss-commit2Project",
+                data: {'disContent':discuss,'id_Project':id_Project,'id_user':id_User},
+                type: "Post",
+                async: false,
+                success: function (result) {
+                    showtoast("success","成功","评论提交成功");
+                    discussInit();
+                    discussReload2();
+                },
+                error: function (result) {
+                    showtoast("dangerous","加载失败","加载目录失败");
+                }
+            })
+        }
+
+        else {
+            $('#input-id').on('filepreajax', function(event, previewId, index) {
+
+            });
+            $('#fileupload').fileinput('upload');
+        }
     }
+
 
     $('#fileupload').fileinput(
         {
             language: 'zh',
+            showUpload: false,
+            removeClass: "btn btn-danger",
+            removeLabel: "清除",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+            uploadClass: "btn btn-info",
+            uploadLabel: "发布",
+            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
             uploadAsync: false,
-            uploadUrl: "discuss-commit2Project", //上传的地址
-            uploadExtraData:{'disContent':$(".discuss").code(), 'id_Project':id_Project,'id_user':id_User}
+            uploadUrl: "discuss-commit2Project",
+            uploadExtraData: function (previewId, index) {
+                var info = {disContent: $(".discuss").code(), id_Project: id_Project, id_user: id_User};
+                return info;
+            }
         }
+
     );
-    $('#fileupload').on('fileselectnone', function(event) {
-        $('#alterable').css('visibility','visible');
-    });
-    $('#fileupload').on('fileloaded', function(event) {
-        $('#alterable').css('visibility','hidden');
-    });
-    $('#fileupload').on('fileclear', function(event) {
-        $('#alterable').css('visibility','visible');
-    });
+
 
     $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
-        var form = data.form, files = data.files, extra = data.extra,
-            response = data.response, reader = data.reader;
+        showtoast("success","成功","评论提交成功");
+        discussInit();
         discussReload2();
     });
 
@@ -742,7 +794,8 @@
 
     //评论编辑按钮
     function edit() {
-        $("#eg").addClass("no-padding");$(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
+        $("#eg").addClass("no-padding");
+        $(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],

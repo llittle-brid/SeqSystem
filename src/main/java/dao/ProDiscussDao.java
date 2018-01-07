@@ -17,7 +17,9 @@ public interface ProDiscussDao {
 
     List<ProDiscussEntity> getCatalogDis(int id_catalog);
 
-    List<ProDiscussEntity> getProjectDis(int id_project);
+    List<ProDiscussEntity> getProjectDis(int id_project,int page);
+
+    int getProDisNum(int id_project);
 
     void delete(int id_pro_discuss);
 }
