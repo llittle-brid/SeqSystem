@@ -7,8 +7,10 @@ package daoImp;
 
 import dao.DAO;
 import dao.OrganizationDao;
+import entity.ApplyOrganizationEntity;
 import entity.OrganizationEntity;
 
+import java.sql.Date;
 import java.util.List;
 
 public class OrganizationDaoImp extends DAO<OrganizationEntity> implements OrganizationDao {

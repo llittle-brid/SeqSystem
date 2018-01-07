@@ -1,6 +1,8 @@
 package dao;
 
 import entity.ProjectEntity;
+import entity.ShowOrgProjectEntity;
+
 import entity.UserEntity;
 import java.util.List;
 

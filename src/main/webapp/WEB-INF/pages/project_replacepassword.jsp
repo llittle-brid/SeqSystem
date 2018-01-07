@@ -140,12 +140,6 @@
     $("button#replacepassword_button").click(function () {
         var verification=$("#verification").val();
         var statu = "true";
-        $(".aria-invalid").each(function{
-            if($(this).attr("某元素")=="true"){
-                statu==false;
-                break;
-            }
-        })
         if(verification === "" || verification ===null) {
             swal("验证码未填写", "请输入验证码", "error");
         }

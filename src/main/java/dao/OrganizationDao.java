@@ -5,6 +5,7 @@
 
 package dao;
 
+import entity.ApplyOrganizationEntity;
 import entity.OrganizationEntity;
 
 import java.util.List;

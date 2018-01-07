@@ -22,8 +22,7 @@
     <link href="css/z_style.css" rel="stylesheet">
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-lite.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
     <link href="../css/mjy.css" rel="stylesheet">
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
@@ -58,8 +57,8 @@
 
 
 </head>
-<body class="fixed-sidebar  gray-bg animated fadeInDown" style="overflow:hidden">
-<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content ">
+<body class="fixed-sidebar  gray-bg" style="overflow:hidden">
+<div id="wrapper" style="padding: 0px" class="wrapper wrapper-content animated fadeInDown gray-bg">
     <div id="next1" style="width: 100%;margin: 0 auto;font-weight: 400" class="gray-bg">
     <div class=" row wrapper white-bg">
         <ol class="breadcrumb" style="margin-left: 50px">
@@ -265,7 +264,7 @@
     </div>
 </div>
 <script src="/js/jquery.min.js?v=2.1.4"></script>
-
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/js/plugins/layer/layer.min.js"></script>
@@ -277,12 +276,8 @@
 <script src="js/mjy.js"></script>
 <script src="js/lzf.js"></script>
 <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../js/plugins/summernote/summernote.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
-<script src="../js/plugins/summernote/summernote-bs4.js"></script>
-<script src="../js/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="../js/plugins/summernote/summernote-lite.js"></script>
 <script>
     $(document).ready(function(){$(".contact-box").each(function(){animationHover(this,"pulse")})});
 </script>
@@ -335,8 +330,7 @@
 </body>
 <script>
     function commitSend() {
-        var content=$(".discuss").summernote('code');
-        alert(content);
+        var content=$(".discuss").code();
         $.ajax({
             url: "librarydiscuss-commit",
             data: {content:content,id_library:${requestScope.id_library}, id_user:${sessionScope.user.id_user}},
@@ -393,44 +387,18 @@
         $(".click2edit").addClass("no-padding");
         $(".click2edit").summernote({
             height: 100,
-            minHeight: 50,
-            maxHeight: 200,
+            minHeight: 100,
+            maxHeight: 100,
             lang: "zh-CN", focus: true, toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
+                ['para', ['paragraph']],
                 ['table', ['table']],
                 ['picture', ['picture']],
                 ['fullscreen', ['fullscreen']]
-            ],
-            callbacks: {
-                onImageUpload: function(files, editor, $editable) {
-                    that=$(this);
-                    sendFile(files,that);
-                }
-            }
+            ]
         })
-        function sendFile(files, that) {
-            var data = new FormData();
-            data.append("file", files[0]);
-            $.ajax({
-                data : data,
-                type : "POST",
-                url : "librarydiscuss-image", //图片上传出来的url，返回的是图片上传后的路径，http格式
-                cache : false,
-                contentType : false,
-                processData : false,
-                dataType : "json",
-                success: function(data) {//data是返回的hash,key之类的值，key是定义的文件名
-                    alert(data.path);
-                    $(that).summernote('insertImage', data.path);
-                },
-                error:function(){
-                    alert("上传失败");
-                }
-            });
-        }
 
 </script>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->

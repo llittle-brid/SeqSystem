@@ -191,10 +191,8 @@
                 $('#showOrgApply').bootstrapTable('load',orgList);
             },
             error:function(){
-                swal({
-                    icon: "error"
-                });
-    }
+                alert("错误");
+            }
         }
     )
     function operateFormatter(value,row,index) {
