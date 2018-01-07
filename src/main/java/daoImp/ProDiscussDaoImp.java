@@ -50,10 +50,10 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     }
 
     @Override
-    public List<ProDiscussEntity> getProjectDis(int id_project) {
-        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT =? order by time desc";
+    public List<ProDiscussEntity> getProjectDis(int id_project,int page) {
+        String sql="select * from VIEW_PRO_DISCUSS where ID_PROJECT = ? limit ?,3;";
 
-        List<ProDiscussEntity> proDiscussEntityList = getForList(sql,id_project);
+        List<ProDiscussEntity> proDiscussEntityList = getForList(sql,id_project,page);
 
         AccessoryDao accessoryDao = new AccessoryDaoImp();
 
@@ -66,11 +66,19 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
         return proDiscussEntityList;
     }
 
+
     @Override
     public void delete(int id_pro_discuss) {
         String sql="delete from PRO_DISCUSS where id_pro_discuss=?";
         String sql1="delete from ACCESSORY where id_pro_discuss=?";
         update(sql,id_pro_discuss);
         update(sql1,id_pro_discuss);
+    }
+
+    @Override
+    public int getProDisNum(int id_project) {
+        String sql = "select count(*) from VIEW_PRO_DISCUSS where ID_PROJECT = ? ";
+        int num = Integer.valueOf(getForValue(sql,id_project).toString());
+        return num;
     }
 }

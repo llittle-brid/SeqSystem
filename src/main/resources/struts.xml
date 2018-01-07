@@ -78,7 +78,8 @@
             </result>
             <result name="end">/WEB-INF/pages/project_completedList.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
+            <result name="projectDocument">/mjy_index.jsp</result>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpDocument,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">
