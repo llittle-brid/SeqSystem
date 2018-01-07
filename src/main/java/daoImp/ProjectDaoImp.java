@@ -38,7 +38,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         }
         else {
             try {
-                ID_Org = getForValue(sql2,p.getOrgName());
+                ID_Org = getForValueThrowsExp(sql2,p.getOrgName());
             } catch (Exception e){
                 return false;
             }
@@ -55,7 +55,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             DocumentDao documentDao = new DocumentDaoImp();
             documentDao.create(Id_Project,1,time,ID_User);
 //          set PM of one Project
-            update(sql3,Id_Project,ID_User,3);
+            updateThrowException(sql3,Id_Project,ID_User,3);
 
             return true;
         }catch (Exception e){
@@ -99,7 +99,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         else {
             String sql1 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
             try {
-                update(sql1, idProject, idUser);
+                updateThrowException(sql1, idProject, idUser);
             } catch (Exception e) {
                 return false;
             }
@@ -144,7 +144,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             Timestamp time = new Timestamp(new java.util.Date().getTime());
 
             try {
-                update(sql, idProject, idUser, time, content);
+                updateThrowException(sql, idProject, idUser, time, content);
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();

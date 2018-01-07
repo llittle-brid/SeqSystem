@@ -132,8 +132,8 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
             disPage = disNum/3;
         else
             disPage = disNum/3 + 1;
-        session.put("disNum",disNum);
-        session.put("disPage",disPage);
+        dataMap.put("disNum",disNum);
+        dataMap.put("disPage",disPage);
         dataMap.put("wrapperList",wrapperList);
         return "Re";
     }
