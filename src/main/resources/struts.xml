@@ -79,14 +79,19 @@
         </action>
 
         <action name="infomation-*" class="action.InfomationAction" method="{1}">
-            <result name="acc">/WEB-INF/pages/project_myprofile.jsp</result>
-            <result name="refuse">/WEB-INF/pages/project_myprofile.jsp</result>
+            <result name="acc" type="json">
+                <param name="root">dataMap</param>
+            </result>
+            <result name="refuse" type="json">
+                <param name="root">dataMap</param>
+            </result>
             <result name="showinfo" type="json">
                 <param name="root">dataMap</param>
             </result>
             <interceptor-ref name="myStack"/>
             <allowed-methods>showInfo,Accept,Refuse</allowed-methods>
         </action>
+
 
         <action name="showApplyOrg-*" class="action.ShowApplyOrgAction" method="{1}">
             <result name="success" type="json">

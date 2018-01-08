@@ -47,6 +47,7 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
     }
     public String Accept(){
         System.out.println("helloaccept");
+        dataMap = new HashMap<String, Object>();
         infodao = new InformationDaoImp();
         org = new OrganizationDaoImp();
         pro = new ProjectDaoImp();
@@ -54,7 +55,7 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         user = (UserEntity)session.get("user");
         Integer id_user = user.getId_user();
         if(information.getID_PROJECT()== null) {
-            infodao.acceptOrg(information.getID_ORGANIZATION(),id_user);
+            boolean res = infodao.acceptOrg(information.getID_ORGANIZATION(),id_user);
             infodao.joinOrg(information.getID_ORGANIZATION(),id_user);
             String Name = org.findName(information.getID_ORGANIZATION());
             String content = "已接受邀请加入"+Name+"机构";
@@ -65,43 +66,49 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
 //            nowTime= df.format(dt);
 //            System.out.println(nowTime);
             history.hasAcceptorRefuseORG(id_user, content, dt,information.getID_ORGANIZATION());
+            dataMap.put("res",res);
         }
         else if(information.getID_ORGANIZATION()== null) {
-            infodao.acceptPro(information.getID_PROJECT(),id_user);
+            boolean res = infodao.acceptPro(information.getID_PROJECT(),id_user);
             infodao.joinPro(information.getID_PROJECT(),id_user);
             String Name = pro.findName(information.getID_PROJECT());
             String content = "已接受邀请加入"+Name+"项目";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
+            dataMap.put("res",res);
         }
         return "acc";
     }
 
     public String Refuse() {
         infodao = new InformationDaoImp();
+        dataMap = new HashMap<String, Object>();
         org = new OrganizationDaoImp();
         pro = new ProjectDaoImp();
         history = new HistoryInfoDaoImp();
         user = (UserEntity)session.get("user");
         Integer id_user = user.getId_user();
         if(information.getID_PROJECT()== null) {
-            infodao.refuseOrg(information.getID_ORGANIZATION(),id_user);
+            boolean res = infodao.refuseOrg(information.getID_ORGANIZATION(),id_user);
             String Name = org.findName(information.getID_ORGANIZATION());
             String content = "已拒绝邀请加入"+Name+"机构";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefuseORG(id_user, content, dt,information.getID_ORGANIZATION());
+            dataMap.put("res",res);
         }
         else if(information.getID_ORGANIZATION()== null) {
-            infodao.refusePro(information.getID_PROJECT(),id_user);
+            boolean res = infodao.refusePro(information.getID_PROJECT(),id_user);
             String Name = pro.findName(information.getID_PROJECT());
             String content = "已拒绝邀请加入"+Name+"项目";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
+            dataMap.put("res",res);
         }
         System.out.println("^^^^"+information.getID_ORGANIZATION()+"$$$$$$"+information.getID_PROJECT());
+
         return "refuse";
     }
 
