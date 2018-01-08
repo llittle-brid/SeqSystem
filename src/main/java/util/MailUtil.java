@@ -18,6 +18,7 @@ public class MailUtil {
     private final static String password = "kuaiyi1"; //授权码
     private final static String replayAddress = "kuaiyizhushou@163.com"; //你的邮箱
     private final static String PORT = "465";
+    private final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
 
     public static void sendHtmlMail(postmailEntity info)throws Exception{
@@ -43,7 +44,7 @@ public class MailUtil {
 
         info.setHost(host);
         info.setFormName(formName);
-        info.setFormPassword(password);   //网易邮箱的授权码~不一定是密码
+        info.setFormPassword(password);
         info.setReplayAddress(replayAddress);
         Message message = getMessage(info);
         //消息发送的内容
@@ -52,9 +53,47 @@ public class MailUtil {
         Transport.send(message);
     }
 
+//    public static boolean sslSend(MessageInfo msg1, EmailAccount emailAccount)
+//            throws AddressException, MessagingException, IOException{
+//        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+//        // Get a Properties object
+//        Properties props = new Properties();
+//        props.setProperty("mail.smtp.host", emailAccount.getPlace());
+//
+//        props.setProperty("mail.smtp.port", "465");
+//        props.setProperty("mail.smtp.socketFactory.port", "465");
+//        props.put("mail.smtp.auth", "true");
+//
+//        final String username = emailAccount.getUsername();
+//        final String password = emailAccount.getPassword();
+//        Session session = Session.getDefaultInstance(props, new Authenticator(){
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(username, password);
+//            }});
+//        Message msg = new MimeMessage(session);
+//
+//        // 设置发件人和收件人
+//        msg.setFrom(new InternetAddress(emailAccount.getUsername()));
+//        List<String> tos = msg1.getTo();
+//        Address to[] = new InternetAddress[tos.size()];
+//        for(int i=0;i<tos.size();i++){
+//            to[i] = new InternetAddress(tos.get(i));
+//        }
+//        // 多个收件人地址
+//        msg.setRecipients(Message.RecipientType.TO, to);
+//        msg.setSubject(msg1.getSubject()); // 标题
+//        msg.setText(msg1.getMsg());// 内容
+//        msg.setSentDate(new Date());
+//        Transport.send(msg);
+//        System.out.println("EmailUtil ssl协议邮件发送打印" +msg.toString());
+//        return true;
+//    }
+
     private static Message getMessage(postmailEntity info) throws Exception{
         final Properties p = System.getProperties() ;
         p.setProperty("mail.smtp.host", info.getHost());
+        p.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        p.setProperty("mail.smtp.socketFactory.fallback", "false");
         p.setProperty("mail.smtp.auth", "true");
         p.setProperty("mail.smtp.user", info.getFormName());
         p.setProperty("mail.smtp.pass", info.getFormPassword());
