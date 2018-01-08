@@ -16,7 +16,8 @@ import java.util.List;
 public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     public boolean save(ProjectEntity p) {
-        String sql = "insert into PROJECT(NAME,DATE,DOCUMENT_NAME,STATE,ID_ORGANIZATION,INTRO) values(?,?,?,?,?,?)";
+        String sql0 = "insert into PROJECT(NAME,DATE,DOCUMENT_NAME,STATE,INTRO) values(?,?,?,?,?)";
+        String sql1 = "insert into PROJECT(NAME,DATE,DOCUMENT_NAME,STATE,ID_ORGANIZATION,INTRO) values(?,?,?,?,?,?)";
         String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME = ?";
         String sql3 = "insert into PROJECT_MEMBER(ID_PROJECT,ID_USER,RANK) values(?,?,?)";
 
@@ -27,19 +28,23 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
         int ID_Org = 0;
 
+
 //      project Name and Document Name cannot be null
         if (p.getName().length()==0||p.getDocument_Name().length()==0){
             return false;
         }
 
+        String orgName = p.getOrgName();
+        int len = orgName.length();
 //      if org is not provided
-        if (p.getOrgName().length()==0){
+        if (len==0){
             ID_Org = 0;
         }
-        else {
+
+        else  {
             try {
-                ID_Org = getForValueThrowsExp(sql2,p.getOrgName());
-            } catch (Exception e){
+                ID_Org = getForValueThrowsExp(sql2, p.getOrgName());
+            } catch (Exception e) {
                 return false;
             }
         }
@@ -49,7 +54,13 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
         try{
 //          新增项目，同时获取自增项目ID
-            int Id_Project = insert(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
+            int Id_Project = 0;
+            if (ID_Org>0) {
+                Id_Project = insert(sql1, p.getName(), createDate, p.getDocument_Name(), 1, ID_Org, p.getIntro());
+            }
+            else {
+                Id_Project = insert(sql0, p.getName(), createDate, p.getDocument_Name(), 1, p.getIntro());
+            }
 
 //            新建文档
             DocumentDao documentDao = new DocumentDaoImp();
@@ -74,7 +85,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public List<UserEntity> getMember(ProjectEntity p) {
-        String sql="select USER.ID_USER, USER.NAME, MAIL, TEL, RANK from USER, VIEW_projectMember where USER.ID_USER=VIEW_projectMember.ID_USER and ID_PROJECT=?";
+        String sql="select USER.ID_USER, USER.NAME, MAIL, TEL, RANK from USER, VIEW_projectMember where USER.ID_USER=VIEW_projectMember.ID_USER and ID_PROJECT=? order by rank";
         UserDaoImp userDao = new UserDaoImp();
         List<UserEntity> members = userDao.getForList(sql,p.getId_Project());
         return members;
@@ -128,9 +139,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     }
 
     @Override
-    public boolean inviteMember(int idUser, String PM, String projectName,int idProject) {
-        String verb = " invite you to join PROJECT:  ";
-        String content = PM+verb+projectName;
+    public boolean inviteMember(int idUser,int idProject,String content) {
 
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
 
@@ -163,6 +172,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     @Override
     public int getRank(int idProject, int idUser) {
         String sql = "select RANK from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
+        int rank=getForValue(sql,idProject,idUser);
         return getForValue(sql,idProject,idUser);
     }
 

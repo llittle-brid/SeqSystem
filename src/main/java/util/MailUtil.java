@@ -17,6 +17,7 @@ public class MailUtil {
     private final static String formName = "kuaiyizhushou@163.com";//你的邮箱
     private final static String password = "kuaiyi1"; //授权码
     private final static String replayAddress = "kuaiyizhushou@163.com"; //你的邮箱
+    private final static String PORT = "465";
 
 
     public static void sendHtmlMail(postmailEntity info)throws Exception{
@@ -57,6 +58,7 @@ public class MailUtil {
         p.setProperty("mail.smtp.auth", "true");
         p.setProperty("mail.smtp.user", info.getFormName());
         p.setProperty("mail.smtp.pass", info.getFormPassword());
+        p.setProperty("mail.smtp.port", PORT);
 
         // 根据邮件会话属性和密码验证器构造一个发送邮件的session
         Session session = Session.getInstance(p, new Authenticator(){

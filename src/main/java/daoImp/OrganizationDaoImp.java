@@ -16,10 +16,10 @@ import java.util.List;
 public class OrganizationDaoImp extends DAO<OrganizationEntity> implements OrganizationDao {
 
     @Override
-    public List<OrganizationEntity> getMatched(String name) {
+    public List<OrganizationEntity> getMatched(int id_User, String name) {
         name="%"+name+"%";
-        String sql = "select * from ORGANIZATION where NAME LIKE ?";
-        return getForList(sql,name);
+        String sql = "select * from VIEW_ORGINFO where ID_USER = ? and NAME LIKE ?";
+        return getForList(sql,id_User,name);
     }
 
     @Override

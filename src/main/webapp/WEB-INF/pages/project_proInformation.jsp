@@ -7,13 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
+<html>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,25 +25,26 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="../example/favicon.ico">
-    <link href="<%=basePath %>css/bootstrap.min.css" rel="stylesheet">
-    <link href="<%=basePath %>css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath %>css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=basePath %>css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath %>css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
     <!-- bootstrap-table -->
-    <link href="<%=basePath %>css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 
-    <link href="<%=basePath %>css/z_style.css" rel="stylesheet">
-    <link href="<%=basePath %>css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="<%=basePath %>css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="<%=basePath %>css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="<%=basePath %>css/plugins/summernote/summernote-lite.css" rel="stylesheet">
-    <link href="<%=basePath %>css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="<%=basePath %>css/xzw.css" rel="stylesheet">
-    <link href="<%=basePath %>css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">--%>
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
+
+    <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -297,30 +298,32 @@
 
 </div>
 </body>
-<script src="<%=basePath %>js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=basePath %>js/bootstrap.min.js"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js"></script>
 <%--bootstrap-table--%>
-<script src="<%=basePath %>js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="<%=basePath %>js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
-<script src="<%=basePath %>js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<%=basePath %>js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath %>js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath %>js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="<%=basePath %>js/contabs.min.js"></script>
-<script src="<%=basePath %>js/plugins/pace/pace.min.js"></script>
-<script src="<%=basePath %>js/plugins/toastr/toastr.min.js"></script>
-<script src="<%=basePath %>js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="<%=basePath %>js/xzw.js"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="<%=basePath %>js/plugins/summernote/summernote.min.js"></script>
-<script src="<%=basePath %>js/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="<%=basePath %>js/plugins/summernote/summernote-lite.js"></script>
-<script src="<%=basePath %>js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>/js/xzw.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="<%=basePath %>js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
-<script src="<%=basePath %>js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
-<script src="<%=basePath %>js/plugins/bootstrap-fileinput/locales/zh.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
+
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
 
 
 <script>
@@ -335,11 +338,13 @@
                     field: 'rank',
                     title: '职务',
                     align: 'center',
+                    sortable: true,
+                    sortOrder: 'asc',
+                    rememberOrder: true,
                     formatter: "rankFormatter"
                 },{
                     field: 'mail',
                     title: '邮箱',
-                    sortable: true,
                     align: 'center'
                 },{
                     field: 'tel',
@@ -380,24 +385,32 @@
             }
         }
     );
-    function rankFormatter(value,row,index) {
-        if (row.rank==5) {
-            return '组员';
+    function ranksorter(a,b) {
+        if (a<b) {
+            return 1;
         }
-        else if (row.rank==4){
+        else
+            return -1;
+        return 0;
+    }
+    function rankFormatter(value,row,index) {
+        if (row.rank===3) {
+            return '组长';
+        }
+        else if (row.rank===4){
             return '副组长';
         }
         else {
-            return '组长';
+            return '组员';
         }
     }
     function operateFormatter(value,row,index) {
         <s:if test="#session.project.rank==3">
-        if (row.rank==5){
+        if (row.rank===5){
             return ['<a class="mod btn-xs btn-info">设为副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
         }
-        else if (row.rank==4){
+        else if (row.rank===4){
             return ['<a class="mod btn-xs btn-warning">撤销副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
         }</s:if>
@@ -542,7 +555,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id = row.id_document;
-                location.href = "project-jmpDocument";
+                location.href = "catalog-jmpTemplate?documentId=1";
             }
     };
 
@@ -639,29 +652,29 @@
         if (page<=0){
             page = 1;
         }
-        discussReload2();
-        $("#page").text(page);
+        discussReload2(page-1);
+        $("#index").text(page);
     }
     function next() {
         page++;
-        if (page > max){
+        if (page >= max){
             page = max;
         }
-        discussReload2();
-        $("#page").text(page);
+        discussReload2(page-1);
+        $("#index").text(page);
     }
     //评论区初始化
     function discussInit() {
-        $(".discuss").code("");
+        $(".discuss").summernote('reset');
     }
     //评论加载
-    function discussReload2() {
+    function discussReload2(page1) {
         $.ajax({
             url: "discuss-getProjectDis",
             data: {
                 id_Project: id_Project,
                 id_user: id_User,
-                page : page
+                page : page1
             },
             dataType: "json",
             type: "Post",
@@ -670,7 +683,7 @@
                 max = result.disPage;
                 num = result.disNum;
 
-                $("#pages").text(page);
+                $("#pages").text(max);
                 $("#num").text(num);
                 var content="",tempDis,date,state;
                 var title = "";
@@ -725,7 +738,7 @@
                 success: function (result) {
                     showtoast2("success","成功","评论提交成功");
                     discussInit();
-                    discussReload2();
+                    discussReload2(0);
                 },
                 error: function (result) {
                     showtoast2("dangerous","加载失败","加载目录失败");
@@ -734,10 +747,10 @@
         }
 
         else {
-            $('#input-id').on('filepreajax', function(event, previewId, index) {
-
-            });
-            $('#fileupload').fileinput('upload');
+            $('#fileupload').fileinput('upload').fileinput('clear');
+            showtoast2("success","成功","评论提交成功");
+            discussInit();
+            discussReload2(0);
         }
     }
 
@@ -749,25 +762,15 @@
             removeClass: "btn btn-danger",
             removeLabel: "清除",
             removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-            uploadClass: "btn btn-info",
-            uploadLabel: "发布",
-            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
             uploadAsync: false,
             uploadUrl: "discuss-commit2Project",
             uploadExtraData: function (previewId, index) {
-                var info = {disContent: $(".discuss").code(), id_Project: id_Project, id_user: id_User};
+                var info = {disContent: $(".discuss").summernote('code'), id_Project: id_Project, id_user: id_User};
                 return info;
             }
         }
 
     );
-
-
-    $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
-        showtoast22("success","成功","评论提交成功");
-        discussInit();
-        discussReload2();
-    });
 
     //评论删除按钮
     $(document).on("click",".deleteDis",function () {
@@ -792,7 +795,7 @@
                     success: function (result) {
                         $("button.cancel").click();
                         showtoast2("success","成功","删除评论成功");
-                        discussReload2()
+                        discussReload2(0)
                     },
                     error: function (result) {
                         showtoast2("dangerous","失败","删除评论失败")
@@ -804,14 +807,18 @@
     //评论编辑按钮
     function edit() {
         $("#eg").addClass("no-padding");
-        $(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            // ['fontsize', ['fontsize']],
-            // ['color', ['color']],
-            // ['para', ['paragraph']],
-            // ['table', ['table']],
-            ['picture', ['picture']]
-        ],
+        $(".click2edit").summernote(
+        {
+            lang:"zh-CN",
+            focus:true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                // ['fontsize', ['fontsize']],
+                // ['color', ['color']],
+                // ['para', ['paragraph']],
+                // ['table', ['table']],
+                ['picture', ['picture']]
+                ],
             callbacks: {
                 onImageUpload: function(files, editor, $editable) {
                     that=$(this);

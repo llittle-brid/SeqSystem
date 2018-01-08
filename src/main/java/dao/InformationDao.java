@@ -13,4 +13,6 @@ public interface InformationDao {
     void refusePro(Integer ID_PROJECT, int ID_USER);
     void joinPro(Integer ID_PROJECT, int ID_USER);
     void joinOrg(Integer ID_ORGANIZATION, int ID_USER);
+
+    void toMember(int id_project, int id_user, String content);
 }

@@ -1,5 +1,6 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -14,9 +15,11 @@ import entity.ProDIscussWrapper;
 import entity.ProDiscussEntity;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.StrutsStatics;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -56,7 +59,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         int third=Integer.valueOf(tempList[2]);
         int fourth=Integer.valueOf(tempList[3]);
         int id_catalog=catalogDao.getIdCatalog(id_document,first,second,third,fourth);
-        proDiscussDao.commit(1,id_catalog,new Timestamp(new java.util.Date().getTime()),disContent);
+        proDiscussDao.commit(1,id_catalog,new Timestamp(new Date().getTime()),disContent);
         return "Re";
     }
 
@@ -69,6 +72,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         List<String> Path = new LinkedList<>();
 
         if (MyFile!=null) {
+            HttpServletRequest request2 = (HttpServletRequest) ActionContext.getContext().get(StrutsStatics.HTTP_REQUEST);
             String savePath = ServletActionContext.getServletContext().getRealPath("accessories");
 
             SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
@@ -94,7 +98,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         }
 
         proDiscussDao = new ProDiscussDaoImp();
-        proDiscussDao.commit1(id_user,id_project,new Timestamp(new java.util.Date().getTime()),disContent,MyFileFileName,Path);
+        proDiscussDao.commit1(id_user,id_project,new Timestamp(new Date().getTime()),disContent,MyFileFileName,Path);
         return "Re";
     }
 
