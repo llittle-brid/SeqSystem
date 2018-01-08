@@ -12,10 +12,10 @@ public class OrgInviteDaoImp extends DAO<OrgInviteEntity> implements OrgInviteDa
     @Override
     public boolean inviteUser(OrgInviteEntity a,UserEntity b) {
         String content = b.getName()+" invite you to join organization:"+a.getORG_NAME();
-        String sql1 = "select ID_USER from USER where NAME = ?";
-        int id_user = getForValue(sql1,a.getUSER_NAME());
-        String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";
-        int id_org = getForValue(sql2,a.getORG_NAME());
+        String sql1 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";
+        int id_org = getForValue(sql1,a.getORG_NAME());
+        String sql2 = "select ID_USER from USER where NAME = ? and ID_USER not in (select ID_USER from ORG_MEMBER where ID_ORGANIZATION=?)";
+        int id_user = getForValue(sql2,a.getUSER_NAME(),id_org);
         Timestamp date = new Timestamp(new java.util.Date().getTime());
         String sql3 = "insert into ORG_USER_APPLY (ID_ORGANIZATION,ID_USER,DATE,MESSAGE) value(?,?,?,?)";
         try {
@@ -34,7 +34,7 @@ public class OrgInviteDaoImp extends DAO<OrgInviteEntity> implements OrgInviteDa
         String sql2 = "select ID_ORGANIZATION from ORGANIZATION where NAME=?";
         int id_org = getForValue(sql2,a.getORG_NAME());
         Timestamp date = new Timestamp(new java.util.Date().getTime());
-        String sql3 = "update ORG_USER_APPLY set STATE = 0,DATE=? where ID_USER=? and ID_ORGANIZATION=?";
+        String sql3 = "update ORG_USER_APPLY set STATE = 0,DATE=? where ID_USER=? and ID_ORGANIZATION=? and STATE=-1";
         update(sql3,date,id_user,id_org);
         return true;
     }
@@ -48,8 +48,8 @@ public class OrgInviteDaoImp extends DAO<OrgInviteEntity> implements OrgInviteDa
 
     @Override
     public boolean grantOrg(int advance_id, int current_id , String org_name) {
-        String sql1="update ORGANIZATION set ID_USER=? where NAME=?";
-        update(sql1,current_id,org_name);
+        String sql1="update ORGANIZATION set ID_USER=? where NAME=? and ID_USER = ?";
+        update(sql1,current_id,org_name,advance_id);
         return true;
     }
 

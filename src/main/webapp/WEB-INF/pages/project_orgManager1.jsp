@@ -321,8 +321,15 @@
                         data: {ID_USER: id_user, ORG_NAME: currentOrg},
                         dataType: "json",
                         success: function () {
-                            swal("转让成功！", "您即将跳转至首页(未跳转请点击下方按钮)。", "success");
-                            location.href = "user-jmpTemp";
+                            swal({
+                                title: "转让成功",
+                                text: "点击返回首页！",
+                                type:"success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpTemp";
+                            })
                         },
                         error: function (result) {
                             swal("操作失败！", "出现未知错误，请重试。", "error");
@@ -442,10 +449,10 @@
                                     $('#showOperate').bootstrapTable('load', orgOperateList);
                                     $('button#cancel-invite').click();
                                 }
-                                else  swal("邀请失败！", "用户名不存在。", "error");
+                                else  swal("邀请失败！", "用户名不存在或该用户已在机构中。", "error");
                             },
                             error: function () {
-                                swal("邀请失败！", "用户名不存在。", "error");
+                                swal("邀请失败！", "用户名不存在或该用户已在机构中。", "error");
                             }
                         }
                     )

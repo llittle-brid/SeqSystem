@@ -65,7 +65,6 @@
 <script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
 <script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
@@ -131,7 +130,7 @@
                     minlength: "验证码为6位",
                     maxlength: "验证码为6位"
                 },
-                email: "请输入一个正确的邮箱",
+                email: "请输入一个正确的邮箱"
             }
         });
     });
@@ -146,7 +145,9 @@
             }
         });
         if(state==="false") {
+            state="true";
             swal("输入有误", "请根据提示修改您的输入的信息", "error");
+
         }
         else {
             $.ajax({

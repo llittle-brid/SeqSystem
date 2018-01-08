@@ -35,30 +35,27 @@
             </div>
             <form class="cmxform" id="signupForm">
                 <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                    <label for="name"></label>
-                    <input name="name" type="text" id="name" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入用户名" required="">
+                    <input name="email" id="email"  class="form-control loginLine valiadate" style="font-size:12px" placeholder="请输入邮箱" >
                 </div>
                 <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                    <label for="email"></label>
-                    <input name="email" id="email" type="email" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入邮箱" required="">
-                </div>
-                <div class="form-group col-sm-8 col-md-offset-2 loginLine ">
-                    <label for="password1"></label>
-                    <input name="password1" type="password" id="password1" class="form-control loginLine valiadate" style="font-size:13px" placeholder="重置一个新密码" required="">
+                    <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="设置用户名（注册成功后不可更改）" required="">
                 </div>
                 <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                    <label for="password2"></label>
-                    <input name="password2" type="password" id="password2" class="form-control loginLine valiadate" style="font-size:13px" placeholder="确认新密码" required="">
+                    <input name="password1" id="password1" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请设置密码（长度为6-22个字符）" required="">
+                </div>
+                <div class="form-group col-sm-8 col-md-offset-2 loginLine">
+                    <input name="password2" id="password2" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请再次输入密码确认" required="">
                 </div>
                 <div class="form-group col-sm-5 col-md-offset-2 loginLine">
-                    <label for="verification"></label>
                     <input name="verification" id="verification"  type="verification" class="form-control loginLine valiadate" style="font-size:12px" placeholder="请填写验证码" required="">
                 </div>
                 <div class="form-group">
-                    <input id="replacepassword_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:22px;height: 30px;width: 15px;font-size:12px"  onclick="sendCode(this)" value="获取邮箱验证码"/>
+                    <input id="replacepassword_email" type="button" class="btn btn-w-m btn-default" style="color:#333333;margin-left:-30px;margin-top:4px;height: 30px;width: 15px;font-size:12px"  onclick="sendCode(this)" value="获取邮箱验证码"/>
                 </div>
+                <h6>&nbsp;</h6>
                 <div style="width: 300px" class="form-group col-sm-8  col-md-offset-2 loginLine">
-                    <button  id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button><a href="login-jmpLogin"><small>取消修改，点我登录</small></a>
+                    <button id="replacepassword_button" class="btn btn-w-m btn-Bblack btn-sm">修改密码</button>
+                    <a href="login-jmpLogin"><small>取消修改，点我登录</small></a>
                 </div>
             </form>
         </div>
@@ -69,7 +66,6 @@
 <script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
 <script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
 <script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
@@ -82,9 +78,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
-
 <script>
-
     //表单验证
     $.validator.setDefaults({
         submitHandler: function() {
@@ -131,10 +125,10 @@
                 },
                 verification: {
                     required: "请输入验证码",
-                    minlength: "验证码不符合要求，请输入正确的验证码",
-                    maxlength: "验证码不符合要求，请输入正确的验证码"
+                    minlength: "验证码为6位",
+                    maxlength: "验证码为6位"
                 },
-                email: "请输入一个正确的邮箱",
+                email: "请输入一个正确的邮箱"
             }
         });
     });
@@ -142,16 +136,17 @@
     var state="true";
     $("button#replacepassword_button").click(function () {
         $(".valiadate").each(function(){
-            if(($(this).attr("aria-invalid")==="undefined")||$(this).attr("aria-invalid")==="true") {
-                alert($(this).val())
+            if(($(this).attr("aria-invalid")==="undefined")||($(this).attr("aria-invalid")==="true")){
                 state="false";
                 return;
             }
         });
         if(state==="false") {
+            var state="true";
             swal("输入有误", "请根据提示修改您的输入的信息", "error");
+
         }
-        else {
+        else{
             $.ajax({
                 url: "login-replacepassword",
                 data: {
@@ -166,7 +161,7 @@
                 async: "false",
                 success: function (result) {
                     if (result.consequence === "error") {
-                        swal("验证码错误！", "请检查您的验证码输入是否正确", "error");
+                        swal("修改密码失败！", "请获取正确验证码", "error");
                     }
                     else if (result.res === true) {
                         swal({
@@ -180,10 +175,10 @@
                         })
                     }
                     else if (result.res === false)
-                        swal("修改密码失败！", "未知错误请检查。", "error");
+                        swal("修改密码失败！", "请确认用户名与邮箱是否匹配。", "error");
                 },
                 error: function () {
-                    swal("修改密码失败！", "请先获取验证码并保证网络通畅。", "error");
+                    swal("修改密码失败！", "服务器异常。", "error");
                 }
             })
         }

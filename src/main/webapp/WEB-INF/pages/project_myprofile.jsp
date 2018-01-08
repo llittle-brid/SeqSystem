@@ -455,14 +455,8 @@
                     field: 'operate',
                     title: '操作',
                     align: 'right',
-                    events: "accRefu",
-                    formatter: "info"
-                },
-                {
-                    field: 'operator',
-                    align: 'left',
-                    events: "refuse",
-                    formatter: "infor"
+                    events: "NewActionEvents",
+                    formatter: "operateFormatter"
                 }
             ]
         }
@@ -590,14 +584,14 @@
      * @param index
      * @returns {string}
      */
-    function info(value,row,index) {
-        return '<a class="mod zfont3">接受</a>'
+    function operateFormatter(value,row,index) {
+        return[
+            '<a class="agree" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >同意</button></a>',
+            '<a class="refuse" style="padding-left: 10px"><button class="btn btn-info text-center btn-xs " >拒绝</button></a>'
+        ].join('');
     }
-    function infor(value,row,index) {
-        return '<a class="mod zfont3">拒绝</a>'
-    }
-    window.accRefu = {
-        'click .mod': function(e, value, row, index) {
+    window.NewActionEvents = {
+        'click .agree': function(e, value, row, index) {
             //修改操作
             swal({title:"您确定要接受这个邀请吗",
                 text:"点击确定将接受这个邀请！",
@@ -607,21 +601,25 @@
                 confirmButtonText:"确定",
                 closeOnConfirm:false
             },function(){
-                swal("接受邀请！","您已经加入这个机构。","success")
-                var id_ORG = row.ID_ORGANIZATION;
-                var ID_ORGANIZATION = parseInt(id_ORG);
-                var ID_PROJECT = parseInt(row.ID_PROJECT);
-                if( isNaN(ID_ORGANIZATION) ){
-                    location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
-                }
-                else if(isNaN(ID_PROJECT)){
-                    location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
-                }
+                swal({
+                    title: "同意成功",
+                    type:"success",
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "OK"
+                },function(){
+                    var id_ORG = row.ID_ORGANIZATION;
+                    var ID_ORGANIZATION = parseInt(id_ORG);
+                    var ID_PROJECT = parseInt(row.ID_PROJECT);
+                    if( isNaN(ID_ORGANIZATION) ){
+                        location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
+                    }
+                    else if(isNaN(ID_PROJECT)){
+                        location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
+                    }
+                })
             })
         },
-    };
-    window.refuse = {
-        'click .mod': function(e, value, row, index) {
+        'click .refuse': function(e, value, row, index) {
             //修改操作
             swal({title:"您确定要拒绝这个邀请吗",
                 text:"点击确定将拒绝这个邀请！",
@@ -631,22 +629,24 @@
                 confirmButtonText:"确定",
                 closeOnConfirm:false
             },function(){
-                swal("拒绝邀请！","您已经拒绝加入这个机构。","success")
-                var id_ORG = row.ID_ORGANIZATION;
-                var ID_ORGANIZATION = parseInt(id_ORG);
-                var ID_PROJECT = parseInt(row.ID_PROJECT);
-                if( isNaN(ID_ORGANIZATION) ){
-                    location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
-                }
-                else if(isNaN(ID_PROJECT)){
-                    location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
-                }
+                swal({
+                    title: "拒绝成功",
+                    type:"success",
+                    confirmButtonColor: "#18a689",
+                    confirmButtonText: "OK"
+                },function(){
+                    var id_ORG = row.ID_ORGANIZATION;
+                    var ID_ORGANIZATION = parseInt(id_ORG);
+                    var ID_PROJECT = parseInt(row.ID_PROJECT);
+                    if( isNaN(ID_ORGANIZATION) ){
+                        location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
+                    }
+                    else if(isNaN(ID_PROJECT)){
+                        location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
+                    }
+                })
             })
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
         }
     };
-
 </script>
 </html>

@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.OrgInviteDao;
 import dao.UserDao;
+import daoImp.HistoryInfoDaoImp;
 import daoImp.OrgInviteDaoImp;
 import daoImp.UserDaoImp;
 import entity.OrgInviteEntity;
@@ -13,6 +14,7 @@ import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,15 +66,21 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         return SUCCESS;
     }
 
-    public String grantOrg(){
+    public String grantOrg() {
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
-        UserDao userDao =  new UserDaoImp();
-        System.out.println(orgInvite.getID_USER()+"grantOrg"+orgInvite.getORG_NAME());
-        UserEntity sessionUser=(UserEntity)session.get("user");
-        boolean res=orgInviteDao.grantOrg(sessionUser.getId_user(),orgInvite.getID_USER(),orgInvite.getORG_NAME());
-        int orgManager=userDao.orgManager(sessionUser.getId_user());
-        session.put("orgManager",orgManager);
+        HistoryInfoDaoImp history = new HistoryInfoDaoImp();
+        UserDao userDao = new UserDaoImp();
+        System.out.println(orgInvite.getID_USER() + "grantOrg" + orgInvite.getORG_NAME());
+        UserEntity sessionUser = (UserEntity) session.get("user");
+        boolean res = orgInviteDao.grantOrg(sessionUser.getId_user(), orgInvite.getID_USER(), orgInvite.getORG_NAME());
+        if (res) {
+            int orgManager = userDao.orgManager(sessionUser.getId_user());
+            session.put("orgManager", orgManager);
+            String content = "你已成为机构"+orgInvite.getORG_NAME()+"的管理员";
+            Date dt=new Date();
+            history.hasAcceptorGrantORG( orgInvite.getID_USER(),content, dt,orgInvite.getORG_NAME());
+        }
         dataMap.put("res",res);
         return SUCCESS;
     }
@@ -80,7 +88,14 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     public String deleteUser(){
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
-        orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
+        HistoryInfoDaoImp history = new HistoryInfoDaoImp();
+        UserEntity sessionUser = (UserEntity) session.get("user");
+        boolean res=orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
+        if (res) {
+            String content = "你已被机构"+orgInvite.getORG_NAME()+"移出";
+            Date dt=new Date();
+            history.hasAcceptorDeleteORG(orgInvite.getID_USER(),content, dt,orgInvite.getORG_NAME());
+        }
         UserDao userdao = new UserDaoImp();
         UserEntity seesionUser=(UserEntity)session.get("user");
         List<UserEntity> orgMember = userdao.getOrgAllMem(seesionUser.getId_user(),orgInvite.getORG_NAME());
