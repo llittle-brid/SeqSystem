@@ -10,9 +10,10 @@ var documentId=$("input#documentId").val();
 var usableList;
 // 加载模板3时初始化
 var roleList;
+var editable=false;
 //评论区初始化
 function discussInit() {
-    $(".discuss").code(""); 
+    $(".discuss").summernote('code',"")
 }
 //评论加载
 function disReload() {
@@ -48,6 +49,7 @@ function disReload() {
 }
 //目录点击事件
 $(document).on("click",".dic",function () {
+    editable=false;
     nowClick=$(this);
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
     $.ajax({
@@ -75,6 +77,7 @@ $(document).on("click",".dic",function () {
             discussInit();
             entity=result.entity;
             if(template.id_template=="3"){//加载角色+内容
+
                 roleList=result.roleList;
                 loadTemplateThree(entity);
             }
@@ -94,6 +97,9 @@ $(document).on("click",".dic",function () {
 //加载模板1的内容
 function loadTemplateOne(entity) {
     var content=entity.content;
+    if (editable==true)
+        $("#describe").summernote("code",content);
+    else
     $("#describe").html(content);
 }
 //加载模板2的内容
@@ -101,9 +107,16 @@ function loadTemplateTwo(entity) {
     var roleName=entity.roleName;
     var describe=entity.describe;
     var permissions=entity.permissions;
-    $("#roleName").val(roleName);
-    $("#describe").html(describe);
-    $("#permissions").html(permissions);
+    if (editable==true){
+        $("#describe").summernote("code",describe);
+        $("#permissions").summernote("code",permissions);
+    }
+else {
+
+        $("#describe").html(describe);
+        $("#permissions").html(permissions);
+    }  $("#roleName").val(roleName);
+
 }
 //加载模板3的内容
 function loadTemplateThree(entity) {
@@ -111,17 +124,12 @@ function loadTemplateThree(entity) {
 
     $("input#funName").val(entity.funName);
     $("select#priority").val(entity.priority);
-    $("#describe").html(entity.describe);
-    $("#in").html(entity.input);
-    $("#out").html(entity.output);
-    $("#basic").html(entity.basic);
-    $("#alternative").html(entity.alternative);
     //生成表格
     var funRoleList=entity.funRoleList;
     var funUsableList=entity.funUsableList;
     var funRoleContent="";
     for (var i=0;i<funRoleList.length;i++){
-        funRoleContent+=" <tr class='funTr'> <th > <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
+        funRoleContent+=" <tr class='funTr'> <th  ><div class='hidenTh' style='display: none'> <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></div></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
 
         for (var j=0;j<roleList.length;j++){
             funRoleContent+="<option";
@@ -143,6 +151,21 @@ function loadTemplateThree(entity) {
         funUsableContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funUsableList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funUsableList[i].usablePara+"</th> <th style='text-align: center' >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
     }
     $(".funTable tfoot").append(funUsableContent);
+    if (editable==true){
+        $("#describe").summernote("code",entity.describe);
+        $("#in").summernote("code",entity.input);
+        $("#out").summernote("code",entity.output);
+        $("#basic").summernote("code",entity.basic);
+        $("#alternative").summernote("code",entity.alternative);
+        $(".dis").removeAttr("disabled")
+    }
+    else {
+        $("#describe").html(entity.describe);
+        $("#in").html(entity.input);
+        $("#out").html(entity.output);
+        $("#basic").html(entity.basic);
+        $("#alternative").html(entity.alternative);
+    }
 }
 
 //新增弹框初始化
@@ -534,7 +557,7 @@ function catalogNew() {
 }
 //评论提交
 function commitDis() {
-    var discuss=$(".discuss").code();
+    var discuss=$(".discuss").summernote('code');
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
     $.ajax({
         url: "discuss-commit",
@@ -606,10 +629,10 @@ function catalogRename() {
 }
 //模板编辑按钮
 function temp_edit() {
+    editable=true;
     $("#eg").addClass("no-padding");$(".click1edit").summernote({
         height:100,
         minHeight:100,
-        maxHeight:100,
         lang:"zh-CN",focus:true,toolbar: [
         // ['style', ['bold', 'italic', 'underline', 'clear']],
         // ['fontsize', ['fontsize']],
@@ -621,20 +644,25 @@ function temp_edit() {
     ],
         placeholder: '暂无内容',
     })
+    $("div.hidenTh").show();
     $("#edit").attr("style","display:none");
     $("#save").attr("style","display:show");
     $(".dis").removeAttr("disabled")
 }
+
+
 //模板保存按钮
 function temp_save() {
     $("#eg").removeClass("no-padding");
-    var aHTML=$(".click1edit").code();$(".click1edit").destroy();
-    $("#save").attr("style","display:none");
-    $("#edit").attr("style","display:show");
+    var aHTML=$(".click1edit").summernote('code');
+    // $(".click1edit").summernote('destroy');
+    // $("#save").attr("style","display:none");
+    // $("#edit").attr("style","display:show");
+    // $("div.hidenTh").hide();
 
     var id_template = nowCatalog.id_template,id_catalog=nowCatalog.id_catalog;
         if (id_template == "1") {//通用
-        var describe=$("#describe").code();
+        var describe=$("#describe").summernote('code');
         $.ajax({
             url: "catalog-saveTemplateOne",
             data: {id_catalog: id_catalog, content: describe},
@@ -651,8 +679,8 @@ function temp_save() {
     }
     else if (id_template == "2") {//角色
         var roleName=$("input#roleName").val();
-        var describe=$("#describe").code();
-        var permissions=$("#permissions").code();
+        var describe=$("#describe").summernote('code');
+        var permissions=$("#permissions").summernote('code');
         $.ajax({
             url: "catalog-saveTemplateTwo",
             data: {id_catalog: id_catalog, content: roleName,describe:describe,permissions:permissions},
@@ -670,11 +698,11 @@ function temp_save() {
     else  if(id_template == "3"){
             var funName=$("input#funName").val();
             var priority=$("select#priority").val();
-            var describe=$("#describe").html();
-            var inDiv=$("#in").html();
-            var outDiv=$("#out").html();
-            var basic=$("#basic").html();
-            var alternative=$("#alternative").html();
+            var describe=$("#describe").summernote('code');
+            var inDiv=$("#in").summernote('code');
+            var outDiv=$("#out").summernote('code');
+            var basic=$("#basic").summernote('code');
+            var alternative=$("#alternative").summernote('code');
             var  funRoleList="[{";
             var roleName,roleDescribe,usableName,usablePara,last="";
             $(".funTable tbody").find("tr").each(function () {
@@ -726,11 +754,13 @@ function temp_save() {
                 }
             })
         }
-    $(".dis").attr("disabled","true");
+    // $(".dis").attr("disabled","true");
 }
 //评论编辑按钮
 function edit() {
     $("#eg").addClass("no-padding");$(".click2edit").summernote({
+        height:50,
+        minHeight:50,
         lang:"zh-CN",focus:true,toolbar: [
         // ['style', ['bold', 'italic', 'underline', 'clear']],
         // ['fontsize', ['fontsize']],
@@ -743,7 +773,7 @@ function edit() {
 //评论保存按钮
 function save() {
     $("#eg").removeClass("no-padding");
-    var aHTML=$(".click2edit").code();
+    var aHTML=$(".click2edit").summernote('code');
 }
 
 /**
@@ -951,6 +981,9 @@ if(id_template=="1"){
         loadTemplateTwo(structureList[id])
     }
   else  if(id_template=="3"){
+    var end=$(".funTable tbody").children(".end");
+    $(".funTable tbody").html(end)
+    $(".funTable tfoot").html("");
         loadTemplateThree(structureList[id])
     }
 }

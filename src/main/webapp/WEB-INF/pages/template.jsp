@@ -36,7 +36,9 @@
     <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs3s.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-lite.css" rel="stylesheet">
     <link href="../css/mjy.css" rel="stylesheet">
 
 </head>
@@ -325,14 +327,16 @@
 <script src="../js/plugins/layer/layer.min.js"></script>
 <script src="../js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="../js/contabs.min.js"></script>
-<script src="../js/plugins/pace/pace.min.js"></script>
+<%--<script src="../js/plugins/pace/pace.min.js"></script>--%>
 <script src="../js/plugins/toastr/toastr.min.js"></script>
 <script src="../js/mjy.js"></script>
 <script src="../js/template.js"></script>
 <%--<script src="../js/template3.js"></script>--%>
-<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../js/plugins/summernote/summernote.min.js"></script>
 <script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="../js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="../js/plugins/summernote/summernote-lite.js"></script>
 
 
 </html>
