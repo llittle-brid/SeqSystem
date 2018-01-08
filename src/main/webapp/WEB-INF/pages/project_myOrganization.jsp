@@ -14,6 +14,10 @@
 <%@ page import="daoImp.OrganizationDaoImp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,12 +30,12 @@
     <meta httpequiv="refresh" content="0;ie.html" />
     <![endif]>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min14ed.css" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
 
 </head>
 

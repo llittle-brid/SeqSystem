@@ -22,28 +22,28 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
 
     public List<LibraryEntity> getCommon(int id_user,int num1,int num2)
     {
-        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))  and ID_TEMPLATE=1 ) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) order by `ID_LIBRARY` limit ?,? ";
+        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) and ID_TEMPLATE=1 order by `ID_LIBRARY` limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,id_user,id_user,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getUser(int id_user,int num1,int num2)
     {
-        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))  and ID_TEMPLATE=2) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) order by `ID_LIBRARY` limit ?,? ";
+        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) and ID_TEMPLATE=2 order by `ID_LIBRARY` limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,id_user,id_user,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getCase(int id_user,int num1,int num2)
     {
-        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?))) and ID_TEMPLATE=3) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) order by `ID_LIBRARY` limit ?,? ";
+        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) and ID_TEMPLATE=3 order by `ID_LIBRARY` limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,id_user,id_user,num1,num2);
         return library1;
     }
 
     public List<LibraryEntity> getPicture(int id_user,int num1,int num2)
     {
-        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?))) and ID_TEMPLATE=4) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) order by `ID_LIBRARY` limit ?,? ";
+        String sql="select `LIBRARY`.`ID_LIBRARY` AS `ID_LIBRARY`,(`LIBRARY`.`ID_USER` * -(1)) AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from `LIBRARY` where (not(`LIBRARY`.`ID_LIBRARY` in (select `LIB_COLLECT`.`ID_LIBRARY` from `LIB_COLLECT` where (`LIB_COLLECT`.`ID_USER` = ?)))) union select `LIB_COLLECT`.`ID_LIBRARY` AS `ID_LIBRARY`,`LIB_COLLECT`.`ID_USER` AS `ID_USER`,`LIBRARY`.`NAME` AS `NAME`,`LIBRARY`.`ID_TEMPLATE` AS `ID_TEMPLATE`,`LIBRARY`.`MENTION` AS `MENTION`,`LIBRARY`.`TIME` AS `TIME`,`LIBRARY`.`COLLECT_NUM` AS `COLLECT_NUM` from (`LIB_COLLECT` left join `LIBRARY` on((`LIB_COLLECT`.`ID_LIBRARY` = `LIBRARY`.`ID_LIBRARY`))) where (`LIB_COLLECT`.`ID_USER` = ?) and ID_TEMPLATE=4 order by `ID_LIBRARY` limit ?,? ";
         List<LibraryEntity> library1=getForList(sql,id_user,id_user,num1,num2);
         return library1;
     }
@@ -60,9 +60,6 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         int count=Integer.valueOf(getForValue(sql).toString());
         return count;
     }
-
-
-
     public int getUsercount()
     {
         String sql="select count(*) from LIBRARY where ID_TEMPLATE=2";
@@ -94,12 +91,6 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         String sql="select count(*) from LIB_COLLECT where ID_USER=?";
         int count=Integer.valueOf(getForValue(sql,id_user).toString());
         return count;
-    }
-
-    @Override
-    public List<LibraryEntity> getTypeOfLib(int id_user, int id_type) {
-       String sql="select * from VIEW_LIB_COLLECT_JOIN_LIBRARY where id_user=? and id_template=?";
-       return getForList(sql,id_user,id_type);
     }
 
 }

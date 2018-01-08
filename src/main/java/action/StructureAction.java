@@ -93,7 +93,7 @@ public class StructureAction extends ActionSupport implements RequestAware, Sess
             ActionContext.getContext().getValueStack().set("list2",usList);
         }
         else if(id_template==3) {
-            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*2,(page-1)*0+2);
+            structureAll=structureDao.getAll(structure.getId_library(),(page-1)*2,(page-1)*2+2);
             int count=structureDao.count(structure.getId_library());
             int num=count/2+1;
             request.put("num",num);

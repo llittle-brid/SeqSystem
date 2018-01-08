@@ -9,17 +9,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.DocumentDao;
-import dao.OrganizationDao;
-import dao.ProjectDao;
+import dao.*;
 
-import dao.UserDao;
-import daoImp.DocumentDaoImp;
-import daoImp.OrganizationDaoImp;
-import daoImp.ProjectDaoImp;
+import daoImp.*;
 
 
-import daoImp.UserDaoImp;
 import entity.DocumentEntity;
 import entity.OrganizationEntity;
 import entity.ProjectEntity;
@@ -37,6 +31,7 @@ import java.util.Map;
 public class ProjectAction extends ActionSupport implements RequestAware, SessionAware, ModelDriven<ProjectEntity>, Preparable {
 
     private ProjectDao projectDao;
+    private ProDiscussDao proDiscussDao;
     private ProjectEntity project;
     private Map<String,Object> request;
     private Map<String,Object> session;
@@ -100,6 +95,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String jmpProjectInfo() {
         return "projectInformation";
     }
+    public String jmpDocument() {
+        return "projectDocument";
+    }
 
     public String getProjectInfo(){
         int id_Project = project.getId_Project();
@@ -107,13 +105,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         project = projectDao.getOne(id_Project);
 
         UserEntity pm = projectDao.getPM(project);
-        UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
-
-        int rank = projectDao.getRank(id_Project,user.getId_user());
 
         session.put("PM",pm);
         session.put("project",project);
-
         return SUCCESS;
     }
     public String getProjectMember(){

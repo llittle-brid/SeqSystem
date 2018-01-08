@@ -11,16 +11,13 @@ import java.util.List;
 public class InformationDaoImp extends DAO<InformationEntity> implements InformationDao{
     @Override
     public List<InformationEntity> getAll(int ID) {
-        String sql1 = "select * from VIEW_ORGAPPLY where STATE = 1 and ID_USER = ?";
+        String sql1 = "select * from VIEW_ORG_USER_APPLY where STATE = 0 and ID_USER = ?";
         List list1 = getForList(sql1,ID);
-        System.out.println(list1);
-        String sql2 = "select * from VIEW_PROAPPLY where STATE = 1 and ID_USER = ?";
+        String sql2 = "select * from VIEW_PROJECT_APPLY where STATE = 0 and ID_USER = ?";
         List list2 = getForList(sql2,ID);
-        System.out.println(list2);
         List list = new ArrayList();
         list.addAll(list1);
         list.addAll(list2);
-        System.out.println(list);
 //        System.out.println("list1:"+list1.size()+"list2:"+list2.size());
 //        while(list1.size() != 0 || list2.size() != 0){
 //            InformationEntity info1 = (InformationEntity) list1.get(0);
@@ -50,25 +47,37 @@ public class InformationDaoImp extends DAO<InformationEntity> implements Informa
     }
 
     @Override
-    public void accept(Integer ID_ORGANIZATION, Integer ID_PROJECT, int ID_USER) {
-        if(ID_ORGANIZATION != null) {
-            String sql = "update ORG_USER_APPLY set STATE=0 where ID_ORGANIZATION=? and ID_USER=?";
+    public void acceptOrg(Integer ID_ORGANIZATION, int ID_USER) {
+            String sql = "update ORG_USER_APPLY set STATE=1 where ID_ORGANIZATION=? and ID_USER=?";
             update(sql,ID_ORGANIZATION,ID_USER);
-        }
-        if(ID_PROJECT != null) {
-            String sql = "update PROJECT_APPLY set STATE=0 where ID_PROJECT=? and ID_USER=?";
-            update(sql,ID_PROJECT,ID_USER);
-        }
     }
     @Override
-    public void refuse(Integer ID_ORGANIZATION, Integer ID_PROJECT, int ID_USER) {
+    public void acceptPro(Integer ID_ORGANIZATION, int ID_USER) {
+        String sql = "update PROJECT_APPLY set STATE=1 where ID_PROJECT=? and ID_USER=?";
+        update(sql,ID_ORGANIZATION,ID_USER);
+    }
+    @Override
+    public void refuseOrg(Integer ID_ORGANIZATION, int ID_USER) {
         if(ID_ORGANIZATION != null) {
             String sql = "update ORG_USER_APPLY set STATE=-1 where ID_ORGANIZATION=? and ID_USER=?";
             update(sql,ID_ORGANIZATION,ID_USER);
         }
-        if(ID_PROJECT != null) {
-            String sql = "update PROJECT_APPLY set STATE=-1 where ID_PROJECT=? and ID_USER=?";
-            update(sql,ID_PROJECT,ID_USER);
-        }
+    }
+    @Override
+    public void refusePro(Integer ID_PROJECT, int ID_USER) {
+        String sql = "update PROJECT_APPLY set STATE=-1 where ID_PROJECT=? and ID_USER=?";
+        update(sql,ID_PROJECT,ID_USER);
+    }
+
+    @Override
+    public void joinPro(Integer ID_PROJECT, int ID_USER) {
+        String sql = "insert into PROJECT_MEMBER(ID_PROJECT,ID_USER,RANK) values(?,?,?)";
+        update(sql,ID_PROJECT,ID_USER,5);
+    }
+
+    @Override
+    public void joinOrg(Integer ID_ORGANIZATION, int ID_USER) {
+        String sql = "insert into ORG_MEMBER(ID_ORGANIZATION,ID_USER) values(?,?)";
+        update(sql,ID_ORGANIZATION,ID_USER);
     }
 }

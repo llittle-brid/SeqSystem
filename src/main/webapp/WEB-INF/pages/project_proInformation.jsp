@@ -7,9 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
-
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,24 +25,26 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="../example/favicon.ico">
-    <link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="../../css/animate.min.css" rel="stylesheet">
-    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
     <!-- bootstrap-table -->
-    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 
-    <link href="../../css/z_style.css" rel="stylesheet">
-    <link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <!-- Sweet Alert -->
-    <link href="../../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="../../css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
 
-    <link href="../../css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -170,7 +176,7 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li>
+                                    <li class="active">
                                         <a href="#tab-1" data-toggle="tab">讨论区</a>
                                     </li>
                                     <li>
@@ -210,9 +216,16 @@
                                         </div>
                                     </div>
                                     <!--自己的留言结束-->
+                                    <p>共<var id="num"></var>条留言</p>
                                     <div class="allDiscuss">
                                         <!--一行留言-->
                                         <!--一行留言结束-->
+                                    </div>
+                                    <div class="pull-right">
+                                        <a onclick="previous()">上一页</a>
+                                        <strong>第<var id="index"></var>页</strong>
+                                        共<var id="pages"></var>页
+                                        <a onclick="next()">下一页</a>
                                     </div>
 
                                 </div>
@@ -285,30 +298,31 @@
 
 </div>
 </body>
-<script src="../../js/jquery.min.js?v=2.1.4"></script>
-<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js"></script>
 <%--bootstrap-table--%>
-<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
-<script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../js/plugins/layer/layer.min.js"></script>
-<script src="../../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../../js/contabs.min.js"></script>
-<script src="../../js/plugins/pace/pace.min.js"></script>
-<script src="../../js/plugins/toastr/toastr.min.js"></script>
-<script src="../../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="../../js/mjy.js"></script>
-<script src="../../js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath %>/js/xzw.js"></script>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
 
-<script src="../../js/plugins/summernote/summernote.min.js"></script>
-<script src="../../js/plugins/summernote/summernote-zh-CN.js"></script>
-
-<script src="../../js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
-<script src="../../js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
-<script src="../../js/plugins/bootstrap-fileinput/locales/zh.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
 
 
 <script>
@@ -346,7 +360,7 @@
 
     var id_Project = "<s:property value="#session.project.id_Project"/>";
     var id_User = "<s:property value="#session.user.id_user"/>";
-    var discuss="123";
+    var discuss="";
 
     $.ajax(
         {
@@ -359,7 +373,6 @@
                 //finishingTask为table的id
                 $('#projectMember').bootstrapTable('load',proList);
                 discussInit();
-                // discussReload();
                 discussReload2();
             },
             error:function(){
@@ -370,10 +383,10 @@
         }
     );
     function rankFormatter(value,row,index) {
-        if (row.rank==5) {
+        if (row.rank===5) {
             return '组员';
         }
-        else if (row.rank==4){
+        else if (row.rank===4){
             return '副组长';
         }
         else {
@@ -406,7 +419,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                                showtoast("success", "设置成功", "成功设为副组长");
+                                showtoast2("success", "设置成功", "成功设为副组长");
                                 elem.text("撤销副组长");
                                 elem.removeClass("btn-info");
                                 elem.addClass("btn-warning");
@@ -425,7 +438,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                            showtoast("success", "撤销成功", "成功撤销该副组长");
+                            showtoast2("success", "撤销成功", "成功撤销该副组长");
                             elem.text("设为副组长");
                             elem.removeClass("btn-warning");
                             elem.addClass("btn-info");
@@ -497,6 +510,7 @@
                     field: 'view',
                     title: '操作',
                     align: 'center',
+                    events: "viewEvents",
                     formatter: "viewFormatter"
                 }
             ]
@@ -515,7 +529,7 @@
                 $('#projectDocs').bootstrapTable('load',docList);
             },
             error:function(){
-                showtoast("error", "没有文档", "获取文档记录失败！");
+                showtoast2("error", "没有文档", "获取文档记录失败！");
             }
         }
     );
@@ -523,6 +537,17 @@
     function viewFormatter(value,row,index) {
         return '<a class="view btn-xs btn-info">查看文档</a>';
     }
+
+    //表格  - 操作 - 事件
+    window.viewEvents = {
+        'click .view':
+            function(e, value, row, index) {
+                //修改操作
+                var id = row.id_document;
+                location.href = "project-jmpDocument";
+            }
+    };
+
 
 
     $("button#button_invite").click(function () {
@@ -538,13 +563,13 @@
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast("success", "邀请成功", "成功发送邀请");
+                    showtoast2("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast("error", "邀请失败", "用户名不存在!")
+                else  showtoast2("error", "邀请失败", "用户名不存在!")
             },
             error: function (result) {
-                showtoast("error", "邀请失败", "用户名不存在!")
+                showtoast2("error", "邀请失败", "用户名不存在!")
             }
         })
     });
@@ -573,13 +598,13 @@
                     async: "false",
                     success: function (result) {
                         if (result.res===true) {
-                            showtoast("success", "转移成功", "成功转移组长给该成员");
+                            showtoast2("success", "转移成功", "成功转移组长给该成员");
                             location.href = "user-jmpCurrentProjectList";
                         }
-                        else showtoast("error", "转移失败", "用户名不存在!");
+                        else showtoast2("error", "转移失败", "用户名不存在!");
                     },
                     error: function (result) {
-                        showtoast("error", "转移失败", "用户名不存在!")
+                        showtoast2("error", "转移失败", "用户名不存在!")
                     }
                 })
             }
@@ -607,26 +632,57 @@
 
 <%--评论区--%>
 <script>
+    var num = 1;
+    var page = 1;
+    var max = 1;
+    $("#index").text(page);
+    function previous() {
+        page--;
+        if (page<=0){
+            page = 1;
+        }
+        discussReload2();
+        $("#index").text(page);
+    }
+    function next() {
+        page++;
+        if (page > max){
+            page = max;
+        }
+        discussReload2();
+        $("#index").text(page);
+    }
     //评论区初始化
     function discussInit() {
-        $(".discuss").code("");
+        $(".discuss").summernote('')
     }
     //评论加载
     function discussReload2() {
         $.ajax({
             url: "discuss-getProjectDis",
-            data: {id_Project: id_Project,
-                id_user: id_User},
+            data: {
+                id_Project: id_Project,
+                id_user: id_User,
+                page : page
+            },
             dataType: "json",
             type: "Post",
             async: "false",
             success: function (result) {
+                max = result.disPage;
+                num = result.disNum;
+
+                $("#pages").text(max);
+                $("#num").text(num);
                 var content="",tempDis,date,state;
                 var title = "";
                 for (var i=0;i<result.wrapperList.length;i++){
                     tempDis=result.wrapperList[i].proDiscussEntity;
                     if (tempDis.name === "<s:property value="#session.PM.name"/>"){
                         title += "<span class=\"label label-warning\">组长</span>&nbsp;";
+                    }
+                    else if (tempDis.name === "<s:property value="#session.user.name"/>"){
+                        title += "<span class=\"label label-success\">我</span>&nbsp;";
                     }
                     state=result.wrapperList[i].state;
                     date=tempDis.time.toString().split("T");
@@ -653,7 +709,7 @@
                 $("div.allDiscuss").html(content);
             },
             error: function (result) {
-                showtoast("dangerous","加载失败","加载目录失败")
+                showtoast2("dangerous","加载失败","加载目录失败")
             }
         })
     }
@@ -661,7 +717,7 @@
 
     //评论提交
     function commitDiscuss() {
-         discuss = $(".discuss").code();
+         discuss = $(".discuss").summernote('code');
         if($('#fileupload').val()=="") {
             $.ajax({
                 url: "discuss-commit2Project",
@@ -669,45 +725,48 @@
                 type: "Post",
                 async: false,
                 success: function (result) {
-                    showtoast("success","成功","评论提交成功");
+                    showtoast2("success","成功","评论提交成功");
                     discussInit();
                     discussReload2();
                 },
                 error: function (result) {
-                    showtoast("dangerous","加载失败","加载目录失败");
+                    showtoast2("dangerous","加载失败","加载目录失败");
                 }
             })
         }
+
         else {
-            // alert(discuss)
-            upload()
+            $('#input-id').on('filepreajax', function(event, previewId, index) {
+
+            });
             $('#fileupload').fileinput('upload');
         }
     }
 
-    function upload() {
-        alert(discuss)
-        $('#fileupload').fileinput(
-            {
-                language: 'zh',
-                showUpload: false,
-                removeClass: "btn btn-danger",
-                removeLabel: "清除",
-                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-                uploadClass: "btn btn-info",
-                uploadLabel: "发布",
-                uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
-                uploadAsync: false,
-                uploadUrl: "discuss-commit2Project",
-                uploadExtraData: {disContent: discuss, id_Project: id_Project, id_user: id_User}
-            }
 
-        );
-    }
+    $('#fileupload').fileinput(
+        {
+            language: 'zh',
+            showUpload: false,
+            removeClass: "btn btn-danger",
+            removeLabel: "清除",
+            removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+            uploadClass: "btn btn-info",
+            uploadLabel: "发布",
+            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
+            uploadAsync: false,
+            uploadUrl: "discuss-commit2Project",
+            uploadExtraData: function (previewId, index) {
+                var info = {disContent: $(".discuss").summernote('code'), id_Project: id_Project, id_user: id_User};
+                return info;
+            }
+        }
+
+    );
 
 
     $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
-        showtoast("success","成功","评论提交成功");
+        showtoast2("success","成功","评论提交成功");
         discussInit();
         discussReload2();
     });
@@ -734,11 +793,11 @@
                     async: "false",
                     success: function (result) {
                         $("button.cancel").click();
-                        showtoast("success","成功","删除评论成功");
+                        showtoast2("success","成功","删除评论成功");
                         discussReload2()
                     },
                     error: function (result) {
-                        showtoast("dangerous","失败","删除评论失败")
+                        showtoast2("dangerous","失败","删除评论失败")
                     }
                 })
             });}
@@ -749,12 +808,38 @@
         $("#eg").addClass("no-padding");
         $(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
             ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['paragraph']],
-            ['table', ['table']],
+            // ['fontsize', ['fontsize']],
+            // ['color', ['color']],
+            // ['para', ['paragraph']],
+            // ['table', ['table']],
             ['picture', ['picture']]
-        ]})
+        ],
+            callbacks: {
+                onImageUpload: function(files, editor, $editable) {
+                    that=$(this);
+                    sendFile(files,that);
+                }
+            }
+        })
+    }
+    function sendFile(files, that) {
+        var data = new FormData();
+        data.append("file", files[0]);
+        $.ajax({
+            data : data,
+            type : "POST",
+            url : "librarydiscuss-image", //图片上传出来的url，返回的是图片上传后的路径，http格式
+            cache : false,
+            contentType : false,
+            processData : false,
+            dataType : "json",
+            success: function(data) {//data是返回的hash,key之类的值，key是定义的文件名
+                $(that).summernote('insertImage', data.path);
+            },
+            error:function(){
+                alert("上传失败");
+            }
+        });
     }
 
     //页面初始化

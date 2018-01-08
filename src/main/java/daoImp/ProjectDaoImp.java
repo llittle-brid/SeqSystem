@@ -3,8 +3,10 @@ package daoImp;
 
 import com.opensymphony.xwork2.ActionContext;
 import dao.DAO;
+import dao.DocumentDao;
 import dao.ProjectDao;
 import entity.ProjectEntity;
+import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
 
 import java.sql.Date;
@@ -20,6 +22,9 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
 //      use getTime() instead of getDate() to get current date.
         Date createDate = new Date(new java.util.Date().getTime());
+
+        Timestamp time = new Timestamp(new java.util.Date().getTime());
+
         int ID_Org = 0;
 
 //      project Name and Document Name cannot be null
@@ -33,12 +38,11 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         }
         else {
             try {
-                ID_Org = getForValue(sql2,p.getOrgName());
+                ID_Org = getForValueThrowsExp(sql2,p.getOrgName());
             } catch (Exception e){
                 return false;
             }
         }
-
 
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
         int ID_User = user.getId_user();
@@ -46,8 +50,12 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         try{
 //          新增项目，同时获取自增项目ID
             int Id_Project = insert(sql,p.getName(),createDate,p.getDocument_Name(),1,ID_Org,p.getIntro());
+
+//            新建文档
+            DocumentDao documentDao = new DocumentDaoImp();
+            documentDao.create(Id_Project,1,time,ID_User);
 //          set PM of one Project
-            update(sql3,Id_Project,ID_User,3);
+            updateThrowException(sql3,Id_Project,ID_User,3);
 
             return true;
         }catch (Exception e){
@@ -89,15 +97,15 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             return false;
         }
         else {
-            String sql1 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
             try {
-                update(sql1, idProject, idUser);
+                String sql1="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
+                update(sql1,idProject);
+                String sql2 = "update PROJECT_MEMBER set RANK=3 where ID_PROJECT = ? and ID_USER = ?";
+                updateThrowException(sql2, idProject, idUser);
+                return true;
             } catch (Exception e) {
                 return false;
             }
-            String sql2="update PROJECT_MEMBER set RANK=5 where ID_PROJECT = ? and RANK = 3";
-            update(sql2,idProject);
-            return true;
         }
     }
 
@@ -121,7 +129,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
 
     @Override
     public boolean inviteMember(int idUser, String PM, String projectName,int idProject) {
-        String verb = " invite you to join ";
+        String verb = " invite you to join PROJECT:  ";
         String content = PM+verb+projectName;
 
         String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
@@ -136,7 +144,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
             Timestamp time = new Timestamp(new java.util.Date().getTime());
 
             try {
-                update(sql, idProject, idUser, time, content);
+                updateThrowException(sql, idProject, idUser, time, content);
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -145,26 +153,6 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         }
     }
 
-    public boolean addMember(int idProject, int idUser){
-        String sql1 = "select count(*) from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
-        if (Integer.valueOf(getForValue(sql1,idProject,idUser).toString())==1) {
-            return false;
-        }
-
-        else {
-            String sql = "insert into PROJECT_MEMBER(ID_PROJECT,ID_USER,RANK) VALUES(?,?,?)";
-            update(sql, idProject,idUser,5);
-
-            String sql2 = "insert into PROJECT_APPLY(ID_PROJECT,ID_USER,DATE,MESSAGE) VALUES (?,?,?,?)";
-            Timestamp time = new Timestamp(new java.util.Date().getTime());
-
-            String verb = "agreed to join";
-            String content = idUser+verb+idProject;
-            update(sql, idProject, idUser, time, content);
-
-            return true;
-        }
-    }
 
     @Override
     public void end(int idProject) {
@@ -191,5 +179,13 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String sql="select * from VIEW_projectINFO where STATE = ? and ID_USER = ?";
         List<ProjectEntity> project = getForList(sql,state,id);
         return project;
+    }
+
+    @Override
+    public String findName(int id_Project) {
+        String sql = "select NAME from PROJECT where ID_PROJECT = ?";
+        String name = getForValue(sql,id_Project);
+        System.out.println("orgName:"+name);
+        return name;
     }
 }

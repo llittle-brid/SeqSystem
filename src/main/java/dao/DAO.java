@@ -61,8 +61,15 @@ public class DAO<T> {
 		}
 		return null;
 	}
-	
 
+	public <E> E getForValueThrowsExp(String sql,Object ... args) throws SQLException {
+		Connection connection=null;
+
+			connection=JdbcUtils.getConnection();
+			E res = (E) qr.query(connection, sql,new ScalarHandler(),args);
+			JdbcUtils.releaseConnection(connection);
+			return res;
+	}
 
 	public List<T> getForList(String sql,Object ... args){
 		Connection connection=null;
@@ -109,21 +116,23 @@ public class DAO<T> {
 			JdbcUtils.releaseConnection(connection);
 		}
 	}
+	public void updateThrowException(String sql, Object ... args) throws SQLException {
+		Connection connection=null;
+			connection=JdbcUtils.getConnection();
+			qr.update(connection, sql, args);
+			JdbcUtils.releaseConnection(connection);
+
+	}
 
 //	添加可以获取自增ID的insert方法
-	public int insert(String sql,Object ... args) {
+	public int insert(String sql,Object ... args) throws SQLException {
         Connection connection=null;
-        try{
+
             connection=JdbcUtils.getConnection();
             Long id0 = qr.insert(connection,sql,new ScalarHandler<Long>(),args);
+			JdbcUtils.releaseConnection(connection);
             int id = Integer.valueOf(id0.toString());
             return id;
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            JdbcUtils.releaseConnection(connection);
-        }
-        return 0;
 	}
 
 }

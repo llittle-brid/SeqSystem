@@ -7,7 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -16,14 +19,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户登录</title>
-    <link rel="shortcut icon" href="example/favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="css/z_style.css" rel="stylesheet">
-
-    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="<%=basePath%>/example/favicon.ico">
+    <link href="<%=basePath%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="<%=basePath%>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/z_style.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath%>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -35,47 +39,104 @@
     <div class="loginForm" >
         <div class="text-center loginLogo m-t" >
         </div>
+        <form class="cmxform" id="signupForm">
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="name" id="name" type="username" class="form-control loginLine" style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" required="">
+                <input name="name" id="name" type="username" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" required="">
             </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="password" id="password"  type="password" class="form-control loginLine" style="font-size:13px" placeholder="请输入密码" required="">
+                <input name="password" id="password"  type="password" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入密码" required="">
             </div>
             <div class="form-group">
                 <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
-
             </div>
-            <div class="form-group" >
-                <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>修改密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a>
-                </p></div>
+        </form>
+        <div class="form-group" >
+            <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a></p>
+        </div>
 
     </div>
 
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/content.min.js?v=1.0.0"></script>
-<script src="js/plugins/toastr/toastr.min.js"></script>
-<script src="js/mjy.js"></script>
+<script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="<%=basePath%>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath%>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath%>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath%>/js/contabs.min.js"></script>
+<script src="<%=basePath%>/js/plugins/pace/pace.min.js"></script>
+<script src="<%=basePath%>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="<%=basePath%>/js/plugins/toastr/toastr.min.js"></script>
+<script src="<%=basePath%>/js/mjy.js"></script>
+<script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
-<script>function verification() {
-    $.ajax({
-        url: "login-login",
-        data: {name: $("input#name").val(),password: $("input#password").val()},
-        dataType: "json",
-        type: "Post",
-        async: "false",
-        success: function (result) {
-            if(result.res===true)  {
-                showtoast("success", "登录成功", "操作成功")
-                location.href = "user-jmpTemp";
-            }
-            else  showtoast("error", "登录失败", "登录失败")
-        },
-        error: function (result) {
-            showtoast("error", "登录失败", "登录失败")
+<script>
+    //表单验证
+    $.validator.setDefaults({
+        submitHandler: function() {
         }
-    })
+    });
+    $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+        $("#signupForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                }
+            },messages: {
+                name: {
+                    required: "请输入用户名",
+                    minlength: "用户名长度不能小于 2 位"
+                },
+                password: {
+                    required: "请输入密码",
+                    minlength: "密码长度不能小于 6 位"
+                }
+            }
+        });
+    });
+    //以上为表单验证
+    var state="true";
+    function verification() {
+        $(".valiadate").each(function(){
+            if(($(this).attr("aria-invalid")==="undefined")||$(this).attr("aria-invalid")==="true") {
+                state="false";
+                return;
+            }
+        });
+        if(state==="false") {
+            swal("输入有误", "请根据提示修改您的输入的信息", "error");
+        }
+        else {
+            $.ajax({
+                url: "login-login",
+                data: {name: $("input#name").val(), password: $("input#password").val()},
+                dataType: "json",
+                type: "Post",
+                async: "false",
+                success: function (result) {
+                    if (result.res === true) {
+                        showtoast("success", "登录成功", "操作成功")
+                        location.href = "user-jmpTemp";
+                    }
+                    else showtoast("error", "登录失败", "用户名或密码错误")
+                },
+                error: function (result) {
+                    showtoast("error", "登录失败", "请检查你的网络")
+                }
+            })
+        }
 }
 </script>
 
