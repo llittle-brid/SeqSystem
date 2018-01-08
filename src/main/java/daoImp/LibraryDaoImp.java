@@ -93,4 +93,10 @@ public class LibraryDaoImp extends DAO<LibraryEntity> implements LibraryDao{
         return count;
     }
 
+    @Override
+    public List<LibraryEntity> getTypeOfLib(int id_user, int id_type) {
+        String sql="select * from VIEW_LIB_COLLECT_JOIN_LIBRARY where id_user=? and id_template=?";
+        return getForList(sql,id_user,id_type);
+    }
+
 }

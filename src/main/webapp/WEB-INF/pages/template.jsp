@@ -14,10 +14,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <!DOCTYPE html>
 <html>
 
@@ -30,18 +26,20 @@
 
 
     <title>模板页面</title>
-    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 
     <!-- Sweet Alert -->
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs3s.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/mjy.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="../css/plugins/summernote/summernote-lite.css" rel="stylesheet">
+    <link href="../css/mjy.css" rel="stylesheet">
 
 </head>
 
@@ -197,7 +195,7 @@
                 <div class="row">
                     <div class="ibox float-e-margins">
                         <div class="catalogNoneContent" style="text-align: center">
-                        <img src="<%=basePath %>/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
+                        <img src="/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
                         <div class="ibox-title catalogNotNoneContent" style="display:none;">
                             <div class="ibox-tools ">
                                 <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389" onclick="disReload()"  data-toggle="modal" data-target="#myModal1" > </i>
@@ -281,17 +279,36 @@
                             </a>
                         </div>
                     </div>
-                    <div class="ibox-content">
+                    <div class="ibox-content form-horizontal">
                         <!--构件库中间部分开始-->
                         <div class="form-group">
-                            <select class="form-control" name="">
-                                <option>通用模板构件库</option>
-                                <option>用例模板构件库</option>
-                                <option>用户模板构件库</option>
-                                <option>图片模板构件库</option>
+                            <label style="padding-left: 15px">选择构建类型</label>
+                            <select class="form-control" name="structType" id="structType">
+                                <option  selected disabled>请选择构建库类型</option>
+                                <option value="1">通用模板构件库</option>
+                                <option value="2">用户模板构件库</option>
+                                <option value="3">用例模板构件库</option>
                             </select>
+                            <br>
+                            <div class="alert alert-info" id="noneLibrary" style="display: none;">
+                                暂无该类型的收藏
+                            </div>
+                            <div class="libraryDiv" style="display: none;">
+                                <label style="padding-left: 15px">选择构建库</label>
+                                <select class="form-control" name="libraryList" id="libraryList" >
+                                    <option selected disabled>请选择构件库</option>
+                                </select>
+                            </div>
                         </div>
-                        <!--构件库中间部分结束-->
+                        <table  class=" col-sm-12 structTable" style="display: none;">
+                            <thead>
+                            <tr><th class="col-sm-6 text-muted">构件名</th><th class="col-sm-6 text-muted"> 操作</th></tr>
+                            </thead>
+
+                        </table>
+                        <h6>
+                            <small>.</small>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -302,22 +319,24 @@
 </div>
 </div>
 </body>
-<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
-<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
-<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
-<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
-<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>
-<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
-<script src="<%=basePath %>/js/mjy.js"></script>
-<script src="<%=basePath %>/js/template.js"></script>
-<%--<script src="<%=basePath %>/js/template3.js"></script>--%>
-<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../js/content.min.js?v=1.0.0"></script>
+<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../js/plugins/layer/layer.min.js"></script>
+<script src="../js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="../js/contabs.min.js"></script>
+<%--<script src="../js/plugins/pace/pace.min.js"></script>--%>
+<script src="../js/plugins/toastr/toastr.min.js"></script>
+<script src="../js/mjy.js"></script>
+<script src="../js/template.js"></script>
+<%--<script src="../js/template3.js"></script>--%>
+<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="../js/plugins/summernote/summernote.min.js"></script>
+<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="../js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="../js/plugins/summernote/summernote-lite.js"></script>
 
 
 </html>

@@ -7350,7 +7350,7 @@ var Context = /** @class */ (function () {
      * destroy modules and other resources and remove layout
      */
     Context.prototype.destroy = function () {
-        this._destroy();
+        this.fuckDestory();
         this.$note.removeData('summernote');
         this.ui.removeLayout(this.$note, this.layoutInfo);
     };
@@ -7360,7 +7360,7 @@ var Context = /** @class */ (function () {
     Context.prototype.reset = function () {
         var disabled = this.isDisabled();
         this.code(dom.emptyPara);
-        this._destroy();
+        this.fuckDestory();
         this._initialize();
         if (disabled) {
             this.disable();
@@ -7382,7 +7382,7 @@ var Context = /** @class */ (function () {
             _this.initializeModule(key);
         });
     };
-    Context.prototype._destroy = function () {
+    Context.prototype.fuckDestory = function () {
         var _this = this;
         // destroy modules with reversed order
         Object.keys(this.modules).reverse().forEach(function (key) {

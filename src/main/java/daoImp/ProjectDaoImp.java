@@ -172,6 +172,7 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
     @Override
     public int getRank(int idProject, int idUser) {
         String sql = "select RANK from PROJECT_MEMBER where ID_PROJECT = ? and ID_USER = ?";
+        int rank=getForValue(sql,idProject,idUser);
         return getForValue(sql,idProject,idUser);
     }
 
