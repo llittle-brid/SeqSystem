@@ -122,7 +122,7 @@
 <script src="<%=basePath %>js/content.min.js?v=1.0.0"></script>
 <script src="<%=basePath %>js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath %>js/plugins/suggest/bootstrap-suggest.min.js"></script>
-<script src="<%=basePath %>js/mjy.js"></script>
+<script src="<%=basePath %>js/xzw.js"></script>
 <script>
 
 </script>
@@ -140,13 +140,16 @@
             async: "false",
             success: function (result) {
                 if(result.res===true) {
-                    showtoast("success", "创建成功", "操作成功");
+                    showtoast2("success", "创建成功", "操作成功");
                     location.href = "user-jmpCurrentProjectList";
                 }
-                else  showtoast("error", "创建失败", "操作失败");
+                else {
+                    showtoast2("error", "创建失败", "操作失败");
+                    alert("error");
+                }
             },
             error: function (result) {
-                showtoast("error", "创建失败", "操作失败");
+                showtoast2("error", "创建失败", "操作失败");
             }
         })
     };

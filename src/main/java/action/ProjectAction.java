@@ -50,8 +50,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String chooseOrg() throws Exception {
         dataMap = new HashMap<String, Object>();
         OrganizationDao organizationDao = new OrganizationDaoImp();
-
-        List<OrganizationEntity> list = organizationDao.getMatched(project.getOrgName());
+        UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
+        int ID_User = user.getId_user();
+        List<OrganizationEntity> list = organizationDao.getMatched(ID_User,project.getOrgName());
         Gson gson = new Gson();
         String jsonString = gson.toJson(list);
         dataMap.put("res",jsonString);
@@ -157,6 +158,13 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
         projectDao = new ProjectDaoImp();
         boolean res = projectDao.alterPM(user.getId_user(),id_Project);
+
+        project = projectDao.getOne(id_Project);
+
+//        发送消息
+        InformationDao informationDao = new InformationDaoImp();
+        String content = "你已成为"+project.getName()+"的组长";
+        informationDao.toMember(id_Project,user.getId_user(),content);
         dataMap.put("res",res);
 
         return SUCCESS;
@@ -166,12 +174,15 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_User = project.getId_User();
         int id_Project = project.getId_Project();
 
-        System.out.println(id_User);
-
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
         projectDao = new ProjectDaoImp();
         projectDao.setVPM(id_User,id_Project);
 
-        System.out.println(id_Project);
+//        发送消息
+        InformationDao informationDao = new InformationDaoImp();
+        String content = "你已成为"+project.getName()+"的副组长";
+        informationDao.toMember(id_Project,id_User,content);
 
         return SUCCESS;
     }
@@ -180,12 +191,16 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_User = project.getId_User();
         int id_Project = project.getId_Project();
 
-        System.out.println(id_User);
+        projectDao = new ProjectDaoImp();
+        project = projectDao.getOne(id_Project);
 
         projectDao = new ProjectDaoImp();
         projectDao.dismissVPM(id_User,id_Project);
 
-        System.out.println(id_Project);
+//        发送消息
+        InformationDao informationDao = new InformationDaoImp();
+        String content = "你已被撤除"+project.getName()+"的副组长职位";
+        informationDao.toMember(id_Project,id_User,content);
 
         return SUCCESS;
     }
@@ -195,8 +210,15 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         int id_Project = project.getId_Project();
 
         projectDao = new ProjectDaoImp();
+
+        project = projectDao.getOne(id_Project);
+
         projectDao.deleteMember(id_User,id_Project);
 
+//      发送消息
+        InformationDao informationDao = new InformationDaoImp();
+        String content = "你已被从"+project.getName()+"中移除";
+        informationDao.toMember(id_Project,id_User,content);
         return SUCCESS;
     }
 
@@ -218,7 +240,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
         UserEntity pm = projectDao.getPM(project);
 
-        boolean res = projectDao.inviteMember(user.getId_user(),pm.getName(),project.getName(),id_Project);
+        String content = pm.getName() + "邀请你加入"+project.getName();
+
+        boolean res = projectDao.inviteMember(user.getId_user(),id_Project,content);
 
         dataMap.put("res",res);
         return SUCCESS;

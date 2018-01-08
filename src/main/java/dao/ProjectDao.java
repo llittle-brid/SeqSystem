@@ -16,7 +16,7 @@ public interface ProjectDao {
     void setVPM(int idUser,int idProject);
     void dismissVPM(int idUser,int idProject);
     void deleteMember(int idUser,int idProject);
-    boolean inviteMember(int idUser, String PM, String projectname, int idProject);
+    boolean inviteMember(int idUser,int idProject, String content);
     void end(int idProject);
     int getRank(int idProject,int idUser);
     ProjectEntity getOne(int id);

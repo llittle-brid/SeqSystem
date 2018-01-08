@@ -39,8 +39,8 @@
     <!-- Sweet Alert -->
     <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">--%>
     <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
 
     <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
@@ -315,10 +315,11 @@
 
 <script src="<%=basePath %>/js/xzw.js"></script>
 <script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
+
 <script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
-<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
 
 <script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
 <script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
@@ -337,11 +338,13 @@
                     field: 'rank',
                     title: '职务',
                     align: 'center',
+                    sortable: true,
+                    sortOrder: 'asc',
+                    rememberOrder: true,
                     formatter: "rankFormatter"
                 },{
                     field: 'mail',
                     title: '邮箱',
-                    sortable: true,
                     align: 'center'
                 },{
                     field: 'tel',
@@ -382,24 +385,32 @@
             }
         }
     );
+    function ranksorter(a,b) {
+        if (a<b) {
+            return 1;
+        }
+        else
+            return -1;
+        return 0;
+    }
     function rankFormatter(value,row,index) {
-        if (row.rank===5) {
-            return '组员';
+        if (row.rank===3) {
+            return '组长';
         }
         else if (row.rank===4){
             return '副组长';
         }
         else {
-            return '组长';
+            return '组员';
         }
     }
     function operateFormatter(value,row,index) {
         <s:if test="#session.project.rank==3">
-        if (row.rank==5){
+        if (row.rank===5){
             return ['<a class="mod btn-xs btn-info">设为副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
         }
-        else if (row.rank==4){
+        else if (row.rank===4){
             return ['<a class="mod btn-xs btn-warning">撤销副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
         }</s:if>
@@ -544,7 +555,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id = row.id_document;
-                location.href = "project-jmpDocument";
+                location.href = "catalog-jmpTemplate?documentId=1";
             }
     };
 
@@ -641,29 +652,29 @@
         if (page<=0){
             page = 1;
         }
-        discussReload2();
+        discussReload2(page-1);
         $("#index").text(page);
     }
     function next() {
         page++;
-        if (page > max){
+        if (page >= max){
             page = max;
         }
-        discussReload2();
+        discussReload2(page-1);
         $("#index").text(page);
     }
     //评论区初始化
     function discussInit() {
-        $(".discuss").summernote('')
+        $(".discuss").summernote('reset');
     }
     //评论加载
-    function discussReload2() {
+    function discussReload2(page1) {
         $.ajax({
             url: "discuss-getProjectDis",
             data: {
                 id_Project: id_Project,
                 id_user: id_User,
-                page : page
+                page : page1
             },
             dataType: "json",
             type: "Post",
@@ -727,7 +738,7 @@
                 success: function (result) {
                     showtoast2("success","成功","评论提交成功");
                     discussInit();
-                    discussReload2();
+                    discussReload2(0);
                 },
                 error: function (result) {
                     showtoast2("dangerous","加载失败","加载目录失败");
@@ -736,10 +747,10 @@
         }
 
         else {
-            $('#input-id').on('filepreajax', function(event, previewId, index) {
-
-            });
-            $('#fileupload').fileinput('upload');
+            $('#fileupload').fileinput('upload').fileinput('clear');
+            showtoast2("success","成功","评论提交成功");
+            discussInit();
+            discussReload2(0);
         }
     }
 
@@ -751,9 +762,6 @@
             removeClass: "btn btn-danger",
             removeLabel: "清除",
             removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-            uploadClass: "btn btn-info",
-            uploadLabel: "发布",
-            uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
             uploadAsync: false,
             uploadUrl: "discuss-commit2Project",
             uploadExtraData: function (previewId, index) {
@@ -763,13 +771,6 @@
         }
 
     );
-
-
-    $('#fileupload').on('fileuploaded', function(event, data, previewId, index) {
-        showtoast2("success","成功","评论提交成功");
-        discussInit();
-        discussReload2();
-    });
 
     //评论删除按钮
     $(document).on("click",".deleteDis",function () {
@@ -794,7 +795,7 @@
                     success: function (result) {
                         $("button.cancel").click();
                         showtoast2("success","成功","删除评论成功");
-                        discussReload2()
+                        discussReload2(0)
                     },
                     error: function (result) {
                         showtoast2("dangerous","失败","删除评论失败")
@@ -806,14 +807,18 @@
     //评论编辑按钮
     function edit() {
         $("#eg").addClass("no-padding");
-        $(".click2edit").summernote({lang:"zh-CN",focus:true,toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            // ['fontsize', ['fontsize']],
-            // ['color', ['color']],
-            // ['para', ['paragraph']],
-            // ['table', ['table']],
-            ['picture', ['picture']]
-        ],
+        $(".click2edit").summernote(
+        {
+            lang:"zh-CN",
+            focus:true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                // ['fontsize', ['fontsize']],
+                // ['color', ['color']],
+                // ['para', ['paragraph']],
+                // ['table', ['table']],
+                ['picture', ['picture']]
+                ],
             callbacks: {
                 onImageUpload: function(files, editor, $editable) {
                     that=$(this);
