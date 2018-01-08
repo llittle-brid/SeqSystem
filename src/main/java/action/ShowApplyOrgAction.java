@@ -11,6 +11,7 @@ import daoImp.ApplyOrganizationDaoImp;
 import daoImp.HistoryInfoDaoImp;
 import daoImp.ShowApplyOrgDaoImp;
 import entity.ShowApplyOrganizationEntity;
+import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -79,7 +80,7 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         ShowApplyOrganization = ShowApplyOrgDao.getOne(id_org_apply);
         ShowApplyOrgDao.refuseOrg(ShowApplyOrganization);
         List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.getALL();
-        String content = "机构："+ShowApplyOrganization.getOrg_name()+" 审核未通过";
+        String content = "管理员未通过机构："+ShowApplyOrganization.getOrg_name()+" 的申请";
         Date dt=new Date();
         history.hasRefuseApplyORG( ShowApplyOrganization.getId_user(),content, dt,ShowApplyOrganization.getOrg_name());
         Gson gson = new Gson();

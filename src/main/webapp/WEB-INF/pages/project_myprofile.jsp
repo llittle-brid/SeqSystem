@@ -471,7 +471,7 @@
                 },
                 {
                     field: 'NAME',
-                    title: '操作人',
+                    title: '用户',
                     sortable: true,
                     align: 'center'
                 },
@@ -550,6 +550,7 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
+                cancelButtonText: "取消",
                 closeOnConfirm: false
             }, function () {
                 var id = row.ID_ORGANIZATION;
@@ -570,9 +571,9 @@
                                 location.href = "user-jmpMyprofile";
                             })
                         }
-                        else swal("退出失败！", "机构管理员不能退出自己的机构", "success");
+                        else swal("退出失败！", "机构管理员不能退出自己的机构", "error");
                     }, error: function () {
-                        swal("退出！", "请检查你的网络", "failed");
+                        swal("退出！", "请检查你的网络", "error");
                     }
                 })
             })
@@ -594,62 +595,133 @@
         ].join('');
     }
     window.NewActionEvents = {
-        'click .agree': function(e, value, row, index) {
+        'click .agree': function (e, value, row, index) {
             //修改操作
-            swal({title:"您确定要接受这个邀请吗",
-                text:"点击确定将接受这个邀请！",
-                type:"warning",
-                showCancelButton:true,
-                confirmButtonColor:"#DD6B55",
-                confirmButtonText:"确定",
-                closeOnConfirm:false
-            },function(){
-                swal({
-                    title: "同意成功",
-                    type:"success",
-                    confirmButtonColor: "#18a689",
-                    confirmButtonText: "OK"
-                },function(){
-                    var id_ORG = row.ID_ORGANIZATION;
-                    var ID_ORGANIZATION = parseInt(id_ORG);
-                    var ID_PROJECT = parseInt(row.ID_PROJECT);
-                    if( isNaN(ID_ORGANIZATION) ){
-                        location.href="infomation-Accept?ID_PROJECT="+ID_PROJECT;
-                    }
-                    else if(isNaN(ID_PROJECT)){
-                        location.href="infomation-Accept?ID_ORGANIZATION="+ID_ORGANIZATION;
-                    }
-                })
+            swal({
+                title: "您确定要接受这个邀请吗",
+                text: "点击确定将接受这个邀请！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#18a689",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if (isNaN(ID_ORGANIZATION)) {
+                    $.ajax({
+                        url: "infomation-Accept?ID_PROJECT=" + ID_PROJECT,
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function (result) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "同意成功",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "user-jmpMyprofile";
+                                })
+                            }
+                            else swal("接受失败！", "接受失败", "failed");
+                        }, error: function () {
+                            swal("接收失败！", "请检查你的网络", "failed");
+                        }
+                    })
+                }
+                else if (isNaN(ID_PROJECT)) {
+                    $.ajax({
+                        url: "infomation-Accept?ID_ORGANIZATION=" + ID_ORGANIZATION,
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function (result) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "同意成功",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "user-jmpMyprofile";
+                                })
+                            }
+                            else swal("接受失败！", "接受失败", "failed");
+                        }, error: function () {
+                            swal("接收失败！", "请检查你的网络", "failed");
+                        }
+                    })
+                }
             })
         },
-        'click .refuse': function(e, value, row, index) {
+        'click .refuse': function (e, value, row, index) {
             //修改操作
-            swal({title:"您确定要拒绝这个邀请吗",
-                text:"点击确定将拒绝这个邀请！",
-                type:"warning",
-                showCancelButton:true,
-                confirmButtonColor:"#DD6B55",
-                confirmButtonText:"确定",
-                closeOnConfirm:false
-            },function(){
-                swal({
-                    title: "拒绝成功",
-                    type:"success",
-                    confirmButtonColor: "#18a689",
-                    confirmButtonText: "OK"
-                },function(){
-                    var id_ORG = row.ID_ORGANIZATION;
-                    var ID_ORGANIZATION = parseInt(id_ORG);
-                    var ID_PROJECT = parseInt(row.ID_PROJECT);
-                    if( isNaN(ID_ORGANIZATION) ){
-                        location.href="infomation-Refuse?ID_PROJECT="+ID_PROJECT;
-                    }
-                    else if(isNaN(ID_PROJECT)){
-                        location.href="infomation-Refuse?ID_ORGANIZATION="+ID_ORGANIZATION;
-                    }
-                })
+            swal({
+                title: "您确定要拒绝这个邀请吗",
+                text: "点击确定将拒绝这个邀请！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                closeOnConfirm: false
+            }, function () {
+                var id_ORG = row.ID_ORGANIZATION;
+                var ID_ORGANIZATION = parseInt(id_ORG);
+                var ID_PROJECT = parseInt(row.ID_PROJECT);
+                if (isNaN(ID_ORGANIZATION)) {
+                    $.ajax({
+                        url: "infomation-Refuse?ID_PROJECT=" + ID_PROJECT,
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function (result) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "拒绝成功",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "user-jmpMyprofile";
+                                })
+                            }
+                            else swal("拒绝失败！", "拒绝失败", "failed");
+                        }, error: function () {
+                            swal("拒绝失败！", "请检查你的网络", "failed");
+                        }
+                    })
+                }
+                else if (isNaN(ID_PROJECT)) {
+                    $.ajax({
+                        url: "infomation-Refuse?ID_ORGANIZATION=" + ID_ORGANIZATION,
+                        dataType: "json",
+                        type: "Post",
+                        async: "false",
+                        success: function (result) {
+                            if (result.res === true) {
+                                swal({
+                                    title: "拒绝成功",
+                                    type: "success",
+                                    confirmButtonColor: "#18a689",
+                                    confirmButtonText: "OK"
+                                }, function () {
+                                    location.href = "user-jmpMyprofile";
+                                })
+                            }
+                            else swal("拒绝失败！", "拒绝失败", "failed");
+                        }, error: function () {
+                            swal("拒绝失败！", "请检查你的网络", "failed");
+                        }
+                    })
+                }
             })
         }
-    };
+    }
+
 </script>
 </html>
