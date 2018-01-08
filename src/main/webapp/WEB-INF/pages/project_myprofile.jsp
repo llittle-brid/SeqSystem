@@ -216,8 +216,8 @@
                     <h4 class="modal-title">申请机构</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名(必填)" class="form-control" required="required"></div>
-                    <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注" class="form-control" required="required"></div>
+                    <div class="form-group"><label>机构名</label> <input id="org_name" type="text" placeholder="请输入机构名(必填，不超过30字符)" maxlength="30" class="form-control" required="required"></div>
+                    <div class="form-group"><label>备注</label> <input id="message" type="text" placeholder="请输入备注(可不填，不超过60字符)"  maxlength="60" class="form-control" required="required"></div>
                 </div>
                 <div class="modal-footer">
                     <button id="cancel-apply" type="button" class="btn btn-white" data-dismiss="modal">取消</button>
@@ -446,7 +446,7 @@
                     align: 'center',
                 },
                 {
-                    field: 'date',
+                    field: 'DATE',
                     title: '时间',
                     sortable: true,
                     align: 'center'
@@ -503,21 +503,7 @@
             }
         }
     )
-    //    $.ajax(
-    //        {
-    //            type:"GET",
-    //            url:"personalcenter-quitorg",
-    //            dataType:"json",
-    //            success:function(json){
-    //                var proList = JSON.parse(json.listorg);
-    //                //finishingTask为table的id
-    //                $('#finishingTask').bootstrapTable('load',proList);
-    //            },
-    //            error:function(){
-    //                alert("错误");
-    //            }
-    //        }
-    //    )
+
     $.ajax(
         {
             type:"GET",
@@ -553,27 +539,44 @@
      *个人机构
      * */
     function AddFunctionAlty(value,row,index) {
-        return '<a class="mod zfont3">退出</a>'
+        return '<a class="exit zfont3">退出</a>'
     }
     window.actionEvents = {
-        'click .mod': function(e, value, row, index) {
-            swal({title:"您确定要退出这个机构吗",
-                text:"点击确定后讲退出机构，请谨慎操作！",
-                type:"warning",
-                showCancelButton:true,
-                confirmButtonColor:"#DD6B55",
-                confirmButtonText:"确定",
-                closeOnConfirm:false
-            }, function(){
-                swal("退出成功！","您已经成功退出这个机构。","success")
+        'click .exit': function (e, value, row, index) {
+            swal({
+                title: "您确定要退出这个机构吗",
+                text: "点击确定后讲退出机构，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                closeOnConfirm: false
+            }, function () {
                 var id = row.ID_ORGANIZATION;
                 var ID_ORGANIZATION = parseInt(id);
-                location.href="personalcenter-quitorg?ID_ORGANIZATION="+ID_ORGANIZATION;
+                $.ajax({
+                    url: "personalcenter-quitorg?ID_ORGANIZATION=" + ID_ORGANIZATION,
+                    dataType: "json",
+                    type: "Post",
+                    async: "false",
+                    success: function (result) {
+                        if (result.res === true){
+                            swal({
+                                title: "退出成功",
+                                type: "success",
+                                confirmButtonColor: "#18a689",
+                                confirmButtonText: "OK"
+                            },function(){
+                                location.href = "user-jmpMyprofile";
+                            })
+                        }
+                        else swal("退出失败！", "机构管理员不能退出自己的机构", "success");
+                    }, error: function () {
+                        swal("退出！", "请检查你的网络", "failed");
+                    }
+                })
             })
             //修改操作
-        },
-        'click .delete' : function(e, value, row, index) {
-            //删除操作
         }
     };
 

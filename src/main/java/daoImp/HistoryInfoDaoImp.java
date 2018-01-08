@@ -45,4 +45,10 @@ public class HistoryInfoDaoImp extends DAO<HistoryInfoEntity> implements History
         String sql = "insert into MESSAGE (ID_USER,CONTENT,DATE,ID_ORG) values(?,?,?,?)";
         update(sql,ID_USER,content,date,id_org);
     }
+
+    @Override
+    public void hasRefuseApplyORG(int ID_USER, String content, Date date, String ORG_NAME) {
+        String sql = "insert into MESSAGE (ID_USER,CONTENT,DATE) values(?,?,?)";
+        update(sql,ID_USER,content,date);
+    }
 }

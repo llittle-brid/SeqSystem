@@ -36,7 +36,6 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         Gson gson = new Gson();
         String json = gson.toJson(list);
 //        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
-        System.out.println("org_showList"+json);
         dataMap.put("res",json);
         return SUCCESS;
     }
@@ -47,15 +46,12 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         List<ShowApplyOrganizationEntity> list = ShowApplyOrgDao.getOthers();
         Gson gson = new Gson();
         String json = gson.toJson(list);
-//        JsonArray jsonArray = new JsonParser().parse(json).getAsJsonArray();
-        System.out.println("apply_orgExitList"+json);
         dataMap.put("res",json);
         return SUCCESS;
     }
 
     public String agreeOrg(){
         dataMap = new HashMap<String, Object>();
-        System.out.println("start createOrg");
         int id_org_apply=ShowApplyOrganization.getId_org_apply();
         ShowApplyOrgDao = new ShowApplyOrgDaoImp();
         HistoryInfoDaoImp history = new HistoryInfoDaoImp();
@@ -85,7 +81,7 @@ public class ShowApplyOrgAction extends ActionSupport implements RequestAware,Se
         List<ShowApplyOrganizationEntity> list=ShowApplyOrgDao.getALL();
         String content = "机构："+ShowApplyOrganization.getOrg_name()+" 审核未通过";
         Date dt=new Date();
-        history.hasAcceptorGrantORG( ShowApplyOrganization.getId_user(),content, dt,ShowApplyOrganization.getOrg_name());
+        history.hasRefuseApplyORG( ShowApplyOrganization.getId_user(),content, dt,ShowApplyOrganization.getOrg_name());
         Gson gson = new Gson();
         String json = gson.toJson(list);
         dataMap.put("res",json);

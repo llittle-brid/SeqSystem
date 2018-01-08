@@ -148,7 +148,7 @@
                 <h4 class="modal-title">邀请用户</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" maxlength="30" class="form-control" required="required"></div>
+                <div class="form-group"><label>用户名</label> <input id="user_name" type="text" placeholder="请输入用户名" maxlength="15" class="form-control" required="required"></div>
             </div>
             <div class="modal-footer">
                 <button id="cancel-invite"type="button" class="btn btn-white" data-dismiss="modal">取消</button>
@@ -303,6 +303,7 @@
         'click .grant': function(e, value, row, index) {
             //转移机构管理权限
             var id_user = parseInt(row.id_user);
+            var user_name = row.name;
             var currentOrg=$("#gender").val();
             swal(
                 {
@@ -318,7 +319,7 @@
                     $.ajax({
                         type: "GET",
                         url: "orgInvite-grantOrg",
-                        data: {ID_USER: id_user, ORG_NAME: currentOrg},
+                        data: {ID_USER: id_user,USER_NAME: user_name, ORG_NAME: currentOrg},
                         dataType: "json",
                         success: function () {
                             swal({
@@ -341,6 +342,7 @@
             //踢出机构
             var id_user = parseInt(row.id_user);
             var currentOrg=$("#gender").val();
+            var user_name=row.name;
             swal(
                 {
                     title: "您确定将该用户移出机构吗",
@@ -355,7 +357,7 @@
                     $.ajax({
                         type: "GET",
                         url: "orgInvite-deleteUser",
-                        data: {ID_USER: id_user, ORG_NAME: currentOrg},
+                        data: {ID_USER: id_user, USER_NAME: user_name,ORG_NAME: currentOrg},
                         dataType: "json",
                         success: function (json) {
                                 swal("移出成功！", "您已将该用户移出机构。", "success");

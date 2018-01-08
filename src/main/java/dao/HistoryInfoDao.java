@@ -11,4 +11,5 @@ public interface HistoryInfoDao {
     void hasAcceptorRefusePRO(int ID_USER, String content, Date date, int ID_PRO);
     void hasAcceptorGrantORG(int ID_USER, String content, Date date, String ORG_NAME);
     void hasAcceptorDeleteORG(int ID_USER, String content, Date date, String ORG_NAME);
+    void hasRefuseApplyORG(int ID_USER, String content, Date date, String ORG_NAME);
 }

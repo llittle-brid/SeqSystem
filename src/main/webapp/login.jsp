@@ -39,23 +39,19 @@
     <div class="loginForm" >
         <div class="text-center loginLogo m-t" >
         </div>
-        <form class="cmxform" id="signupForm">
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="name" id="name" type="username" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" required="">
+                <input name="name" id="name" type="username" class="form-control loginLine " style="font-size:13px" placeholder="请输入账号（邮箱/手机/用户名）" maxlength="15" required="">
             </div>
             <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                <input name="password" id="password"  type="password" class="form-control loginLine valiadate" style="font-size:13px" placeholder="请输入密码" required="">
+                <input name="password" id="password"  type="password" class="form-control loginLine " style="font-size:13px" placeholder="请输入密码" maxlength="22" required="">
             </div>
             <div class="form-group">
                 <button id="login_button" class="btn btn-w-m btn-Bblack btn-sm" onclick="verification()">登 录</button>
             </div>
-        </form>
         <div class="form-group" >
             <p class="text-muted text-center" > <a href="login-jmpReplacepassword"><small>找回密码</small></a> | <a href="login-jmpRegistration"><small>注册账号</small></a></p>
         </div>
-
     </div>
-
 </div>
 <script src="<%=basePath%>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath%>/js/bootstrap.min.js?v=3.3.6"></script>
@@ -72,53 +68,9 @@
 <script src="<%=basePath%>/js/mjy.js"></script>
 <script src="<%=basePath%>/js/plugins/suggest/bootstrap-suggest.min.js"></script>
 <script src="<%=basePath%>/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 </body>
 <script>
-    //表单验证
-    $.validator.setDefaults({
-        submitHandler: function() {
-        }
-    });
-    $().ready(function() {
-// 在键盘按下并释放及提交后验证提交表单
-        $("#signupForm").validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 2
-                },
-                password: {
-                    required: true,
-                    minlength: 6
-                }
-            },messages: {
-                name: {
-                    required: "请输入用户名",
-                    minlength: "用户名长度不能小于 2 位"
-                },
-                password: {
-                    required: "请输入密码",
-                    minlength: "密码长度不能小于 6 位"
-                }
-            }
-        });
-    });
-    //以上为表单验证
-    var state="true";
     function verification() {
-        $(".valiadate").each(function(){
-            if(($(this).attr("aria-invalid")==="undefined")||$(this).attr("aria-invalid")==="true") {
-                state="false";
-                return;
-            }
-        });
-        if(state==="false") {
-            swal("输入有误", "请根据提示修改您的输入的信息", "error");
-        }
-        else {
             $.ajax({
                 url: "login-login",
                 data: {name: $("input#name").val(), password: $("input#password").val()},
@@ -137,7 +89,6 @@
                 }
             })
         }
-}
 </script>
 
 </html>

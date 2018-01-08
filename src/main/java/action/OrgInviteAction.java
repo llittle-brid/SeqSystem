@@ -30,13 +30,13 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
         UserEntity sessionUser = (UserEntity)session.get("user");
-        boolean res=orgInviteDao.inviteUser(orgInvite,sessionUser);
+        String content = sessionUser.getName()+"邀请你加入机构 "+orgInvite.getORG_NAME();
+        boolean res=orgInviteDao.inviteUser(content,orgInvite,sessionUser);
         List<OrgInviteEntity> list=orgInviteDao.getlist(orgInvite.getORG_NAME());
         Gson gson = new Gson();
         String showOperate = gson.toJson(list);
         dataMap.put("res",res);
         dataMap.put("showOperate",showOperate);
-        System.out.println("showOrgList"+showOperate);
         return SUCCESS;
     }
 
@@ -49,7 +49,6 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         Gson gson = new Gson();
         String showOperate = gson.toJson(list);
         dataMap.put("res",showOperate);
-        System.out.println("showOrgList"+showOperate);
         return SUCCESS;
     }
 
@@ -62,7 +61,6 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         Gson gson = new Gson();
         String showOperate = gson.toJson(list);
         dataMap.put("res",showOperate);
-        System.out.println("showOrgList"+showOperate);
         return SUCCESS;
     }
 
@@ -71,7 +69,6 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         orgInviteDao = new OrgInviteDaoImp();
         HistoryInfoDaoImp history = new HistoryInfoDaoImp();
         UserDao userDao = new UserDaoImp();
-        System.out.println(orgInvite.getID_USER() + "grantOrg" + orgInvite.getORG_NAME());
         UserEntity sessionUser = (UserEntity) session.get("user");
         boolean res = orgInviteDao.grantOrg(sessionUser.getId_user(), orgInvite.getID_USER(), orgInvite.getORG_NAME());
         if (res) {
@@ -92,16 +89,17 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         UserEntity sessionUser = (UserEntity) session.get("user");
         boolean res=orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
         if (res) {
-            String content = "你已被机构"+orgInvite.getORG_NAME()+"移出";
+            String content1 = orgInvite.getUSER_NAME()+"已被您移出机构"+orgInvite.getORG_NAME();
+            String content2 = "您已被移出机构"+orgInvite.getORG_NAME();
             Date dt=new Date();
-            history.hasAcceptorDeleteORG(orgInvite.getID_USER(),content, dt,orgInvite.getORG_NAME());
+            history.hasAcceptorDeleteORG(sessionUser.getId_user(),content1, dt,orgInvite.getORG_NAME());
+            history.hasAcceptorDeleteORG(orgInvite.getID_USER(),content2, dt,orgInvite.getORG_NAME());
         }
         UserDao userdao = new UserDaoImp();
         UserEntity seesionUser=(UserEntity)session.get("user");
         List<UserEntity> orgMember = userdao.getOrgAllMem(seesionUser.getId_user(),orgInvite.getORG_NAME());
         Gson gson = new Gson();
         String json = gson.toJson(orgMember);
-        System.out.println("OrgAllMember"+json);
         dataMap.put("res",json);
         return SUCCESS;
     }

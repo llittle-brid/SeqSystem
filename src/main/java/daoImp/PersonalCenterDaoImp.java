@@ -23,9 +23,17 @@ public class PersonalCenterDaoImp extends DAO<PersonalCenterEntity> implements P
     }
 
     @Override
-    public void quitorg(int ID,int ID_ORG){
-        String sql = "delete from ORG_MEMBER where ID_USER = ? and ID_ORGANIZATION = ?";
-        System.out.println("out of Org");
-        update(sql,ID, ID_ORG);
+    public boolean quitorg(int ID,int ID_ORG){
+        String sql0 = "select ID_USER from ORGANIZATION where ID_ORGANIZATION = ?";
+        int ID_USER = getForValue(sql0,ID_ORG);
+        if(ID == ID_USER){
+            return false;
+        }
+        else{
+            String sql1 = "delete from ORG_MEMBER where ID_USER = ? and ID_ORGANIZATION = ?";
+            System.out.println("out of Org");
+            update(sql1,ID, ID_ORG);
+            return true;
+        }
     };
 }
