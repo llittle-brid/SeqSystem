@@ -7013,6 +7013,7 @@ $$1.fn.extend({
      */
     summernote: function () {
         var type = $$1.type(lists.head(arguments));
+        alert("11")
         var isExternalAPICalled = type === 'string';
         var hasInitOptions = type === 'object';
         var options = $$1.extend({}, $$1.summernote.options, hasInitOptions ? lists.head(arguments) : {});

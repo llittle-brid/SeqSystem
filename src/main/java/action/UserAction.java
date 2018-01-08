@@ -159,6 +159,8 @@ public class UserAction extends ActionSupport implements RequestAware, SessionAw
         session.put("user",null);
         session.put("sysManager",0);
         session.put("orgManager",0);
+        session.put("project",null);
+        session.put("PM",null);
         return "loginPage";
     }
     public String jmpMyprofile(){

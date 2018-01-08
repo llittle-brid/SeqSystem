@@ -17,4 +17,10 @@ public class StructureDaoImp extends DAO<StructureEntity> implements StructureDa
         int count=Integer.valueOf(getForValue(sql,id_library).toString());
         return count;
     }
+
+    @Override
+    public List<StructureEntity> getAll(int id_library) {
+        String sql="select * from STRUCTURE where ID_LIBRARY=?";
+        return getForList(sql,id_library);
+    }
 }

@@ -39,8 +39,8 @@
     <!-- Sweet Alert -->
     <link href="<%=basePath %>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">--%>
-    <%--<link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">--%>
+    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
     <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
 
     <link href="<%=basePath %>/css/xzw.css" rel="stylesheet">
@@ -85,7 +85,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>转移给</label>
-                    <input id="MemberName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off" onkeyup="inputSuggest()">
+                    <input id="MemberName" type="text" placeholder="请输入用户名" class="form-control" required="true" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">
@@ -122,10 +122,10 @@
                             <strong><s:property value="#session.project.name"/></strong>
                         </h2>
                         <s:if test='#session.project.state==1'>
-                            <s:if test='#session.project.rank==3||#session.project.rank==4'>
-                                <button href="project-" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
+                            <s:if test='#session.rank==3||#session.rank==4'>
+                                <button href="catalog-jmpTemplate?state=1" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
                             </s:if>
-                            <s:if test="#session.project.rank==3">
+                            <s:if test="#session.rank==3">
                                 <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
                             </s:if>
                         </s:if>
@@ -232,7 +232,7 @@
                                 <div class="tab-pane" id="tab-2">
                                     <div id="toolbar1">
                                         <s:if test='#session.project.state==1'>
-                                            <s:if test="#session.project.rank==3">
+                                            <s:if test="#session.rank==3">
                                                 <button id="searchUser" class="btn btn-info" data-toggle="modal" data-target="#newUser">
                                                     <i class="glyphicon glyphicon-zoom-in"></i> 邀请成员
                                                 </button>
@@ -313,18 +313,61 @@
 <script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="<%=basePath %>/js/xzw.js"></script>
-<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
 
 <script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
 
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.min.js"></script>
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
-
+<script>
+    function showtoast(type, title, msg) {
+        var $showDuration = "3000";
+        var $hideDuration = "1000";
+        var $timeOut = "5000";
+        var $extendedTimeOut = "1000";
+        var $showEasing = "swing";
+        var $hideEasing = "linear";
+        var $showMethod = "fadeIn";
+        var $hideMethod = "fadeOut";
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "onclick": null
+        };
+        if ($showDuration) {
+            toastr.options.showDuration = $showDuration
+        }
+        if ($hideDuration) {
+            toastr.options.hideDuration = $hideDuration
+        }
+        if ($timeOut) {
+            toastr.options.timeOut = $timeOut
+        }
+        if ($extendedTimeOut) {
+            toastr.options.extendedTimeOut = $extendedTimeOut
+        }
+        if ($showEasing) {
+            toastr.options.showEasing = $showEasing
+        }
+        if ($hideEasing) {
+            toastr.options.hideEasing = $hideEasing
+        }
+        if ($showMethod) {
+            toastr.options.showMethod = $showMethod
+        }
+        if ($hideMethod) {
+            toastr.options.hideMethod = $hideMethod
+        }
+        if (!msg) {
+            msg = getMessage()
+        }
+    }
+</script>
 
 <script>
     $('#projectMember').bootstrapTable({
@@ -405,7 +448,7 @@
         }
     }
     function operateFormatter(value,row,index) {
-        <s:if test="#session.project.rank==3">
+        <s:if test="#session.rank==3">
         if (row.rank===5){
             return ['<a class="mod btn-xs btn-info">设为副组长</a>',
                 '<a class="delete btn-xs btn-danger" >移除成员</a>'].join('');
@@ -430,7 +473,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                                showtoast2("success", "设置成功", "成功设为副组长");
+                                showtoast("success", "设置成功", "成功设为副组长");
                                 elem.text("撤销副组长");
                                 elem.removeClass("btn-info");
                                 elem.addClass("btn-warning");
@@ -449,7 +492,7 @@
                         data: {id_User: id_user, id_Project: id_Project},
                         dataType: "json",
                         success: function () {
-                            showtoast2("success", "撤销成功", "成功撤销该副组长");
+                            showtoast("success", "撤销成功", "成功撤销该副组长");
                             elem.text("设为副组长");
                             elem.removeClass("btn-warning");
                             elem.addClass("btn-info");
@@ -540,7 +583,7 @@
                 $('#projectDocs').bootstrapTable('load',docList);
             },
             error:function(){
-                showtoast2("error", "没有文档", "获取文档记录失败！");
+                showtoast("error", "没有文档", "获取文档记录失败！");
             }
         }
     );
@@ -555,7 +598,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id = row.id_document;
-                location.href = "catalog-jmpTemplate?documentId=1";
+                location.href = "catalog-jmpTemplate?documentId="+id;
             }
     };
 
@@ -574,13 +617,13 @@
             async: "false",
             success: function (result) {
                 if(result.res===true)  {
-                    showtoast2("success", "邀请成功", "成功发送邀请");
+                    showtoast("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast2("error", "邀请失败", "用户名不存在!")
+                else  showtoast("error", "邀请失败", "用户名不存在!")
             },
             error: function (result) {
-                showtoast2("error", "邀请失败", "用户名不存在!")
+                showtoast("error", "邀请失败", "用户名不存在!")
             }
         })
     });
@@ -609,13 +652,13 @@
                     async: "false",
                     success: function (result) {
                         if (result.res===true) {
-                            showtoast2("success", "转移成功", "成功转移组长给该成员");
+                            showtoast("success", "转移成功", "成功转移组长给该成员");
                             location.href = "user-jmpCurrentProjectList";
                         }
-                        else showtoast2("error", "转移失败", "用户名不存在!");
+                        else showtoast("error", "转移失败", "用户名不存在!");
                     },
                     error: function (result) {
-                        showtoast2("error", "转移失败", "用户名不存在!")
+                        showtoast("error", "转移失败", "用户名不存在!")
                     }
                 })
             }
@@ -720,7 +763,7 @@
                 $("div.allDiscuss").html(content);
             },
             error: function (result) {
-                showtoast2("dangerous","加载失败","加载目录失败")
+                showtoast("dangerous","加载失败","加载目录失败")
             }
         })
     }
@@ -736,19 +779,19 @@
                 type: "Post",
                 async: false,
                 success: function (result) {
-                    showtoast2("success","成功","评论提交成功");
+                    showtoast("success","成功","评论提交成功");
                     discussInit();
                     discussReload2(0);
                 },
                 error: function (result) {
-                    showtoast2("dangerous","加载失败","加载目录失败");
+                    showtoast("dangerous","加载失败","加载目录失败");
                 }
             })
         }
 
         else {
             $('#fileupload').fileinput('upload').fileinput('clear');
-            showtoast2("success","成功","评论提交成功");
+            showtoast("success","成功","评论提交成功");
             discussInit();
             discussReload2(0);
         }
@@ -794,11 +837,11 @@
                     async: "false",
                     success: function (result) {
                         $("button.cancel").click();
-                        showtoast2("success","成功","删除评论成功");
+                        showtoast("success","成功","删除评论成功");
                         discussReload2(0)
                     },
                     error: function (result) {
-                        showtoast2("dangerous","失败","删除评论失败")
+                        showtoast("dangerous","失败","删除评论失败")
                     }
                 })
             });}

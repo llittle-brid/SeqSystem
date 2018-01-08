@@ -5,8 +5,6 @@ import dao.InformationDao;
 import entity.InformationEntity;
 import org.apache.commons.lang3.ObjectUtils;
 
-
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
