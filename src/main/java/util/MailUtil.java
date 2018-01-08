@@ -59,6 +59,7 @@ public class MailUtil {
         p.setProperty("mail.smtp.user", info.getFormName());
         p.setProperty("mail.smtp.pass", info.getFormPassword());
         p.setProperty("mail.smtp.port", PORT);
+        p.setProperty("mail.smtp.socketFactory.port", PORT);
 
         // 根据邮件会话属性和密码验证器构造一个发送邮件的session
         Session session = Session.getInstance(p, new Authenticator(){
