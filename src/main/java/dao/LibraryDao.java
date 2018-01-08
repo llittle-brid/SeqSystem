@@ -23,4 +23,6 @@ public interface LibraryDao {
     int getCasecount();
     int getPicturecount();
     int getCommoncount();
+
+    List<LibraryEntity> getTypeOfLib(int id_user,int id_type);
 }

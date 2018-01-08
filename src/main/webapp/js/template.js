@@ -116,7 +116,9 @@ else {
         $("#describe").html(describe);
         $("#permissions").html(permissions);
     }  $("#roleName").val(roleName);
-
+    if($("#roleName").val()==null){
+        $("#roleName").prepend("<option selected disabled>未定义</option>>")
+    }
 }
 //加载模板3的内容
 function loadTemplateThree(entity) {
@@ -130,12 +132,18 @@ function loadTemplateThree(entity) {
     var funRoleContent="";
     for (var i=0;i<funRoleList.length;i++){
         funRoleContent+=" <tr class='funTr'> <th  ><div class='hidenTh' style='display: none'> <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></div></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
-
+        var undefined="true",roleListContent="";
         for (var j=0;j<roleList.length;j++){
-            funRoleContent+="<option";
-            if(funRoleList[i].roleName==roleList[j].roleName)funRoleContent+=" selected";
-            funRoleContent+=" >"+roleList[j].roleName+"</option>";
+            roleListContent+="<option";
+            if(funRoleList[i].roleName==roleList[j].roleName){
+                roleListContent+=" selected";
+                undefined="false";
+            }
+            roleListContent+=" >"+roleList[j].roleName+"</option>";
         }
+        if(undefined=="true"){
+            funRoleContent+="<option disabled selected>未定义</option>";
+        }funRoleContent+=roleListContent;
         funRoleContent+="</select> </th> <th> <textarea   class='form-control roleDescribe dis'  name='roleDescribe'   style='max-width: 100%' disabled>";
         funRoleContent+=funRoleList[i].roleDescribe+"</textarea> </th>";
         if(funRoleList[i].usableName==null){//新增按钮

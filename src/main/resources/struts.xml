@@ -52,7 +52,7 @@
             <result name="completedProjectList">/WEB-INF/pages/project_completedList.jsp</result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="temp">/WEB-INF/pages/temp.jsp</result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>
                 jmpMyprofile,jmpMycollect,jmpHomepage,editProfile,jmpSysManager1,jmpSysManager2,jmpNewproject,jmpTemp,jmpCasecomponent,jmpUsercomponent,jmpCurrentProjectList,jmpCompletedProjectList
             </allowed-methods>
@@ -64,7 +64,7 @@
             </result>
             <result name="myprofilePage">/WEB-INF/pages/project_myprofile.jsp</result>
             <result name="SysManager1Page">/WEB-INF/pages/project_sysManager1.jsp</result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>applyOrg</allowed-methods>
         </action>
 
@@ -74,7 +74,7 @@
             <result name="display" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>jmpOrgManager1,jmpOrgManager2,showAllMember,showAllProject,showHistoryProject</allowed-methods>
         </action>
 
@@ -84,7 +84,7 @@
             <result name="showinfo" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>showInfo,Accept,Refuse</allowed-methods>
         </action>
 
@@ -93,7 +93,7 @@
                 <param name="root">dataMap</param>
             </result>
             <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>showList,showOthers,agreeOrg,refuseOrg</allowed-methods>
         </action>
 
@@ -104,7 +104,7 @@
             <result name="success" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>InviteUser,showList,grantOrg,deleteUser,reInviteUser</allowed-methods>
         </action>
 
@@ -112,7 +112,7 @@
             <result name="exitOrgList" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>showList</allowed-methods>
         </action>
 
@@ -121,7 +121,7 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,saveTemplateThree,saveTemplateTwo,getUsable</allowed-methods>
         </action>
 
@@ -132,7 +132,7 @@
             <result name="end">/WEB-INF/pages/project_completedList.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <result name="projectDocument">/mjy_index.jsp</result>
-            <interceptor-ref name="myStack"/>
+         <interceptor-ref name="myStack"/>
             <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpDocument,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
         </action>
 
@@ -144,13 +144,13 @@
             <result name="getpicture">/WEB-INF/pages/project_picture_library.jsp</result>
             <result name="libraryPage">/WEB-INF/pages/project_library.jsp</result>
             <result name="getMycollect">/WEB-INF/pages/project_mycollect.jsp</result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>get,getagain,getcommon,getcommonagain,getuser,getuseragain,getcase,getcaseagain,getpicture,getpictureagain,Mycollect,Mycollectagain</allowed-methods>
         </action>
 
         <action name="librarycollect-*" class="action.LibrarycollectAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>collect,nocollect</allowed-methods>
         </action>
 
@@ -158,14 +158,14 @@
             <result name="RES" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>commit,delete,image</allowed-methods>
         </action>
 
         <action name="structure-*" class="action.StructureAction" method="{1}">
             <result name="RES" type="json"><param name="root">dataMap</param></result>
             <result name="get">/WEB-INF/pages/project_structure.jsp</result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>get</allowed-methods>
         </action>
 
@@ -175,7 +175,7 @@
             <result name="orgList" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>jmpMyprofile,showList,quitorg</allowed-methods>
         </action>
 
@@ -183,22 +183,22 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>commit,getCatalogDis,delete,commit2Project,getProjectDis</allowed-methods>
         </action>
 
-        <!--<action name="templateLib-*" class="action.TemplateLibAction" method="{1}">-->
-            <!--<result name="Re" type="json"><param name="root">dataMap</param>-->
-            <!--</result>-->
-            <!--<interceptor-ref name="myStack"/>-->
-            <!--<allowed-methods>getTypeOfLib,getStructure</allowed-methods>-->
-        <!--</action>-->
+        <action name="templateLib-*" class="action.TemplateLibAction" method="{1}">
+            <result name="Re" type="json"><param name="root">dataMap</param>
+            </result>
+         <interceptor-ref name="myStack"/>
+            <allowed-methods>getTypeOfLib,getStructure</allowed-methods>
+        </action>
 
         <action name="history-*" class="action.HistoryAction" method="{1}">
             <result name="showHistory" type="json">
                 <param name="root">dataMap</param>
             </result>
-            <interceptor-ref name="myStack"/>
+        <interceptor-ref name="myStack"/>
             <allowed-methods>showHistory</allowed-methods>
         </action>
     </package>

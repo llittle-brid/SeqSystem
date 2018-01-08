@@ -94,3 +94,6 @@ body.mini-navbar .navbar-default .nav >#allIndex> li > a {
 #uaname,#uaproblem,#uasolution,#uaexample{
     margin-top: 10px;
 }
+.structTable th{
+    text-align: center;
+}
