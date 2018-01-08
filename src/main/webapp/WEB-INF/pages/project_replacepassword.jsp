@@ -38,7 +38,7 @@
                     <input name="email" id="email"  class="form-control loginLine valiadate" style="font-size:12px" placeholder="请输入邮箱" >
                 </div>
                 <div class="form-group col-sm-8 col-md-offset-2 loginLine">
-                    <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="设置用户名（注册成功后不可更改）" required="">
+                    <input name="name" id="name" type="text" aria-required="true" aria-invalid="true" class="form-control loginLine valiadate" style="font-size:12px" placeholder="输入用户名" required="">
                 </div>
                 <div class="form-group col-sm-8 col-md-offset-2 loginLine">
                     <input name="password1" id="password1" type="password" class="form-control loginLine valiadate" style="font-size:12px" maxlength="22" placeholder="请设置密码（长度为6-22个字符）" required="">
