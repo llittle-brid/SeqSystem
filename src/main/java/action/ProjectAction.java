@@ -23,6 +23,8 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +48,16 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return SUCCESS;
     }
 
+    public String createDoc() {
+        int Id_Project = (Integer)request.get("id_Project");
+        UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
+        int ID_User = user.getId_user();
+        Timestamp time = new Timestamp(new java.util.Date().getTime());
+        DocumentDao documentDao = new DocumentDaoImp();
+        int version = documentDao.getVersion(Id_Project)+1;
+        documentDao.create(Id_Project,version,time,ID_User);
+        return "jmpToDoc";
+    }
 
     public String chooseOrg() throws Exception {
         dataMap = new HashMap<String, Object>();
@@ -252,28 +264,19 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         return SUCCESS;
     }
 
+    public String deploy() {
+        int documentId = (Integer)request.get("documentId");
+        DocumentDao documentDao = new DocumentDaoImp();
+        documentDao.deploy(documentId);
+        return  SUCCESS;
+    }
+
     public String end(){
         int id_Project = (Integer)request.get("id_Project");
         System.out.println(id_Project);
         projectDao = new ProjectDaoImp();
         projectDao.end(id_Project);
         return "end";
-    }
-
-    public String chooseMember(){
-        dataMap = new HashMap<String, Object>();
-        int id_Project = project.getId_Project();
-        String username = project.getUsername();
-
-        projectDao = new ProjectDaoImp();
-        project = projectDao.getOne(id_Project);
-
-        List<UserEntity> members = projectDao.getMatched(project,username);
-        Gson gson = new Gson();
-        String json = gson.toJson(members);
-
-        dataMap.put("res",json);
-        return SUCCESS;
     }
 
     @Override

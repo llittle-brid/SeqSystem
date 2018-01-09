@@ -73,31 +73,31 @@
                     field: 'name',
                     title: '项目名称',
                     sortable: true,
-                    align: 'center'
+                    align: 'left'
                 }, {
                     field: 'date',
                     title: '创建日期',
                     sortable: true,
-                    align: 'center'
+                    align: 'left'
                 },
                 {
                     field: 'document_Name',
                     title: '文档名称',
-                    align: 'center'
+                    align: 'left'
                 }, {
                     field: 'release_date',
                     title: '发布日期',
                     sortable: true,
-                    align: 'center'
+                    align: 'left'
                 }, {
                     field: 'orgName',
                     title: '所属机构',
                     sortable: true,
-                    align: 'center'
+                    align: 'left'
                 },{
                     field: 'operate',
                     title: '操作',
-                    align: 'center',
+                    align: 'left',
                     searchable: false,
                     events: "actionEvents",
                     formatter: "operateFormatter"

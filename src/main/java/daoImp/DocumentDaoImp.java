@@ -15,12 +15,24 @@ public class DocumentDaoImp extends DAO<DocumentEntity> implements DocumentDao {
     }
 
     @Override
+    public void deploy(int Id_Document) {
+        String sql = "update DOCUMENT set state = 1 where ID_DOCUMENT = ?";
+        update(sql,Id_Document);
+    }
+
+    @Override
+    public int getVersion(int id) {
+        String sql = "select max(VERSION) from DOCUMENT where ID_PROJECT = ?";
+        int version = Integer.valueOf(getForValue(sql,id).toString());
+        return version;
+    }
+
+    @Override
     public DocumentEntity getOne(int id) {
         String sql = "select * from DOCUMENT where ID_DOCUMENT = ?";
         DocumentEntity document = getForValue(sql,id);
         return document;
     }
-
     @Override
     public List<DocumentEntity> getAll(int id) {
         String sql = "select * from VIEW_projectDocs where ID_PROJECT = ?";

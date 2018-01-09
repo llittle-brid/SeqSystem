@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface DocumentDao {
     void create(int id_project, int version, Timestamp timestamp, int id_user);
+    void deploy(int Id_Document);
+    int getVersion(int id);
     DocumentEntity getOne(int id);
     List<DocumentEntity> getAll(int id);
 }
