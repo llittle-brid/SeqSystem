@@ -9,7 +9,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-    <a href="catalog-jmpTemplate?documentId=1">click</a>
+    <a href="catalog-jmpTemplate?documentId=1?projectId=1">click</a>
 
 </head>
 <body>

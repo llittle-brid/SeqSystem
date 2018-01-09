@@ -9,14 +9,16 @@ public class DocumentEntity {
     double version;
     Date date;
     int id_user;
+    int state;
 
-    public DocumentEntity(int id_document, String document_name, int id_project, double version, Date date, int id_user) {
+    public DocumentEntity(int id_document, String document_name, int id_project, double version, Date date, int id_user, int state) {
         this.id_document = id_document;
         this.document_name = document_name;
         this.id_project = id_project;
         this.version = version;
         this.date = date;
         this.id_user = id_user;
+        this.state = state;
     }
 
     public DocumentEntity() {
@@ -68,5 +70,13 @@ public class DocumentEntity {
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

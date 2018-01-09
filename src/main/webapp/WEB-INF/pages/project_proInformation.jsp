@@ -122,10 +122,8 @@
                             <strong><s:property value="#session.project.name"/></strong>
                         </h2>
                         <s:if test='#session.project.state==1'>
-                            <s:if test='#session.rank==3||#session.rank==4'>
-                                <button href="catalog-jmpTemplate?state=1" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
-                            </s:if>
-                            <s:if test="#session.rank==3">
+                            <s:if test='#session.rank==3'>
+                                <button id="createDoc" class="btn btn-success"><i class="fa fa-file"></i>新建文档</button>
                                 <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
                             </s:if>
                         </s:if>
@@ -157,7 +155,7 @@
                     <dl class="dl-horizontal">
 
                         <dt><h3>最后更新：</h3></dt>
-                        <dd><h3>12/25/17</h3></dd>
+                        <dd><h3><s:property value="#session.date"/></h3></dd>
 
                         <dt><h3>创建于：</h3></dt>
                         <dd><h3><s:property value="#session.project.date"/></h3></dd>
@@ -313,61 +311,14 @@
 <script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
 <script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.js"></script>
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
-<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
-
 <script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
 <script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
-
-<script>
-    function showtoast(type, title, msg) {
-        var $showDuration = "3000";
-        var $hideDuration = "1000";
-        var $timeOut = "5000";
-        var $extendedTimeOut = "1000";
-        var $showEasing = "swing";
-        var $hideEasing = "linear";
-        var $showMethod = "fadeIn";
-        var $hideMethod = "fadeOut";
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-            "onclick": null
-        };
-        if ($showDuration) {
-            toastr.options.showDuration = $showDuration
-        }
-        if ($hideDuration) {
-            toastr.options.hideDuration = $hideDuration
-        }
-        if ($timeOut) {
-            toastr.options.timeOut = $timeOut
-        }
-        if ($extendedTimeOut) {
-            toastr.options.extendedTimeOut = $extendedTimeOut
-        }
-        if ($showEasing) {
-            toastr.options.showEasing = $showEasing
-        }
-        if ($hideEasing) {
-            toastr.options.hideEasing = $hideEasing
-        }
-        if ($showMethod) {
-            toastr.options.showMethod = $showMethod
-        }
-        if ($hideMethod) {
-            toastr.options.hideMethod = $hideMethod
-        }
-        if (!msg) {
-            msg = getMessage()
-        }
-    }
-</script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
+<script src="<%=basePath %>/js/mjy.js"></script>
 
 <script>
     $('#projectMember').bootstrapTable({
@@ -410,32 +361,48 @@
 
     $.ajax(
         {
-            type:"post",
-            url:"project-getProjectMember",
+            type: "post",
+            url: "project-getProjectMember",
             data: {Id_Project: id_Project},
-            dataType:"json",
-            success:function(json){
+            dataType: "json",
+            success: function (json) {
                 var proList = JSON.parse(json.res);
                 //finishingTask为table的id
-                $('#projectMember').bootstrapTable('load',proList);
+                $('#projectMember').bootstrapTable('load', proList);
                 discussInit();
                 discussReload2();
             },
-            error:function(){
+            error: function () {
                 swal({
                     icon: "error"
                 });
             }
         }
     );
-    function ranksorter(a,b) {
-        if (a<b) {
-            return 1;
-        }
-        else
-            return -1;
-        return 0;
+
+    function proMemberReload() {
+        $.ajax(
+            {
+                type: "post",
+                url: "project-getProjectMember",
+                data: {Id_Project: id_Project},
+                dataType: "json",
+                success: function (json) {
+                    var proList = JSON.parse(json.res);
+                    //finishingTask为table的id
+                    $('#projectMember').bootstrapTable('load', proList);
+                    discussInit();
+                    discussReload2();
+                },
+                error: function () {
+                    swal({
+                        icon: "error"
+                    });
+                }
+            }
+        );
     }
+
     function rankFormatter(value,row,index) {
         if (row.rank===3) {
             return '组长';
@@ -467,42 +434,68 @@
                 var id_user = parseInt(row.id_user);
                 var elem = $(this);
                 if (elem.hasClass("btn-info")) {
-                    $.ajax({
-                        type: "post",
-                        url: "project-setVPM",
-                        data: {id_User: id_user, id_Project: id_Project},
-                        dataType: "json",
-                        success: function () {
-                                showtoast("success", "设置成功", "成功设为副组长");
-                                elem.text("撤销副组长");
-                                elem.removeClass("btn-info");
-                                elem.addClass("btn-warning");
-                        },
-                        error: function () {
-                            swal({
-                                icon: "error"
-                            });
-                        }
-                    })
+                    swal(
+                        {
+                            title: "您确定要将这名成员设为副组长吗",
+                            text: "请谨慎操作！",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确认",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: true
+                        }, function () {
+                            $.ajax({
+                                type: "post",
+                                url: "project-setVPM",
+                                data: {id_User: id_user, id_Project: id_Project},
+                                dataType: "json",
+                                success: function () {
+                                    showtoast("success", "设置成功", "成功设为副组长");
+                                    proMemberReload();
+                                    elem.text("撤销副组长");
+                                    elem.removeClass("btn-info");
+                                    elem.addClass("btn-warning");
+                                },
+                                error: function () {
+                                    swal({
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                        })
                 }
                 else {
-                    $.ajax({
-                        type: "post",
-                        url: "project-dismissVPM",
-                        data: {id_User: id_user, id_Project: id_Project},
-                        dataType: "json",
-                        success: function () {
-                            showtoast("success", "撤销成功", "成功撤销该副组长");
-                            elem.text("设为副组长");
-                            elem.removeClass("btn-warning");
-                            elem.addClass("btn-info");
-                        },
-                        error: function () {
-                            swal({
-                                icon: "error"
-                            });
-                        }
-                    })
+                    swal(
+                        {
+                            title: "您确定要将撤除这名副组长吗",
+                            text: "请谨慎操作！",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确认",
+                            cancelButtonText: "取消",
+                            closeOnConfirm: true
+                        }, function () {
+                            $.ajax({
+                                type: "post",
+                                url: "project-dismissVPM",
+                                data: {id_User: id_user, id_Project: id_Project},
+                                dataType: "json",
+                                success: function () {
+                                    showtoast("success", "撤销成功", "成功撤销该副组长");
+                                    proMemberReload();
+                                    elem.text("设为副组长");
+                                    elem.removeClass("btn-warning");
+                                    elem.addClass("btn-info");
+                                },
+                                error: function () {
+                                    swal({
+                                        icon: "error"
+                                    });
+                                }
+                            })
+                        })
                 }
             },
         'click .delete' :
@@ -589,16 +582,48 @@
     );
 
     function viewFormatter(value,row,index) {
-        return '<a class="view btn-xs btn-info">查看文档</a>';
+
+        <s:if test='#session.rank==3'>
+            if (row.state===0) {
+                return ['<a class="edit btn-xs btn-success">编辑文档</a>',
+                    '<a class="deploy btn-xs btn-danger" >发布文档</a>'].join('');
+            }
+            else {
+                return '<a class="view btn-xs btn-info">查看文档</a>';
+            }
+        </s:if>
+
+        <s:if test='#session.rank==4'>
+            if (row.state===0) {
+                return '<a class="edit btn-xs btn-success">编辑文档</a>';
+            }
+            else {
+                return '<a class="view btn-xs btn-info">查看文档</a>';
+            }
+        </s:if>
+
+        <s:if test='#session.rank==5'>
+            return '<a class="view btn-xs btn-info">查看文档</a>';
+        </s:if>
     }
 
+    var rank = "<s:property value="#session.rank"/>";
     //表格  - 操作 - 事件
     window.viewEvents = {
+        'click .edit':
+            function(e, value, row, index) {
+                var id = row.id_document;
+                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank;
+            },
+        'click .deploy':
+            function(e, value, row, index) {
+                var id = row.id_document;
+                location.href = "project-deploy?documentId="+id;
+            },
         'click .view':
             function(e, value, row, index) {
-                //修改操作
                 var id = row.id_document;
-                location.href = "catalog-jmpTemplate?documentId="+id;
+                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank;
             }
     };
 
@@ -620,10 +645,10 @@
                     showtoast("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast("error", "邀请失败", "用户名不存在!")
+                else  showtoast("error", "邀请失败", "用户名不存在!");
             },
             error: function (result) {
-                showtoast("error", "邀请失败", "用户名不存在!")
+                showtoast("error", "邀请失败", "用户名不存在!");
             }
         })
     });
@@ -682,6 +707,10 @@
                 }
             );
         });
+
+    $("button#createDoc").click(function() {
+        location.href="project-createDoc?id_Project=<s:property value="#session.project.id_project"/>"
+    });
 </script>
 
 <%--评论区--%>
@@ -772,6 +801,9 @@
     //评论提交
     function commitDiscuss() {
          discuss = $(".discuss").summernote('code');
+        if($('#fileupload').val()==""&&discuss.val()=="") {
+            return;
+        }
         if($('#fileupload').val()=="") {
             $.ajax({
                 url: "discuss-commit2Project",
@@ -856,10 +888,6 @@
             focus:true,
             toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
-                // ['fontsize', ['fontsize']],
-                // ['color', ['color']],
-                // ['para', ['paragraph']],
-                // ['table', ['table']],
                 ['picture', ['picture']]
                 ],
             callbacks: {

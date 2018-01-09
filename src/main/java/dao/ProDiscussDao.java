@@ -13,7 +13,9 @@ import java.util.List;
 public interface ProDiscussDao {
     void commit(int id_user,int id_catalog,Timestamp time,String content);
 
-    void commit1(int id_user,int id_project,Timestamp time, String content, List<String> MyFileFileName,List<String> Path);
+    void commit(int id_user, int id_project, Timestamp time, String content, List<String> MyFileFileName, List<String> Path);
+
+    void commitToCatalog(int id_user, int id_catalog, Timestamp time, String content, List<String> MyFileFileName, List<String> Path);
 
     List<ProDiscussEntity> getCatalogDis(int id_catalog);
 
