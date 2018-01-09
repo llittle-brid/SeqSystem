@@ -38,6 +38,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     private Map<String,Object> request;
     private Map<String,Object> session;
     private Map<String, Object> dataMap;
+    private int documentId;
 
     public String create() {
         dataMap = new HashMap<String, Object>();
@@ -265,10 +266,9 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String deploy() {
-        int documentId = (Integer)request.get("documentId");
         DocumentDao documentDao = new DocumentDaoImp();
         documentDao.deploy(documentId);
-        return  SUCCESS;
+        return "deploy";
     }
 
     public String end(){
@@ -282,6 +282,14 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     @Override
     public void prepare() throws Exception {
         project = new ProjectEntity();
+    }
+
+    public int getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(int documentId) {
+        this.documentId = documentId;
     }
 
     public Map<String, Object> getRequest() {
@@ -314,5 +322,4 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public ProjectEntity getModel() {
         return project;
     }
-
 }

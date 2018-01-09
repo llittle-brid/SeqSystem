@@ -137,8 +137,9 @@
             <result name="end">/WEB-INF/pages/project_completedList.jsp</result>
             <result name="projectInformation">/WEB-INF/pages/project_proInformation.jsp</result>
             <result name="projectDocument">/mjy_index.jsp</result>
+            <result name="deploy">/WEB-INF/pages/project_proInformation.jsp</result>
          <interceptor-ref name="myStack"/>
-            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpDocument,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,chooseMember</allowed-methods>
+            <allowed-methods>create,chooseOrg,jmpProjectMember,jmpProjectInfo,jmpDocument,showCurrentList,showCompletedList,getProjectInfo,getProjectMember,setVPM,dismissVPM,deleteMember,inviteMember,end,alterPM,getDocument,deploy,createDoc</allowed-methods>
         </action>
 
         <action name="library-*" class="action.LibraryAction" method="{1}">

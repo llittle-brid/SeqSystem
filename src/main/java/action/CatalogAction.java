@@ -150,7 +150,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
     public String  newCatalog(){
         CatalogDao catalogDao=new CatalogDaoImp();
-        catalogDao.newCatalog(catalogEntity.getId_template(),catalogEntity.getTitle(),catalogEntity.getId_document());
+        catalogDao.newCatalog(catalogEntity.getId_document(),catalogEntity.getTitle(),catalogEntity.getId_template());
         return "Re";
     }
     public String getCatalog() {
