@@ -713,7 +713,21 @@
         });
 
     $("button#createDoc").click(function() {
-        location.href="project-createDoc?id_Project=<s:property value="#session.project.id_project"/>"
+        $.ajax({
+            url: "project-createDoc",
+            data: {
+                Id_Project: id_Project
+            },
+            dataType: "json",
+            type: "Post",
+            async: "false",
+            success: function (result) {
+                location.href = "catalog-jmpTemplate?documentId="+result.id+"&rank=3&projectId="+id_Project+"&state=0";
+            },
+            error: function (result) {
+                showtoast("error", "转移失败", "用户名不存在!")
+            }
+        })
     });
 </script>
 

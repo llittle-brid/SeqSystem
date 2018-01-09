@@ -50,14 +50,16 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String createDoc() {
+        dataMap = new HashMap<String, Object>();
         int Id_Project = (Integer)request.get("id_Project");
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
         int ID_User = user.getId_user();
         Timestamp time = new Timestamp(new java.util.Date().getTime());
         DocumentDao documentDao = new DocumentDaoImp();
         int version = documentDao.getVersion(Id_Project)+1;
-        documentDao.create(Id_Project,version,time,ID_User);
-        return "jmpToDoc";
+        int id = documentDao.create(Id_Project,version,time,ID_User);
+        dataMap.put("id",id);
+        return SUCCESS;
     }
 
     public String chooseOrg() throws Exception {
