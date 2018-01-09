@@ -154,8 +154,8 @@
                 <div class="col-sm-7">
                     <dl class="dl-horizontal">
 
-                        <dt><h3>最后更新：</h3></dt>
-                        <dd><h3><s:property value="#session.date"/></h3></dd>
+                        <dt><h3>当前版本：</h3></dt>
+                        <dd><h3><s:property value="#session.version"/></h3></dd>
 
                         <dt><h3>创建于：</h3></dt>
                         <dd><h3><s:property value="#session.project.date"/></h3></dd>
@@ -817,8 +817,8 @@
                 async: false,
                 success: function (result) {
                     showtoast("success","成功","评论提交成功");
-                    discussInit();
                     discussReload2(0);
+                    discussInit();
                 },
                 error: function (result) {
                     showtoast("dangerous","失败","评论不能为空");
@@ -829,8 +829,8 @@
         else {
             $('#fileupload').fileinput('upload').fileinput('clear');
             showtoast("success","成功","评论提交成功");
-            discussInit();
             discussReload2(0);
+            discussInit();
         }
     }
 

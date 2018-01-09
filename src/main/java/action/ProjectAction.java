@@ -122,7 +122,10 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         UserEntity user = (UserEntity)ActionContext.getContext().getSession().get("user");
 
         int rank = projectDao.getRank(id_Project,user.getId_user());
+        DocumentDao documentDao = new DocumentDaoImp();
+        int version = documentDao.getVersion(id_Project);
 
+        session.put("version",version);
         session.put("rank",rank);
         session.put("PM",pm);
         session.put("project",project);
