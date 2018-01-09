@@ -9,4 +9,6 @@ public interface DocumentDao {
     void create(int id_project, int version, Timestamp timestamp, int id_user);
     DocumentEntity getOne(int id);
     List<DocumentEntity> getAll(int id);
+
+    int getDocumentId(int id_project);
 }

@@ -14,6 +14,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html>
 
@@ -26,20 +30,22 @@
 
 
     <title>模板页面</title>
-    <link rel="shortcut icon" href="favicon.ico"> <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="<%=basePath %>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="<%=basePath %>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 
     <!-- Sweet Alert -->
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <link href="../css/animate.min.css" rel="stylesheet">
-    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
-    <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
-    <link href="../css/plugins/summernote/summernote-lite.css" rel="stylesheet">
-    <link href="../css/mjy.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/animate.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/plugins/summernote/summernote-lite.css" rel="stylesheet">
+    <link href="<%=basePath %>/css/mjy.css" rel="stylesheet">
+
+    <link href="<%=basePath %>/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
 
 </head>
 
@@ -58,7 +64,8 @@
                             <div class="ibox-title" style="border-bottom: solid #e7eaec thin">
                                 <li class="li_head black">
                                     <span class="block m-t-xs"><strong class="font-bold">需求开发文档</strong></span>
-                                    <input style="display: none" value="${requestScope.documentId}" id="documentId"></i>
+                                    <input style="display: none" value="${requestScope.documentId}" id="documentId">
+                                    <input style="display: none" value="${requestScope.projectId}" id="projectId">
                                 </li>
                                 <li class="li_fun">
                                     <span class="li_rename li_fa fa col-md-offset-1  fa-pencil-square-o black"   title="重命名" data-toggle="modal" data-target="#myModal3"></span>
@@ -227,13 +234,18 @@
                                     <div class="ibox-title">
                                         <h5>我的留言</h5>
                                         <div class="ibox-tools">
-                                            <button  class="btn btn-primary  btn-xs col-lg-push-1" 、 type="button" style="margin-right: 10px">上传附件</button>
                                             <button  class="btn btn-primary  btn-xs col-lg-push-1" onclick="commitDis()" type="button" style="margin-right: 10px">发布</button>
                                         </div>
                                     </div>
                                     <div class="ibox-content">
                                         <div class="click2edit wrapper discuss">
                                         </div>
+                                        <%--文件上传--%>
+                                        <div class="file-loading">
+                                            <!-- The file input field used as target for the file upload widget -->
+                                            <input id="fileupload" name="MyFile" type="file" class="file" multiple data-msg-placeholder="选择要上传的文件">
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -243,17 +255,19 @@
                             <div class="row">
                                 <div class="ibox float-e-margins " style="margin-bottom: 10px">
                                     <div class="ibox-title">
-                                        <h5>大毛同学 2017-2-6 17:15:56 </h5>
+                                        <h5></h5>
                                         <input style="display: none" class="id_dis">
                                         <button  class="btn btn-danger  btn-xs col-lg-push-1 m-l-sm deleteDis"  type="button" style="margin-top: -3px">删除</button>
-                                        <div class="ibox-tools">
-                                            <i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>
-                                        </div>
+                                        <%--<div class="ibox-tools">--%>
+                                            <%--<i class="fa fa-file-text-o " style="color: #26d7d9"  title="下载"> 附件：内容摘要.doc</i>--%>
+                                        <%--</div>--%>
                                     </div>
                                     <div class="ibox-content">
                                         <div class=" wrapper">
-                                            王炸
                                         </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -269,7 +283,8 @@
             </div>
             <!--中间部分结束-->
             <!--右侧部分开始-->
-            <div class="col-sm-3">
+            <s:if test="#request.state!=0">
+            <div class="col-sm-3" >
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>构件库</h5>
@@ -312,6 +327,7 @@
                     </div>
                 </div>
             </div>
+            </s:if>
             <!--右侧部分结束-->
         </div>
     </div>
@@ -319,24 +335,29 @@
 </div>
 </div>
 </body>
-<script src="../js/jquery.min.js?v=2.1.4"></script>
-<script src="../js/bootstrap.min.js?v=3.3.6"></script>
-<script src="../js/content.min.js?v=1.0.0"></script>
-<script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../js/plugins/layer/layer.min.js"></script>
-<script src="../js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="../js/contabs.min.js"></script>
-<%--<script src="../js/plugins/pace/pace.min.js"></script>--%>
-<script src="../js/plugins/toastr/toastr.min.js"></script>
-<script src="../js/mjy.js"></script>
-<script src="../js/template.js"></script>
-<%--<script src="../js/template3.js"></script>--%>
-<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../js/plugins/summernote/summernote.min.js"></script>
-<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
-<script src="../js/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="../js/plugins/summernote/summernote-lite.js"></script>
+<script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
+<script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="<%=basePath %>/js/content.min.js?v=1.0.0"></script>
+<script src="<%=basePath %>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="<%=basePath %>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath %>/js/plugins/layer/layer.min.js"></script>
+<script src="<%=basePath %>/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="<%=basePath %>/js/contabs.min.js"></script>
+<%--<script src="<%=basePath %>/js/plugins/pace/pace.min.js"></script>--%>
+<script src="<%=basePath %>/js/plugins/toastr/toastr.min.js"></script>
 
+<%--<script src="<%=basePath %>/js/template3.js"></script>--%>
+<script src="<%=basePath %>/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-zh-CN.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="<%=basePath %>/js/plugins/summernote/summernote-lite.js"></script>
+<%--文件--%>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/fileinput.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/plugins/sortable.min.js"></script>
+<script src="<%=basePath %>/js/plugins/bootstrap-fileinput/locales/zh.js"></script>
+
+<script src="<%=basePath %>/js/mjy.js"></script>
+<script src="<%=basePath %>/js/template.js"></script>
 
 </html>

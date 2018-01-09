@@ -123,7 +123,7 @@
                         </h2>
                         <s:if test='#session.project.state==1'>
                             <s:if test='#session.rank==3||#session.rank==4'>
-                                <button href="catalog-jmpTemplate?state=1" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
+                                <button href="catalog-jmpTemplate?state=0&projectId=<s:property value='#session.project.id_Project'/>" class="btn btn-success"><i class="fa fa-file"></i>编辑文档</button>
                             </s:if>
                             <s:if test="#session.rank==3">
                                 <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
@@ -598,7 +598,7 @@
             function(e, value, row, index) {
                 //修改操作
                 var id = row.id_document;
-                location.href = "catalog-jmpTemplate?documentId="+id;
+                location.href = "catalog-jmpTemplate?documentId="+id+"&projectId="+id_Project+"&state=1";
             }
     };
 

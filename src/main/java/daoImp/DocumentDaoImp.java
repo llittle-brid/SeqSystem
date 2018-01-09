@@ -27,4 +27,10 @@ public class DocumentDaoImp extends DAO<DocumentEntity> implements DocumentDao {
         List<DocumentEntity> list = getForList(sql,id);
         return list;
     }
+
+    @Override
+    public int getDocumentId(int id_project) {
+        String sql="select id_document from DOCUMENT where id_project=? and state=0";
+        return  getForValue(sql,id_project);
+    }
 }
