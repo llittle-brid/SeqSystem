@@ -11,4 +11,6 @@ public interface DocumentDao {
     int getVersion(int id);
     DocumentEntity getOne(int id);
     List<DocumentEntity> getAll(int id);
+
+    int getDocumentId(int id_project);
 }

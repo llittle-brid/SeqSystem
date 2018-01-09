@@ -5,11 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-import dao.CatalogDao;
-import dao.TemplateDao;
-import dao.UsableDao;
-import dao.UserDao;
+import dao.*;
 import daoImp.CatalogDaoImp;
+import daoImp.DocumentDaoImp;
 import daoImp.TemplateDaoImp;
 import daoImp.UsableDaoImp;
 import entity.*;
@@ -41,6 +39,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private int  id_catalog;
     private String describe;
     private String permissions;
+    private  int projectId;
+    private int state;
+    private int rank;
     //3
     private String funName;
     private int priority;
@@ -60,7 +61,17 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String jmpTemplate(){
+        if (state==1){//过期
         request.put("documentId",documentId);
+        request.put("projectId",projectId);
+        }
+        else {
+            DocumentDao documentDao=new DocumentDaoImp();
+            int id_document=documentDao.getDocumentId(projectId);
+            request.put("documentId",id_document);
+        }
+        request.put("state",state);
+        request.put("rank",rank);
         return "document";
     }
     public String addState1(){//下一级别，需要新增ul
@@ -165,7 +176,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
             List<CatalogEntity> catalogEntityList = catalogDao.getAllRole(documentId);
             List<UserStructureEntity> roleList = new ArrayList<>();
             for (int i = 0; i < catalogEntityList.size(); i++) {
-                roleList.add(gson.fromJson(catalogEntityList.get(i).getContent(), UserStructureEntity.class));  }
+                UserStructureEntity userStructureEntity=gson.fromJson(catalogEntityList.get(i).getContent(), UserStructureEntity.class);
+                if(userStructureEntity.getRoleName()!=null)
+                roleList.add(userStructureEntity);  }
                 //获取当前catalog内容
                 FunStructureEntity entity = gson.fromJson(catalogEntity.getContent(), FunStructureEntity.class);
             //这个是内容类
@@ -338,5 +351,17 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

@@ -20,7 +20,7 @@ function disReload() {
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
     $.ajax({
         url: "discuss-getCatalogDis",
-        data: {catalogIndex:catalogIndex, id_document:documentId},
+        data: {catalogIndex:catalogIndex, id_document:documentId,projectId: $("#projectId").val()},
         dataType: "json",
         type: "Post",
         async: "false",
@@ -37,7 +37,15 @@ function disReload() {
                     content+=" btn-danger ";
                 else content+=" btn-default ";
                 content+="btn-xs col-lg-push-1 m-l-sm deleteDis'  type='button'  style='margin-top: -3px'>删除</button> ";
-                content+="</div> <div class='ibox-content'> <div class=' wrapper'>";
+                if(tempDis.accessoryEntityList!=null){
+                content+="<div class='ibox-tools'>";
+                for (var j=0;j<tempDis.accessoryEntityList.length;j++) {
+                    content += '<a class="fa fa-file" href="' + "accessories/"+tempDis.accessoryEntityList[j].path+ '">';
+                    content += tempDis.accessoryEntityList[j].filename;
+                    content += '</a>';
+                }
+                content+="</div> " ;}
+                content+="</div><div class='ibox-content'> <div class=' wrapper'>";
                 content+=tempDis.content+"  </div> </div> </div> </div>";
             }
             $("div.allDiscuss").html(content);
@@ -130,6 +138,7 @@ function loadTemplateThree(entity) {
     var funRoleList=entity.funRoleList;
     var funUsableList=entity.funUsableList;
     var funRoleContent="";
+    if(funRoleList!=null&&funRoleList.length!=0&&funRoleList[i]!=null)
     for (var i=0;i<funRoleList.length;i++){
         funRoleContent+=" <tr class='funTr'> <th  ><div class='hidenTh' style='display: none'> <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></div></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
         var undefined="true",roleListContent="";
@@ -155,6 +164,7 @@ function loadTemplateThree(entity) {
     }
     $(".funTable tbody").prepend(funRoleContent);
     var funUsableContent="";
+    if(funUsableList!=null&&funUsableList.length!=0&&funUsableList[i]!=null)
     for (var i=0;i<funUsableList.length;i++){
         funUsableContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funUsableList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funUsableList[i].usablePara+"</th> <th style='text-align: center' >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
     }
@@ -567,6 +577,7 @@ function catalogNew() {
 function commitDis() {
     var discuss=$(".discuss").summernote('code');
     var catalogIndex=$(nowClick).children("span.catalogIndex").text()
+    if($('#fileupload').val()=="") {
     $.ajax({
         url: "discuss-commit",
         data: {disContent: discuss,catalogIndex:catalogIndex, id_document:documentId},
@@ -581,7 +592,14 @@ function commitDis() {
         error: function (result) {
             showtoast("dangerous","加载失败","加载目录失败")
         }
-    })
+    })}
+    else {
+        $('#fileupload').fileinput('upload').fileinput('clear');
+        showtoast("success","成功","评论提交成功");
+        discussInit();
+        disReload()
+    }
+
 }
 //评论删除按钮
 $(document).on("click",".deleteDis",function () {
@@ -651,13 +669,38 @@ function temp_edit() {
         ['fullscreen', ['fullscreen']]
     ],
         placeholder: '暂无内容',
+        callbacks: {
+            onImageUpload: function(files, editor, $editable) {
+                that=$(this);
+                sendFile(files,that);
+            }
+        }
     })
     $("div.hidenTh").show();
     $("#edit").attr("style","display:none");
     $("#save").attr("style","display:show");
     $(".dis").removeAttr("disabled")
 }
-
+//图片上传
+function sendFile(files, that) {
+    var data = new FormData();
+    data.append("file", files[0]);
+    $.ajax({
+        data : data,
+        type : "POST",
+        url : "librarydiscuss-image", //图片上传出来的url，返回的是图片上传后的路径，http格式
+        cache : false,
+        contentType : false,
+        processData : false,
+        dataType : "json",
+        success: function(data) {//data是返回的hash,key之类的值，key是定义的文件名
+            $(that).summernote('insertImage', data.path);
+        },
+        error:function(){
+            alert("上传失败");
+        }
+    });
+}
 
 //模板保存按钮
 function temp_save() {
@@ -776,7 +819,13 @@ function edit() {
         // ['para', ['paragraph']],
         // ['table', ['table']],
         ['picture', ['picture']]
-    ]})
+    ],  callbacks: {
+            onImageUpload: function(files, editor, $editable) {
+                that=$(this);
+                sendFile(files,that);
+            }
+        }
+    })
 }
 //评论保存按钮
 function save() {
@@ -995,3 +1044,21 @@ if(id_template=="1"){
         loadTemplateThree(structureList[id])
     }
 }
+//文本框初始化
+$('#fileupload').fileinput(
+    {
+        language: 'zh',
+        showUpload: false,
+        removeClass: "btn btn-danger",
+        removeLabel: "清除",
+        removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+        uploadAsync: false,
+        uploadUrl: "discuss-commit2Project",
+        uploadExtraData: function (previewId, index) {
+            var info = {disContent: $(".discuss").summernote('code'),id_catalog:nowCatalog.id_catalog};
+            return info;
+        }
+    }
+
+);
+//

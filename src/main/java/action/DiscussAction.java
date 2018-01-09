@@ -13,6 +13,7 @@ import daoImp.ProDiscussDaoImp;
 import entity.AccessoryEntity;
 import entity.ProDIscussWrapper;
 import entity.ProDiscussEntity;
+import entity.UserEntity;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.StrutsStatics;
@@ -45,6 +46,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     private AccessoryDao accessoryDao;
     private ProDiscussEntity proDiscussEntity;
     private int page;
+    private int projectId;
 
     public void setPage(int page) {
         this.page = page;
@@ -65,7 +67,7 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
 
     public String commit2Project(){
         int id_project = proDiscussEntity.getId_Project();
-        int id_user = proDiscussEntity.getId_user();
+        int id_user = ((UserEntity)ActionContext.getContext().getSession().get("user")).getId_user();
         List<File> MyFile = proDiscussEntity.getMyFile();
         List<String> MyFileFileName = proDiscussEntity.getMyFileFileName();
 
@@ -98,7 +100,10 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         }
 
         proDiscussDao = new ProDiscussDaoImp();
-        proDiscussDao.commit1(id_user,id_project,new Timestamp(new Date().getTime()),disContent,MyFileFileName,Path);
+        if (id_project!=0)
+        proDiscussDao.commit(id_user,id_project,new Timestamp(new Date().getTime()),disContent,MyFileFileName,Path);
+        else
+            proDiscussDao.commitToCatalog(((UserEntity)session.get("user")).getId_user(),proDiscussEntity.getId_catalog(),new Timestamp(new Date().getTime()),disContent,MyFileFileName,Path);
         return "Re";
     }
 
@@ -113,9 +118,8 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         int fourth=Integer.valueOf(tempList[3]);
         int id_catalog=catalogDao.getIdCatalog(id_document,first,second,third,fourth);
         List<ProDiscussEntity> discussList=proDiscussDao.getCatalogDis(id_catalog);
-        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,1,1);
+        List<ProDIscussWrapper> wrapperList=ProDIscussWrapper.getWrapperList(discussList,((UserEntity)(ActionContext.getContext().getSession().get("user"))).getId_user(),projectId);
         dataMap.put("wrapperList",wrapperList);
-        dataMap.put("test",1);
         return "Re";
     }
 
@@ -200,5 +204,9 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
     @Override
     public void setRequest(Map<String, Object> request) {
         this.request = request;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }
