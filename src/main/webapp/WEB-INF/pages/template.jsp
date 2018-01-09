@@ -84,7 +84,7 @@
                                     <input style="display: none" value="${requestScope.projectId}" id="projectId">
                                 </li>
                                 <li class="li_fun">
-                                    <s:if test="#request.rank!=5">
+                                    <s:if test="#request.rank!=5&&#request.state==0">
                                     <span class="li_rename li_fa fa col-md-offset-1  fa-pencil-square-o black"   title="重命名" data-toggle="modal" data-target="#myModal3"></span>
                                     <span class="li_add li_fa fa col-md-offset-1  fa-plus black"   title="新增目录"></span>
                                     <span class="li_add_hidden li_fa fa col-md-offset-1  fa-plus black" style="display: none" data-toggle="modal" data-target="#myModal"></span>

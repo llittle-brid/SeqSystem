@@ -582,7 +582,7 @@
     );
 
     function viewFormatter(value,row,index) {
-
+<s:if test='#session.project.state==1'>
         <s:if test='#session.rank==3'>
             if (row.state===0) {
                 return ['<a class="edit btn-xs btn-success">编辑文档</a>',
@@ -605,6 +605,10 @@
         <s:if test='#session.rank==5'>
             return '<a class="view btn-xs btn-info">查看文档</a>';
         </s:if>
+    </s:if>
+    <s:if test='#session.project.state==0'>
+        return '<a class="view btn-xs btn-info">查看文档</a>';
+        </s:if>
     }
 
     var rank = "<s:property value="#session.rank"/>";
@@ -613,7 +617,7 @@
         'click .edit':
             function(e, value, row, index) {
                 var id = row.id_document;
-                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank;
+                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank+"&projectId="+id_Project+"&state="+row.state;
             },
         'click .deploy':
             function(e, value, row, index) {
@@ -623,7 +627,7 @@
         'click .view':
             function(e, value, row, index) {
                 var id = row.id_document;
-                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank;
+                location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank+"&projectId="+id_Project+"&state="+row.state;
             }
     };
 
@@ -801,7 +805,8 @@
     //评论提交
     function commitDiscuss() {
          discuss = $(".discuss").summernote('code');
-        if($('#fileupload').val()==""&&discuss.val()=="") {
+        if($('#fileupload').val()==""&&discuss.trim()=="") {
+            showtoast("dangerous","失败","评论不能为空");
             return;
         }
         if($('#fileupload').val()=="") {
@@ -816,7 +821,7 @@
                     discussReload2(0);
                 },
                 error: function (result) {
-                    showtoast("dangerous","加载失败","加载目录失败");
+                    showtoast("dangerous","失败","评论不能为空");
                 }
             })
         }
