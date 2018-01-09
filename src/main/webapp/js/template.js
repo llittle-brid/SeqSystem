@@ -138,6 +138,7 @@ function loadTemplateThree(entity) {
     var funRoleList=entity.funRoleList;
     var funUsableList=entity.funUsableList;
     var funRoleContent="";
+    if(funRoleList!=null&&funRoleList.length!=0&&funRoleList[i]!=null)
     for (var i=0;i<funRoleList.length;i++){
         funRoleContent+=" <tr class='funTr'> <th  ><div class='hidenTh' style='display: none'> <span class='fun_down li_fa fa col-md-offset-1  fa-arrow-down black'></span> <span class='fun_up fa li_fa col-md-offset-1  fa-arrow-up black ' ></span> <span class='fun_delete li_fa fa col-md-offset-1  fa-times  black' ></span></div></th> <th> <select class='form-control  roleName dis' name='roleName'   disabled>";
         var undefined="true",roleListContent="";
@@ -163,6 +164,7 @@ function loadTemplateThree(entity) {
     }
     $(".funTable tbody").prepend(funRoleContent);
     var funUsableContent="";
+    if(funUsableList!=null&&funUsableList.length!=0&&funUsableList[i]!=null)
     for (var i=0;i<funUsableList.length;i++){
         funUsableContent+="<tr class='usableTr'> <th colspan='2' name='usableName' class='usableName'>"+funUsableList[i].usableName+"</th> <th  name='usablePara' class='usablePara' >"+funUsableList[i].usablePara+"</th> <th style='text-align: center' >  <button  class='btn btn-danger  btn-xs col-lg-push-1 dis' id='deleteUsable'  onclick='deleteUsable(this)' type='button' style='margin-right: 10px' disabled>删除可用性</button></th> </tr>"
     }

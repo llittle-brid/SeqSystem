@@ -84,12 +84,14 @@
                                     <input style="display: none" value="${requestScope.projectId}" id="projectId">
                                 </li>
                                 <li class="li_fun">
+                                    <s:if test="#request.rank!=5">
                                     <span class="li_rename li_fa fa col-md-offset-1  fa-pencil-square-o black"   title="重命名" data-toggle="modal" data-target="#myModal3"></span>
                                     <span class="li_add li_fa fa col-md-offset-1  fa-plus black"   title="新增目录"></span>
                                     <span class="li_add_hidden li_fa fa col-md-offset-1  fa-plus black" style="display: none" data-toggle="modal" data-target="#myModal"></span>
                                     <span class="li_up li_fa fa col-md-offset-1  fa-arrow-up black" title="上移目录"></span>
                                     <span class="li_down fa li_fa col-md-offset-1  fa-arrow-down black" title="下移目录"></span>
                                     <span class="li_delete li_fa fa col-md-offset-1  fa-times showtoastr black" title="删除目录"></span>
+                                    </s:if>
 
                                     <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -220,11 +222,13 @@
                         <div class="catalogNoneContent" style="text-align: center">
                         <img src="/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
                         <div class="ibox-title catalogNotNoneContent" style="display:none;">
+                            <s:if test="#request.rank!=5&&#request.state==0">
                             <div class="ibox-tools ">
                                 <i class="fa fa-commenting modal-icon discussButton" style="color: #6D8389" onclick="disReload()"  data-toggle="modal" data-target="#myModal1" > </i>
                                 <button id="edit" class="btn btn-primary btn-xs m-l-sm" onclick="temp_edit()" type="button">编辑</button>
                                 <button id="save" class="btn btn-primary  btn-xs m-l-sm" onclick="temp_save()" type="button" style="display:none;">保存</button>
                             </div>
+                            </s:if>
                         </div>
                         <div class="ibox-content form-horizontal content catalogNotNoneContent" style="display:none">
                         </div>

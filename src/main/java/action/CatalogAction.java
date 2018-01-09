@@ -41,6 +41,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private String permissions;
     private  int projectId;
     private int state;
+    private int rank;
     //3
     private String funName;
     private int priority;
@@ -63,14 +64,14 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         if (state==1){//过期
         request.put("documentId",documentId);
         request.put("projectId",projectId);
-            request.put("state",state);
         }
         else {
             DocumentDao documentDao=new DocumentDaoImp();
             int id_document=documentDao.getDocumentId(projectId);
             request.put("documentId",id_document);
-            request.put("state",state);
         }
+        request.put("state",state);
+        request.put("rank",rank);
         return "document";
     }
     public String addState1(){//下一级别，需要新增ul
@@ -358,5 +359,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }
