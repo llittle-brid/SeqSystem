@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
                         return invocation.invoke();
                     else{
                         ((ActionSupport) invocation.getAction()).addActionError("sorry,you don't have permission!");
-                        return Action.NONE;
+                        return Action.LOGIN;
                     }
                 }
                 if(Objects.equals(method, "jmpOrgManager1")|| Objects.equals(method, "jmpOrgManager2")){
@@ -40,7 +40,7 @@ import javax.servlet.http.HttpSession;
                         return invocation.invoke();
                     else {
                         ((ActionSupport) invocation.getAction()).addActionError("sorry,you don't have permission!");
-                        return Action.NONE;
+                        return Action.LOGIN;
                     }
                 }
                 //    放行到下一个拦截器或者action中的方法
