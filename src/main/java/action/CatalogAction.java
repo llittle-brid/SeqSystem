@@ -61,15 +61,8 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     }
 
     public String jmpTemplate(){
-        if (state==1){//过期
         request.put("documentId",documentId);
         request.put("projectId",projectId);
-        }
-        else {
-            DocumentDao documentDao=new DocumentDaoImp();
-            int id_document=documentDao.getDocumentId(projectId);
-            request.put("documentId",id_document);
-        }
         request.put("state",state);
         request.put("rank",rank);
         return "document";
