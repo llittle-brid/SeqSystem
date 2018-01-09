@@ -802,7 +802,7 @@
         {
             language: 'zh',
             showUpload: false,
-            removeClass: "btn btn-danger",
+            removeClass: "btn btn-dang  r",
             removeLabel: "清除",
             removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
             uploadAsync: false,

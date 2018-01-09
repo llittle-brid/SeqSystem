@@ -50,7 +50,23 @@
 </head>
 
 <body class="gray-bg">
-
+<div class=" row wrapper white-bg">
+    <ol class="breadcrumb" style="margin-left: 40px">
+        <li style="font-size: 15px">
+            <strong>
+                <a href="user-jmpHomepage"><span class="lzf_b">首页</span></a> >>
+                <s:if test='#session.project.state==1'>
+                    <a href="user-jmpCurrentProjectList">当前项目<span class="lzf_b"></span></a>
+                </s:if>
+                <s:if test='#session.project.state==0'>
+                    <a href="user-jmpCompletedProjectList">历史项目<span class="lzf_b"></span></a>
+                </s:if>
+                >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>>
+                需求文档
+            </strong>
+        </li>
+    </ol>
+</div>
 
 <div class="wrapper wrapper-content">
     <div class="row">
@@ -283,7 +299,7 @@
             </div>
             <!--中间部分结束-->
             <!--右侧部分开始-->
-            <s:if test="#request.state!=0">
+            <s:if test="#request.state==0">
             <div class="col-sm-3" >
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
