@@ -511,7 +511,7 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "移除",
                         cancelButtonText: "取消",
-                        closeOnConfirm: false
+                        closeOnConfirm: true
                     },function () {
                         $.ajax({
                             type: "post",
@@ -622,7 +622,20 @@
         'click .deploy':
             function(e, value, row, index) {
                 var id = row.id_document;
-                location.href = "project-deploy?documentId="+id;
+                swal(
+                    {
+                        title: "您确定要发布这份文档吗",
+                        text: "请谨慎操作！",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: true
+                    },function () {
+                        swal("发布成功！", "您已成功发布此版本需求文档。", "success");
+                        location.href = "project-deploy?documentId=" + id;
+                    })
             },
         'click .view':
             function(e, value, row, index) {
@@ -668,7 +681,7 @@
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "转移",
                 cancelButtonText: "取消",
-                closeOnConfirm: false
+                closeOnConfirm: true
             },function () {
                 $.ajax({
                     url: "project-alterPM",
@@ -843,8 +856,7 @@
         else {
             $('#fileupload').fileinput('upload').fileinput('clear');
             showtoast("success","成功","评论提交成功");
-            discussReload2(0);
-            discussInit();
+            location.href="project-jmpProjectInfo"
         }
     }
 
@@ -878,7 +890,7 @@
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "删除",
                 cancelButtonText: "取消",
-                closeOnConfirm: false
+                closeOnConfirm: true
             }, function () {
                 $.ajax({
                     url: "discuss-delete",
@@ -911,7 +923,7 @@
                 ],
             callbacks: {
                 onImageUpload: function(files, editor, $editable) {
-                    that=$(this);
+                    var that=$(this);
                     sendFile(files,that);
                 }
             }

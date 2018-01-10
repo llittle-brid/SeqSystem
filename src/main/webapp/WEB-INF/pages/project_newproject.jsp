@@ -44,6 +44,7 @@
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="<%=basePath %>img/u11.png" style="height: 18px;width: 20px"></button>　项目名称：*</label>
         <div class="col-sm-4">
             <input type="text"  id="proName" class="form-control text-center" placeholder="请输入项目名称  (必填）" required="true"/>
+            <i id="warning1"></i>
         </div>
 
     </div>
@@ -56,6 +57,7 @@
         <label class="control-label col-sm-3"><button class="btn-circle btn-default"><img src="<%=basePath %>img/u12.png" style="height: 18px;width: 20px"></button>　文档名称：*</label>
         <div class="col-sm-4">
             <input type="text"  id="docName" class="form-control text-center" placeholder="请输入文档名称（必填）" required="true"/>
+            <i id="warning2"></i>
         </div>
     </div>
 
@@ -114,8 +116,6 @@
     </div>
 </div>
 
-
-
 </body>
 <script src="<%=basePath %>js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath %>js/bootstrap.min.js?v=3.3.6"></script>
@@ -129,6 +129,22 @@
 <script>
 
     function create() {
+        var proName = $("input#proName").val();
+        var docName = $("input#docName").val();
+        if ($.trim(proName)==""){
+            $("#warning1").html("<i class='glyphicon glyphicon-remove pull-right' style='color: red'>必填项!</i>");
+            return;
+        }
+        else {
+            $("#warning1").html("<i class='glyphicon glyphicon-ok-sign pull-right' style='color: green'></i>");
+        }
+        if ($.trim(docName)==""){
+            $("#warning2").html("<i class='glyphicon glyphicon-remove pull-right' style='color: red'>必填项!</i>");
+            return;
+        }
+        else {
+            $("#warning2").html("<i class='glyphicon glyphicon-ok-sign pull-right' style='color: green'></i>");
+        }
         $.ajax({
             url: "project-create",
             data: {
@@ -145,7 +161,6 @@
                 }
                 else {
                     showtoast2("error", "创建失败", "操作失败");
-                    alert("error");
                 }
             },
             error: function (result) {
@@ -172,15 +187,23 @@
                     idField:"ID_ORGANIZATION",
                     keyField:"NAME",
                     data:suggest,
+                    ignorecase: true,
                     listStyle: {
-                        'text-align': 'center'
+                        'text-align': 'center',
+                        'padding-top': 0,
+                        'max-height': '375px',
+                        'max-width': '800px',
+                        'overflow': 'auto',
+                        'width': 'auto',
+                        'transition': '0.3s',
+                        '-webkit-transition': '0.3s',
+                        '-moz-transition': '0.3s',
+                        '-o-transition': '0.3s'
                     }
-                }).on('onDataRequestSuccess', function (e, result) {
-                    console.log('从 json.data 参数中获取，不会触发 onDataRequestSuccess 事件', result);
                 });
             },
             error: function (result) {
-                alert('error');
+                showtoast2("error", "创建失败", "操作失败");
             }
         })
     }
