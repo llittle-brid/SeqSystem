@@ -1053,6 +1053,7 @@ $('#fileupload').fileinput(
         removeLabel: "清除",
         removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
         uploadAsync: false,
+        maxFileSize: 1536,
         uploadUrl: "discuss-commit2Project",
         uploadExtraData: function (previewId, index) {
             var info = {disContent: $(".discuss").summernote('code'),id_catalog:nowCatalog.id_catalog};

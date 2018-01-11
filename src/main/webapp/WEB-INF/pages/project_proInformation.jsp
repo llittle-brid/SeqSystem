@@ -854,9 +854,11 @@
         }
 
         else {
-            $('#fileupload').fileinput('upload').fileinput('clear');
-            showtoast("success","成功","评论提交成功");
-            location.href="project-jmpProjectInfo"
+            $('#fileupload').fileinput('upload').fileinput('clear').on('filebatchuploadsuccess', function(event, data) {
+                showtoast("success","成功","评论提交成功");
+                discussReload2(0);
+                discussInit();
+            });
         }
     }
 
@@ -870,6 +872,7 @@
             removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
             uploadAsync: false,
             uploadUrl: "discuss-commit2Project",
+            maxFileSize: 1536,
             uploadExtraData: function (previewId, index) {
                 var info = {disContent: $(".discuss").summernote('code'), id_Project: id_Project, id_user: id_User};
                 return info;

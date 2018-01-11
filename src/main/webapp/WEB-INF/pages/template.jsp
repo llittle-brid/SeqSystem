@@ -61,7 +61,7 @@
                 <s:if test='#session.project.state==0'>
                     <a href="user-jmpCompletedProjectList">历史项目<span class="lzf_b"></span></a>
                 </s:if>
-                >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a>>
+                >><a href="project-jmpProjectInfo"><span class="lzf_b">项目信息</span></a> >>
                 需求文档
             </strong>
         </li>
