@@ -56,4 +56,12 @@ public class OrganizationDaoImp extends DAO<OrganizationEntity> implements Organ
         return name;
     }
 
+    @Override
+    public boolean isIn(int id_user,int id_org) {
+        String sql = "select count(*) from ORG_MEMBER where ID_USER = ? and ID_ORGANIZATION = ?";
+        if (Integer.valueOf(getForValue(sql,id_user,id_org).toString())>0)
+            return true;
+        else
+            return false;
+    }
 }

@@ -14,6 +14,7 @@ public interface OrganizationDao {
     OrganizationEntity getOne(String name);
     List<OrganizationEntity> getAll();
     void quit(String NAME);
+    boolean isIn(int id_user, int id_org);
     List<OrganizationEntity> getMatched(int id_User, String name);
     List<OrganizationEntity> getMyOrg(int id);
     String findName(int ID_ORGANIZATION);  //获取机构ID对应的NAME

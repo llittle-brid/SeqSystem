@@ -14,6 +14,7 @@ import daoImp.OrganizationDaoImp;
 import daoImp.ProjectDaoImp;
 import entity.InformationEntity;
 
+import entity.ProjectEntity;
 import entity.UserEntity;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -71,6 +72,15 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         else if(information.getID_ORGANIZATION()== null) {
             boolean res = infodao.acceptPro(information.getID_PROJECT(),id_user);
             infodao.joinPro(information.getID_PROJECT(),id_user);
+            ProjectDao projectDao = new ProjectDaoImp();
+            ProjectEntity projectEntity = projectDao.getOne(information.getID_PROJECT());
+            int id_org = projectEntity.getId_Organization();
+            if (id_org>0) {
+                OrganizationDao organizationDao = new OrganizationDaoImp();
+                if (!organizationDao.isIn(id_user, id_org)) {
+                    infodao.joinOrg(id_org, id_user);
+                }
+            }
             String Name = pro.findName(information.getID_PROJECT());
             String content = "已接受邀请加入"+Name+"项目";
             System.out.println(content);
