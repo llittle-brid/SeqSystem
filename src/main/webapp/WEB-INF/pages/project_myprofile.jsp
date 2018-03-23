@@ -83,7 +83,7 @@
                                 <s:property value="" default="未填写" />
                             </s:if>
                             <s:else>
-                                <s:property value="#session.user.address"/>
+                                <s:property value="#session.user.qq"/>
                             </s:else>
                         </th>
                     </tr>

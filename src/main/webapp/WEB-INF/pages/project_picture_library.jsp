@@ -206,7 +206,7 @@
 <script>
     $(document).ready(function(){
         $("div.structure").click(function(){
-            location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1;
+            location.href="structure-get?id_library="+$(this).next().val()+'&id_template=' + $(this).children().val()+'&page='+1+'&pagedis='+1;
         });
     });
 </script>
