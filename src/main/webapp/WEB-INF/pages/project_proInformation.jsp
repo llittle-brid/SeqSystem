@@ -114,29 +114,28 @@
     </div>
 
     <div id="page-wrapper" class="dashbard-1">
-        <div class="ibox-content">
+        <div class="ibox-content modal-body">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <div class="m-b-md">
                         <h2>
                             <strong><s:property value="#session.project.name"/></strong>
                         </h2>
-                        <s:if test='#session.project.state==1'>
-                            <s:if test='#session.rank==3'>
-                                <button id="createDoc" class="btn btn-success"><i class="fa fa-file"></i>新建文档</button>
-                                <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
-                            </s:if>
-                        </s:if>
-                    </div>
-                    <dl class="dl-horizontal">
-                        <dt>状态：</dt>
                         <s:if test='#session.project.state==1'>
                             <dd><span class="label label-primary">进行中</span></dd>
                         </s:if>
                         <s:if test='#session.project.state==0'>
                             <dd><span class="label label-default">已完成</span></dd>
                         </s:if>
-                    </dl>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <s:if test='#session.project.state==1'>
+                        <s:if test='#session.rank==3'>
+                            <%--<button id="createDoc" class="btn btn-success"><i class="fa fa-file"></i>新建文档</button>--%>
+                            <button id="endProject" class="btn btn-danger pull-right">结束项目</button>
+                        </s:if>
+                    </s:if>
                 </div>
             </div>
             <div class="row">
@@ -157,16 +156,16 @@
                         <dt><h3>当前版本：</h3></dt>
                         <dd><h3><s:property value="#session.version"/></h3></dd>
 
-                        <dt><h3>创建于：</h3></dt>
+                        <dt><h3>创建时间：</h3></dt>
                         <dd><h3><s:property value="#session.project.date"/></h3></dd>
                     </dl>
                 </div>
-                <div class="col-sm-7">
+            </div>
+            <div class="row col-sm-12 ">
                     <dl class="dl-horizontal">
-                        <dt><h3>项目简介</h3></dt>
+                        <dt><h3>项目简介：</h3></dt>
                         <dd><h3><s:property value="#session.project.intro"/></h3></dd>
                     </dl>
-                </div>
             </div>
             <div class="row m-t-sm">
                 <div class="col-sm-12">
@@ -918,6 +917,8 @@
         $("#eg").addClass("no-padding");
         $(".click2edit").summernote(
         {
+            height:50,
+            minHeight:50,
             lang:"zh-CN",
             focus:true,
             toolbar: [

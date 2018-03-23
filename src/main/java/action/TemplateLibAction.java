@@ -33,7 +33,9 @@ public class TemplateLibAction extends ActionSupport implements RequestAware, Se
     public String getTypeOfLib(){
         libraryDao=new LibraryDaoImp();
         dataMap=new HashMap<>();
-        List<LibraryEntity> list=libraryDao.getTypeOfLib(1,libraryEntity.getId_template());
+        UserEntity seesionUser=(UserEntity)session.get("user");
+        List<LibraryEntity> list=libraryDao.getTypeOfLib(seesionUser.getId_user()
+                ,libraryEntity.getId_template());
         dataMap.put("libraryList",list);
         return "Re";
     }
