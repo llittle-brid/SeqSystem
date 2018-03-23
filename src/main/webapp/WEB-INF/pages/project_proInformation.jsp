@@ -661,10 +661,10 @@
                     showtoast("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast("error", "邀请失败", "用户名不存在!");
+                else  showtoast("error", "邀请失败", "用户名不存在或已在项目中!");
             },
             error: function (result) {
-                showtoast("error", "邀请失败", "用户名不存在!");
+                showtoast("error", "邀请失败", "用户名不存在或已在项目中!");
             }
         })
     });
