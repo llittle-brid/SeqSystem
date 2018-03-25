@@ -24,4 +24,6 @@ public interface ProDiscussDao {
     int getProDisNum(int id_project);
 
     void delete(int id_pro_discuss);
+
+    int getCatalogDisNum(int id_catalog);
 }

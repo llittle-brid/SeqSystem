@@ -116,6 +116,13 @@ public class ProDiscussDaoImp extends DAO<ProDiscussEntity> implements ProDiscus
     }
 
     @Override
+    public int getCatalogDisNum(int id_catalog) {
+        String sql = "select count(*) from VIEW_PRO_DISCUSS where ID_CATALOG = ? ";
+        int num = Integer.valueOf(getForValue(sql,id_catalog).toString());
+        return num;
+    }
+
+    @Override
     public int getProDisNum(int id_project) {
         String sql = "select count(*) from VIEW_PRO_DISCUSS where ID_PROJECT = ? ";
         int num = Integer.valueOf(getForValue(sql,id_project).toString());

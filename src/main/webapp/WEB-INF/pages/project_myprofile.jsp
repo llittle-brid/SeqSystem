@@ -83,7 +83,7 @@
                                 <s:property value="" default="未填写" />
                             </s:if>
                             <s:else>
-                                <s:property value="#session.user.address"/>
+                                <s:property value="#session.user.qq"/>
                             </s:else>
                         </th>
                     </tr>
@@ -440,12 +440,6 @@
                     align: 'center',
                 },
                 {
-                    field: 'NAME',
-                    title: '操作人',
-                    sortable: true,
-                    align: 'center',
-                },
-                {
                     field: 'DATE',
                     title: '时间',
                     sortable: true,
@@ -466,12 +460,6 @@
                 {
                     field: 'CONTENT',
                     title: '消息',
-                    sortable: true,
-                    align: 'center'
-                },
-                {
-                    field: 'NAME',
-                    title: '用户',
                     sortable: true,
                     align: 'center'
                 },

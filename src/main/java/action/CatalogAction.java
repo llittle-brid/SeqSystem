@@ -6,10 +6,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.*;
-import daoImp.CatalogDaoImp;
-import daoImp.DocumentDaoImp;
-import daoImp.TemplateDaoImp;
-import daoImp.UsableDaoImp;
+import daoImp.*;
 import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -156,8 +153,11 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         CatalogEntity catalogEntity = catalogDao.getOne(documentId, first, second, third, fourth);
         TemplateDao templateDao = new TemplateDaoImp();
         TemplateEntity templateEntity = templateDao.getTemplate(catalogEntity.getId_template());
+        ProDiscussDao proDiscussDao=new ProDiscussDaoImp();
+        int catalogDisNum=proDiscussDao.getCatalogDisNum(catalogEntity.getId_catalog());
         Gson gson = new Gson();
         dataMap = new HashMap<>();
+        dataMap.put("catalogDisNum",catalogDisNum);
         if (catalogEntity.getId_template() == 1) {//通用
             CommonStructureEntity entity = gson.fromJson(catalogEntity.getContent(), CommonStructureEntity.class);
             dataMap.put("entity", entity);

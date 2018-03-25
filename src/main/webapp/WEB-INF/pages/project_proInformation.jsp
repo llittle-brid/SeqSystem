@@ -120,13 +120,13 @@
                     <div class="m-b-md">
                         <h2>
                             <strong><s:property value="#session.project.name"/></strong>
+                            <s:if test='#session.project.state==1'>
+                                <span class="label label-primary">进行中</span>
+                            </s:if>
+                            <s:if test='#session.project.state==0'>
+                                <span class="label label-default">已完成</span>
+                            </s:if>
                         </h2>
-                        <s:if test='#session.project.state==1'>
-                            <dd><span class="label label-primary">进行中</span></dd>
-                        </s:if>
-                        <s:if test='#session.project.state==0'>
-                            <dd><span class="label label-default">已完成</span></dd>
-                        </s:if>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -230,9 +230,9 @@
                                     <div id="toolbar1">
                                         <s:if test='#session.project.state==1'>
                                             <s:if test="#session.rank==3">
-                                                <button id="searchUser" class="btn btn-info" data-toggle="modal" data-target="#newUser">
-                                                    <i class="glyphicon glyphicon-zoom-in"></i> 邀请成员
-                                                </button>
+                                                    <button id="searchUser" class="btn btn-info" data-toggle="modal" data-target="#newUser">
+                                                        <i class="glyphicon glyphicon-zoom-in"></i> 邀请成员
+                                                    </button>
                                                 <button id="alterPM" class="btn btn-warning" data-toggle="modal" data-target="#switchPM">
                                                     <i class="glyphicon"></i> 转移组长
                                                 </button>
@@ -261,7 +261,11 @@
                                 <div class="tab-pane" id="tab-3">
 
                                     <div id="toolbar2">
-
+<s:if test='#session.project.state==1'>
+    <s:if test='#session.rank==3'>
+        <button id="createDoc" class="btn btn-success"><i class="fa fa-file"></i>新建文档</button>
+    </s:if>
+</s:if>
                                     </div>
                                     <div class="bootstrap-table" >
                                         <table id="projectDocs" data-toggle="table"
@@ -661,10 +665,10 @@
                     showtoast("success", "邀请成功", "成功发送邀请");
                     $('button#button_cancel').click();
                 }
-                else  showtoast("error", "邀请失败", "用户名不存在!");
+                else  showtoast("error", "邀请失败", "用户名不存在或已在项目中！");
             },
             error: function (result) {
-                showtoast("error", "邀请失败", "用户名不存在!");
+                showtoast("error", "邀请失败", "用户名不存在或已在项目中！");
             }
         })
     });

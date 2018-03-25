@@ -67,7 +67,7 @@ $(document).on("click",".dic",function () {
         type: "Post",
         async: "false",
         success: function (result) {
-            var content;
+            var content,catalogDisNum=result.catalogDisNum;
             $("#save").attr("style","display:none");
             $("#edit").attr("style","display:show");
             $("div.catalogNoneContent").hide();
@@ -84,6 +84,14 @@ $(document).on("click",".dic",function () {
             $("h2#catalog_title").text(title);
             discussInit();
             entity=result.entity;
+            alert("1")
+            alert(catalogDisNum)
+            if(catalogDisNum>0){
+                $("#discussButton").attr("style","color:#59BD4F");
+            }
+            else {
+                $("#discussButton").attr("style","color:#.6D8389");
+            }
             if(template.id_template=="3"){//加载角色+内容
 
                 roleList=result.roleList;

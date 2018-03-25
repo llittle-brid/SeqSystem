@@ -18,4 +18,5 @@ public interface OrganizationDao {
     List<OrganizationEntity> getMatched(int id_User, String name);
     List<OrganizationEntity> getMyOrg(int id);
     String findName(int ID_ORGANIZATION);  //获取机构ID对应的NAME
+    String findAdminName(int ID_ORGANIZATION);
 }

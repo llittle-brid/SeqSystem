@@ -59,7 +59,8 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
             boolean res = infodao.acceptOrg(information.getID_ORGANIZATION(),id_user);
             infodao.joinOrg(information.getID_ORGANIZATION(),id_user);
             String Name = org.findName(information.getID_ORGANIZATION());
-            String content = "已接受邀请加入"+Name+"机构";
+            String Adminname = org.findAdminName(information.getID_ORGANIZATION());
+            String content = "已接受"+Adminname+"邀请加入"+Name+"机构";
             System.out.println(content);
             Date dt=new Date();
 //            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -82,7 +83,8 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
                 }
             }
             String Name = pro.findName(information.getID_PROJECT());
-            String content = "已接受邀请加入"+Name+"项目";
+            String AdminName = pro.findAdminName(information.getID_PROJECT());
+            String content = "已接受"+AdminName+"邀请加入"+Name+"项目";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
@@ -102,7 +104,8 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         if(information.getID_PROJECT()== null) {
             boolean res = infodao.refuseOrg(information.getID_ORGANIZATION(),id_user);
             String Name = org.findName(information.getID_ORGANIZATION());
-            String content = "已拒绝邀请加入"+Name+"机构";
+            String Adminname = org.findAdminName(information.getID_ORGANIZATION());
+            String content =  "已拒绝"+Adminname+"邀请加入"+Name+"机构";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefuseORG(id_user, content, dt,information.getID_ORGANIZATION());
@@ -111,7 +114,8 @@ public class InfomationAction extends ActionSupport implements RequestAware, Ses
         else if(information.getID_ORGANIZATION()== null) {
             boolean res = infodao.refusePro(information.getID_PROJECT(),id_user);
             String Name = pro.findName(information.getID_PROJECT());
-            String content = "已拒绝邀请加入"+Name+"项目";
+            String AdminName = pro.findAdminName(information.getID_PROJECT());
+            String content = "已拒绝"+AdminName+"邀请加入"+Name+"项目";
             System.out.println(content);
             Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
             history.hasAcceptorRefusePRO(id_user, content, dt,information.getID_PROJECT());
