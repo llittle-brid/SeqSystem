@@ -45,7 +45,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <div style="float: left;margin-left: 5px"><span><strong>基本资料</strong></span></div>
-                <div style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">修改资料</button></div>
+                <div id="test1" style="float: left;margin-left: 10px"><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">修改资料</button></div>
             </div>
             <div style="padding-left: 80px" class="ibox-content">
                 <table class="table" style="width:400px;border-left: none;border-right: none">
@@ -479,6 +479,7 @@
                     field: 'DATE',
                     title: '时间',
                     sortable: true,
+                    sortOrder: "desc",
                     align: 'center'
                 },
             ]
@@ -722,6 +723,5 @@
             })
         }
     }
-
 </script>
 </html>

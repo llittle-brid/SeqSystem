@@ -31,24 +31,23 @@
 
     <!--右侧部分开始-->
     <div id="page-wrapper" class="white-bg dashbard-1">
-        <div class="row border-bottom">
+        <div  class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a  href="user-jmpTemp"><img src="<%=basePath %>/img/logo.png" style="height: 50px;margin: 10px 0px 5px 50px;"> </a></div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <a class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
-
+                    <a id="yourName" class="dropdown J_tabClose" data-toggle="dropdown">${sessionScope.user.name}<span class="caret"></span>
                     </a>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
+                    <ul  role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li  class="J_tabShowActive"><a id="test1"  class="J_menuItem" href="user-jmpMyprofile">个人中心</a>
                         </li>
                         <li class="divider"></li>
                         <s:if test='#session.sysManager!="0"'>
-                            <li class="J_tabShowActive"><a  class="J_menuItem" href="user-jmpSysManager1">系统管理</a>
+                            <li class="J_tabShowActive"><a id="test2" class="J_menuItem" href="user-jmpSysManager1">系统管理</a>
                             </li>
                             <li class="divider"></li>
                         </s:if>
                         <s:if test='#session.orgManager!="0"'>
-                        <li class="J_tabShowActive"><a  class="J_menuItem" href="Organization-jmpOrgManager1">机构管理</a>
+                        <li class="J_tabShowActive"><a id="test3" class="J_menuItem" href="Organization-jmpOrgManager1">机构管理</a>
                         </li>
                         <li class="divider"></li>
                         </s:if>
@@ -83,7 +82,25 @@
 <script src="<%=basePath %>/js/mjy.js"></script>
 
 </body>
-
-
+<script>
+    $("#test1").click(function (){
+        var oDiv = document.getElementById('yourName');
+        oDiv.onclick = function(){
+        };
+        oDiv.click();
+    })
+    $("#test2").click(function (){
+        var oDiv = document.getElementById('yourName');
+        oDiv.onclick = function(){
+        };
+        oDiv.click();
+    })
+    $("#test3").click(function (){
+        var oDiv = document.getElementById('yourName');
+        oDiv.onclick = function(){
+        };
+        oDiv.click();
+    })
+</script>
 <!-- Mirrored from www.zi-han.net/theme/hplus/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:17:11 GMT -->
 </html>

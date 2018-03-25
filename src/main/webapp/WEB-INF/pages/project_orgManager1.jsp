@@ -329,7 +329,7 @@
                                 confirmButtonColor: "#18a689",
                                 confirmButtonText: "OK"
                             },function(){
-                                location.href = "user-jmpTemp";
+                                location.href = "user-jmpHomepage";
                             })
                         },
                         error: function (result) {
