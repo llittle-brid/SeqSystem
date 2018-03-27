@@ -1,6 +1,8 @@
 /**
  * Created by DELL on 2017/12/14.
  */
+
+
 /*
  * nowClick:最近一次点击
  * */
@@ -84,8 +86,6 @@ $(document).on("click",".dic",function () {
             $("h2#catalog_title").text(title);
             discussInit();
             entity=result.entity;
-            alert("1")
-            alert(catalogDisNum)
             if(catalogDisNum>0){
                 $("#discussButton").attr("style","color:#59BD4F");
             }
@@ -211,9 +211,13 @@ function templateInit() {
         type: "Post",
         async: "false",
         success: function (result) {
+            var state=$("#state").val();
             $("div#allIndex").html("<div class='spiner-example'> <div class='sk-spinner sk-spinner-three-bounce'> <div class='sk-bounce1'></div> <div class='sk-bounce2'></div> <div class='sk-bounce3'></div> </div>");
-            if(result.catalogList.length==0){
+            if(result.catalogList.length==0&&state==0){//0表示文档可编辑
                 $("div#allIndex").html("<div class='spiner-example'><li class='li_head black'> <button class='btn btn-primary  btn-xs'  data-toggle='modal' data-target='#myModal2'>新建目录</button> </li></div>");
+            }
+            if(result.catalogList.length==0&&state==1){//1表示文档不可编辑
+                $("div#allIndex").html("<div class='spiner-example'><li class='li_head black'> <strong class=‘font-bold’>文档无任何内容</strong> </li></div>");
             }
             else {
             var content=" ",nowFirst="0",nowSecond="0",nowThird="0",nowFourth="0",tempFirst,tempSecond,tempThird,tempFourth,tempCatalog;

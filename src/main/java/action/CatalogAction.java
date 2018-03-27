@@ -170,7 +170,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
             List<UserStructureEntity> roleList = new ArrayList<>();
             for (int i = 0; i < catalogEntityList.size(); i++) {
                 UserStructureEntity userStructureEntity=gson.fromJson(catalogEntityList.get(i).getContent(), UserStructureEntity.class);
-                if(userStructureEntity.getRoleName()!=null)
+                if(userStructureEntity!=null&&userStructureEntity.getRoleName()!=null)
                 roleList.add(userStructureEntity);  }
                 //获取当前catalog内容
                 FunStructureEntity entity = gson.fromJson(catalogEntity.getContent(), FunStructureEntity.class);
@@ -226,9 +226,9 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 //        System.out.println(funUsables);
         type= new TypeToken<ArrayList<FunRole>>() {}.getType();
         List<FunRole> funRoles;
-        System.out.println(funRoleList);
+//        System.out.println(funRoleList);
         funRoles=gson.fromJson(funRoleList,type);
-        System.out.println(funRoles);
+//        System.out.println(funRoles);
         FunStructureEntity funStructureEntity=new FunStructureEntity(funName,priority,content,funRoles,funUsables,inDiv,outDiv,basic,alternative);
         catalogDao.saveContent(id_catalog,gson.toJson(funStructureEntity));
         return "Re";

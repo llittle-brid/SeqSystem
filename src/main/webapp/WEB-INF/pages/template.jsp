@@ -78,10 +78,13 @@
                     <div class="sidebar-collapse ">
                         <ul class="nav" id="side-menu">
                             <div class="ibox-title" style="border-bottom: solid #e7eaec thin">
-                                <li class="li_head black">
-                                    <span class="block m-t-xs"><strong class="font-bold">需求开发文档</strong></span>
+
+                                <li class="li_head black" style="text-align: left">
+                                    <button class="btn btn-outline btn-success btn-xs"  onclick="window.location.href='project-jmpProjectInfo'" ><i class="fa fa-home"></i></button>
+                                 <strong class="font-bold col-md-offset-2  " style="text-align: center">需求开发文档</strong>
                                     <input style="display: none" value="${requestScope.documentId}" id="documentId">
                                     <input style="display: none" value="${requestScope.projectId}" id="projectId">
+                                    <input style="display: none" value="${requestScope.state}" id="state">
                                 </li>
                                 <li class="li_fun">
                                     <s:if test="#request.rank!=5&&#request.state==0">
@@ -294,7 +297,6 @@
                             <!--一行留言结束-->
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
                         </div>
@@ -353,7 +355,9 @@
     </div>
 
 </div>
-</div>
+
+
+
 </body>
 <script src="<%=basePath %>/js/jquery.min.js?v=2.1.4"></script>
 <script src="<%=basePath %>/js/bootstrap.min.js?v=3.3.6"></script>
