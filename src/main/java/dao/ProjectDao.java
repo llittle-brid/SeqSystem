@@ -22,4 +22,5 @@ public interface ProjectDao {
     ProjectEntity getOne(int id);
     List<ProjectEntity> getAll(int state,int id);
     String findName(int id_Project);        //获取项目ID对应的NAME
+    String findAdminName(int id_project);
 }

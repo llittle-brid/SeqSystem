@@ -189,12 +189,22 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         List<ProjectEntity> project = getForList(sql,state,id);
         return project;
     }
-
+//查询项目名称
     @Override
     public String findName(int id_Project) {
         String sql = "select NAME from PROJECT where ID_PROJECT = ?";
         String name = getForValue(sql,id_Project);
         System.out.println("orgName:"+name);
+        return name;
+    }
+    //查询项目组长名
+    @Override
+    public String findAdminName(int id_Project){
+        System.out.println("项目ID:(ProjectDaoImp.java203)"+id_Project);
+        String sql = "select ID_USER from PROJECT_MEMBER where ID_PROJECT = ? and RANK = 3";
+        int id_admin = getForValue(sql,id_Project);
+        String sql0 = "select NAME from USER where ID_USER = ?";
+        String name = getForValue(sql0,id_admin);
         return name;
     }
 }

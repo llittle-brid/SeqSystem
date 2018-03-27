@@ -5,9 +5,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 import dao.OrgInviteDao;
+import dao.OrganizationDao;
 import dao.UserDao;
 import daoImp.HistoryInfoDaoImp;
 import daoImp.OrgInviteDaoImp;
+import daoImp.OrganizationDaoImp;
 import daoImp.UserDaoImp;
 import entity.OrgInviteEntity;
 import entity.UserEntity;
@@ -25,6 +27,7 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     private Map<String, Object> dataMap;
     private OrgInviteEntity orgInvite;
     private OrgInviteDao orgInviteDao;
+    private OrganizationDao org;
 
     public String InviteUser(){
         dataMap = new HashMap<String, Object>();
@@ -73,8 +76,10 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
         boolean res = orgInviteDao.grantOrg(sessionUser.getId_user(), orgInvite.getID_USER(), orgInvite.getORG_NAME());
         if (res) {
             int orgManager = userDao.orgManager(sessionUser.getId_user());
+            String advance_name = userDao.FindName(sessionUser.getId_user());
+            String current_name = userDao.FindName(orgInvite.getID_USER());
             session.put("orgManager", orgManager);
-            String content = "你已成为机构"+orgInvite.getORG_NAME()+"的管理员";
+            String content = advance_name+"任命"+current_name+"为"+orgInvite.getORG_NAME()+"机构管理员";
             Date dt=new Date();
             history.hasAcceptorGrantORG( orgInvite.getID_USER(),content, dt,orgInvite.getORG_NAME());
         }
@@ -85,12 +90,15 @@ public class OrgInviteAction extends ActionSupport implements RequestAware, Sess
     public String deleteUser(){
         dataMap = new HashMap<String, Object>();
         orgInviteDao = new OrgInviteDaoImp();
+        org = new OrganizationDaoImp();
+        UserDao userDao = new UserDaoImp();
         HistoryInfoDaoImp history = new HistoryInfoDaoImp();
         UserEntity sessionUser = (UserEntity) session.get("user");
         boolean res=orgInviteDao.deleteUser(orgInvite.getID_USER(),orgInvite.getORG_NAME());
         if (res) {
             String content1 = orgInvite.getUSER_NAME()+"已被您移出机构"+orgInvite.getORG_NAME();
-            String content2 = "您已被移出机构"+orgInvite.getORG_NAME();
+            String Adminname = org.findAdminName(orgInvite.getID_ORGANIZATION());
+            String content2 = "您已被"+Adminname+"移出机构"+orgInvite.getORG_NAME();
             Date dt=new Date();
             history.hasAcceptorDeleteORG(sessionUser.getId_user(),content1, dt,orgInvite.getORG_NAME());
             history.hasAcceptorDeleteORG(orgInvite.getID_USER(),content2, dt,orgInvite.getORG_NAME());

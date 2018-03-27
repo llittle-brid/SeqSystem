@@ -26,5 +26,6 @@ public interface UserDao {
 	int nowNews(int id);
 	List<UserEntity> getOrgAllMem(int user_id,String name);
 	boolean nameAndMail(String name, String email);
-
+	//找名字
+	String FindName(int id_user);
 }

@@ -203,7 +203,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
 //        发送消息
         InformationDao informationDao = new InformationDaoImp();
-        String content = "你已成为"+project.getName()+"的副组长";
+        String Name = projectDao.findAdminName(id_Project);
+        String content = "你已被"+Name+"任命为"+project.getName()+"的副组长";
         informationDao.toMember(id_Project,id_User,content);
 
         return SUCCESS;
@@ -221,7 +222,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
 //        发送消息
         InformationDao informationDao = new InformationDaoImp();
-        String content = "你已被撤除"+project.getName()+"的副组长职位";
+        String Name = projectDao.findAdminName(id_Project);
+        String content = "你已被"+Name+"撤除"+project.getName()+"的副组长职位";
         informationDao.toMember(id_Project,id_User,content);
 
         return SUCCESS;
@@ -239,7 +241,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
 //      发送消息
         InformationDao informationDao = new InformationDaoImp();
-        String content = "你已被从"+project.getName()+"中移除";
+        String Name = projectDao.findAdminName(id_Project);
+        String content = "你已被"+Name+"从"+project.getName()+"中移除";
         informationDao.toMember(id_Project,id_User,content);
         return SUCCESS;
     }
