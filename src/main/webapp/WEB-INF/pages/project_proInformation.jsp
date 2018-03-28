@@ -394,8 +394,8 @@
                     var proList = JSON.parse(json.res);
                     //finishingTask为table的id
                     $('#projectMember').bootstrapTable('load', proList);
-                    discussInit();
-                    discussReload2();
+//                    discussInit();
+//                    discussReload2();
                 },
                 error: function () {
                     swal({
@@ -576,6 +576,16 @@
             success:function(json){
                 var docList = JSON.parse(json.res);
                 //finishingTask为table的id
+                var addOrNot=json.addOrNot;
+                if(addOrNot=="0"){
+                    $("#createDoc").attr("disabled","")
+                    $("#createDoc").removeClass("btn-success")
+                    $("#createDoc").addClass("btn-default")}
+                    else
+                {
+                    $("#createDoc").removeClass("btn-default")
+                    $("#createDoc").addClass("btn-success")
+                }
                 $('#projectDocs').bootstrapTable('load',docList);
             },
             error:function(){
@@ -588,7 +598,7 @@
 <s:if test='#session.project.state==1'>
         <s:if test='#session.rank==3'>
             if (row.state===0) {
-                return ['<a class="edit btn-xs btn-success">编辑文档</a>',
+                return ['<a class="edit btn-xs btn-success ">编辑文档</a>',
                     '<a class="deploy btn-xs btn-danger" >发布文档</a>'].join('');
             }
             else {

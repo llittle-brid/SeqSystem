@@ -43,7 +43,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
     public String create() {
         dataMap = new HashMap<String, Object>();
         projectDao = new ProjectDaoImp();
-        System.out.println(project.getName()+" "+project.getDocument_Name());
+//        System.out.println(project.getName()+" "+project.getDocument_Name());
         boolean res= projectDao.save(project);
         dataMap.put("res",res);
         return SUCCESS;
@@ -137,7 +137,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         dataMap = new HashMap<String, Object>();
         int id_Project = project.getId_Project();
 
-        System.out.println(id_Project);
+//        System.out.println(id_Project);
         projectDao = new ProjectDaoImp();
         project = projectDao.getOne(id_Project);
 
@@ -155,10 +155,15 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
         try {
             List<DocumentEntity> list = documentDao.getAll(project.getId_Project());
-
+            int addOrNot=1;//1为可编辑，0为不可编辑
+            if(list.size()!=0&&list.get(0).getState()==0)//有未发布文档，不可编辑
+            {
+                System.out.println(list.get(list.size()-1).getState()+"  "+list.size());
+                addOrNot=0;
+            }
             Gson gson = new Gson();
             String jsonString = gson.toJson(list);
-
+            dataMap.put("addOrNot",addOrNot);
             dataMap.put("res", jsonString);
         }catch (Exception e){
             e.printStackTrace();
@@ -172,11 +177,11 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         UserDao userDao = new UserDaoImp();
         UserEntity user = userDao.getOne(username);
 
-        System.out.println(username);
+//        System.out.println(username);
 
         int id_Project = project.getId_Project();
 
-        System.out.println(id_Project);
+//        System.out.println(id_Project);
 
         projectDao = new ProjectDaoImp();
         boolean res = projectDao.alterPM(user.getId_user(),id_Project);
@@ -254,8 +259,8 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
         int id_Project = project.getId_Project();
 
-        System.out.println(username);
-        System.out.println(id_Project);
+//        System.out.println(username);
+//        System.out.println(id_Project);
 
         UserDao userDao = new UserDaoImp();
         UserEntity user = userDao.getOne(username);
@@ -281,7 +286,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
 
     public String end(){
         int id_Project = (Integer)request.get("id_Project");
-        System.out.println(id_Project);
+//        System.out.println(id_Project);
         projectDao = new ProjectDaoImp();
         projectDao.end(id_Project);
         return "end";
