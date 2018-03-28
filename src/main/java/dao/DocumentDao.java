@@ -13,4 +13,6 @@ public interface DocumentDao {
     List<DocumentEntity> getAll(int id);
 
     int getDocumentId(int id_project);
+
+    void delete(int Id_Document);
 }

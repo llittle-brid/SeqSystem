@@ -158,7 +158,7 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
             int addOrNot=1;//1为可编辑，0为不可编辑
             if(list.size()!=0&&list.get(0).getState()==0)//有未发布文档，不可编辑
             {
-                System.out.println(list.get(list.size()-1).getState()+"  "+list.size());
+//                System.out.println(list.get(list.size()-1).getState()+"  "+list.size());
                 addOrNot=0;
             }
             Gson gson = new Gson();
@@ -290,6 +290,12 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         projectDao = new ProjectDaoImp();
         projectDao.end(id_Project);
         return "end";
+    }
+    public String delete(){
+        DocumentDao documentDao = new DocumentDaoImp();
+//        System.out.println(documentId);
+        documentDao.delete(documentId);
+        return "projectInformation";
     }
 
     @Override

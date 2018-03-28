@@ -52,4 +52,10 @@ public class DocumentDaoImp extends DAO<DocumentEntity> implements DocumentDao {
         String sql="select id_document from DOCUMENT where id_project=? and state=0";
         return  getForValue(sql,id_project);
     }
+
+    @Override
+    public void delete(int Id_Document) {
+        String sql="delete from DOCUMENT where id_document=?";
+        update(sql,Id_Document);
+    }
 }

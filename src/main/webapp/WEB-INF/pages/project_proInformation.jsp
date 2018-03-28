@@ -143,10 +143,10 @@
                     <dl class="dl-horizontal">
 
                         <dt><h3>项目组长：</h3></dt>
-                        <dd><h2><s:property value="#session.PM.name"/></h2></dd>
+                        <dd><h3><s:property value="#session.PM.name"/></h3></dd>
 
                         <dt><h3>所属机构：</h3></dt>
-                        <dd><h2><s:property value="#session.project.orgName"/></h2></dd>
+                        <dd><h3><s:property value="#session.project.orgName"/></h3></dd>
 
                     </dl>
                 </div>
@@ -596,31 +596,38 @@
 
     function viewFormatter(value,row,index) {
 <s:if test='#session.project.state==1'>
-        <s:if test='#session.rank==3'>
+        <s:if test='#session.rank==3'>//项目组长
             if (row.state===0) {
-                return ['<a class="edit btn-xs btn-success ">编辑文档</a>',
-                    '<a class="deploy btn-xs btn-danger" >发布文档</a>'].join('');
+                return ["<a class='edit btn-xs btn-primary '>编辑</a>&nbsp",
+                              "<a class='deploy btn-xs btn-warning '>发布</a>&nbsp",
+                              "<a class='delete btn-xs btn-danger ' >删除</a>"
+                ].join('');
             }
             else {
-                return '<a class="view btn-xs btn-info">查看文档</a>';
+                return ["<a class='view btn-xs btn-info '>查看</a>&nbsp",
+                    "<a class='delete btn-xs btn-danger ' >删除</a>"
+                ].join('');
+//                return ["<a class='view btn-xs btn-info'>查看</a>",
+//                    "<a class='delete btn-xs btn-danger' >删除</a>"
+//                ].join();
             }
         </s:if>
 
-        <s:if test='#session.rank==4'>
+        <s:if test='#session.rank==4'>//项目副组长
             if (row.state===0) {
-                return '<a class="edit btn-xs btn-success">编辑文档</a>';
+                return '<a class="edit btn-xs btn-success">编辑</a>';
             }
             else {
-                return '<a class="view btn-xs btn-info">查看文档</a>';
+                return '<a class="view btn-xs btn-info">查看</a>';
             }
         </s:if>
 
         <s:if test='#session.rank==5'>
-            return '<a class="view btn-xs btn-info">查看文档</a>';
+            return '<a class="view btn-xs btn-info">查看</a>';
         </s:if>
     </s:if>
     <s:if test='#session.project.state==0'>
-        return '<a class="view btn-xs btn-info">查看文档</a>';
+        return '<a class="view btn-xs btn-info">查看</a>';
         </s:if>
     }
 
@@ -631,6 +638,24 @@
             function(e, value, row, index) {
                 var id = row.id_document;
                 location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank+"&projectId="+id_Project+"&state="+row.state;
+            },
+        'click .delete':
+            function(e, value, row, index) {
+                var id = row.id_document;
+                swal(
+                    {
+                        title: "您确定要删除这份文档吗",
+                        text: "请谨慎操作！",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: true
+                    },function () {
+                        swal("删除成功！", "您已成功删除此版本需求文档", "success");
+                        location.href = "project-delete?documentId=" + id;
+                    })
             },
         'click .deploy':
             function(e, value, row, index) {
