@@ -216,7 +216,7 @@ function templateInit() {
             if(result.catalogList.length==0&&state==0){//0表示文档可编辑
                 $("div#allIndex").html("<div class='spiner-example'><li class='li_head black'> <button class='btn btn-primary  btn-xs'  data-toggle='modal' data-target='#myModal2'>新建目录</button> </li></div>");
             }
-            if(result.catalogList.length==0&&state==1){//1表示文档不可编辑
+            else if(result.catalogList.length==0&&state==1){//1表示文档不可编辑
                 $("div#allIndex").html("<div class='spiner-example'><li class='li_head black'> <strong class=‘font-bold’>文档无任何内容</strong> </li></div>");
             }
             else {
@@ -475,6 +475,7 @@ function catalogAdd() {
     var temp = $(nowClick).attr("class");
     var classList = temp.split(' ');
     var nowRank = classList[1];
+    var continueFlag=1;//1为可以创建新的模块，0不可以
     //需要判断文档能否新建功能模块
     if (id_template == "3") {
         $.ajax({
@@ -482,11 +483,11 @@ function catalogAdd() {
             data: {documentId: documentId},
             dataType: "json",
             type: "Post",
-            async: "false",
+            async: false,
             success: function (result) {
                 if (parseInt(result.roleCount) <= 0) {
                     showtoast("warning", "失败", "需要先创建用户");
-                    return;
+                    continueFlag=0;
                 }
             },
             error: function (result) {
@@ -494,8 +495,9 @@ function catalogAdd() {
             }
         })
     }
-
-        if (place == "0") {//同级,传最后一个元素位置
+    if(continueFlag==0){
+        return false;}
+     if (place == "0") {//同级,传最后一个元素位置
             catalogIndex = $(nowClick).parent().parent().children("li:last-child").children("a").children("span.catalogIndex").text();
             $.ajax({
                 url: "catalog-addState2",
@@ -565,7 +567,9 @@ function catalogAdd() {
 //第一次新增目录
 function catalogNew() {
     var title=$("input#new_title").val(),id_template=$("#new_id_template").val();
-    if (id_template=="3")showtoast("warning","失败","需要先创建用户")
+    if (id_template=="3"){
+        showtoast("warning","失败","需要先创建用户")
+    }
     else {
         $.ajax({
             url: "catalog-newCatalog",

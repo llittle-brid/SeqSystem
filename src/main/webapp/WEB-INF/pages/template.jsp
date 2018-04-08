@@ -223,7 +223,7 @@
                 <div class="row">
                     <div class="ibox float-e-margins">
                         <div class="catalogNoneContent" style="text-align: center">
-                        <img src="/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
+                        <img src="<%=basePath %>/img/logo.png" style="height: 50%;width: 50%;margin: 10px 0px 5px 50px;"></div>
                         <div class="ibox-title catalogNotNoneContent" style="display:none;">
                             <s:if test="#request.rank!=5&&#request.state==0">
                             <div class="ibox-tools ">
