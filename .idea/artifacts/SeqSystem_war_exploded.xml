@@ -33,6 +33,8 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:1.3.2" />
           <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.13" />
+          <element id="library" level="project" name="Maven: com.itextpdf:itext-asian:5.2.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -83,13 +83,13 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         update(sql,id_document,first,second,third-1);
         sql="update CATALOG set third_index=third_index-1 where id_document=? and first_index=? and second_index=? and third_index=?";
         update(sql,id_document,first,second,third);
-        sql="update CATALOG set second_index=second_index-99999 where id_document=? and first_index=? and second_index=? and third_index=?";
-        update(sql,id_document,first,third+99999);
+        sql="update CATALOG set third_index=third_index-99999 where id_document=? and first_index=? and second_index=? and third_index=?";
+        update(sql,id_document,first,second,third+99999);
     }
 
     @Override
     public void up(int id_document, int first, int second, int third, int fourth) {
-        String sql="update CATALOG set fourth_index=fourth_index+100000 where id_document=? and first_index=? and second_index=? and third_index=? and fourth=?";
+        String sql="update CATALOG set fourth_index=fourth_index+100000 where id_document=? and first_index=? and second_index=? and third_index=? and fourth_index=?";
         update(sql,id_document,first,second,third,fourth-1);
         sql="update CATALOG set fourth_index=fourth_index-1 where id_document=? and first_index=? and second_index=?  and third_index=? and fourth_index=? ";
         update(sql,id_document,first,second,third,fourth);
@@ -123,13 +123,13 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         update(sql,id_document,first,second,third+1);
         sql="update CATALOG set third_index=third_index+1 where id_document=? and first_index=? and second_index=? and third_index=?";
         update(sql,id_document,first,second,third);
-        sql="update CATALOG set second_index=second_index-100000 where id_document=? and first_index=? and second_index=? and third_index=?";
-        update(sql,id_document,first,third+100000);
+        sql="update CATALOG set third_index=third_index-100000 where id_document=? and first_index=? and second_index=? and third_index=?";
+        update(sql,id_document,first,second,third+100000);
     }
 
     @Override
     public void down(int id_document, int first, int second, int third, int fourth) {
-        String sql="update CATALOG set fourth_index=fourth_index+99999 where id_document=? and first_index=? and second_index=? and third_index=? and fourth=?";
+        String sql="update CATALOG set fourth_index=fourth_index+99999 where id_document=? and first_index=? and second_index=? and third_index=? and fourth_index=?";
         update(sql,id_document,first,second,third,fourth+1);
         sql="update CATALOG set fourth_index=fourth_index+1 where id_document=? and first_index=? and second_index=?  and third_index=? and fourth_index=? ";
         update(sql,id_document,first,second,third,fourth);

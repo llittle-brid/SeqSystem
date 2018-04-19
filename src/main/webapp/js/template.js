@@ -494,7 +494,7 @@ function catalogAdd() {
                 showtoast("dangerous", "加载失败", "加载目录失败")
             }
         })
-    }
+    } 
     if(continueFlag==0){
         return false;}
      if (place == "0") {//同级,传最后一个元素位置
