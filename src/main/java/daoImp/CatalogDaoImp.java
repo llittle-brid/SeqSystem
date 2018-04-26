@@ -179,4 +179,10 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         return  getForList(sql,id_document);
     }
 
+    @Override
+    public List<CatalogEntity> getAll(int id_document) {
+        String sql="select * from CATALOG where id_document=? ORDER BY first_index asc,second_index asc,third_index asc,fourth_index asc ";
+        return  getForList(sql,id_document);
+    }
+
 }

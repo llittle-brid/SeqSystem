@@ -51,4 +51,6 @@ void update(int id_document, int first, int second);
     void saveContent(int id_catalog,String content);
 
     List<CatalogEntity> getAllRole(int id_document);
+
+    List<CatalogEntity> getAll(int id_document);
 }

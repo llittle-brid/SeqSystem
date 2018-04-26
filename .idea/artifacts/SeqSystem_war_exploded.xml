@@ -35,6 +35,7 @@
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.13" />
           <element id="library" level="project" name="Maven: com.itextpdf:itext-asian:5.2.0" />
+          <element id="library" level="project" name="Maven: com.itextpdf.tool:xmlworker:5.5.9" />
         </element>
       </element>
       <element id="directory" name="META-INF">
