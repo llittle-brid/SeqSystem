@@ -221,14 +221,10 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         CatalogDao catalogDao=new CatalogDaoImp();
         Type type = new TypeToken<ArrayList<FunUsable>>() {}.getType();
         List<FunUsable> funUsables;
-//        System.out.println(funUsableList);
         funUsables=gson.fromJson(funUsableList,type);
-//        System.out.println(funUsables);
         type= new TypeToken<ArrayList<FunRole>>() {}.getType();
         List<FunRole> funRoles;
-//        System.out.println(funRoleList);
         funRoles=gson.fromJson(funRoleList,type);
-//        System.out.println(funRoles);
         FunStructureEntity funStructureEntity=new FunStructureEntity(funName,priority,content,funRoles,funUsables,inDiv,outDiv,basic,alternative);
         catalogDao.saveContent(id_catalog,gson.toJson(funStructureEntity));
         return "Re";

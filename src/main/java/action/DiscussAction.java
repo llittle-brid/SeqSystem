@@ -56,12 +56,13 @@ public class DiscussAction extends ActionSupport implements RequestAware, Sessio
         catalogDao=new CatalogDaoImp();
         proDiscussDao=new ProDiscussDaoImp();
         String[] tempList=catalogIndex.split(" ");
+        UserEntity seesionUser=(UserEntity)session.get("user");
         int first=Integer.valueOf(tempList[0]);
         int second=Integer.valueOf(tempList[1]);
         int third=Integer.valueOf(tempList[2]);
         int fourth=Integer.valueOf(tempList[3]);
         int id_catalog=catalogDao.getIdCatalog(id_document,first,second,third,fourth);
-        proDiscussDao.commit(1,id_catalog,new Timestamp(new Date().getTime()),disContent);
+        proDiscussDao.commit(seesionUser.getId_user(),id_catalog,new Timestamp(new Date().getTime()),disContent);
         return "Re";
     }
 

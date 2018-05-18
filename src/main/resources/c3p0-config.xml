@@ -2,8 +2,8 @@
 <c3p0-config>
   
 
-  <!-- This app is massive! -->
-  <named-config name="mvcapp"> 
+   This app is massive!
+  <named-config name="mvcapp">
   	 <property name="user">py</property>
  	<property name="password">py520</property>
 	 <property name="driverClass">com.mysql.jdbc.Driver</property>
@@ -12,6 +12,8 @@
     <property name="initialPoolSize">10</property>
     <property name="minPoolSize">5</property>
     <property name="maxPoolSize">10</property>
+
+
 
     <!-- intergalactoApp adopts a different approach to configuring statement caching -->
     <property name="maxStatements">20</property> 

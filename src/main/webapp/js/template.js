@@ -468,7 +468,6 @@ function getNextRank(nowRank) {
 }
 //新增目录
 function catalogAdd() {
-
     var title = $("input#add_title").val(), id_template = $("#add_id_template").val()
     var place = $("input[name='add_place']:checked").val(),
         catalogIndex = $(nowClick).children("span.catalogIndex").text();
@@ -686,9 +685,15 @@ function temp_edit() {
     ],
         placeholder: '暂无内容',
         callbacks: {
-            onImageUpload: function(files, editor, $editable) {
-                that=$(this);
-                sendFile(files,that);
+            onPaste: function (ne) {
+                var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
+                //    ne.preventDefault();
+                ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
+                // Firefox fix
+                setTimeout(function () {
+                    document.execCommand("insertText", false, bufferText);
+                }, 10);
+                /*  */
             }
         }
     })
@@ -826,23 +831,31 @@ function temp_save() {
 //评论编辑按钮
 function edit() {
     $("#eg").addClass("no-padding");$(".click2edit").summernote({
-        height:50,
-        minHeight:50,
-        lang:"zh-CN",focus:true,toolbar: [
-        // ['style', ['bold', 'italic', 'underline', 'clear']],
-        // ['fontsize', ['fontsize']],
-        // ['color', ['color']],
-        // ['para', ['paragraph']],
-        // ['table', ['table']],
-        ['picture', ['picture']]
-    ],  callbacks: {
-            onImageUpload: function(files, editor, $editable) {
-                that=$(this);
-                sendFile(files,that);
+        height: 50,
+        minHeight: 50,
+        lang: "zh-CN", focus: true, toolbar: [
+            // ['style', ['bold', 'italic', 'underline', 'clear']],
+            // ['fontsize', ['fontsize']],
+            // ['color', ['color']],
+            // ['para', ['paragraph']],
+            // ['table', ['table']],
+            ['picture', ['picture']]
+        ], callbacks: {
+            onPaste: function (ne) {
+                alert("paste")
+                var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
+                //    ne.preventDefault();
+                ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
+                // Firefox fix
+                setTimeout(function () {
+                    document.execCommand("insertText", false, bufferText);
+                }, 10);
+                /*  */
             }
         }
     })
 }
+
 //评论保存按钮
 function save() {
     $("#eg").removeClass("no-padding");
