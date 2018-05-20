@@ -2,6 +2,7 @@ package action;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.itextpdf.text.DocumentException;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -10,7 +11,10 @@ import daoImp.*;
 import entity.*;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import util.Template2Pdf;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +52,7 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
     private String alternative;
     private String funRoleList;
     private String funUsableList;
+    private InputStream pdfStream;
 
     public String getIndex(){
         dataMap = new HashMap<String, Object>();
@@ -238,6 +243,19 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
         return "Re";
     }
 
+    public String generateContract() {
+        try {
+            Template2Pdf template2Pdf = new Template2Pdf();
+             pdfStream= template2Pdf.createPdf(documentId);
+            pdfStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        return "pdf";
+    }
+
     public void prepareNewCatalog(){
         catalogEntity=new CatalogEntity();
     }
@@ -352,5 +370,13 @@ public class CatalogAction extends ActionSupport implements RequestAware, Sessio
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public InputStream getPdfStream() {
+        return pdfStream;
+    }
+
+    public void setPdfStream(InputStream pdfStream) {
+        this.pdfStream = pdfStream;
     }
 }

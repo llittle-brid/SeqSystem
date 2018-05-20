@@ -683,19 +683,20 @@ function temp_edit() {
         ['picture', ['picture']],
         ['fullscreen', ['fullscreen']]
     ],
-        placeholder: '暂无内容',
-        callbacks: {
-            onPaste: function (ne) {
-                var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
-                //    ne.preventDefault();
-                ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
-                // Firefox fix
-                setTimeout(function () {
-                    document.execCommand("insertText", false, bufferText);
-                }, 10);
-                /*  */
-            }
-        }
+        placeholder: '暂无内容'
+        // ,
+        // callbacks: {
+        //     onPaste: function (ne) {
+        //         var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
+        //         //    ne.preventDefault();
+        //         ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
+        //         // Firefox fix
+        //         setTimeout(function () {
+        //             document.execCommand("insertText", false, bufferText);
+        //         }, 10);
+        //         /*  */
+        //     }
+        // }
     })
     $("div.hidenTh").show();
     $("#edit").attr("style","display:none");
@@ -840,19 +841,19 @@ function edit() {
             // ['para', ['paragraph']],
             // ['table', ['table']],
             ['picture', ['picture']]
-        ], callbacks: {
-            onPaste: function (ne) {
-                alert("paste")
-                var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
-                //    ne.preventDefault();
-                ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
-                // Firefox fix
-                setTimeout(function () {
-                    document.execCommand("insertText", false, bufferText);
-                }, 10);
-                /*  */
-            }
-        }
+        ]
+        // , callbacks: {
+        //     onPaste: function (ne) {
+        //         var bufferText = ((ne.originalEvent || ne).clipboardData || window.clipboardData).getData('Text/plain');
+        //         //    ne.preventDefault();
+        //         ne.preventDefault ? ne.preventDefault() : (ne.returnValue = false);
+        //         // Firefox fix
+        //         setTimeout(function () {
+        //             document.execCommand("insertText", false, bufferText);
+        //         }, 10);
+        //         /*  */
+        //     }
+        // }
     })
 }
 

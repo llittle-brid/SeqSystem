@@ -185,4 +185,10 @@ public class CatalogDaoImp extends DAO<CatalogEntity> implements CatalogDao {
         return  getForList(sql,id_document);
     }
 
+    @Override
+    public String getCatalogName(int id_document) {
+        String sql="SELECT PROJECT.DOCUMENT_NAME FROM DOCUMENT INNER JOIN PROJECT ON DOCUMENT.ID_PROJECT = PROJECT.ID_PROJECT WHERE DOCUMENT.ID_DOCUMENT=?";
+        return getForValue(sql,id_document);
+    }
+
 }

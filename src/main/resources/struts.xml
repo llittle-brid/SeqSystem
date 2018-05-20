@@ -126,8 +126,14 @@
             <result name="Re" type="json">
                 <param name="root">dataMap</param>
             </result>
+            <result name="pdf" type="stream">
+                <param name="contentType">application/pdf; charset=gb2312</param>
+                <param name="inputName">pdfStream</param>
+                <param name="contentDisposition">attachment; filename="ReqDocument.pdf"</param>
+                <param name="bufferSize">2048</param>
+            </result>
         <interceptor-ref name="myStack"/>
-            <allowed-methods>getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,saveTemplateThree,saveTemplateTwo,getUsable</allowed-methods>
+            <allowed-methods>generateContract,getIndex,jmpTemplate,addState1,addState2,up,down,newCatalog,getCatalog,rename,getRoleCount,saveTemplateOne,saveTemplateThree,saveTemplateTwo,getUsable</allowed-methods>
         </action>
 
         <action name="project-*" class="action.ProjectAction" method="{1}">

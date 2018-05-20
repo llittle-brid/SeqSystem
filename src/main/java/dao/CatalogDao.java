@@ -53,4 +53,6 @@ void update(int id_document, int first, int second);
     List<CatalogEntity> getAllRole(int id_document);
 
     List<CatalogEntity> getAll(int id_document);
+
+    String getCatalogName(int id_document);
 }

@@ -600,11 +600,13 @@
             if (row.state===0) {
                 return ["<a class='edit btn-xs btn-primary '>编辑</a>&nbsp",
                               "<a class='deploy btn-xs btn-warning '>发布</a>&nbsp",
+                    "<a class='generateContract btn-xs btn-primary '>导出</a>&nbsp",
                               "<a class='delete btn-xs btn-danger ' >删除</a>"
                 ].join('');
             }
             else {
                 return ["<a class='view btn-xs btn-info '>查看</a>&nbsp",
+                    "<a class='generateContract btn-xs btn-primary '>导出</a>&nbsp",
                     "<a class='delete btn-xs btn-danger ' >删除</a>"
                 ].join('');
 //                return ["<a class='view btn-xs btn-info'>查看</a>",
@@ -615,10 +617,12 @@
 
         <s:if test='#session.rank==4'>//项目副组长
             if (row.state===0) {
-                return '<a class="edit btn-xs btn-success">编辑</a>';
+                return '<a class="edit btn-xs btn-success">编辑</a>',
+                "<a class='generateContract btn-xs btn-primary '>导出</a>&nbsp";
             }
             else {
-                return '<a class="view btn-xs btn-info">查看</a>';
+                return '<a class="view btn-xs btn-info">查看</a>',
+                "<a class='generateContract btn-xs btn-primary '>导出</a>&nbsp";
             }
         </s:if>
 
@@ -679,6 +683,11 @@
             function(e, value, row, index) {
                 var id = row.id_document;
                 location.href = "catalog-jmpTemplate?documentId="+id+"&rank="+rank+"&projectId="+id_Project+"&state="+row.state;
+            },
+        'click .generateContract':
+            function(e, value, row, index) {
+                var id = row.id_document;
+                location.href = "catalog-generateContract?documentId="+id;
             }
     };
 
