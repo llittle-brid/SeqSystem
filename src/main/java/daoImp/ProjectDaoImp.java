@@ -2,9 +2,11 @@ package daoImp;
 
 
 import com.opensymphony.xwork2.ActionContext;
+import dao.CatalogDao;
 import dao.DAO;
 import dao.DocumentDao;
 import dao.ProjectDao;
+import entity.CatalogEntity;
 import entity.ProjectEntity;
 import entity.ShowOrgProjectEntity;
 import entity.UserEntity;
@@ -207,4 +209,27 @@ public class ProjectDaoImp extends DAO<ProjectEntity> implements ProjectDao {
         String name = getForValue(sql0,id_admin);
         return name;
     }
+
+    @Override
+    public boolean copyAll(int id_document,int new_idDocument, int version) {
+        System.out.println("start");
+        CatalogDao catalogDao=new CatalogDaoImp();
+        try {
+            List<CatalogEntity> catalogEntityList=catalogDao.getAllByDocument(id_document);
+            CatalogEntity catalogEntity;
+            for (int i = 0; i < catalogEntityList.size(); i++) {
+                catalogEntity=catalogEntityList.get(i);
+                catalogDao.insert(catalogEntity.getId_template(),new_idDocument,catalogEntity.getTitle(),catalogEntity.getFirst_index(),catalogEntity.getSecond_index(),catalogEntity.getThird_index(),catalogEntity.getFourth_index());
+            }
+        }
+        catch (Exception e){
+            System.out.println("exception:"+e);
+            String sql="delete from CATALOG where id_document=? ";
+            update(sql,id_document,version+1);
+            return false;
+        }
+        return true;
+    }
+
+
 }

@@ -57,8 +57,13 @@ public class ProjectAction extends ActionSupport implements RequestAware, Sessio
         Timestamp time = new Timestamp(new java.util.Date().getTime());
         DocumentDao documentDao = new DocumentDaoImp();
         int version = documentDao.getVersion(Id_Project)+1;
-        int id = documentDao.create(Id_Project,version,time,ID_User);
-        dataMap.put("id",id);
+        int id_document=documentDao.getDocumentId(Id_Project);
+        int new_idDocument = documentDao.create(Id_Project,version,time,ID_User);
+        if (id_document!=-1){
+            projectDao=new ProjectDaoImp();
+            projectDao.copyAll(id_document,new_idDocument,version);
+        }
+        dataMap.put("id",new_idDocument);
         return SUCCESS;
     }
 

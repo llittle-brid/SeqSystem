@@ -55,4 +55,8 @@ void update(int id_document, int first, int second);
     List<CatalogEntity> getAll(int id_document);
 
     String getCatalogName(int id_document);
+
+    List<CatalogEntity> getAllByDocument(int id_document);
+
+
 }
